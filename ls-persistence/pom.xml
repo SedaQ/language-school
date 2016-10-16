@@ -2,14 +2,15 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>com.fi.eshop</groupId>
-		<artifactId>eshop</artifactId>
+		<groupId>com.fi.languageschool</groupId>
+		<artifactId>language-school</artifactId>
 		<version>1.0</version>
 	</parent>
 
-	<artifactId>eshop-persistence</artifactId>
+	<artifactId>ls-persistence</artifactId>
 	<packaging>jar</packaging>
-	<name>eshop-persistence</name>
+
+	<name>Language School Persistence</name>
 
 	<dependencies>
 		<dependency>

@@ -1,4 +1,4 @@
-package com.fi.eshop.persistence.entity;
+package com.fi.ls.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -6,16 +6,20 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
- * 
- * @author Seda
+ * @author Pavel Šeda (441048)
  *
  */
 @Entity
-public class User {
+public class Course {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	public User() {
+	public Course() {
 	}
+
+	public Long getId() {
+		return id;
+	}
+
 }

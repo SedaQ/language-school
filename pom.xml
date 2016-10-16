@@ -1,12 +1,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.fi.eshop</groupId>
-	<artifactId>eshop</artifactId>
+	<groupId>com.fi.languageschool</groupId>
+	<artifactId>language-school</artifactId>
 	<version>1.0</version>
 	<packaging>pom</packaging>
-	
-	<name>eshop Parent</name>
+
+	<name>Language School Parent</name>
 
 	<!-- defines compatible versions of many libraries -->
 	<!-- see http://docs.spring.io/platform/docs/current/reference/htmlsingle/#getting-started-using-spring-io-platform-maven -->
@@ -57,6 +57,6 @@
 	</build>
 
 	<modules>
-		<module>eshop-persistence</module>
+		<module>ls-persistence</module>
 	</modules>
 </project>
