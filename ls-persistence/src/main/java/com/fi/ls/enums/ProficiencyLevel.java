@@ -7,7 +7,6 @@ import java.util.Optional;
  *
  */
 public enum ProficiencyLevel {
-
 	A1("Breakthrough","A basic ability to communicate and exchange information in a simple way."), 
 	A2("Waystage","An ability to deal with simple, straightforward information and begin to express oneself in familiar contexts."), 
 	B1("Threshold","The ability to express oneself in a limited way in familiar situations and to deal in a general way with nonroutine information."), 

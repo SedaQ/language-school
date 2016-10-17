@@ -15,10 +15,8 @@
 			<property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider" />
 			<property name="hibernate.dialect" value="org.hibernate.dialect.DerbyTenSevenDialect" />
 			<property name="hibernate.hbm2ddl.auto" value="create" />
-			<!-- Discuss with others if we want to have it as true or not -->
 			<property name="show_sql" value="true" />
 			<property name="format_sql" value="true" />
 		</properties>
 	</persistence-unit>
-
 </persistence>

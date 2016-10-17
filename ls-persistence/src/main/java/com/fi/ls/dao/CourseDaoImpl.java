@@ -16,7 +16,6 @@ import com.fi.ls.entity.Course;
  */
 @Repository
 public class CourseDaoImpl implements CourseDao {
-
 	@PersistenceContext
 	private EntityManager em;
 
@@ -45,5 +44,4 @@ public class CourseDaoImpl implements CourseDao {
 		TypedQuery<Course> course = em.createQuery("SELECT c FROM Course c", Course.class);
 		return course.getResultList();
 	}
-
 }
