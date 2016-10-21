@@ -4,7 +4,9 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
@@ -15,7 +17,9 @@ import com.fi.ls.entity.Course;
  *
  */
 @Repository
+@Transactional
 public class CourseDaoImpl implements CourseDao {
+
 	@PersistenceContext
 	private EntityManager em;
 
@@ -41,7 +45,6 @@ public class CourseDaoImpl implements CourseDao {
 
 	@Override
 	public List<Course> findAll() {
-		TypedQuery<Course> course = em.createQuery("SELECT c FROM Course c", Course.class);
-		return course.getResultList();
+		return em.createNamedQuery("findAll", Course.class).getResultList();
 	}
 }

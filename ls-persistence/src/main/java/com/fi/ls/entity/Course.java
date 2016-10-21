@@ -1,13 +1,17 @@
 package com.fi.ls.entity;
 
+import java.util.List;
 import java.util.Locale;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.NamedQuery;
 import javax.validation.constraints.NotNull;
 
 import com.fi.ls.enums.ProficiencyLevel;
@@ -17,7 +21,9 @@ import com.fi.ls.enums.ProficiencyLevel;
  *
  */
 @Entity
+@NamedQuery(name = "findAll", query = "SELECT c FROM Course c")
 public class Course {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -29,11 +35,11 @@ public class Course {
 	@Column
 	private Locale language;
 
-	@Enumerated
+	@Enumerated(EnumType.STRING)
 	private ProficiencyLevel proficiencyLevel;
 
-	// @Column
-	// private List<Lecture> listOfLectures;
+	@ManyToMany
+	private List<Lecture> listOfLectures;
 
 	public Course() {
 	}
@@ -48,6 +54,14 @@ public class Course {
 
 	public void setProficiencyLevel(ProficiencyLevel proficiencyLevel) {
 		this.proficiencyLevel = proficiencyLevel;
+	}
+
+	public void setListOfLectures(List<Lecture> listOfLectures) {
+		this.listOfLectures = listOfLectures;
+	}
+
+	public void addLecture(Lecture lecture) {
+		this.listOfLectures.add(lecture);
 	}
 
 	public Long getId() {
@@ -65,7 +79,11 @@ public class Course {
 	public ProficiencyLevel getProficiencyLevel() {
 		return proficiencyLevel;
 	}
-	
+
+	public List<Lecture> getListOfLectures() {
+		return listOfLectures;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -94,7 +112,7 @@ public class Course {
 	@Override
 	public String toString() {
 		return "Course [id=" + id + ", name=" + name + ", language=" + language + ", proficiencyLevel="
-				+ proficiencyLevel + "]";
+				+ proficiencyLevel + ", listOfLectures=" + listOfLectures + "]";
 	}
 
 }

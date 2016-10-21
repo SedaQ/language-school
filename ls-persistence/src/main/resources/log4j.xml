@@ -19,11 +19,6 @@
 		<appender-ref ref="console" />
 	</logger>
 
-	<logger name="org.hibernate.type">
-		<level value="warn" />
-		<appender-ref ref="console" />
-	</logger>
-
 	<root>
 		<level value="INFO" />
 		<appender-ref ref="console" />
