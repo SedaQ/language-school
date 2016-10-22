@@ -1,5 +1,7 @@
 package com.fi.ls.entity;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +12,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.script.ScriptEngine;
 import javax.validation.constraints.NotNull;
+import org.hibernate.mapping.Collection;
 
 /**
  *
@@ -29,10 +32,10 @@ public class Lecturer {
     private String surname;
 
     @OneToMany(targetEntity = Language.class, mappedBy = "lecturer")
-    private List<Language> listOfLanguages;
+    private List<Language> listOfLanguages = new ArrayList<>();
 
     @ManyToMany
-    private List<Lecture> listOfLectures;
+    private List<Lecture> listOfLectures = new ArrayList<>();
 
     //<editor-fold defaultstate="collapsed" desc="GET/SET">
     
@@ -57,19 +60,17 @@ public class Lecturer {
     }
 
     public List<Language> getListOfLanguages() {
-        return listOfLanguages;
-    }
-
-    public void setListOfLanguages(List<Language> listOfLanguages) {
-        this.listOfLanguages = listOfLanguages;
-    }
-
-    public void setListOfLectures(List<Lecture> listOfLectures) {
-        this.listOfLectures = listOfLectures;
+        return Collections.unmodifiableList(listOfLanguages);
     }
 
     public List<Lecture> getListOfLectures() {
-        return listOfLectures;
+        return Collections.unmodifiableList(listOfLectures);
+    }
+    
+    public void addLanguage(Language lan)
+    {
+        listOfLanguages.add(lan);
+        lan.setLecturer(this);
     }
     
     //</editor-fold>
@@ -84,17 +85,25 @@ public class Lecturer {
             return false;
         Lecturer other = (Lecturer)obj;
         if(this.firstName == null)
+        {
             if(other.firstName != null)
                 return false;
+        }
         else
+        {
              if(!this.firstName.equals(other.firstName))
                  return false;
+        }
         if(this.surname == null)
+        {
             if(other.surname != null)
                 return false;
+        }
         else
+        {
              if(!this.surname.equals(other.surname))
                  return false;
+        }
         return true;
     }
 
