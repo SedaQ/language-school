@@ -21,7 +21,7 @@ import com.fi.ls.enums.ProficiencyLevel;
  *
  */
 @Entity
-@NamedQuery(name = "findAll", query = "SELECT c FROM Course c")
+@NamedQuery(name = "Course.findAll", query = "SELECT c FROM Course c")
 public class Course {
 
 	@Id
@@ -33,7 +33,7 @@ public class Course {
 	private String name;
 
 	@Column
-	private Locale language;
+	private String language;
 
 	@Enumerated(EnumType.STRING)
 	private ProficiencyLevel proficiencyLevel;
@@ -48,7 +48,7 @@ public class Course {
 		this.name = name;
 	}
 
-	public void setLanguage(Locale language) {
+	public void setLanguage(String language) {
 		this.language = language;
 	}
 
@@ -72,7 +72,7 @@ public class Course {
 		return name;
 	}
 
-	public Locale getLanguage() {
+	public String getLanguage() {
 		return language;
 	}
 

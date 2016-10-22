@@ -45,6 +45,6 @@ public class CourseDaoImpl implements CourseDao {
 
 	@Override
 	public List<Course> findAll() {
-		return em.createNamedQuery("findAll", Course.class).getResultList();
+		return em.createNamedQuery("Course.findAll", Course.class).getResultList();
 	}
 }

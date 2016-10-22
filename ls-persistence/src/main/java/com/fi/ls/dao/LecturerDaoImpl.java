@@ -15,35 +15,33 @@ import org.springframework.stereotype.Repository;
 @Transactional
 public class LecturerDaoImpl implements LecturerDao {
 
-    @PersistenceContext
-    private EntityManager em;
-    
-    private final String findAllQuerry = "SELECT l FROM Lecturer l";
-    
-    @Override
-    public void create(Lecturer l) {
-         em.persist(l);
-    }
+	@PersistenceContext
+	private EntityManager em;
 
-    @Override
-    public Lecturer findById(Long id) {
-        return em.find(Lecturer.class, id);
-    }
+	@Override
+	public void create(Lecturer l) {
+		em.persist(l);
+	}
 
-    @Override
-    public Lecturer update(Lecturer l) {
-        return em.merge(l);
-    }
+	@Override
+	public Lecturer findById(Long id) {
+		return em.find(Lecturer.class, id);
+	}
 
-    @Override
-    public void remove(Lecturer l) {
-        Lecturer toRemove = em.getReference(Lecturer.class, l.getId());
-        em.remove(toRemove);
-    }
+	@Override
+	public Lecturer update(Lecturer l) {
+		return em.merge(l);
+	}
 
-    @Override
-    public List<Lecturer> findAll() {
-        return em.createQuery(findAllQuerry).getResultList();
-    }
-    
+	@Override
+	public void remove(Lecturer l) {
+		Lecturer toRemove = em.getReference(Lecturer.class, l.getId());
+		em.remove(toRemove);
+	}
+
+	@Override
+	public List<Lecturer> findAll() {
+		return em.createNamedQuery("Lecturer.findAll", Lecturer.class).getResultList();
+	}
+
 }

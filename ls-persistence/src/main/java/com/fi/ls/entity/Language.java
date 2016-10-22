@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -13,98 +14,90 @@ import javax.validation.constraints.NotNull;
  * @author Lukas Daubner (410034)
  */
 @Entity
+@NamedQuery(name = "Language.findAll", query = "SELECT l FROM Language l")
 public class Language {
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    
-    @NotNull
-    private String language;
-    
-    @NotNull
-    @ManyToOne
-    private Lecturer lecturer;
-    
-    @NotNull
-    private ProficiencyLevel cefrLever;
-    
-    //<editor-fold defaultstate="collapsed" desc="GET/SET">
 
-    public Long getId() {
-        return id;
-    }
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    public String getLanguage() {
-        return language;
-    }
+	@NotNull
+	private String language;
 
-    public void setLanguage(String language) {
-        this.language = language;
-    }
+	@NotNull
+	@ManyToOne
+	private Lecturer lecturer;
 
-    public Lecturer getLecturer() {
-        return lecturer;
-    }
+	@NotNull
+	private ProficiencyLevel cefrLever;
 
-    public void setLecturer(Lecturer lecturer) {
-        this.lecturer = lecturer;
-    }
+	// <editor-fold defaultstate="collapsed" desc="GET/SET">
 
-    public ProficiencyLevel getCefrLever() {
-        return cefrLever;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setCefrLever(ProficiencyLevel cefrLever) {
-        this.cefrLever = cefrLever;
-    }
-    
-    //</editor-fold>
+	public String getLanguage() {
+		return language;
+	}
 
-    @Override
-    public boolean equals(Object obj) {
-        if(this == obj)
-            return true;
-        if(this == null)
-            return false;
-        if(!(obj instanceof Language))
-            return false;
-        Language other = (Language)obj;
-        if(this.language == null)
-        {
-            if(other.language != null)
-                return false;
-        }
-        else
-        {
-             if(!this.language.equals(other.language))
-                 return false;
-        }
-        if(this.lecturer == null)
-        {
-            if(other.lecturer != null)
-                return false;
-        }
-        else
-        {
-             if(!this.lecturer.equals(other.lecturer))
-                 return false;
-        }
-        if(this.cefrLever == null)
-        {
-            if(other.cefrLever != null)
-                return false;
-        }
-        else
-        {
-            if(!this.cefrLever.equals(other.cefrLever))
-                 return false;
-        }
-        return true;
-    }
+	public void setLanguage(String language) {
+		this.language = language;
+	}
 
-    @Override
-    public int hashCode() {
-        return (language == null ? 0 : language.hashCode()) + 2^(lecturer == null ? 0 : lecturer.hashCode());
-    }
+	public Lecturer getLecturer() {
+		return lecturer;
+	}
+
+	public void setLecturer(Lecturer lecturer) {
+		this.lecturer = lecturer;
+	}
+
+	public ProficiencyLevel getCefrLever() {
+		return cefrLever;
+	}
+
+	public void setCefrLever(ProficiencyLevel cefrLever) {
+		this.cefrLever = cefrLever;
+	}
+
+	// </editor-fold>
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof Language))
+			return false;
+		Language other = (Language) obj;
+		if (this.language == null) {
+			if (other.language != null)
+				return false;
+		} else {
+			if (!this.language.equals(other.language))
+				return false;
+		}
+		if (this.lecturer == null) {
+			if (other.lecturer != null)
+				return false;
+		} else {
+			if (!this.lecturer.equals(other.lecturer))
+				return false;
+		}
+		if (this.cefrLever == null) {
+			if (other.cefrLever != null)
+				return false;
+		} else {
+			if (!this.cefrLever.equals(other.cefrLever))
+				return false;
+		}
+		return true;
+	}
+
+	@Override
+	public int hashCode() {
+		return (language == null ? 0 : language.hashCode()) + 2 ^ (lecturer == null ? 0 : lecturer.hashCode());
+	}
 }

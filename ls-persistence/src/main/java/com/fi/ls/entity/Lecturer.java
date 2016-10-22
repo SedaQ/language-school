@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.script.ScriptEngine;
 import javax.validation.constraints.NotNull;
@@ -19,96 +20,90 @@ import org.hibernate.mapping.Collection;
  * @author Lukas Daubner (410034)
  */
 @Entity
+@NamedQuery(name = "Lecturer.findAll", query = "SELECT l FROM Lecturer l")
 public class Lecturer {
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
-    @NotNull
-    private String firstName;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @NotNull
-    private String surname;
+	@NotNull
+	private String firstName;
 
-    @OneToMany(targetEntity = Language.class, mappedBy = "lecturer")
-    private List<Language> listOfLanguages = new ArrayList<>();
+	@NotNull
+	private String surname;
 
-    @ManyToMany
-    private List<Lecture> listOfLectures = new ArrayList<>();
+	@OneToMany(targetEntity = Language.class, mappedBy = "lecturer")
+	private List<Language> listOfLanguages = new ArrayList<>();
 
-    //<editor-fold defaultstate="collapsed" desc="GET/SET">
-    
-    public Long getId() {
-        return id;
-    }
+	@ManyToMany
+	private List<Lecture> listOfLectures = new ArrayList<>();
 
-    public String getFirstName() {
-        return firstName;
-    }
+	// <editor-fold defaultstate="collapsed" desc="GET/SET">
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public String getSurname() {
-        return surname;
-    }
+	public String getFirstName() {
+		return firstName;
+	}
 
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
 
-    public List<Language> getListOfLanguages() {
-        return Collections.unmodifiableList(listOfLanguages);
-    }
+	public String getSurname() {
+		return surname;
+	}
 
-    public List<Lecture> getListOfLectures() {
-        return Collections.unmodifiableList(listOfLectures);
-    }
-    
-    public void addLanguage(Language lan)
-    {
-        listOfLanguages.add(lan);
-        lan.setLecturer(this);
-    }
-    
-    //</editor-fold>
+	public void setSurname(String surname) {
+		this.surname = surname;
+	}
 
-    @Override
-    public boolean equals(Object obj) {
-        if(this == obj)
-            return true;
-        if(this == null)
-            return false;
-        if(!(obj instanceof Lecturer))
-            return false;
-        Lecturer other = (Lecturer)obj;
-        if(this.firstName == null)
-        {
-            if(other.firstName != null)
-                return false;
-        }
-        else
-        {
-             if(!this.firstName.equals(other.firstName))
-                 return false;
-        }
-        if(this.surname == null)
-        {
-            if(other.surname != null)
-                return false;
-        }
-        else
-        {
-             if(!this.surname.equals(other.surname))
-                 return false;
-        }
-        return true;
-    }
+	public List<Language> getListOfLanguages() {
+		return Collections.unmodifiableList(listOfLanguages);
+	}
 
-    @Override
-    public int hashCode() {
-        return (firstName == null ? 0 : firstName.hashCode()) + 2^(surname == null ? 0 : surname.hashCode());
-    }
+	public List<Lecture> getListOfLectures() {
+		return Collections.unmodifiableList(listOfLectures);
+	}
+
+	public void addLanguage(Language lan) {
+		listOfLanguages.add(lan);
+		lan.setLecturer(this);
+	}
+
+	// </editor-fold>
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof Lecturer))
+			return false;
+		Lecturer other = (Lecturer) obj;
+		if (this.firstName == null) {
+			if (other.firstName != null)
+				return false;
+		} else {
+			if (!this.firstName.equals(other.firstName))
+				return false;
+		}
+		if (this.surname == null) {
+			if (other.surname != null)
+				return false;
+		} else {
+			if (!this.surname.equals(other.surname))
+				return false;
+		}
+		return true;
+	}
+
+	@Override
+	public int hashCode() {
+		return (firstName == null ? 0 : firstName.hashCode()) + 2 ^ (surname == null ? 0 : surname.hashCode());
+	}
 }
