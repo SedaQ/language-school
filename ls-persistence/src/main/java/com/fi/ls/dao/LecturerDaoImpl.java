@@ -37,7 +37,7 @@ public class LecturerDaoImpl implements LecturerDao {
 
     @Override
     public void remove(Lecturer l) {
-        Lecturer toRemove = em.getReference(Lecturer.class, l);
+        Lecturer toRemove = em.getReference(Lecturer.class, l.getId());
         em.remove(toRemove);
     }
 

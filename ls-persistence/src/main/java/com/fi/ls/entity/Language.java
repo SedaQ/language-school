@@ -71,23 +71,35 @@ public class Language {
             return false;
         Language other = (Language)obj;
         if(this.language == null)
+        {
             if(other.language != null)
                 return false;
+        }
         else
+        {
              if(!this.language.equals(other.language))
                  return false;
+        }
         if(this.lecturer == null)
+        {
             if(other.lecturer != null)
                 return false;
+        }
         else
+        {
              if(!this.lecturer.equals(other.lecturer))
                  return false;
+        }
         if(this.cefrLever == null)
+        {
             if(other.cefrLever != null)
                 return false;
+        }
         else
-             if(!this.cefrLever.equals(other.cefrLever))
+        {
+            if(!this.cefrLever.equals(other.cefrLever))
                  return false;
+        }
         return true;
     }
 

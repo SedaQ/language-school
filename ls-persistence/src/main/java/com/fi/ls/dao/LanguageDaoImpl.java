@@ -37,7 +37,7 @@ public class LanguageDaoImpl implements LanguageDao {
 
     @Override
     public void remove(Language lan) {
-        Language toRemove = em.getReference(Language.class, lan);
+        Language toRemove = em.getReference(Language.class, lan.getId());
         em.remove(toRemove);
         
     }
