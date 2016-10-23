@@ -24,8 +24,12 @@ public class Student {
 	private Long id;
 
 	@NotNull
-	@Column(unique = true)
+	@Column
 	private String name;
+
+	@NotNull
+	@Column
+	private String surname;
 
 	@ManyToMany
 	private List<Lecture> listOfLectures;
@@ -33,11 +37,14 @@ public class Student {
 	public Student() {
 	}
 
-        // <editor-fold defaultstate="collapsed" desc="GET/SET">
 	public void setName(String name) {
 		this.name = name;
 	}
-        
+
+	public void setSurname(String surname) {
+		this.surname = surname;
+	}
+
 	public void setListOfLectures(List<Lecture> listOfLectures) {
 		this.listOfLectures = listOfLectures;
 	}
@@ -54,31 +61,34 @@ public class Student {
 		return name;
 	}
 
+	public String getSurname() {
+		return surname;
+	}
+
 	public List<Lecture> getListOfLectures() {
 		return listOfLectures;
 	}
-        // </editor-fold>
 
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 79 * hash + Objects.hashCode(this.name);
-        return hash;
-    }
+	@Override
+	public int hashCode() {
+		return 31 + ((id == null) ? 0 : id.hashCode());
+	}
 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Student other = (Student) obj;
-        if (!Objects.equals(this.name, other.name)) {
-            return false;
-        }
-        return true;
-    }
-        
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof Student))
+			return false;
+		Student other = (Student) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
+
 }

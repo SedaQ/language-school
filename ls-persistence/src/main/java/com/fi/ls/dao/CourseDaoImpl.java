@@ -17,7 +17,6 @@ import com.fi.ls.entity.Course;
  *
  */
 @Repository
-@Transactional
 public class CourseDaoImpl implements CourseDao {
 
 	@PersistenceContext

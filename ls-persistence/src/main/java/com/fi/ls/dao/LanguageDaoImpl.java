@@ -12,7 +12,6 @@ import org.springframework.stereotype.Repository;
  * @author Lukas Daubner (410034)
  */
 @Repository
-@Transactional
 public class LanguageDaoImpl implements LanguageDao {
 
 	@PersistenceContext
@@ -37,7 +36,6 @@ public class LanguageDaoImpl implements LanguageDao {
 	public void remove(Language lan) {
 		Language toRemove = em.getReference(Language.class, lan.getId());
 		em.remove(toRemove);
-
 	}
 
 	@Override

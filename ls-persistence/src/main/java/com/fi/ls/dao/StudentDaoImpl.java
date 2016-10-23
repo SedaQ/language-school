@@ -12,7 +12,6 @@ import org.springframework.stereotype.Repository;
  * @author Matúš
  */
 @Repository
-@Transactional
 public class StudentDaoImpl implements StudentDao {
     
     @PersistenceContext
