@@ -31,8 +31,6 @@ public class Language {
 	@NotNull
 	private ProficiencyLevel cefrLever;
 
-	// <editor-fold defaultstate="collapsed" desc="GET/SET">
-
 	public Long getId() {
 		return id;
 	}
@@ -60,8 +58,6 @@ public class Language {
 	public void setCefrLever(ProficiencyLevel cefrLever) {
 		this.cefrLever = cefrLever;
 	}
-
-	// </editor-fold>
 
 	@Override
 	public boolean equals(Object obj) {
