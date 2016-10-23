@@ -1,5 +1,6 @@
 package com.fi.ls.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.Column;
@@ -32,7 +33,7 @@ public class Student {
 	private String surname;
 
 	@ManyToMany
-	private List<Lecture> listOfLectures;
+	private List<Lecture> listOfLectures = new ArrayList<>();
 
 	public Student() {
 	}
