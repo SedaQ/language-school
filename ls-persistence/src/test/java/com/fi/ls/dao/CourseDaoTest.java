@@ -50,6 +50,14 @@ public class CourseDaoTest extends AbstractTestNGSpringContextTests {
     }
     
     @Test(expectedExceptions = Exception.class)
+    public void testCreateNull() {
+        
+        courseDao.create(null);
+        
+        Assert.fail("Expected exception! Null parameter.");
+    }
+    
+    @Test(expectedExceptions = Exception.class)
     public void testCreateNonUniqueName() {
         
         Course c1 = new Course();
@@ -78,7 +86,19 @@ public class CourseDaoTest extends AbstractTestNGSpringContextTests {
         
         em.persist(c);
         
-        Assert.assertEquals(c, courseDao.findById(c.getId()));
+        Course found = courseDao.findById(c.getId());
+        
+        Assert.assertEquals(c, found);
+    }
+    
+    @Test(expectedExceptions = Exception.class)
+    public void testFindByIdNull() {
+        
+        em.persist(c);
+        
+        Course found = courseDao.findById(null);
+        
+        Assert.fail("Expected exception! Null parameter.");
     }
     
     @Test
@@ -91,6 +111,18 @@ public class CourseDaoTest extends AbstractTestNGSpringContextTests {
         
         Assert.assertEquals(c, em.find(Course.class, c.getId()));
     }
+    
+    @Test(expectedExceptions = Exception.class)
+    public void testUpdateNull() {
+        
+        em.persist(c);
+        em.detach(c);
+        c.setLanguage("cmn");
+        courseDao.update(null);
+        
+        Assert.fail("Expected exception! Null parameter.");
+    }
+    
     @Test
     public void testRemove() {
         
@@ -99,6 +131,16 @@ public class CourseDaoTest extends AbstractTestNGSpringContextTests {
         
         Assert.assertNull(em.find(Course.class, c.getId()));
     }
+    
+    @Test(expectedExceptions = Exception.class)
+    public void testRemoveNull() {
+        
+        em.persist(c);
+        courseDao.remove(null);
+        
+        Assert.fail("Expected exception! Null parameter.");
+    }
+    
     @Test   
     public void testFindAll() {
         
@@ -119,6 +161,5 @@ public class CourseDaoTest extends AbstractTestNGSpringContextTests {
         List<Course> allCourses = courseDao.findAll();
         
         Assert.assertEquals(allCourses.size(), 3);
-        
     }
 }
