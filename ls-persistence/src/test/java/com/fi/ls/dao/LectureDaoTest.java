@@ -11,6 +11,7 @@ import javax.persistence.PersistenceUnit;
 import javax.validation.ValidationException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
+import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -60,7 +61,7 @@ public class LectureDaoTest extends AbstractTestNGSpringContextTests {
         em.getTransaction().commit();
         em.close();
     }
-    
+    /**
     @Test(expectedExceptions = ValidationException.class)
     public void nullIntoNotNullColumn() {
         EntityManager em = emf.createEntityManager();
@@ -69,6 +70,17 @@ public class LectureDaoTest extends AbstractTestNGSpringContextTests {
         em.persist(l3);
         
         //sem by sa to nemalo dostat - len na commit do branchu
+        em.getTransaction().commit();
+        em.close();
+    }*/
+    @Test
+    public void lectureHasStudents() {
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        
+        Lecture tl = em.find(Lecture.class, l1.getId());
+        Assert.assertEquals(tl.getListOfStudents().size(), 2);
+        
         em.getTransaction().commit();
         em.close();
     }
