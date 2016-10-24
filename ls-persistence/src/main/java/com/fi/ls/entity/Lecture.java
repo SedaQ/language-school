@@ -23,162 +23,162 @@ public class Lecture {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
         
-        @NotNull
-        private LocalDateTime dayTime;
-        
-        @NotNull
-        private String topic;
-        
-        @ManyToMany(targetEntity = Student.class, mappedBy = "listOfLectures")        
-        private List<Student> listOfStudents = new ArrayList<>();
-        
-        @ManyToMany(targetEntity = Lecturer.class, mappedBy = "listOfLectures")
-        private List<Lecturer> listOfLecturers = new ArrayList<>();
-        
-        @ManyToMany(targetEntity = Course.class, mappedBy = "listOfLectures")
-        private List<Course> listOfCourses = new ArrayList<>();
+    @NotNull
+    private LocalDateTime dayTime;
+    
+    @NotNull
+    private String topic;
+    
+    @ManyToMany(targetEntity = Student.class, mappedBy = "listOfLectures")        
+    private List<Student> listOfStudents = new ArrayList<>();
+    
+    @ManyToMany(targetEntity = Lecturer.class, mappedBy = "listOfLectures")
+    private List<Lecturer> listOfLecturers = new ArrayList<>();
+    
+    @ManyToMany(targetEntity = Course.class, mappedBy = "listOfLectures")
+    private List<Course> listOfCourses = new ArrayList<>();
         
 	public Lecture() {
             
 	}
         
-        public Long getId() {
-            
-            return this.id;
-            
-        }
+    public Long getId() {
         
-        public LocalDateTime getDayTime() {
-            
-            return this.dayTime;
-            
-        }
+        return this.id;
         
-        public void setDayTime(LocalDateTime newDayTime) {
-            
-           this.dayTime = newDayTime; 
-            
-        }
+    }
+    
+    public LocalDateTime getDayTime() {
         
-        public String getTopic() {
-            
-            return this.topic;
-            
-        }
+        return this.dayTime;
         
-        public void setTopic(String newTopic) {
-            
-            this.topic = newTopic;
-            
-        }
+    }
+    
+    public void setDayTime(LocalDateTime newDayTime) {
         
-        public List<Student> getListOfStudents() {
-            
-            return this.listOfStudents;
-            
-        }
+       this.dayTime = newDayTime; 
         
-        public void setListOfStudents(List<Student> newListOfStudents) {
-            
-            this.listOfStudents = newListOfStudents;
-            
-        }
+    }
+    
+    public String getTopic() {
         
-        public List<Lecturer> getListOfLecturers() {
-            
-            return this.listOfLecturers;
-            
-        }
+        return this.topic;
         
-        public void setListOfLecturers(List<Lecturer> newListOfLecturers) {
-            
-            this.listOfLecturers = newListOfLecturers;
-            
-        }
+    }
+    
+    public void setTopic(String newTopic) {
         
-        public List<Course> getListOfCourses() {
-            
-            return this.listOfCourses;
-            
-        }
+        this.topic = newTopic;
         
-        public void setListOfCourses(List<Course> newListOfCourses) {
-            
-            this.listOfCourses = newListOfCourses;
-            
-        }
+    }
+    
+    public List<Student> getListOfStudents() {
         
-        public void addStudent(Student student) {
-            
-            this.listOfStudents.add(student);
-            
-        }
+        return this.listOfStudents;
         
-        public void addLecturer (Lecturer lecturer) {
-            
-            this.listOfLecturers.add(lecturer);
-            
-        }
+    }
+    
+    public void setListOfStudents(List<Student> newListOfStudents) {
         
-        public void addCourse (Course course) {
-            
-            this.listOfCourses.add(course);
-            
-        }
+        this.listOfStudents = newListOfStudents;
         
-        @Override
-        public int hashCode() {
-            
-            return 31 + Long.valueOf(id).hashCode();
-            
-        }
+    }
+    
+    public List<Lecturer> getListOfLecturers() {
         
-        @Override
-        public boolean equals(Object obj) {
-                
-            if (this == obj) {
-                
-                return true;
-                
-            }
-            if (obj == null) {
-                
-                return false;
-                
-            }
-            if (!(obj instanceof Lecture)) {
-                
-                return false;
-                
-            }
-            Lecture other = (Lecture) obj;
-            if (this.id == null) {
-                
-		if (other.id != null) {
-                    
-                    return false;
-                    
-                }				
-            } else {
-		
-                if (!this.id.equals(other.id)) {
-                    
-                    return false;
-                    
-                }
-				
-            }
+        return this.listOfLecturers;
+        
+    }
+    
+    public void setListOfLecturers(List<Lecturer> newListOfLecturers) {
+        
+        this.listOfLecturers = newListOfLecturers;
+        
+    }
+    
+    public List<Course> getListOfCourses() {
+        
+        return this.listOfCourses;
+        
+    }
+    
+    public void setListOfCourses(List<Course> newListOfCourses) {
+        
+        this.listOfCourses = newListOfCourses;
+        
+    }
+    
+    public void addStudent(Student student) {
+        
+        this.listOfStudents.add(student);
+        
+    }
+    
+    public void addLecturer (Lecturer lecturer) {
+        
+        this.listOfLecturers.add(lecturer);
+        
+    }
+    
+    public void addCourse (Course course) {
+        
+        this.listOfCourses.add(course);
+        
+    }
+    
+    @Override
+    public int hashCode() {
+        
+        return 31 + Long.valueOf(id).hashCode();
+        
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+            
+        if (this == obj) {
+            
             return true;
             
         }
-        
-        @Override
-        public String toString() {
+        if (obj == null) {
             
-            return "Lecture [id = " + id + ", dayTime = " + dayTime.toString() + ", topic = " + topic 
-                    + ", listOfStudents: " + listOfStudents.toString() + ", listOfLecturers: "
-                    + listOfLecturers.toString() + ", listOfCourses: " + listOfCourses.toString() + "]";
+            return false;
             
         }
+        if (!(obj instanceof Lecture)) {
+            
+            return false;
+            
+        }
+        Lecture other = (Lecture) obj;
+        if (this.id == null) {
+            
+	if (other.id != null) {
+                
+                return false;
+                
+            }				
+        } else {
+	
+            if (!this.id.equals(other.id)) {
+                
+                return false;
+                
+            }
+			
+        }
+        return true;
+        
+    }
+    
+    @Override
+    public String toString() {
+        
+        return "Lecture [id = " + id + ", dayTime = " + dayTime.toString() + ", topic = " + topic 
+                + ", listOfStudents: " + listOfStudents.toString() + ", listOfLecturers: "
+                + listOfLecturers.toString() + ", listOfCourses: " + listOfCourses.toString() + "]";
+        
+    }
         
 }

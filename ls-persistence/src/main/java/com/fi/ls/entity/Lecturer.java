@@ -39,8 +39,6 @@ public class Lecturer {
 	@ManyToMany
 	private List<Lecture> listOfLectures = new ArrayList<>();
 
-	// <editor-fold defaultstate="collapsed" desc="GET/SET">
-
 	public Long getId() {
 		return id;
 	}
@@ -73,8 +71,6 @@ public class Lecturer {
 		listOfLanguages.add(lan);
 		lan.setLecturer(this);
 	}
-
-	// </editor-fold>
 
 	@Override
 	public boolean equals(Object obj) {

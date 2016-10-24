@@ -31,7 +31,7 @@ public class Language {
 	private Lecturer lecturer;
 
 	@NotNull
-        @Enumerated(EnumType.STRING)
+	@Enumerated(EnumType.STRING)
 	private ProficiencyLevel cefrLever;
 
 	public Long getId() {
