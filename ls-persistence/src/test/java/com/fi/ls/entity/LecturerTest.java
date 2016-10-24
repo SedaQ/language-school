@@ -22,7 +22,7 @@ public class LecturerTest {
 	Language lan3;
 
 	@BeforeClass
-	public void BeforeClass() {
+	public void beforeClass() {
 		l1 = new Lecturer();
 		l1.setFirstName("Batman Bin");
 		l1.setSurname("Supaman");
@@ -37,27 +37,27 @@ public class LecturerTest {
 	}
 
 	@Test
-	public void TestEqualsSame() {
+	public void testEqualsSame() {
 		Assert.assertTrue(l1.equals(l1));
 	}
 
 	@Test
-	public void TestEquals() {
+	public void testEquals() {
 		Assert.assertTrue(l1.equals(l3));
 	}
 
 	@Test
-	public void TestNotEquals() {
+	public void testNotEquals() {
 		Assert.assertTrue(!l1.equals(l2));
 	}
 
 	@Test
-	public void TestNotEqualsNull() {
+	public void testNotEqualsNull() {
 		Assert.assertTrue(!l1.equals(null));
 	}
 
 	@Test
-	public void TestNotEqualsType() {
+	public void testNotEqualsType() {
 		Assert.assertTrue(!l2.equals("Satan"));
 	}
 }

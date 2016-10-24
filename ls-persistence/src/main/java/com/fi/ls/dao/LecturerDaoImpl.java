@@ -12,7 +12,6 @@ import org.springframework.stereotype.Repository;
  * @author Lukas Daubner (410034)
  */
 @Repository
-@Transactional
 public class LecturerDaoImpl implements LecturerDao {
 
 	@PersistenceContext

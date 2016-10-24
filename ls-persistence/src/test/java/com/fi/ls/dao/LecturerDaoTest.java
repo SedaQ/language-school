@@ -10,14 +10,11 @@ import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.fi.ls.entity.Language;
 import com.fi.ls.entity.Lecturer;
-import com.fi.ls.enums.ProficiencyLevel;
 
 /**
  * @author Pavel Šeda (441048)
@@ -34,51 +31,59 @@ public class LecturerDaoTest extends AbstractTestNGSpringContextTests {
 	@Autowired
 	private LecturerDao lecturerDao;
 
-	private Lecturer lect;
+	private Lecturer lect1;
+	private Lecturer lect2;
 
 	@BeforeMethod
 	public void init() {
-		lect = new Lecturer();
-		lect.setFirstName("first name lect1");
-		lect.setSurname("surname lect1");
+		lect1 = new Lecturer();
+		lect1.setFirstName("first name lect1");
+		lect1.setSurname("surname lect1");
 
-		lecturerDao.create(lect);
+		lect2 = new Lecturer();
+		lect2.setFirstName("first name lect2");
+		lect2.setSurname("surname lect2");
+
+		lecturerDao.create(lect1);
+		lecturerDao.create(lect2);
 	}
 
 	@Test
 	public void testCreate() {
-		Assert.assertNotNull(lecturerDao.findById(lect.getId()));
+		Assert.assertNotNull(lecturerDao.findById(lect1.getId()));
+		Assert.assertNotNull(lecturerDao.findById(lect2.getId()));
 	}
 
 	@Test
 	public void testFindAll() {
-		Assert.assertEquals(lecturerDao.findAll().size(), 1);
+		Assert.assertEquals(lecturerDao.findAll().size(), 2);
 	}
 
 	@Test
 	public void testFindById() {
-		Assert.assertEquals(lecturerDao.findById(lect.getId()).getFirstName(), "first name lect1");
-		Assert.assertNotEquals(lecturerDao.findById(lect.getId()).getFirstName(), "Some other weird name");
+		Assert.assertEquals(lecturerDao.findById(lect1.getId()).getFirstName(), "first name lect1");
+		Assert.assertNotEquals(lecturerDao.findById(lect1.getId()).getFirstName(), "Some other weird name");
 	}
 
 	@Test
 	public void testUpdate() {
-		lect.setFirstName("TEST update lecturer");
-		lecturerDao.update(lect);
-		Assert.assertEquals(lecturerDao.findById(lect.getId()).getFirstName(), "TEST update lecturer");
-		Assert.assertNotEquals(lecturerDao.findById(lect.getId()).getFirstName(), "first name lect1");
+		lect1.setFirstName("TEST update lecturer");
+		lecturerDao.update(lect1);
+		Assert.assertEquals(lecturerDao.findById(lect1.getId()).getFirstName(), "TEST update lecturer");
+		Assert.assertNotEquals(lecturerDao.findById(lect1.getId()).getFirstName(), "first name lect1");
 	}
 
 	@Test
 	public void testRemove() {
-		Assert.assertNotNull(lecturerDao.findById(lect.getId()));
-		lecturerDao.remove(lect);
-		Assert.assertNull(lecturerDao.findById(lect.getId()));
+		Assert.assertNotNull(lecturerDao.findById(lect1.getId()));
+		lecturerDao.remove(lect1);
+		Assert.assertNull(lecturerDao.findById(lect1.getId()));
 	}
 
 	@AfterMethod
 	public void clearMemory() {
-		lect = null;
+		lect1 = null;
+		lect2 = null;
 	}
 
 }

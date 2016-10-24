@@ -19,7 +19,7 @@ public class CourseTest {
 	private Course c3;
 
 	@BeforeClass
-	public void BeforeClass() {
+	public void beforeClass() {
 		c1 = new Course();
 		c1.setName("Java Course");
 
@@ -31,27 +31,27 @@ public class CourseTest {
 	}
 
 	@Test
-	public void TestEqualsSame() {
+	public void testEqualsSame() {
 		Assert.assertTrue(c1.equals(c1));
 	}
 
 	@Test
-	public void TestEquals() {
+	public void testEquals() {
 		Assert.assertTrue(c1.equals(c2));
 	}
 
 	@Test
-	public void TestNotEquals() {
+	public void testNotEquals() {
 		Assert.assertFalse(c1.equals(c3));
 	}
 
 	@Test
-	public void TestNotEqualsNull() {
+	public void testNotEqualsNull() {
 		Assert.assertFalse(c1.equals(null));
 	}
 
 	@Test
-	public void TestNotEqualsType() {
+	public void testNotEqualsType(){
 		Assert.assertFalse(c1.equals("Test String"));
 	}
 

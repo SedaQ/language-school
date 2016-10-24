@@ -2,6 +2,8 @@ package com.fi.ls.entity;
 
 import com.fi.ls.enums.ProficiencyLevel;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,9 +31,8 @@ public class Language {
 	private Lecturer lecturer;
 
 	@NotNull
+        @Enumerated(EnumType.STRING)
 	private ProficiencyLevel cefrLever;
-
-	// <editor-fold defaultstate="collapsed" desc="GET/SET">
 
 	public Long getId() {
 		return id;
@@ -60,8 +61,6 @@ public class Language {
 	public void setCefrLever(ProficiencyLevel cefrLever) {
 		this.cefrLever = cefrLever;
 	}
-
-	// </editor-fold>
 
 	@Override
 	public boolean equals(Object obj) {

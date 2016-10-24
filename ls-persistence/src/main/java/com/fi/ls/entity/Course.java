@@ -15,6 +15,7 @@ import javax.persistence.NamedQuery;
 import javax.validation.constraints.NotNull;
 
 import com.fi.ls.enums.ProficiencyLevel;
+import java.util.ArrayList;
 
 /**
  * @author Pavel Šeda (441048)
@@ -39,7 +40,7 @@ public class Course {
 	private ProficiencyLevel proficiencyLevel;
 
 	@ManyToMany
-	private List<Lecture> listOfLectures;
+	private List<Lecture> listOfLectures = new ArrayList<>();
 
 	public Course() {
 	}
@@ -86,10 +87,7 @@ public class Course {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		return result;
+		return 31 + ((name == null) ? 0 : name.hashCode());
 	}
 
 	@Override
