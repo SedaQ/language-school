@@ -36,6 +36,7 @@ public class LecturerDaoTest extends AbstractTestNGSpringContextTests {
 	@BeforeMethod
 	public void init() {
 		lect1 = new Lecturer();
+                lect1.setNickname("nickname lect1");
 		lect1.setFirstName("first name lect1");
 		lect1.setSurname("surname lect1");
 	}
@@ -66,8 +67,8 @@ public class LecturerDaoTest extends AbstractTestNGSpringContextTests {
 	@Test
 	public void testFindById() {
 		em.persist(lect1);
-		Assert.assertEquals(lecturerDao.findById(lect1.getId()).getFirstName(), "first name lect1");
-		Assert.assertNotEquals(lecturerDao.findById(lect1.getId()).getFirstName(), "Some other weird name");
+		Assert.assertEquals(lecturerDao.findById(lect1.getId()).getNickname(), "nickname lect1");
+		Assert.assertNotEquals(lecturerDao.findById(lect1.getId()).getNickname(), "Some other weird name");
 	}
 
 	@Test(expectedExceptions = org.springframework.dao.InvalidDataAccessApiUsageException.class)
@@ -79,10 +80,10 @@ public class LecturerDaoTest extends AbstractTestNGSpringContextTests {
 	@Test
 	public void testUpdate() {
 		em.persist(lect1);
-		lect1.setFirstName("TEST update lecturer");
+		lect1.setNickname("TEST update lecturer");
 		lecturerDao.update(lect1);
-		Assert.assertEquals(em.find(Lecturer.class, lect1.getId()).getFirstName(), "TEST update lecturer");
-		Assert.assertNotEquals(em.find(Lecturer.class, lect1.getId()).getFirstName(), "first name lect1");
+		Assert.assertEquals(em.find(Lecturer.class, lect1.getId()).getNickname(), "TEST update lecturer");
+		Assert.assertNotEquals(em.find(Lecturer.class, lect1.getId()).getNickname(), "nickname lect1");
 	}
 
 	@Test(expectedExceptions = org.springframework.dao.InvalidDataAccessApiUsageException.class)
@@ -94,6 +95,7 @@ public class LecturerDaoTest extends AbstractTestNGSpringContextTests {
 	@Test
 	public void testFindAll() {
 		Lecturer lect2 = new Lecturer();
+                lect2.setNickname("nickname lect2");
 		lect2.setFirstName("first name lect2");
 		lect2.setSurname("surname lect2");
 

@@ -11,9 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.script.ScriptEngine;
 import javax.validation.constraints.NotNull;
-import org.hibernate.mapping.Collection;
 
 /**
  *
@@ -27,6 +25,10 @@ public class Lecturer {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+        @NotNull
+        @Column(unique = true)
+	private String nickname;
+        
 	@NotNull
 	private String firstName;
 
@@ -43,6 +45,14 @@ public class Lecturer {
 		return id;
 	}
 
+        public String getNickname() {
+            return nickname;
+        }
+
+        public void setNickname(String nickname) {
+            this.nickname = nickname;
+        }
+        
 	public String getFirstName() {
 		return firstName;
 	}
@@ -81,6 +91,13 @@ public class Lecturer {
 		if (!(obj instanceof Lecturer))
 			return false;
 		Lecturer other = (Lecturer) obj;
+                if (this.nickname == null) {
+			if (other.nickname != null)
+				return false;
+		} else {
+			if (!this.nickname.equals(other.nickname))
+				return false;
+		}
 		if (this.firstName == null) {
 			if (other.firstName != null)
 				return false;
@@ -100,6 +117,6 @@ public class Lecturer {
 
 	@Override
 	public int hashCode() {
-		return (firstName == null ? 0 : firstName.hashCode()) + 2 ^ (surname == null ? 0 : surname.hashCode());
+		return (nickname == null ? 0 : nickname.hashCode());
 	}
 }
