@@ -24,14 +24,17 @@ public class LecturerTest {
 	@BeforeClass
 	public void beforeClass() {
 		l1 = new Lecturer();
+                l1.setNickname("Superhero");
 		l1.setFirstName("Batman Bin");
 		l1.setSurname("Supaman");
 
 		l2 = new Lecturer();
+                l2.setNickname("Christ");
 		l2.setFirstName("Jesus");
 		l2.setSurname("of Nazareth");
 
 		l3 = new Lecturer();
+                l3.setNickname("Superhero");
 		l3.setFirstName("Batman Bin");
 		l3.setSurname("Supaman");
 	}
