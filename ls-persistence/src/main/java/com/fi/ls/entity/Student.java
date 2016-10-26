@@ -2,6 +2,7 @@ package com.fi.ls.entity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,6 +31,10 @@ public class Student {
 	@NotNull
 	@Column
 	private String surname;
+        
+        @NotNull
+        @Column(unique = true)
+        private String birthNumber;
 
 	@ManyToMany
 	private List<Lecture> listOfLectures = new ArrayList<>();
@@ -69,26 +74,36 @@ public class Student {
 		return listOfLectures;
 	}
 
-	@Override
-	public int hashCode() {
-		return 31 + ((id == null) ? 0 : id.hashCode());
-	}
+    public String getBirthNumber() {
+        return birthNumber;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (!(obj instanceof Student))
-			return false;
-		Student other = (Student) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		return true;
-	}
+    public void setBirthNumber(String birthNumber) {
+        this.birthNumber = birthNumber;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 59 * hash + Objects.hashCode(this.birthNumber);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Student other = (Student) obj;
+        if (!Objects.equals(this.birthNumber, other.birthNumber)) {
+            return false;
+        }
+        return true;
+    }
+        
+        
 
 }

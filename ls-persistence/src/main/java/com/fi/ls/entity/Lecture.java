@@ -1,14 +1,17 @@
 package com.fi.ls.entity;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -24,7 +27,8 @@ public class Lecture {
 	private Long id;
         
     @NotNull
-    private LocalDateTime dayTime;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dayTime;
     
     @NotNull
     private String topic;
@@ -48,13 +52,13 @@ public class Lecture {
         
     }
     
-    public LocalDateTime getDayTime() {
+    public Date getDayTime() {
         
         return this.dayTime;
         
     }
     
-    public void setDayTime(LocalDateTime newDayTime) {
+    public void setDayTime(Date newDayTime) {
         
        this.dayTime = newDayTime; 
         
@@ -125,51 +129,31 @@ public class Lecture {
         this.listOfCourses.add(course);
         
     }
-    
+
     @Override
     public int hashCode() {
-        
-        return 31 + Long.valueOf(id).hashCode();
-        
+        int hash = 7;
+        hash = 67 * hash + Objects.hashCode(this.dayTime);
+        hash = 67 * hash + Objects.hashCode(this.topic);
+        return hash;
     }
-    
+
     @Override
     public boolean equals(Object obj) {
-            
-        if (this == obj) {
-            
-            return true;
-            
-        }
         if (obj == null) {
-            
             return false;
-            
         }
-        if (!(obj instanceof Lecture)) {
-            
+        if (getClass() != obj.getClass()) {
             return false;
-            
         }
-        Lecture other = (Lecture) obj;
-        if (this.id == null) {
-            
-	if (other.id != null) {
-                
-                return false;
-                
-            }				
-        } else {
-	
-            if (!this.id.equals(other.id)) {
-                
-                return false;
-                
-            }
-			
+        final Lecture other = (Lecture) obj;
+        if (!Objects.equals(this.dayTime, other.dayTime)) {
+            return false;
+        }
+        if (!Objects.equals(this.topic, other.topic)) {
+            return false;
         }
         return true;
-        
     }
     
     @Override
