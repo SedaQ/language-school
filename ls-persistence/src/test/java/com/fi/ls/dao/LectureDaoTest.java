@@ -1,7 +1,7 @@
 package com.fi.ls.dao;
 
 import com.fi.ls.entity.Lecture;
-import java.time.LocalDateTime;
+import java.util.Date;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
@@ -35,7 +35,7 @@ public class LectureDaoTest extends AbstractTestNGSpringContextTests {
     @BeforeMethod
     public void beforeMethod() {
         l = new Lecture();
-        l.setDayTime(LocalDateTime.MIN);
+        l.setDayTime(new Date(10));
         l.setTopic("Something");
     }
     
@@ -51,6 +51,7 @@ public class LectureDaoTest extends AbstractTestNGSpringContextTests {
         lectureDao.create(l);
     }
     //odtialto
+    /*
     @Test
     public void testFindById() {
         lectureDao.create(l);
@@ -85,8 +86,8 @@ public class LectureDaoTest extends AbstractTestNGSpringContextTests {
         l.setTopic("Something else");
         lectureDao.update(l);
         Assert.assertEquals(l.getTopic(), lectureDao.findById(l.getId()).getTopic());
-    }
-    /*
+    }*/
+    
     @Test
     public void testFindById() {
         em.persist(l);
@@ -96,7 +97,7 @@ public class LectureDaoTest extends AbstractTestNGSpringContextTests {
     @Test
     public void testFindAll() {
         Lecture l1 = new Lecture();
-        l1.setDayTime(LocalDateTime.MAX);
+        l1.setDayTime(new Date(20));
         l1.setTopic("Random topic");
         
         em.persist(l);
@@ -122,5 +123,5 @@ public class LectureDaoTest extends AbstractTestNGSpringContextTests {
         em.persist(l);
         Assert.assertEquals(l.getTopic(), lectureDao.findById(l.getId()).getTopic());
     }
-    */
+    
 }
