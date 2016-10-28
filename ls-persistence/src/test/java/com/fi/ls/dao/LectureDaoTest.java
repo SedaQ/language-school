@@ -1,6 +1,7 @@
 package com.fi.ls.dao;
 
 import com.fi.ls.entity.Lecture;
+import java.time.LocalDateTime;
 import java.util.Date;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -35,7 +36,7 @@ public class LectureDaoTest extends AbstractTestNGSpringContextTests {
     @BeforeMethod
     public void beforeMethod() {
         l = new Lecture();
-        l.setDayTime(new Date(10));
+        l.setDayTime(LocalDateTime.MIN);
         l.setTopic("Something");
     }
     
@@ -97,7 +98,7 @@ public class LectureDaoTest extends AbstractTestNGSpringContextTests {
     @Test
     public void testFindAll() {
         Lecture l1 = new Lecture();
-        l1.setDayTime(new Date(20));
+        l1.setDayTime(LocalDateTime.MAX);
         l1.setTopic("Random topic");
         
         em.persist(l);

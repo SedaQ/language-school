@@ -20,59 +20,59 @@ import javax.validation.constraints.NotNull;
 @NamedQuery(name = "Student.findAll", query = "SELECT s FROM Student s")
 public class Student {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@NotNull
-	@Column
-	private String name;
+    @NotNull
+    @Column
+    private String name;
 
-	@NotNull
-	@Column
-	private String surname;
+    @NotNull
+    @Column
+    private String surname;
         
-        @NotNull
-        @Column(unique = true)
-        private String birthNumber;
+    @NotNull
+    @Column(unique = true)
+    private String birthNumber;
 
-	@ManyToMany
-	private List<Lecture> listOfLectures = new ArrayList<>();
+    @ManyToMany
+    private List<Lecture> listOfLectures = new ArrayList<>();
 
-	public Student() {
-	}
+    public Student() {
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setName(String name) {
+	this.name = name;
+    }
 
-	public void setSurname(String surname) {
-		this.surname = surname;
-	}
+    public void setSurname(String surname) {
+    	this.surname = surname;
+    }
 
-	public void setListOfLectures(List<Lecture> listOfLectures) {
-		this.listOfLectures = listOfLectures;
-	}
+    public void setListOfLectures(List<Lecture> listOfLectures) {
+    	this.listOfLectures = listOfLectures;
+    }
 
-	public void addLecture(Lecture lecture) {
-		this.listOfLectures.add(lecture);
-	}
+    public void addLecture(Lecture lecture) {
+	this.listOfLectures.add(lecture);
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public Long getId() {
+	return id;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+	return name;
+    }
 
-	public String getSurname() {
-		return surname;
-	}
+    public String getSurname() {
+	return surname;
+    }
 
-	public List<Lecture> getListOfLectures() {
-		return listOfLectures;
-	}
+    public List<Lecture> getListOfLectures() {
+    	return listOfLectures;
+    }
 
     public String getBirthNumber() {
         return birthNumber;
@@ -103,7 +103,4 @@ public class Student {
         }
         return true;
     }
-        
-        
-
 }
