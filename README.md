@@ -25,4 +25,4 @@ mvn clean install
 
 ## Use Case & Class diagram for entities
 
-Use Case & Class diagram are in Wiki folder of this project.
+Use Case & Class diagram are in [Wiki](https://github.com/SedaQ/language-school/wiki) folder of this project.
