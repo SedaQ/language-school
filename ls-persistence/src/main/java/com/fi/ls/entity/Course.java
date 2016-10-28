@@ -32,9 +32,11 @@ public class Course {
 	@Column(unique = true)
 	private String name;
 
+	@NotNull
 	@Column
 	private String language;
 
+	@NotNull
 	@Enumerated(EnumType.STRING)
 	private ProficiencyLevel proficiencyLevel;
 
@@ -86,10 +88,14 @@ public class Course {
 
 	@Override
 	public int hashCode() {
-		return 31 + ((name == null) ? 0 : name.hashCode());
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((language == null) ? 0 : language.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((proficiencyLevel == null) ? 0 : proficiencyLevel.hashCode());
+		return result;
 	}
 
-	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
@@ -98,10 +104,17 @@ public class Course {
 		if (!(obj instanceof Course))
 			return false;
 		Course other = (Course) obj;
+		if (language == null) {
+			if (other.language != null)
+				return false;
+		} else if (!language.equals(other.language))
+			return false;
 		if (name == null) {
 			if (other.name != null)
 				return false;
 		} else if (!name.equals(other.name))
+			return false;
+		if (proficiencyLevel != other.proficiencyLevel)
 			return false;
 		return true;
 	}
