@@ -1,5 +1,6 @@
 package com.fi.ls.entity;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -27,8 +28,8 @@ public class Lecture {
 	private Long id;
         
     @NotNull
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dayTime;
+    //@Temporal(TemporalType.TIMESTAMP)
+    private LocalDateTime dayTime;
     
     @NotNull
     private String topic;
@@ -52,13 +53,13 @@ public class Lecture {
         
     }
     
-    public Date getDayTime() {
+    public LocalDateTime getDayTime() {
         
         return this.dayTime;
         
     }
     
-    public void setDayTime(Date newDayTime) {
+    public void setDayTime(LocalDateTime newDayTime) {
         
        this.dayTime = newDayTime; 
         

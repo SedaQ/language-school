@@ -1,7 +1,6 @@
 package com.fi.ls.entity;
 
 import java.util.List;
-import java.util.Locale;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

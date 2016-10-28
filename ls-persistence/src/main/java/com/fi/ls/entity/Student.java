@@ -32,9 +32,9 @@ public class Student {
 	@Column
 	private String surname;
         
-        @NotNull
-        @Column(unique = true)
-        private String birthNumber;
+    @NotNull
+    @Column(unique = true)
+    private String birthNumber;
 
 	@ManyToMany
 	private List<Lecture> listOfLectures = new ArrayList<>();

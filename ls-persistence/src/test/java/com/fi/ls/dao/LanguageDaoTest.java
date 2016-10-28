@@ -43,7 +43,7 @@ public class LanguageDaoTest extends AbstractTestNGSpringContextTests {
 		lan1.setCefrLever(ProficiencyLevel.A1);
 
 		lect1 = new Lecturer();
-                lect1.setNickname("nickname lect1");
+        lect1.setNickname("nickname lect1");
 		lect1.setFirstName("first name lect1");
 		lect1.setSurname("surname lect1");
 		lect1.addLanguage(lan1);
