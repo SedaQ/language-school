@@ -1,6 +1,6 @@
 # PA165 project: Language School
 
-language school is project which was one of possible projects to develop and demonstrate knowledge of topics introduced in course: [PA165](https://is.muni.cz/predmet/fi/podzim2016/PA165)
+language school is one of possible projects to develop and demonstrate knowledge of topics introduced in course: [PA165](https://is.muni.cz/predmet/fi/podzim2016/PA165)
 
 ## Project description:
 
