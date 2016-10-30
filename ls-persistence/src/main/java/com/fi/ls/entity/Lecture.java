@@ -25,8 +25,10 @@ public class Lecture {
     private Long id;
         
     @NotNull
-    //@Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime dayTime;
+    
+    @NotNull
+    private String classId;
     
     @NotNull
     private String topic;
@@ -47,6 +49,18 @@ public class Lecture {
     public Long getId() {
         
         return this.id;
+        
+    }
+    
+    public String getClassId() {
+        
+        return this.classId;
+        
+    }
+    
+    public void setClassId(String newClassId) {
+        
+        this.classId = newClassId;
         
     }
     
@@ -130,14 +144,18 @@ public class Lecture {
 
     @Override
     public int hashCode() {
+        
         int hash = 7;
         hash = 67 * hash + Objects.hashCode(this.dayTime);
+        hash = 67 * hash + Objects.hashCode(this.classId);
         hash = 67 * hash + Objects.hashCode(this.topic);
         return hash;
+        
     }
 
     @Override
     public boolean equals(Object obj) {
+        
         if (obj == null) {
             return false;
         }
@@ -148,18 +166,17 @@ public class Lecture {
         if (!Objects.equals(this.dayTime, other.dayTime)) {
             return false;
         }
-        if (!Objects.equals(this.topic, other.topic)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.classId, other.classId);
+        
     }
     
     @Override
     public String toString() {
         
-        return "Lecture [id = " + id + ", dayTime = " + dayTime.toString() + ", topic = " + topic 
-                + ", listOfStudents: " + listOfStudents.toString() + ", listOfLecturers: "
-                + listOfLecturers.toString() + ", listOfCourses: " + listOfCourses.toString() + "]";
+        return "Lecture [id = " + id + ", dayTime = " + dayTime.toString() + ", classId: " + classId
+                + ", topic = " + topic + ", listOfStudents: " + listOfStudents.toString()
+                + ", listOfLecturers: " + listOfLecturers.toString() + ", listOfCourses: "
+                + listOfCourses.toString() + "]";
         
     }
 
