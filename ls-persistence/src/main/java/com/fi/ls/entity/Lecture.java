@@ -179,5 +179,5 @@ public class Lecture {
                 + listOfCourses.toString() + "]";
         
     }
-        
+
 }
