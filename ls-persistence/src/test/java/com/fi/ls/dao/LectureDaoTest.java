@@ -38,7 +38,7 @@ public class LectureDaoTest extends AbstractTestNGSpringContextTests {
         l = new Lecture();
         l.setDayTime(LocalDateTime.now());
         l.setTopic("Something");
-        l.setClassId("1");
+        l.setClassroomId("1");
     }
     
     @Test(expectedExceptions = ValidationException.class)
@@ -64,7 +64,7 @@ public class LectureDaoTest extends AbstractTestNGSpringContextTests {
         Lecture l1 = new Lecture();
         l1.setDayTime(LocalDateTime.of(1990, Month.MARCH, 14, 10, 20));
         l1.setTopic("Random topic");
-        l1.setClassId("test");
+        l1.setClassroomId("test");
         
         em.persist(l);
         em.persist(l1);
@@ -95,7 +95,7 @@ public class LectureDaoTest extends AbstractTestNGSpringContextTests {
         Lecture l1 = new Lecture();
         l1.setDayTime(LocalDateTime.of(1990, Month.MARCH, 14, 10, 20));
         l1.setTopic("Random topic");
-        l1.setClassId("test");
+        l1.setClassroomId("test");
         
         em.persist(l);
         Assert.assertEquals(lectureDao.findAll().size(), 1);

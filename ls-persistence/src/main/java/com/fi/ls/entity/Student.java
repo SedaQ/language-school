@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -17,90 +18,91 @@ import javax.validation.constraints.NotNull;
  * @author Matúš
  */
 @Entity
+@Table(name = "student")
 @NamedQuery(name = "Student.findAll", query = "SELECT s FROM Student s")
 public class Student {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_student")
+	private Long id;
 
-    @NotNull
-    @Column
-    private String name;
+	@NotNull
+	private String firstName;
 
-    @NotNull
-    @Column
-    private String surname;
-        
-    @NotNull
-    @Column(unique = true)
-    private String birthNumber;
+	@NotNull
+	private String surname;
 
-    @ManyToMany
-    private List<Lecture> listOfLectures = new ArrayList<>();
+	@NotNull
+	@Column(unique = true, name = "birth_number")
+	private String birthNumber;
 
-    public Student() {
-    }
+	@ManyToMany
+	@Column(name = "list_of_lectures")
+	private List<Lecture> listOfLectures = new ArrayList<>();
 
-    public void setName(String name) {
-	this.name = name;
-    }
+	public Student() {
+	}
 
-    public void setSurname(String surname) {
-    	this.surname = surname;
-    }
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
 
-    public void setListOfLectures(List<Lecture> listOfLectures) {
-    	this.listOfLectures = listOfLectures;
-    }
+	public void setSurname(String surname) {
+		this.surname = surname;
+	}
 
-    public void addLecture(Lecture lecture) {
-	this.listOfLectures.add(lecture);
-    }
+	public void setListOfLectures(List<Lecture> listOfLectures) {
+		this.listOfLectures = listOfLectures;
+	}
 
-    public Long getId() {
-	return id;
-    }
+	public void setBirthNumber(String birthNumber) {
+		this.birthNumber = birthNumber;
+	}
 
-    public String getName() {
-	return name;
-    }
+	public void addLecture(Lecture lecture) {
+		this.listOfLectures.add(lecture);
+	}
 
-    public String getSurname() {
-	return surname;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public List<Lecture> getListOfLectures() {
-    	return listOfLectures;
-    }
+	public String getFirstName() {
+		return firstName;
+	}
 
-    public String getBirthNumber() {
-        return birthNumber;
-    }
+	public String getSurname() {
+		return surname;
+	}
 
-    public void setBirthNumber(String birthNumber) {
-        this.birthNumber = birthNumber;
-    }
+	public List<Lecture> getListOfLectures() {
+		return listOfLectures;
+	}
 
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 59 * hash + Objects.hashCode(this.birthNumber);
-        return hash;
-    }
+	public String getBirthNumber() {
+		return birthNumber;
+	}
 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (!(obj instanceof Student)) {
-            return false;
-        }
-        final Student other = (Student) obj;
-        if (!Objects.equals(this.birthNumber, other.birthNumber)) {
-            return false;
-        }
-        return true;
-    }
+	@Override
+	public int hashCode() {
+		int hash = 7;
+		hash = 59 * hash + Objects.hashCode(this.birthNumber);
+		return hash;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof Student)) {
+			return false;
+		}
+		final Student other = (Student) obj;
+		if (!Objects.equals(this.birthNumber, other.birthNumber)) {
+			return false;
+		}
+		return true;
+	}
 }

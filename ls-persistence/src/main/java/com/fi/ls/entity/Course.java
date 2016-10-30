@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import com.fi.ls.enums.ProficiencyLevel;
@@ -21,11 +22,13 @@ import java.util.ArrayList;
  *
  */
 @Entity
+@Table(name = "course")
 @NamedQuery(name = "Course.findAll", query = "SELECT c FROM Course c")
 public class Course {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_course")
 	private Long id;
 
 	@NotNull
@@ -33,14 +36,15 @@ public class Course {
 	private String name;
 
 	@NotNull
-	@Column
 	private String language;
 
 	@NotNull
 	@Enumerated(EnumType.STRING)
+	@Column(name = "proficiency_level")
 	private ProficiencyLevel proficiencyLevel;
 
 	@ManyToMany
+	@Column(name = "list_of_lectures")
 	private List<Lecture> listOfLectures = new ArrayList<>();
 
 	public Course() {

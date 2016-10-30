@@ -26,9 +26,9 @@ public class LectureTest {
         lecture1.setDayTime(LocalDateTime.of(2016, Month.NOVEMBER, 29, 16, 0));
         lecture2.setDayTime(LocalDateTime.of(2016, Month.NOVEMBER, 29, 16, 0));
         lecture3.setDayTime(LocalDateTime.of(2016, Month.NOVEMBER, 30, 12, 0));
-        lecture1.setClassId("B403");
-        lecture2.setClassId("B403");
-        lecture3.setClassId("B403");
+        lecture1.setClassroomId("B403");
+        lecture2.setClassroomId("B403");
+        lecture3.setClassroomId("B403");
         lecture1.setTopic("English");
         lecture2.setTopic("English");
         lecture3.setTopic("Farsi");
