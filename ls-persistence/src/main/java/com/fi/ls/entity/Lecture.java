@@ -1,9 +1,5 @@
 package com.fi.ls.entity;
 
-<<<<<<< HEAD
-import com.fi.ls.utils.converter.LocalDateTimeAttributeConverter;
-=======
->>>>>>> refs/remotes/origin/master
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,9 +20,9 @@ import javax.validation.constraints.NotNull;
 @NamedQuery(name = "Lecture.findAll", query = "SELECT l FROM Lecture l")
 public class Lecture {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
         
     @NotNull
     //@Temporal(TemporalType.TIMESTAMP)
