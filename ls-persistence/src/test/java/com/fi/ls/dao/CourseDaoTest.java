@@ -8,6 +8,8 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import javax.validation.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
+import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
@@ -49,7 +51,7 @@ public class CourseDaoTest extends AbstractTestNGSpringContextTests {
 		Assert.assertNotNull(em.find(Course.class, c.getId()));
 	}
 
-	@Test(expectedExceptions = Exception.class)
+	@Test(expectedExceptions = InvalidDataAccessApiUsageException.class)
 	public void testCreateNull() {
 
 		courseDao.create(null);
@@ -57,7 +59,7 @@ public class CourseDaoTest extends AbstractTestNGSpringContextTests {
 		Assert.fail("Expected exception! Null parameter.");
 	}
 
-	@Test(expectedExceptions = Exception.class)
+	@Test(expectedExceptions = JpaSystemException.class)
 	public void testCreateNonUniqueName() {
 
 		Course c1 = new Course();
@@ -91,7 +93,7 @@ public class CourseDaoTest extends AbstractTestNGSpringContextTests {
 		Assert.assertEquals(c, found);
 	}
 
-	@Test(expectedExceptions = Exception.class)
+	@Test(expectedExceptions = InvalidDataAccessApiUsageException.class)
 	public void testFindByIdNull() {
 
 		em.persist(c);
@@ -112,7 +114,7 @@ public class CourseDaoTest extends AbstractTestNGSpringContextTests {
 		Assert.assertEquals(c, em.find(Course.class, c.getId()));
 	}
 
-	@Test(expectedExceptions = Exception.class)
+	@Test(expectedExceptions = InvalidDataAccessApiUsageException.class)
 	public void testUpdateNull() {
 
 		em.persist(c);
@@ -132,7 +134,7 @@ public class CourseDaoTest extends AbstractTestNGSpringContextTests {
 		Assert.assertNull(em.find(Course.class, c.getId()));
 	}
 
-	@Test(expectedExceptions = Exception.class)
+	@Test(expectedExceptions = NullPointerException.class)
 	public void testRemoveNull() {
 
 		em.persist(c);
