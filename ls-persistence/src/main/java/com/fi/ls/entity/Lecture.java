@@ -1,7 +1,7 @@
 package com.fi.ls.entity;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.Entity;
@@ -25,7 +25,7 @@ public class Lecture {
     private Long id;
         
     @NotNull
-    private Date dayTime;
+    private LocalDateTime dayTime;
     
     @NotNull
     private String classId;
@@ -64,13 +64,13 @@ public class Lecture {
         
     }
     
-    public Date getDayTime() {
+    public LocalDateTime getDayTime() {
         
         return this.dayTime;
         
     }
     
-    public void setDayTime(Date newDayTime) {
+    public void setDayTime(LocalDateTime newDayTime) {
         
        this.dayTime = newDayTime; 
         
