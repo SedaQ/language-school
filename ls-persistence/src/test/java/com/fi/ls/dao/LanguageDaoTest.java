@@ -43,7 +43,7 @@ public class LanguageDaoTest extends AbstractTestNGSpringContextTests {
 		lan1.setProficiencyLevel(ProficiencyLevel.A1);
 
 		lect1 = new Lecturer();
-        lect1.setNickname("nickname lect1");
+		lect1.setNickname("nickname lect1");
 		lect1.setFirstName("first name lect1");
 		lect1.setSurname("surname lect1");
 		lect1.addLanguage(lan1);
@@ -60,24 +60,32 @@ public class LanguageDaoTest extends AbstractTestNGSpringContextTests {
 	@Test(expectedExceptions = org.springframework.dao.InvalidDataAccessApiUsageException.class)
 	public void testCreateNull() {
 		languageDao.create(null);
+		Assert.fail(
+				"Language object cannot be null. Exception org.springframework.dao.InvalidDataAccessApiUsageException.class expected");
 	}
 
 	@Test(expectedExceptions = javax.validation.ConstraintViolationException.class)
 	public void testCreateNullLanguage() {
 		lan1.setLanguage(null);
 		languageDao.create(lan1);
+		Assert.fail(
+				"Language cannot be setted to null. Exception javax.validation.ConstraintViolationException.class expected");
 	}
 
 	@Test(expectedExceptions = javax.validation.ConstraintViolationException.class)
 	public void testCreateNullLecturer() {
 		lan1.setLecturer(null);
 		languageDao.create(lan1);
+		Assert.fail(
+				"Lecturer cannot be setted to null. Exception javax.validation.ConstraintViolationException.class expected");
 	}
 
 	@Test(expectedExceptions = javax.validation.ConstraintViolationException.class)
-	public void testCreateNullCefrLevel() {
+	public void testCreateNullProficiencyLevel() {
 		lan1.setProficiencyLevel(null);
 		languageDao.create(lan1);
+		Assert.fail(
+				"ProficiencyLevel cannot be setted to null. Exception javax.validation.ConstraintViolationException.class expected.");
 	}
 
 	@Test
@@ -91,6 +99,8 @@ public class LanguageDaoTest extends AbstractTestNGSpringContextTests {
 	public void testFindByIdNull() {
 		em.persist(lan1);
 		languageDao.findById(null);
+		Assert.fail(
+				"I cannot call function findById with null parameter. Exception org.springframework.dao.InvalidDataAccessApiUsageException expected");
 	}
 
 	@Test
@@ -106,12 +116,14 @@ public class LanguageDaoTest extends AbstractTestNGSpringContextTests {
 	public void testUpdateNull() {
 		em.persist(lan1);
 		languageDao.update(null);
+		Assert.fail(
+				"Update function cannot be call with null parameter. Exception org.springframework.dao.InvalidDataAccessApiUsageException.class expected.");
 	}
 
 	@Test
 	public void testFindAll() {
 		Lecturer lect2 = new Lecturer();
-                lect2.setNickname("nickname lect2");
+		lect2.setNickname("nickname lect2");
 		lect2.setFirstName("first name lect2");
 		lect2.setSurname("surname lect2");
 
@@ -140,6 +152,8 @@ public class LanguageDaoTest extends AbstractTestNGSpringContextTests {
 	public void testRemoveNull() {
 		em.persist(lan1);
 		languageDao.remove(null);
+		Assert.fail(
+				"Remove function cannot be called with null parameter. Exception NullPointerException.class expected.");
 	}
 
 	@AfterMethod
