@@ -50,18 +50,24 @@ public class LecturerDaoTest extends AbstractTestNGSpringContextTests {
 	@Test(expectedExceptions = org.springframework.dao.InvalidDataAccessApiUsageException.class)
 	public void testCreateNull() {
 		lecturerDao.create(null);
+		Assert.fail(
+				"Lecturer object cannot null. Exception org.springframework.dao.InvalidDataAccessApiUsageException.class expected.");
 	}
 
 	@Test(expectedExceptions = javax.validation.ConstraintViolationException.class)
 	public void testCreateNullName() {
 		lect1.setFirstName(null);
 		lecturerDao.create(lect1);
+		Assert.fail(
+				"Lecturer cannot be created with firstName null parameter. Exception javax.validation.ConstraintViolationException.class expected.");
 	}
 
 	@Test(expectedExceptions = javax.validation.ConstraintViolationException.class)
 	public void testCreateNullSurname() {
 		lect1.setSurname(null);
 		lecturerDao.create(lect1);
+		Assert.fail(
+				"Lecture cannot be created with surname null parameter. Exception javax.validation.ConstraintViolationException.class.");
 	}
 
 	@Test(expectedExceptions = org.springframework.orm.jpa.JpaSystemException.class)
@@ -72,6 +78,8 @@ public class LecturerDaoTest extends AbstractTestNGSpringContextTests {
 		lecturer2.setSurname("surname lect1");
 		lecturerDao.create(lect1);
 		lecturerDao.create(lecturer2);
+		Assert.fail(
+				"Lecturers with same nickName cannot exist. Exception org.springframework.orm.jpa.JpaSystemException.class expected.");
 	}
 
 	@Test
@@ -85,6 +93,8 @@ public class LecturerDaoTest extends AbstractTestNGSpringContextTests {
 	public void testFindByIdNull() {
 		em.persist(lect1);
 		lecturerDao.findById(null);
+		Assert.fail(
+				"I cannot call function findById with null parameter. Exception org.springframework.dao.InvalidDataAccessApiUsageException expected");
 	}
 
 	@Test
@@ -100,6 +110,8 @@ public class LecturerDaoTest extends AbstractTestNGSpringContextTests {
 	public void testUpdateNull() {
 		em.persist(lect1);
 		lecturerDao.update(null);
+		Assert.fail(
+				"Update function cannot be call with null parameter. Exception org.springframework.dao.InvalidDataAccessApiUsageException.class expected.");
 	}
 
 	@Test
@@ -126,6 +138,8 @@ public class LecturerDaoTest extends AbstractTestNGSpringContextTests {
 	public void testRemoveNull() {
 		em.persist(lect1);
 		lecturerDao.remove(null);
+		Assert.fail(
+				"Remove function cannot be called with null parameter. Exception NullPointerException.class expected.");
 	}
 
 	@AfterMethod
