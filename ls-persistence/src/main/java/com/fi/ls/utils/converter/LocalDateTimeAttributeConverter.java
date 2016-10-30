@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.fi.ls.utils.converter;
 
 import java.sql.Timestamp;

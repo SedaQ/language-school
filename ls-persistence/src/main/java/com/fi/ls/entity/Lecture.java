@@ -1,6 +1,9 @@
 package com.fi.ls.entity;
 
+<<<<<<< HEAD
 import com.fi.ls.utils.converter.LocalDateTimeAttributeConverter;
+=======
+>>>>>>> refs/remotes/origin/master
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
