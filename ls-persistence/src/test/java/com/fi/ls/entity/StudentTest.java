@@ -24,7 +24,7 @@ public class StudentTest {
 	s2 = new Student();
         s2.setFirstName("Ozzy");
         s2.setSurname("Osbourne");
-        s2.setBirthNumber("8811229999");
+        s2.setBirthNumber("42");
         
 	s3 = new Student();
         s3.setFirstName("Jim");
