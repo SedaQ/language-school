@@ -36,7 +36,7 @@ public class LecturerDaoTest extends AbstractTestNGSpringContextTests {
 	@BeforeMethod
 	public void init() {
 		lect1 = new Lecturer();
-                lect1.setNickname("nickname lect1");
+		lect1.setNickname("nickname lect1");
 		lect1.setFirstName("first name lect1");
 		lect1.setSurname("surname lect1");
 	}
@@ -62,6 +62,16 @@ public class LecturerDaoTest extends AbstractTestNGSpringContextTests {
 	public void testCreateNullSurname() {
 		lect1.setSurname(null);
 		lecturerDao.create(lect1);
+	}
+
+	@Test(expectedExceptions = org.springframework.orm.jpa.JpaSystemException.class)
+	public void testCreateLecturerNickNameDupl() {
+		Lecturer lecturer2 = new Lecturer();
+		lecturer2.setNickname("nickname lect1"); // nick name should be unique
+		lecturer2.setFirstName("first name lecturer2");
+		lecturer2.setSurname("surname lect1");
+		lecturerDao.create(lect1);
+		lecturerDao.create(lecturer2);
 	}
 
 	@Test
@@ -95,7 +105,7 @@ public class LecturerDaoTest extends AbstractTestNGSpringContextTests {
 	@Test
 	public void testFindAll() {
 		Lecturer lect2 = new Lecturer();
-                lect2.setNickname("nickname lect2");
+		lect2.setNickname("nickname lect2");
 		lect2.setFirstName("first name lect2");
 		lect2.setSurname("surname lect2");
 

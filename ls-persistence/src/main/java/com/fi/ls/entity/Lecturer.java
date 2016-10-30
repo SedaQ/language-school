@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -18,41 +19,46 @@ import javax.validation.constraints.NotNull;
  * @author Lukas Daubner (410034)
  */
 @Entity
+@Table(name = "lecturer")
 @NamedQuery(name = "Lecturer.findAll", query = "SELECT l FROM Lecturer l")
 public class Lecturer {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_lecturer")
 	private Long id;
 
-    @NotNull
-    @Column(unique = true)
-	private String nickname;
-        
 	@NotNull
+	@Column(unique = true)
+	private String nickname;
+
+	@NotNull
+	@Column(name = "first_name")
 	private String firstName;
 
 	@NotNull
 	private String surname;
 
 	@OneToMany(targetEntity = Language.class, mappedBy = "lecturer")
+	@Column(name = "list_of_languages")
 	private List<Language> listOfLanguages = new ArrayList<>();
 
 	@ManyToMany
+	@Column(name = "list_of_lectures")
 	private List<Lecture> listOfLectures = new ArrayList<>();
 
 	public Long getId() {
 		return id;
 	}
 
-        public String getNickname() {
-            return nickname;
-        }
+	public String getNickname() {
+		return nickname;
+	}
 
-        public void setNickname(String nickname) {
-            this.nickname = nickname;
-        }
-        
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
 	public String getFirstName() {
 		return firstName;
 	}
@@ -91,7 +97,7 @@ public class Lecturer {
 		if (!(obj instanceof Lecturer))
 			return false;
 		Lecturer other = (Lecturer) obj;
-                if (this.nickname == null) {
+		if (this.nickname == null) {
 			if (other.nickname != null)
 				return false;
 		} else {

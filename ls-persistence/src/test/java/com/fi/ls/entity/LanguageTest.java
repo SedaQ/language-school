@@ -28,17 +28,17 @@ public class LanguageTest {
 		lan1 = new Language();
 		lan1.setLanguage("eng");
 		lan1.setLecturer(l1);
-		lan1.setCefrLever(ProficiencyLevel.C1);
+		lan1.setProficiencyLevel(ProficiencyLevel.C1);
 
 		lan2 = new Language();
 		lan2.setLanguage("cmn");
 		lan2.setLecturer(l1);
-		lan2.setCefrLever(ProficiencyLevel.B2);
+		lan2.setProficiencyLevel(ProficiencyLevel.B2);
 
 		lan3 = new Language();
 		lan3.setLanguage("eng");
 		lan3.setLecturer(l1);
-		lan3.setCefrLever(ProficiencyLevel.C1);
+		lan3.setProficiencyLevel(ProficiencyLevel.C1);
 
 		l1.addLanguage(lan1);
 		l1.addLanguage(lan2);

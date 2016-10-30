@@ -1,6 +1,8 @@
 package com.fi.ls.entity;
 
 import com.fi.ls.enums.ProficiencyLevel;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -9,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -16,6 +19,7 @@ import javax.validation.constraints.NotNull;
  * @author Lukas Daubner (410034)
  */
 @Entity
+@Table(name = "language")
 @NamedQuery(name = "Language.findAll", query = "SELECT l FROM Language l")
 public class Language {
 
@@ -32,7 +36,8 @@ public class Language {
 
 	@NotNull
 	@Enumerated(EnumType.STRING)
-	private ProficiencyLevel cefrLever;
+	@Column(name = "proficiency_level")
+	private ProficiencyLevel proficiencyLevel;
 
 	public Long getId() {
 		return id;
@@ -54,12 +59,12 @@ public class Language {
 		this.lecturer = lecturer;
 	}
 
-	public ProficiencyLevel getCefrLever() {
-		return cefrLever;
+	public ProficiencyLevel getProficiencyLevel() {
+		return proficiencyLevel;
 	}
 
-	public void setCefrLever(ProficiencyLevel cefrLever) {
-		this.cefrLever = cefrLever;
+	public void setProficiencyLevel(ProficiencyLevel proficiencyLevel) {
+		this.proficiencyLevel = proficiencyLevel;
 	}
 
 	@Override
@@ -85,11 +90,11 @@ public class Language {
 			if (!this.lecturer.equals(other.lecturer))
 				return false;
 		}
-		if (this.cefrLever == null) {
-			if (other.cefrLever != null)
+		if (this.proficiencyLevel == null) {
+			if (other.proficiencyLevel != null)
 				return false;
 		} else {
-			if (!this.cefrLever.equals(other.cefrLever))
+			if (!this.proficiencyLevel.equals(other.proficiencyLevel))
 				return false;
 		}
 		return true;

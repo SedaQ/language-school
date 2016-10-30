@@ -34,7 +34,7 @@ public class StudentDaoTest extends AbstractTestNGSpringContextTests {
     public void init() {
             
         student1 = new Student();
-        student1.setName("Teysa");
+        student1.setFirstName("Teysa");
         student1.setSurname("Karlov");
         student1.setBirthNumber("846013/5821");
             
@@ -58,7 +58,7 @@ public class StudentDaoTest extends AbstractTestNGSpringContextTests {
     @Test(expectedExceptions = javax.validation.ConstraintViolationException.class)
     public void testCreateStudentNullName() {
             
-        student1.setName(null);
+        student1.setFirstName(null);
         studentDao.create(student1);
         Assert.fail("Student with NULL name inserted. Constraint did not work.");
             
@@ -77,7 +77,7 @@ public class StudentDaoTest extends AbstractTestNGSpringContextTests {
     public void testCreateStudentBirthNumberDupl() {
         
         Student student2 = new Student();
-        student2.setName("Clonium");
+        student2.setFirstName("Clonium");
         student2.setSurname("Maximo");
         student2.setBirthNumber("846013/5821");
         studentDao.create(student1);
@@ -133,7 +133,7 @@ public class StudentDaoTest extends AbstractTestNGSpringContextTests {
     public void testFindAll() {
         
 	Student student2 = new Student();
-        student2.setName("Pia");
+        student2.setFirstName("Pia");
         student2.setSurname("Nalaar");
         student2.setBirthNumber("765820/7414");
 	em.persist(student1);

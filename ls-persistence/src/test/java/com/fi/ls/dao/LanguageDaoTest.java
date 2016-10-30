@@ -40,7 +40,7 @@ public class LanguageDaoTest extends AbstractTestNGSpringContextTests {
 	public void init() {
 		lan1 = new Language();
 		lan1.setLanguage("ENG");
-		lan1.setCefrLever(ProficiencyLevel.A1);
+		lan1.setProficiencyLevel(ProficiencyLevel.A1);
 
 		lect1 = new Lecturer();
         lect1.setNickname("nickname lect1");
@@ -76,7 +76,7 @@ public class LanguageDaoTest extends AbstractTestNGSpringContextTests {
 
 	@Test(expectedExceptions = javax.validation.ConstraintViolationException.class)
 	public void testCreateNullCefrLevel() {
-		lan1.setCefrLever(null);
+		lan1.setProficiencyLevel(null);
 		languageDao.create(lan1);
 	}
 
@@ -117,7 +117,7 @@ public class LanguageDaoTest extends AbstractTestNGSpringContextTests {
 
 		Language lan2 = new Language();
 		lan2.setLanguage("CZE");
-		lan2.setCefrLever(ProficiencyLevel.A2);
+		lan2.setProficiencyLevel(ProficiencyLevel.A2);
 		lect2.addLanguage(lan2);
 
 		em.persist(lect1);
