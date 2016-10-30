@@ -2,7 +2,6 @@ package com.fi.ls.entity;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.Entity;
@@ -11,8 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -23,13 +20,15 @@ import javax.validation.constraints.NotNull;
 @NamedQuery(name = "Lecture.findAll", query = "SELECT l FROM Lecture l")
 public class Lecture {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
         
     @NotNull
-    //@Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime dayTime;
+    
+    @NotNull
+    private String classId;
     
     @NotNull
     private String topic;
@@ -50,6 +49,18 @@ public class Lecture {
     public Long getId() {
         
         return this.id;
+        
+    }
+    
+    public String getClassId() {
+        
+        return this.classId;
+        
+    }
+    
+    public void setClassId(String newClassId) {
+        
+        this.classId = newClassId;
         
     }
     
@@ -133,14 +144,18 @@ public class Lecture {
 
     @Override
     public int hashCode() {
+        
         int hash = 7;
         hash = 67 * hash + Objects.hashCode(this.dayTime);
+        hash = 67 * hash + Objects.hashCode(this.classId);
         hash = 67 * hash + Objects.hashCode(this.topic);
         return hash;
+        
     }
 
     @Override
     public boolean equals(Object obj) {
+        
         if (obj == null) {
             return false;
         }
@@ -151,18 +166,17 @@ public class Lecture {
         if (!Objects.equals(this.dayTime, other.dayTime)) {
             return false;
         }
-        if (!Objects.equals(this.topic, other.topic)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.classId, other.classId);
+        
     }
     
     @Override
     public String toString() {
         
-        return "Lecture [id = " + id + ", dayTime = " + dayTime.toString() + ", topic = " + topic 
-                + ", listOfStudents: " + listOfStudents.toString() + ", listOfLecturers: "
-                + listOfLecturers.toString() + ", listOfCourses: " + listOfCourses.toString() + "]";
+        return "Lecture [id = " + id + ", dayTime = " + dayTime.toString() + ", classId: " + classId
+                + ", topic = " + topic + ", listOfStudents: " + listOfStudents.toString()
+                + ", listOfLecturers: " + listOfLecturers.toString() + ", listOfCourses: "
+                + listOfCourses.toString() + "]";
         
     }
         
