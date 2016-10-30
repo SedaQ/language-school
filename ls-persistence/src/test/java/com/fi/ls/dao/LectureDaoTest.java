@@ -1,8 +1,8 @@
 package com.fi.ls.dao;
 
 import com.fi.ls.entity.Lecture;
-
 import java.time.LocalDateTime;
+import java.time.Month;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
@@ -31,13 +31,14 @@ public class LectureDaoTest extends AbstractTestNGSpringContextTests {
     @Autowired
     private LectureDao lectureDao;
     
-    private Lecture l;
+    Lecture l;
     
     @BeforeMethod
     public void beforeMethod() {
         l = new Lecture();
-        l.setDayTime(LocalDateTime.MIN);
+        l.setDayTime(LocalDateTime.now());
         l.setTopic("Something");
+        l.setClassId("1");
     }
     
     @Test(expectedExceptions = ValidationException.class)
@@ -51,43 +52,6 @@ public class LectureDaoTest extends AbstractTestNGSpringContextTests {
         l.setTopic(null);
         lectureDao.create(l);
     }
-    //odtialto
-    /*
-    @Test
-    public void testFindById() {
-        lectureDao.create(l);
-        Assert.assertEquals(l, lectureDao.findById(l.getId()));
-    }
-    
-    @Test
-    public void testFindAll() {
-        Lecture l1 = new Lecture();
-        l1.setDayTime(LocalDateTime.MAX);
-        l1.setTopic("Random topic");
-        
-        lectureDao.create(l);
-        lectureDao.create(l1);
-        
-        Assert.assertEquals(lectureDao.findAll().size(), 2);
-        Assert.assertTrue(lectureDao.findAll().contains(l));
-        Assert.assertTrue(lectureDao.findAll().contains(l1));
-    }
-    
-    @Test
-    public void testCreateAndRemove() {
-        lectureDao.create(l);
-        Assert.assertEquals(lectureDao.findAll().size(), 1);
-        lectureDao.remove(l);
-        Assert.assertEquals(lectureDao.findAll().size(), 0);
-    }
-    
-    @Test
-    public void testUpdate() {
-        lectureDao.create(l);
-        l.setTopic("Something else");
-        lectureDao.update(l);
-        Assert.assertEquals(l.getTopic(), lectureDao.findById(l.getId()).getTopic());
-    }*/
     
     @Test
     public void testFindById() {
@@ -98,8 +62,9 @@ public class LectureDaoTest extends AbstractTestNGSpringContextTests {
     @Test
     public void testFindAll() {
         Lecture l1 = new Lecture();
-        l1.setDayTime(LocalDateTime.MAX);
+        l1.setDayTime(LocalDateTime.of(1990, Month.MARCH, 14, 10, 20));
         l1.setTopic("Random topic");
+        l1.setClassId("test");
         
         em.persist(l);
         em.persist(l1);
@@ -123,5 +88,18 @@ public class LectureDaoTest extends AbstractTestNGSpringContextTests {
         l.setTopic("Something else");
         em.persist(l);
         Assert.assertEquals(l.getTopic(), lectureDao.findById(l.getId()).getTopic());
+    }
+    
+    @Test
+    public void testRemoveOtherObject() {
+        Lecture l1 = new Lecture();
+        l1.setDayTime(LocalDateTime.of(1990, Month.MARCH, 14, 10, 20));
+        l1.setTopic("Random topic");
+        l1.setClassId("test");
+        
+        em.persist(l);
+        Assert.assertEquals(lectureDao.findAll().size(), 1);
+        em.remove(l1);
+        Assert.assertEquals(lectureDao.findAll().size(), 1);
     }
 }
