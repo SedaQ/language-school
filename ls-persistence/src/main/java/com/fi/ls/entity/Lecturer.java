@@ -18,7 +18,6 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 @Table(name = "lecturer")
-//@DiscriminatorValue("1")
 @NamedQuery(name = "Lecturer.findAll", query = "SELECT l FROM Lecturer l")
 public class Lecturer extends LSUser {
 

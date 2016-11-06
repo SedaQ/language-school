@@ -17,8 +17,6 @@ import javax.validation.constraints.Pattern;
 @Entity
 @Table(name = "lsuser")
 @Inheritance(strategy = InheritanceType.JOINED)
-// @DiscriminatorColumn(name = "USER_TYPE", discriminatorType =
-// DiscriminatorType.INTEGER)
 @NamedQuery(name = "LSUser.findAll", query = "SELECT u FROM LSUser u")
 public class LSUser {
 
