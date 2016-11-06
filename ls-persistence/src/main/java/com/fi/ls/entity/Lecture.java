@@ -172,10 +172,10 @@ public class Lecture {
 			return false;
 		}
 		final Lecture other = (Lecture) obj;
-		if (!Objects.equals(this.dayTime, other.dayTime)) {
+		if (!Objects.equals(this.dayTime, other.getDayTime())) {
 			return false;
 		}
-		return Objects.equals(this.classroomId, other.classroomId);
+		return Objects.equals(this.classroomId, other.getClassroomId());
 
 	}
 

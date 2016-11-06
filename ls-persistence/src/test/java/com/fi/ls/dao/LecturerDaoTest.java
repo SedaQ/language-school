@@ -39,6 +39,8 @@ public class LecturerDaoTest extends AbstractTestNGSpringContextTests {
 		lect1.setNickname("nickname lect1");
 		lect1.setFirstName("first name lect1");
 		lect1.setSurname("surname lect1");
+		lect1.setEmail("test3@email.cz");
+		lect1.setPasswordHash("testHashtestHashtestHashtestHash7841267871s!@$%");
 	}
 
 	@Test
@@ -76,6 +78,8 @@ public class LecturerDaoTest extends AbstractTestNGSpringContextTests {
 		lecturer2.setNickname("nickname lect1"); // nick name should be unique
 		lecturer2.setFirstName("first name lecturer2");
 		lecturer2.setSurname("surname lect1");
+		lecturer2.setEmail("test4@email.cz");
+		lecturer2.setPasswordHash("testHashtestHashtestHashtestHash7841267871s!@$%");
 		lecturerDao.create(lect1);
 		lecturerDao.create(lecturer2);
 		Assert.fail(
@@ -120,6 +124,8 @@ public class LecturerDaoTest extends AbstractTestNGSpringContextTests {
 		lect2.setNickname("nickname lect2");
 		lect2.setFirstName("first name lect2");
 		lect2.setSurname("surname lect2");
+		lect2.setEmail("test5@email.cz");
+		lect2.setPasswordHash("testHashtestHashtestHashtestHash7841267871s!@$%");
 
 		em.persist(lect1);
 		em.persist(lect2);

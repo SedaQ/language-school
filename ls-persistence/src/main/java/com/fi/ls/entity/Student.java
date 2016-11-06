@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,13 +20,9 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 @Table(name = "student")
+//@DiscriminatorValue("2")
 @NamedQuery(name = "Student.findAll", query = "SELECT s FROM Student s")
-public class Student {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_student")
-	private Long id;
+public class Student extends LSUser {
 
 	@NotNull
 	private String firstName;
@@ -100,7 +97,7 @@ public class Student {
 			return false;
 		}
 		final Student other = (Student) obj;
-		if (!Objects.equals(this.birthNumber, other.birthNumber)) {
+		if (!Objects.equals(this.birthNumber, other.getBirthNumber())) {
 			return false;
 		}
 		return true;

@@ -22,7 +22,7 @@ import com.fi.ls.dao.CourseDao;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories
-@ComponentScan( basePackageClasses = { CourseDao.class })
+@ComponentScan(basePackageClasses = { CourseDao.class })
 public class PersistenceApplicationContext {
 
 	/**
