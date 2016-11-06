@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 @Entity
-@Table(name = "user")
+@Table(name = "lsuser")
 @Inheritance(strategy = InheritanceType.JOINED)
 // @DiscriminatorColumn(name = "USER_TYPE", discriminatorType =
 // DiscriminatorType.INTEGER)
