@@ -10,13 +10,8 @@
 
 	<!-- defines compatible versions of many libraries -->
 	<!-- see http://docs.spring.io/platform/docs/current/reference/htmlsingle/#getting-started-using-spring-io-platform-maven -->
-	<parent>
-		<groupId>io.spring.platform</groupId>
-		<artifactId>platform-bom</artifactId>
-		<version>2.0.8.RELEASE</version>
-		<relativePath />
-	</parent>
-
+	<!-- <parent> <groupId>io.spring.platform</groupId> <artifactId>platform-bom</artifactId> 
+		<version>Athens-RELEASE</version> <relativePath /> </parent> -->
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -42,6 +37,13 @@
 	<!-- specifies versions not defined by the Spring platform-bom -->
 	<dependencyManagement>
 		<dependencies>
+			<dependency>
+				<groupId>io.spring.platform</groupId>
+				<artifactId>platform-bom</artifactId>
+				<version>2.0.8.RELEASE</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
 			<dependency>
 				<groupId>org.mockito</groupId>
 				<artifactId>mockito-all</artifactId>
@@ -74,7 +76,6 @@
 	<modules>
 		<module>ls-persistence</module>
 		<module>ls-service</module>
-		<module>ls-rest</module>
 		<module>ls-api</module>
 	</modules>
 </project>

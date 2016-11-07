@@ -11,6 +11,6 @@ import com.fi.ls.entity.LSUser;
  * @author Pavel Šeda (441048)
  *
  */
-public interface UserDao extends JpaRepository<LSUser, Long> {
+public interface LSUserDao extends JpaRepository<LSUser, Long> {
 
 }

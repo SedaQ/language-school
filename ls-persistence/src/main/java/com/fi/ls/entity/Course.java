@@ -51,6 +51,10 @@ public class Course {
 	public Course() {
 	}
 
+	public void addLecture(Lecture lecture) {
+		this.listOfLectures.add(lecture);
+	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -65,10 +69,6 @@ public class Course {
 
 	public void setListOfLectures(List<Lecture> listOfLectures) {
 		this.listOfLectures = listOfLectures;
-	}
-
-	public void addLecture(Lecture lecture) {
-		this.listOfLectures.add(lecture);
 	}
 
 	public Long getId() {
