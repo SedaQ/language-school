@@ -3,10 +3,11 @@ package com.fi.ls.service;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Service;
 
-import com.fi.ls.dao.LSUserDao;
+import com.fi.ls.dao.LSUserRepository;
 import com.fi.ls.entity.LSUser;
 
 /**
@@ -17,7 +18,7 @@ import com.fi.ls.entity.LSUser;
 public class LSUserServiceImpl implements LSUserService {
 
 	@Inject
-	private LSUserDao userDao;
+	private LSUserRepository userDao;
 
 	@Override
 	public void create(LSUser c) {

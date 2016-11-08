@@ -12,33 +12,33 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class StudentDaoImpl implements StudentDao {
-    
-    @PersistenceContext
+
+	@PersistenceContext
 	private EntityManager em;
 
-    @Override
-    public void create(Student s) {
-        em.persist(s);
-    }
+	@Override
+	public void create(Student s) {
+		em.persist(s);
+	}
 
-    @Override
-    public Student findById(Long id) {
-        return em.find(Student.class, id);
-    }
+	@Override
+	public Student findById(Long id) {
+		return em.find(Student.class, id);
+	}
 
-    @Override
-    public Student update(Student s) {
-        return em.merge(s);
-    }
+	@Override
+	public Student update(Student s) {
+		return em.merge(s);
+	}
 
-    @Override
-    public void remove(Student s) {
-        em.remove(findById(s.getId()));
-    }
+	@Override
+	public void remove(Student s) {
+		em.remove(em.getReference(Student.class, s.getId()));
+	}
 
-    @Override
-    public List<Student> findAll() {
-        return em.createNamedQuery("Student.findAll", Student.class).getResultList();
-    }
-    
+	@Override
+	public List<Student> findAll() {
+		return em.createNamedQuery("Student.findAll", Student.class).getResultList();
+	}
+
 }

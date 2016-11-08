@@ -35,7 +35,7 @@ public class CourseDaoImpl implements CourseDao {
 
 	@Override
 	public void remove(Course c) {
-		em.remove(findById(c.getId()));
+		em.remove(em.getReference(Course.class, c.getId()));
 	}
 
 	@Override

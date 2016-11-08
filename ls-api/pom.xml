@@ -11,14 +11,12 @@
 	<packaging>jar</packaging>
 	<name>API Language School Layer</name>
 
-
 	<dependencies>
 		<!-- validation annotations for bean properties -->
 		<dependency>
 			<groupId>javax.validation</groupId>
 			<artifactId>validation-api</artifactId>
 		</dependency>
-
 	</dependencies>
 
 </project>

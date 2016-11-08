@@ -39,8 +39,8 @@ public class LectureDaoImpl implements LectureDao {
 
 	@Override
 	public void remove(Lecture lecture) {
-                
-                em.remove(findById(lecture.getId()));              
+		
+		em.remove(em.getReference(Lecture.class, lecture.getId()));
 
 	}
 
