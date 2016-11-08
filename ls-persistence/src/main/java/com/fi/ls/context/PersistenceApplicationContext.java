@@ -19,7 +19,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories
+@EnableJpaRepositories(basePackages = { "com.fi.ls.dao" })
 @ComponentScan(basePackages = { "com.fi.ls.dao" })
 public class PersistenceApplicationContext {
 
