@@ -14,7 +14,6 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.fi.ls.entity.Course;
 import com.fi.ls.entity.LSUser;
 
 /**
