@@ -9,8 +9,9 @@ import com.fi.ls.enums.ProficiencyLevel;
  * @author Pavel Šeda (441048)
  *
  */
-public class CourseDTO extends LSUserDTO {
+public class CourseDTO {
 
+	private Long id;
 	private String name;
 	private String language;
 	private ProficiencyLevel proficiencyLevel;
@@ -37,6 +38,10 @@ public class CourseDTO extends LSUserDTO {
 
 	public void setListOfLectures(List<LectureDTO> listOfLectures) {
 		this.listOfLectures = listOfLectures;
+	}
+
+	public Long getId() {
+		return id;
 	}
 
 	public String getLanguage() {

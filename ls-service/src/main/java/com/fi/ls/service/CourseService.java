@@ -12,6 +12,7 @@ import com.fi.ls.entity.Course;
  */
 @Service
 public interface CourseService {
+	
 	/**
 	 * create new course in database
 	 * 

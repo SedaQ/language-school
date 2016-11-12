@@ -12,13 +12,6 @@ import com.fi.ls.entity.LSUser;
  */
 @Service
 public interface LSUserService {
-	/**
-	 * create new user in database
-	 * 
-	 * @param c
-	 *            specific User to be created
-	 */
-	public void create(LSUser c);
 
 	/**
 	 * finds specific user by id
@@ -28,6 +21,22 @@ public interface LSUserService {
 	 * @return specific user by id
 	 */
 	public LSUser findById(Long id);
+
+	/**
+	 * Returns all user in language school
+	 * 
+	 * @return List of user which are in language school
+	 */
+	public List<LSUser> findAll();
+
+	/**
+	 * Find specific user by his email
+	 * 
+	 * @param email
+	 *            email to search in String format
+	 * @return return specific user by his email
+	 */
+	public LSUser findByEmail(String email);
 
 	/**
 	 * updates given user
@@ -47,10 +56,14 @@ public interface LSUserService {
 	public void remove(LSUser c);
 
 	/**
-	 * Returns all user in language school
-	 * 
-	 * @return List of user which are in language school
+	 * Register the given user with the given unencrypted password.
 	 */
-	public List<LSUser> findAll();
+	public void registerUser(LSUser u, String unencryptedPassword);
+
+	/**
+	 * Try to authenticate a user. Return true only if the hashed password
+	 * matches the records.
+	 */
+	public boolean authenticate(LSUser u, String password);
 
 }

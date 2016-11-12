@@ -1,6 +1,7 @@
 package com.fi.ls.facade;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.fi.ls.dto.CourseDTO;
 
@@ -25,7 +26,7 @@ public interface CourseFacade {
 	 *            of a course that would be returned
 	 * @return specific course by id
 	 */
-	public CourseDTO findById(Long id);
+	public Optional<CourseDTO> getCourseById(Long id);
 
 	/**
 	 * updates given course
@@ -34,7 +35,7 @@ public interface CourseFacade {
 	 *            course that has to be updated
 	 * @return updated course
 	 */
-	public CourseDTO update(CourseDTO c);
+	public Optional<CourseDTO> updateCourse(Long id);
 
 	/**
 	 * removes given course
@@ -42,12 +43,12 @@ public interface CourseFacade {
 	 * @param c
 	 *            course that has to be removed
 	 */
-	public void remove(CourseDTO c);
+	public void deleteCourse(Long id);
 
 	/**
 	 * Returns all courses in language school
 	 * 
 	 * @return List of courses which are in language school
 	 */
-	public List<CourseDTO> findAll();
+	public List<CourseDTO> getAllCourses();
 }

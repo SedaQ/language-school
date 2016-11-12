@@ -1,6 +1,7 @@
 package com.fi.ls.facade;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.fi.ls.dto.LSUserDTO;
 
@@ -11,21 +12,13 @@ import com.fi.ls.dto.LSUserDTO;
 public interface LSUserFacade {
 
 	/**
-	 * create new user in database
-	 * 
-	 * @param c
-	 *            specific User to be created
-	 */
-	public void create(LSUserDTO c);
-
-	/**
 	 * finds specific user by id
 	 * 
 	 * @param id
 	 *            of a user that would be returned
 	 * @return specific user by id
 	 */
-	public LSUserDTO findById(Long id);
+	public Optional<LSUserDTO> getUserById(Long id);
 
 	/**
 	 * updates given user
@@ -34,7 +27,7 @@ public interface LSUserFacade {
 	 *            user that has to be updated
 	 * @return updated user
 	 */
-	public LSUserDTO update(LSUserDTO c);
+	public Optional<LSUserDTO> update(Long userId);
 
 	/**
 	 * removes given user
@@ -42,13 +35,33 @@ public interface LSUserFacade {
 	 * @param c
 	 *            user that has to be removed
 	 */
-	public void remove(LSUserDTO c);
+	public void deleteUser(Long userId);
 
 	/**
 	 * Returns all courses in language school
 	 * 
 	 * @return List of courses which are in language school
 	 */
-	public List<LSUserDTO> findAll();
+	public List<LSUserDTO> getAllUsers();
+
+	/**
+	 * Find specific user by his email
+	 * 
+	 * @param email
+	 *            email to search in String format
+	 * @return return specific user by his email
+	 */
+	public Optional<LSUserDTO> getUserByEmail(String email);
+
+	/**
+	 * Register the given user with the given unencrypted password.
+	 */
+	public void registerUser(LSUserDTO u, String unencryptedPassword);
+
+	/**
+	 * Try to authenticate a user. Return true only if the hashed password
+	 * matches the records.
+	 */
+	public boolean authenticate(LSUserDTO u);
 
 }

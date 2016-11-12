@@ -15,6 +15,7 @@ import javax.validation.constraints.Pattern;
 /**
  * @author Pavel Šeda (441048)
  *
+ *         Parent User entity for login to system (uses pattern for email)
  */
 @Entity
 @Table(name = "lsuser")
@@ -28,7 +29,7 @@ public class LSUser {
 	protected Long id;
 
 	@NotNull
-	@Pattern(regexp = ".+@.+\\....?")
+	@Pattern(regexp = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")
 	@Column(unique = true)
 	private String email;
 
