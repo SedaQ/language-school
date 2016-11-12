@@ -37,4 +37,27 @@ public class LSUserDTO {
 		return id;
 	}
 
+	@Override
+	public int hashCode() {
+		int result = 31 * 1 + ((email == null) ? 0 : email.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof LSUserDTO))
+			return false;
+		LSUserDTO other = (LSUserDTO) obj;
+		if (email == null) {
+			if (other.getEmail() != null)
+				return false;
+		} else if (!email.equals(other.getEmail()))
+			return false;
+		return true;
+	}
+
 }

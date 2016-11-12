@@ -46,13 +46,13 @@ public class LSUserFacadeImpl implements LSUserFacade {
 
 	@Override
 	public Optional<LSUserDTO> update(Long userId) {
-		// TODO Auto-generated method stub
-		return Optional.empty();
+		Optional<LSUser> user = Optional.of(userService.findById(userId));
+		return user.isPresent() ? beanMapping.mapTo(user.get(), LSUserDTO.class) : Optional.empty();
 	}
 
 	@Override
 	public void deleteUser(Long userId) {
-		// TODO Auto-generated method stub
+		userService.remove(userService.findById(userId));
 	}
 
 	@Override

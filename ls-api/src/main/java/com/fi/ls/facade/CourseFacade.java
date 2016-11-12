@@ -16,8 +16,9 @@ public interface CourseFacade {
 	 * 
 	 * @param c
 	 *            specific Course to be created
+	 * @return
 	 */
-	public void create(CourseDTO c);
+	public Optional<Long> create(CourseDTO c);
 
 	/**
 	 * finds specific course by id

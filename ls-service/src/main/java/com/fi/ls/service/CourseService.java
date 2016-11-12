@@ -12,14 +12,15 @@ import com.fi.ls.entity.Course;
  */
 @Service
 public interface CourseService {
-	
+
 	/**
 	 * create new course in database
 	 * 
 	 * @param c
 	 *            specific Course to be created
+	 * @return
 	 */
-	public void create(Course c);
+	public Course create(Course c);
 
 	/**
 	 * finds specific course by id
