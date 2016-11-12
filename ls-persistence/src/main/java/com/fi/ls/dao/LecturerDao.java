@@ -40,5 +40,5 @@ public interface LecturerDao {
 	 * @return List of Lecturers
 	 */
 	public List<Lecturer> findAll();
-    
+	
 }

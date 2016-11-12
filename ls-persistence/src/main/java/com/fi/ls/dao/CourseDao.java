@@ -41,4 +41,5 @@ public interface CourseDao {
 	 * @return List of courses which are in language school
 	 */
 	public List<Course> findAll();
+	
 }
