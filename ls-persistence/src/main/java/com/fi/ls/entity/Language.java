@@ -77,24 +77,24 @@ public class Language {
 			return false;
 		Language other = (Language) obj;
 		if (this.language == null) {
-			if (other.language != null)
+			if (other.getLanguage() != null)
 				return false;
 		} else {
-			if (!this.language.equals(other.language))
+			if (!this.language.equals(other.getLanguage()))
 				return false;
 		}
 		if (this.lecturer == null) {
-			if (other.lecturer != null)
+			if (other.getLecturer() != null)
 				return false;
 		} else {
-			if (!this.lecturer.equals(other.lecturer))
+			if (!this.lecturer.equals(other.getLecturer()))
 				return false;
 		}
 		if (this.proficiencyLevel == null) {
-			if (other.proficiencyLevel != null)
+			if (other.getProficiencyLevel() != null)
 				return false;
 		} else {
-			if (!this.proficiencyLevel.equals(other.proficiencyLevel))
+			if (!this.proficiencyLevel.equals(other.getProficiencyLevel()))
 				return false;
 		}
 		return true;

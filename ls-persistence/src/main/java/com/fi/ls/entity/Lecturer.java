@@ -5,9 +5,6 @@ import java.util.Collections;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -21,12 +18,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "lecturer")
 @NamedQuery(name = "Lecturer.findAll", query = "SELECT l FROM Lecturer l")
-public class Lecturer {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_lecturer")
-	private Long id;
+public class Lecturer extends LSUser {
 
 	@NotNull
 	@Column(unique = true)
@@ -98,24 +90,24 @@ public class Lecturer {
 			return false;
 		Lecturer other = (Lecturer) obj;
 		if (this.nickname == null) {
-			if (other.nickname != null)
+			if (other.getNickname() != null)
 				return false;
 		} else {
-			if (!this.nickname.equals(other.nickname))
+			if (!this.nickname.equals(other.getNickname()))
 				return false;
 		}
 		if (this.firstName == null) {
-			if (other.firstName != null)
+			if (other.getFirstName() != null)
 				return false;
 		} else {
-			if (!this.firstName.equals(other.firstName))
+			if (!this.firstName.equals(other.getFirstName()))
 				return false;
 		}
 		if (this.surname == null) {
-			if (other.surname != null)
+			if (other.getSurname() != null)
 				return false;
 		} else {
-			if (!this.surname.equals(other.surname))
+			if (!this.surname.equals(other.getSurname()))
 				return false;
 		}
 		return true;

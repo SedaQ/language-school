@@ -16,6 +16,7 @@ import javax.validation.constraints.NotNull;
 
 import com.fi.ls.enums.ProficiencyLevel;
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * @author Pavel Šeda (441048)
@@ -50,6 +51,10 @@ public class Course {
 	public Course() {
 	}
 
+	public void addLecture(Lecture lecture) {
+		this.listOfLectures.add(lecture);
+	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -64,10 +69,6 @@ public class Course {
 
 	public void setListOfLectures(List<Lecture> listOfLectures) {
 		this.listOfLectures = listOfLectures;
-	}
-
-	public void addLecture(Lecture lecture) {
-		this.listOfLectures.add(lecture);
 	}
 
 	public Long getId() {
@@ -87,7 +88,7 @@ public class Course {
 	}
 
 	public List<Lecture> getListOfLectures() {
-		return listOfLectures;
+		return Collections.unmodifiableList(listOfLectures);
 	}
 
 	@Override
@@ -109,16 +110,16 @@ public class Course {
 			return false;
 		Course other = (Course) obj;
 		if (language == null) {
-			if (other.language != null)
+			if (other.getLanguage() != null)
 				return false;
-		} else if (!language.equals(other.language))
+		} else if (!language.equals(other.getLanguage()))
 			return false;
 		if (name == null) {
-			if (other.name != null)
+			if (other.getName() != null)
 				return false;
-		} else if (!name.equals(other.name))
+		} else if (!name.equals(other.getName()))
 			return false;
-		if (proficiencyLevel != other.proficiencyLevel)
+		if (proficiencyLevel != other.getProficiencyLevel())
 			return false;
 		return true;
 	}

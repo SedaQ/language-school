@@ -47,6 +47,8 @@ public class LanguageDaoTest extends AbstractTestNGSpringContextTests {
 		lect1.setFirstName("first name lect1");
 		lect1.setSurname("surname lect1");
 		lect1.addLanguage(lan1);
+		lect1.setEmail("nicknameLect1@email.cz");
+		lect1.setPasswordHash("testHashtestHashtestHashtestHash7841267871s!@$%");
 
 		em.persist(lect1);
 	}
@@ -126,6 +128,8 @@ public class LanguageDaoTest extends AbstractTestNGSpringContextTests {
 		lect2.setNickname("nickname lect2");
 		lect2.setFirstName("first name lect2");
 		lect2.setSurname("surname lect2");
+		lect2.setEmail("testEMail2@email.cz");
+		lect2.setPasswordHash("testHashtestHashtestHashtestHash7841267871s!@$%");
 
 		Language lan2 = new Language();
 		lan2.setLanguage("CZE");

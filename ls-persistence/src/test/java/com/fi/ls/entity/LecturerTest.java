@@ -24,19 +24,25 @@ public class LecturerTest {
 	@BeforeClass
 	public void beforeClass() {
 		l1 = new Lecturer();
-                l1.setNickname("Superhero");
+		l1.setNickname("Superhero");
 		l1.setFirstName("Batman Bin");
 		l1.setSurname("Supaman");
+		l1.setEmail("Superhero@test.cz");
+		l1.setPasswordHash("testHashtestHashtestHashtestHash7841267871s!@$%");
 
 		l2 = new Lecturer();
-                l2.setNickname("Christ");
+		l2.setNickname("Christ");
 		l2.setFirstName("Jesus");
 		l2.setSurname("of Nazareth");
+		l2.setEmail("Christ@test.cz");
+		l2.setPasswordHash("testHashtestHashtestHashtestHash7841267871s!@$%");
 
 		l3 = new Lecturer();
-                l3.setNickname("Superhero");
+		l3.setNickname("Superhero");
 		l3.setFirstName("Batman Bin");
 		l3.setSurname("Supaman");
+		l3.setEmail("Superhero@test.cz");
+		l3.setPasswordHash("testHashtestHashtestHashtestHash7841267871s!@$%");
 	}
 
 	@Test

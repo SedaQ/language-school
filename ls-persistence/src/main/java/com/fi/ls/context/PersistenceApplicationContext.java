@@ -17,12 +17,10 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 import javax.sql.DataSource;
 
-import com.fi.ls.dao.CourseDao;
-
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories
-@ComponentScan( basePackageClasses = { CourseDao.class })
+@EnableJpaRepositories(basePackages = { "com.fi.ls.dao" })
+@ComponentScan(basePackages = { "com.fi.ls.dao" })
 public class PersistenceApplicationContext {
 
 	/**

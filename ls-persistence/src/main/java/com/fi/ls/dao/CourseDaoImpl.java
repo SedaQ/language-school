@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
 import org.springframework.stereotype.Repository;
 
 import com.fi.ls.entity.Course;
@@ -36,7 +35,7 @@ public class CourseDaoImpl implements CourseDao {
 
 	@Override
 	public void remove(Course c) {
-		em.remove(findById(c.getId()));
+		em.remove(em.getReference(Course.class, c.getId()));
 	}
 
 	@Override

@@ -3,7 +3,7 @@ package com.fi.ls.entity;
 import com.fi.ls.entity.Language;
 import com.fi.ls.entity.Lecturer;
 import com.fi.ls.enums.ProficiencyLevel;
-import java.util.Arrays;
+
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;

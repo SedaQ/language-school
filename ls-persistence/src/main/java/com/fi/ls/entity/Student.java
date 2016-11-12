@@ -5,9 +5,6 @@ import java.util.List;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -20,12 +17,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "student")
 @NamedQuery(name = "Student.findAll", query = "SELECT s FROM Student s")
-public class Student {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_student")
-	private Long id;
+public class Student extends LSUser {
 
 	@NotNull
 	private String firstName;
@@ -100,7 +92,7 @@ public class Student {
 			return false;
 		}
 		final Student other = (Student) obj;
-		if (!Objects.equals(this.birthNumber, other.birthNumber)) {
+		if (!Objects.equals(this.birthNumber, other.getBirthNumber())) {
 			return false;
 		}
 		return true;
