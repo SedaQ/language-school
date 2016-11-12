@@ -1,6 +1,7 @@
 package com.fi.ls.facade;
 
 import com.fi.ls.dto.StudentDTO;
+import java.util.List;
 
 /**
  *
@@ -19,7 +20,7 @@ public interface StudentFacade {
      * @param id of student
      * @return student that is found by id
      */
-    public StudentDTO findById(Long id);
+    public StudentDTO getStudentById(Long id);
     
     /**
      * updates specific student in database
@@ -33,4 +34,10 @@ public interface StudentFacade {
      * @param s - student to be removed
      */
     public void remove (StudentDTO s);
+    
+    /**
+     * returns all students in database
+     * @return list of all students
+     */
+    public List<StudentDTO> getAllStudents();
 }

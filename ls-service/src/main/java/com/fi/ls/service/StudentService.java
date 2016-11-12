@@ -1,6 +1,7 @@
 package com.fi.ls.service;
 
 import com.fi.ls.entity.Student;
+import java.util.List;
 
 /**
  *
@@ -33,4 +34,10 @@ public interface StudentService {
      * @param s - student to be removed
      */
     public void remove (Student s);
+    
+    /**
+     * returns all students in database
+     * @return list of all students
+     */
+    public List<Student> findAll();
 }
