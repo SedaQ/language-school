@@ -40,6 +40,10 @@ public class CourseDTO {
 		this.listOfLectures = listOfLectures;
 	}
 
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -58,6 +62,45 @@ public class CourseDTO {
 
 	public List<LectureDTO> getListOfLectures() {
 		return listOfLectures;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((language == null) ? 0 : language.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((proficiencyLevel == null) ? 0 : proficiencyLevel.hashCode());
+		return result;
+	}
+
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof CourseDTO))
+			return false;
+		CourseDTO other = (CourseDTO) obj;
+		if (language == null) {
+			if (other.getLanguage() != null)
+				return false;
+		} else if (!language.equals(other.getLanguage()))
+			return false;
+		if (name == null) {
+			if (other.getName() != null)
+				return false;
+		} else if (!name.equals(other.getName()))
+			return false;
+		if (proficiencyLevel != other.getProficiencyLevel())
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "CourseDTO [id=" + id + ", name=" + name + ", language=" + language + ", proficiencyLevel="
+				+ proficiencyLevel + ", listOfLectures=" + listOfLectures + "]";
 	}
 
 }

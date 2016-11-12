@@ -82,12 +82,12 @@ public class LSUser {
 				return false;
 		} else if (!email.equals(other.getEmail()))
 			return false;
-		if (passwordHash == null) {
-			if (other.getPasswordHash() != null)
-				return false;
-		} else if (!passwordHash.equals(other.getEmail()))
-			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "LSUser [id=" + id + ", email=" + email + ", passwordHash=" + passwordHash + "]";
 	}
 
 }

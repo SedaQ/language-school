@@ -65,7 +65,26 @@ public class UserFacadeTest extends AbstractTestNGSpringContextTests {
 	}
 
 	@Test
-	public void getUserByEmail() {
+	public void testGetUserByEmail() {
 		Assert.assertEquals(userFacade.getUserByEmail(user1.getEmail()).get().getId(), user1.getId());
 	}
+
+//	@Test
+//	public void testUpdate() {
+//		user1.setEmail("changedEmail@seznam.cz");
+//		userFacade.update(userFacade.getUserByEmail(user1.getEmail()).get().getId());
+//		Assert.assertEquals(userFacade.getUserByEmail(user1.getEmail()).get().getEmail(), "changedEmail@seznam.cz");
+//	}
+
+	// @Test
+	// public void testDeleteUser() {
+	// LSUserDTO userToRemove = new LSUserDTO();
+	// userToRemove.setEmail("userToRemove@seznam.cz");
+	// userToRemove.setPasswordHash("userPasswordFake");
+	// userFacade.registerUser(userToRemove, "testPassword");
+	//
+	// Assert.assertNotNull(userFacade.getUserByEmail("userToRemove@seznam.cz"));
+	// userFacade.deleteUser(userToRemove.getId());
+	// Assert.assertNull(userFacade.getUserById(userToRemove.getId()));
+	// }
 }
