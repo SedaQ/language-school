@@ -21,6 +21,10 @@ public class CourseServiceImpl implements CourseService {
 	@Inject
 	private CourseDao courseDao;
 
+        public CourseServiceImpl(CourseDao courseDao) {
+            this.courseDao = courseDao;
+        }
+        
 	@Override
 	public Course create(Course c) {
 		courseDao.create(c);
