@@ -1,11 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.fi.ls.service;
 
-import com.fi.ls.dto.LecturerDTO;
+import com.fi.ls.entity.Lecturer;
 import com.fi.ls.exceptions.ServiceException;
 import java.util.List;
 
@@ -19,11 +14,11 @@ public interface LecturerService {
      * create new lecturer in database
      * 
      * @param l
-     *            specific LecturerDTO to be created
-     * @return created LecturerDTO
+     *            specific Lecturer to be created
+     * @return created Lecturer
      * @throws ServiceException
      */
-    LecturerDTO create(LecturerDTO l) throws ServiceException;
+    Lecturer create(Lecturer l) throws ServiceException;
          
     /**
      * Returns all lecturers in language school
@@ -31,35 +26,35 @@ public interface LecturerService {
      * @return List of all lecturers which are in language school
      * @throws ServiceException 
      */
-    List<LecturerDTO> findAll() throws ServiceException;
+    List<Lecturer> findAll() throws ServiceException;
     
     /**
      * finds specific lecturer by id
      * 
      * @param id
-     *            id of a LecturerDTO that would be returned
-     * @return specific LecturerDTO by id
+     *            id of a Lecturer that would be returned
+     * @return specific Lecturer by id
      * @throws ServiceException
      */  
-    LecturerDTO findById(Long id) throws ServiceException;
+    Lecturer findById(Long id) throws ServiceException;
 
     /**
      * removes given lecturer from database
      *       
      * @param l
-     *            LecturerDTO that has to be removed
+     *            Lecturer that has to be removed
      * @throws ServiceException 
      */
-    void remove(LecturerDTO l) throws ServiceException;
+    void remove(Lecturer l) throws ServiceException;
     
     /**
      * updates given lecturer in database
      * 
      * @param l
-     *            lecturerDTO that has to be updated
-     * @return updated lecturerDTO
+     *            Lecturer that has to be updated
+     * @return updated Lecturer
      * @throws ServiceException
      */
-    LecturerDTO update(LecturerDTO l) throws ServiceException;
+    Lecturer update(Lecturer l) throws ServiceException;
     
 }
