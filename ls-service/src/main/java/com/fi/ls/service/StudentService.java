@@ -1,5 +1,7 @@
 package com.fi.ls.service;
 
+import com.fi.ls.entity.Course;
+import com.fi.ls.entity.Lecture;
 import com.fi.ls.entity.Student;
 import java.util.List;
 import org.springframework.stereotype.Service;
@@ -78,5 +80,34 @@ public interface StudentService {
      * @param s - student to be created
      * @param unecryptedPassword of student
      */
-	void registerStudent(Student s, String unencryptedPassword);
+	public void registerStudent(Student s, String unencryptedPassword);
+	
+	/**
+	 * students enroll to specific course
+	 * @param c - course to be enrolled
+	 * @param s - student enrolling to course
+	 */ 
+	public void enrollCourse(Course c, Student s);
+	
+	/**
+	 * students enroll to specific lecture
+	 * @param l - lecture to be enrolled
+	 * @param s - student enrolling to lecture
+	 */
+	public void enrollLecture(Lecture l, Student s);
+	
+	/**
+	 * students cancel lecture
+	 * @param l - lecture which will be canceled 
+	 * @param s - student which will cancel some lecture
+	 */
+	public void cancelLectureFromStudentsList(Lecture l, Student s);
+	
+	/**
+	 * students cancel lectures
+	 * @param l - lectures which will be canceled 
+	 * @param s - student which will cancel some lecture
+	 */
+	public void cancelLecturesFromStudentsList(List<Lecture> l, Student s);
+	
 }

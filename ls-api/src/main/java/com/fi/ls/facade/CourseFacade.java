@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import com.fi.ls.dto.CourseDTO;
+import com.fi.ls.dto.LectureDTO;
+import com.fi.ls.dto.LecturerDTO;
 
 /**
  * @author Pavel Šeda (441048)
@@ -61,4 +63,19 @@ public interface CourseFacade {
 	 * @return List of courses which are in language school
 	 */
 	public List<CourseDTO> getAllCourses();
+	
+	/**
+	 * add lecture to course
+	 * @param l lecture which will be added to course
+	 * @param c course to which lecture will be added
+	 */
+	public void addLecture(CourseDTO c, LectureDTO l);
+	
+	/**
+	 * add lectures to course
+	 * @param l list of lectures which will be added to course
+	 * @param c course to which lectures will be added
+	 */
+	public void addLectures(CourseDTO c, List<LectureDTO> l);
+	
 }

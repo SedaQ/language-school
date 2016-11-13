@@ -1,7 +1,5 @@
 package com.fi.ls.service;
 
-import javax.inject.Inject;
-import javax.transaction.Transactional;
 
 import org.hibernate.service.spi.ServiceException;
 import org.mockito.InjectMocks;
@@ -12,7 +10,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.fi.ls.config.BeanMappingConfiguration;
@@ -25,7 +22,6 @@ import com.fi.ls.enums.ProficiencyLevel;
  *
  */
 @ContextConfiguration(classes = BeanMappingConfiguration.class)
-@Transactional
 public class CourseServiceTest extends AbstractTestNGSpringContextTests {
 
 	@Mock

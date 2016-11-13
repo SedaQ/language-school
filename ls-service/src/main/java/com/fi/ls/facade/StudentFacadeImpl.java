@@ -1,6 +1,10 @@
 package com.fi.ls.facade;
 
+import com.fi.ls.dto.CourseDTO;
+import com.fi.ls.dto.LectureDTO;
 import com.fi.ls.dto.StudentDTO;
+import com.fi.ls.entity.Course;
+import com.fi.ls.entity.Lecture;
 import com.fi.ls.entity.Student;
 import com.fi.ls.mapping.BeanMapping;
 import com.fi.ls.service.StudentService;
@@ -78,6 +82,30 @@ public class StudentFacadeImpl implements StudentFacade {
 	@Override
 	public List<StudentDTO> getStudentsBySurname(String surname) {
 		return beanMapping.mapTo(studentService.findBySurname(surname), StudentDTO.class);
+	}
+
+	@Override
+	public void enrollCourse(CourseDTO c, StudentDTO s) {
+		studentService.enrollCourse(beanMapping.mapTo(c, Course.class).get(),
+				beanMapping.mapTo(s, Student.class).get());
+	}
+
+	@Override
+	public void enrollLecture(LectureDTO l, StudentDTO s) {
+		studentService.enrollLecture(beanMapping.mapTo(l, Lecture.class).get(),
+				beanMapping.mapTo(s, Student.class).get());
+	}
+
+	@Override
+	public void cancelLectureFromStudentsList(LectureDTO l, StudentDTO s) {
+		studentService.cancelLectureFromStudentsList(beanMapping.mapTo(l, Lecture.class).get(),
+				beanMapping.mapTo(s, Student.class).get());
+	}
+
+	@Override
+	public void cancelLecturesFromStudentsList(List<LectureDTO> l, StudentDTO s) {
+		studentService.cancelLecturesFromStudentsList(beanMapping.mapTo(l, Lecture.class),
+				beanMapping.mapTo(s, Student.class).get());
 	}
 
 }

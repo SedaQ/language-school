@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.fi.ls.entity.Course;
+import com.fi.ls.entity.Lecture;
+import com.fi.ls.entity.Lecturer;
 
 /**
  * @author Pavel Šeda (441048)
@@ -36,7 +38,7 @@ public interface CourseService {
 	 * @param name of a course that would be returned
 	 * @return specific course by name 
 	 */
-	public Course findByName(String name);	
+	public Course findByName(String name);
 	
 	/**
 	 * updates given course
@@ -61,4 +63,24 @@ public interface CourseService {
 	 * @return List of courses which are in language school
 	 */
 	public List<Course> findAll();
+	
+	/**
+	 * add lecture to course
+	 * @param l lecture which will be added to course
+	 * @param c course to which lecture will be added
+	 */
+	public void addLecture(Course c, Lecture l);
+	
+	/**
+	 * add lectures to course
+	 * @param l list of lectures which will be added to course
+	 * @param c course to which lectures will be added
+	 */
+	public void addLectures(Course c, List<Lecture> l);	
+	
+	/**
+	 * synchronize lectures
+	 */
+	public void synchronizeLectures();
+
 }

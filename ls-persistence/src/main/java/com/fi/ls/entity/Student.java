@@ -56,6 +56,20 @@ public class Student extends LSUser {
 		this.listOfLectures.add(lecture);
 	}
 
+	public void removeLecture(Lecture lecture) {
+		if (lecture == null) {
+			throw new NullPointerException("Cannot remove null lecture from listOfLectures");
+		}
+		this.listOfLectures.remove(lecture);
+	}
+
+	public void removeLectures(List<Lecture> lectures) {
+		if (lectures == null) {
+			throw new NullPointerException("Cannot remove lectures which are null from listOfLectures");
+		}
+		lectures.forEach(lecture -> listOfLectures.remove(lecture));
+	}
+
 	public Long getId() {
 		return id;
 	}

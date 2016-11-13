@@ -9,7 +9,11 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import com.fi.ls.dto.CourseDTO;
+import com.fi.ls.dto.LectureDTO;
+import com.fi.ls.dto.LecturerDTO;
 import com.fi.ls.entity.Course;
+import com.fi.ls.entity.Lecture;
+import com.fi.ls.entity.Lecturer;
 import com.fi.ls.mapping.BeanMapping;
 import com.fi.ls.service.CourseService;
 
@@ -57,6 +61,16 @@ public class CourseFacadeImpl implements CourseFacade {
 	public Optional<CourseDTO> getCourseByName(String name) {
 		Optional<Course> course = Optional.of(courseService.findByName(""));
 		return course.isPresent() ? beanMapping.mapTo(course.get(), CourseDTO.class) : Optional.empty();
+	}
+
+	@Override
+	public void addLecture(CourseDTO c, LectureDTO l) {
+		courseService.addLecture(beanMapping.mapTo(c, Course.class).get(), beanMapping.mapTo(l, Lecture.class).get());
+	}
+
+	@Override
+	public void addLectures(CourseDTO c, List<LectureDTO> l) {
+		courseService.addLectures(beanMapping.mapTo(c, Course.class).get(), beanMapping.mapTo(l, Lecture.class));
 	}
 
 }

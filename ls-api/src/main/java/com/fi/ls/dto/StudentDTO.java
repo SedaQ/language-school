@@ -52,4 +52,6 @@ public class StudentDTO extends LSUserDTO {
     public void setListOfLectures(List<LectureDTO> listOfLectures) {
         this.listOfLectures = listOfLectures;
     }
+    
+    
 }
