@@ -86,7 +86,7 @@ public class LSUserRepositoryTest extends AbstractTestNGSpringContextTests {
 	}
 
 	@Test
-	public void findByEmail() {
+	public void testFindByEmail() {
 		userDao.save(user);
 		Assert.assertNull(userDao.findByEmail("testFAKE@email.cz"));
 		Assert.assertNotNull(userDao.findByEmail("test123@email.cz"));

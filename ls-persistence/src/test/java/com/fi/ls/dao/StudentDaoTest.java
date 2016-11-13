@@ -149,6 +149,42 @@ public class StudentDaoTest extends AbstractTestNGSpringContextTests {
 	}
 
 	@Test
+	public void testFindByFirstName() {
+
+		em.persist(student1);
+		Assert.assertNotNull(studentDao.findByFirstName(student1.getFirstName()));
+		//Assert.assertEquals(student1.getFirstName(), studentDao.findByFirstName(student1.getFirstName()));
+
+	}
+
+	@Test
+	public void testFindBySurname() {
+
+		em.persist(student1);
+		Assert.assertNotNull(studentDao.findBySurname(student1.getSurname()));
+		//Assert.assertEquals(student1.getSurname(), studentDao.findBySurname(student1.getSurname()));
+
+	}
+
+	@Test
+	public void testFindByBirthNumber() {
+
+		em.persist(student1);
+		Assert.assertNotNull(studentDao.findByBirthNumber(student1.getBirthNumber()));
+		//Assert.assertEquals(student1.getBirthNumber(), studentDao.findByBirthNumber(student1.getBirthNumber()));
+
+	}
+
+	@Test
+	public void testFindByEmail() {
+
+		em.persist(student1);
+		Assert.assertNotNull(studentDao.findByEmail(student1.getEmail()));
+		//Assert.assertEquals(student1.getEmail(), studentDao.findByEmail(student1.getEmail()));
+
+	}
+
+	@Test
 	public void testRemove() {
 
 		em.persist(student1);

@@ -9,7 +9,35 @@ import java.util.List;
  */
 public interface StudentDao {
         
-    	/**
+    /**
+     * returns all students with same first name
+     * @param firstName of students
+     * @return list of all students with specific first name
+     */
+    public List<Student> findByFirstName(String firstName);
+    
+    /**
+     * returns all students with same surname
+     * @param surname of students
+     * @return list of all students with specific surname
+     */
+    public List<Student> findBySurname(String surname);
+    
+    /**
+     * finds specific student from database by birth number
+     * @param birthNumber of student
+     * @return student that is found by birth number
+     */
+    public Student findByBirthNumber(String birthNumber);
+    
+    /**
+     * finds specific student from database by email
+     * @param email of student
+     * @return student that is found by email
+     */
+    public Student findByEmail(String email);    
+    
+	/**
 	 * creates new Student in database 
 	 * @param s specific Student to be created
 	 */
