@@ -1,116 +1,97 @@
 package com.fi.ls.service;
 
 import com.fi.ls.dao.LecturerDao;
-import com.fi.ls.dto.LecturerDTO;
 import com.fi.ls.entity.Lecturer;
 import com.fi.ls.exceptions.ServiceException;
-import com.fi.ls.mapping.BeanMapping;
 import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
 import javax.inject.Inject;
 import javax.persistence.PersistenceException;
 import javax.validation.ConstraintViolationException;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.orm.jpa.JpaSystemException;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author Lukas Daubner (410034)
  */
+@Service
 public class LecturerServiceImpl implements LecturerService {
     
     @Inject
     private LecturerDao lecturerDao;
-    
-    @Inject 
-    private BeanMapping beanMapping;
-    
+
     @Override
-    public LecturerDTO create(LecturerDTO l) throws ServiceException {
+    public Lecturer create(Lecturer l) throws ServiceException {
         if(l == null)
-            throw new IllegalArgumentException("LecturerDTO parameter is null");
+            throw new IllegalArgumentException("Lecturer parameter is null");
         
-        Optional<Lecturer> entity = beanMapping.mapTo(l, Lecturer.class);
         try {
-            lecturerDao.create(entity.get());
-            Optional<LecturerDTO> dto = beanMapping.mapTo(entity, LecturerDTO.class);
-            return dto.get();
+            lecturerDao.create(l);
+            return l;
         }
         catch(  PersistenceException |
                 InvalidDataAccessApiUsageException |
                 ConstraintViolationException |
-                JpaSystemException |
-                NoSuchElementException ex) {
+                JpaSystemException ex) {
             throw new ServiceException("Problem with creating Lecturer, see inner exception.", ex);
         }
     }
 
     @Override
-    public LecturerDTO findById(Long id) throws ServiceException {
-        if(id == null)
-            throw new IllegalArgumentException("Id parameter is null");
-        
+    public List<Lecturer> findAll() throws ServiceException {
         try {
-            Lecturer entity = lecturerDao.findById(id);
-            Optional<LecturerDTO> dto = beanMapping.mapTo(entity, LecturerDTO.class);
-            return dto.get();
+            return lecturerDao.findAll();
         }
         catch(  PersistenceException |
-                InvalidDataAccessApiUsageException |
-                JpaSystemException |
-                NoSuchElementException ex) {
+                JpaSystemException ex) {
             throw new ServiceException("Problem with finding Lecturer, see inner exception.", ex);
         }
     }
 
     @Override
-    public LecturerDTO update(LecturerDTO l) throws ServiceException {
-        if(l == null)
-            throw new IllegalArgumentException("LecturerDTO parameter is null");
+    public Lecturer findById(Long id) throws ServiceException {
+        if(id == null)
+            throw new IllegalArgumentException("Id parameter is null");
         
-        Optional<Lecturer> entity = beanMapping.mapTo(l, Lecturer.class);
         try {
-            lecturerDao.update(entity.get());
-            Optional<LecturerDTO> dto = beanMapping.mapTo(entity, LecturerDTO.class);
-            return dto.get();
+            return lecturerDao.findById(id);
         }
         catch(  PersistenceException |
                 InvalidDataAccessApiUsageException |
-                ConstraintViolationException |
-                JpaSystemException |
-                NoSuchElementException ex) {
-            throw new ServiceException("Problem with updating Lecturer, see inner exception.", ex);
+                JpaSystemException ex) {
+            throw new ServiceException("Problem with finding Lecturer, see inner exception.", ex);
         }
     }
 
     @Override
-    public void remove(LecturerDTO l) throws ServiceException {
+    public void remove(Lecturer l) throws ServiceException {
         if(l == null)
-            throw new IllegalArgumentException("LecturerDTO parameter is null");
+            throw new IllegalArgumentException("Lecturer parameter is null");
         
-        Optional<Lecturer> entity = beanMapping.mapTo(l, Lecturer.class);
         try {
-            lecturerDao.remove(entity.get());
+            lecturerDao.remove(l);
         }
         catch(  PersistenceException |
                 InvalidDataAccessApiUsageException |
-                JpaSystemException |
-                NoSuchElementException ex) {
+                JpaSystemException ex) {
             throw new ServiceException("Problem with removing Lecturer, see inner exception.", ex);
         }
     }
 
     @Override
-    public List<LecturerDTO> findAll() throws ServiceException {
+    public Lecturer update(Lecturer l) throws ServiceException {
+        if(l == null)
+            throw new IllegalArgumentException("Lecturer parameter is null");
+        
         try {
-            List<Lecturer> entities = lecturerDao.findAll();
-            return beanMapping.mapTo(entities, LecturerDTO.class);
+            return lecturerDao.update(l);
         }
         catch(  PersistenceException |
-                JpaSystemException |
-                NoSuchElementException ex) {
-            throw new ServiceException("Problem with finding Lecturer, see inner exception.", ex);
+                InvalidDataAccessApiUsageException |
+                ConstraintViolationException |
+                JpaSystemException ex) {
+            throw new ServiceException("Problem with updating Lecturer, see inner exception.", ex);
         }
     }
 }

@@ -1,6 +1,6 @@
 package com.fi.ls.service;
 
-import com.fi.ls.dto.LanguageDTO;
+import com.fi.ls.entity.Language;
 import com.fi.ls.exceptions.ServiceException;
 import java.util.List;
 
@@ -14,11 +14,11 @@ public interface LanguageService {
      * create new lecturers language in database
      * 
      * @param lan
-     *            specific LanguageDTO to be created
-     * @return created LanguageDTO
+     *            specific Language to be created
+     * @return created Language
      * @throws ServiceException
      */
-    LanguageDTO create(LanguageDTO lan) throws ServiceException;
+    Language create(Language lan) throws ServiceException;
          
     /**
      * Returns all lecturers languages in language school
@@ -26,35 +26,35 @@ public interface LanguageService {
      * @return List of all lecturers languages which are in language school
      * @throws ServiceException 
      */
-    List<LanguageDTO> findAll() throws ServiceException;
+    List<Language> findAll() throws ServiceException;
     
     /**
      * finds specific lecturers language by id
      * 
      * @param id
-     *            id of a LanguageDTO that would be returned
-     * @return specific LanguageDTO by id
+     *            id of a Language that would be returned
+     * @return specific Language by id
      * @throws ServiceException
      */  
-    LanguageDTO findById(Long id) throws ServiceException;
+    Language findById(Long id) throws ServiceException;
 
     /**
      * removes given lecturers language from database
      *       
      * @param lan
-     *            LanguageDTO that has to be removed
+     *            Language that has to be removed
      * @throws ServiceException 
      */
-    void remove(LanguageDTO lan) throws ServiceException;
+    void remove(Language lan) throws ServiceException;
     
     /**
      * updates given lecturers language in database
      * 
      * @param lan
-     *            LanguageDTO that has to be updated
-     * @return updated lecturerDTO
+     *            Language that has to be updated
+     * @return updated Language
      * @throws ServiceException
      */
-    LanguageDTO update(LanguageDTO lan) throws ServiceException;
+    Language update(Language lan) throws ServiceException;
     
 }
