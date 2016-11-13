@@ -144,6 +144,15 @@ public class CourseDaoTest extends AbstractTestNGSpringContextTests {
 	}
 
 	@Test
+	public void testFindByName() {
+
+		em.persist(c);
+		Assert.assertNotNull(courseDao.findByName(c.getName()));
+		Assert.assertEquals(courseDao.findByName(c.getName()).getName(), "English 101");
+
+	}
+
+	@Test
 	public void testFindAll() {
 
 		Course c1 = new Course();
