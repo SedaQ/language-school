@@ -1,38 +1,35 @@
 package com.fi.ls.service;
 
-import org.hibernate.service.spi.ServiceException;
-import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 
-import com.fi.ls.config.BeanMappingConfiguration;
 import com.fi.ls.dao.CourseDao;
 import com.fi.ls.entity.Course;
 import com.fi.ls.enums.ProficiencyLevel;
+import org.mockito.Mock;
+import org.testng.annotations.Test;
+
+import static org.mockito.Mockito.*;
+import static org.junit.Assert.*;
 
 /**
  * @author Pavel Šeda (441048)
  *
  */
-@ContextConfiguration(classes = BeanMappingConfiguration.class)
-public class CourseServiceTest extends AbstractTestNGSpringContextTests {
+public class CourseServiceTest {
 
-	@Autowired
+	@Mock
 	private CourseDao courseDao;
 
-	@Autowired
-	@InjectMocks
 	private CourseService courseService;
 
 	Course c;
 
 	@BeforeClass
-	public void setup() throws ServiceException {
+	public void setup() {
 		MockitoAnnotations.initMocks(this);
+                courseService = new CourseServiceImpl(courseDao);
 	}
 
 	@BeforeMethod
@@ -48,13 +45,15 @@ public class CourseServiceTest extends AbstractTestNGSpringContextTests {
 	// public void testCreate() {
 	// Assert.assertNotNull(courseService.findById(c.getId()));
 	// }
-	//
-	// @Test
-	// public void testUpdate() {
-	// c.setLanguage("CZE");
-	// Assert.assertEquals(courseService.findById(c.getId()).getLanguage(),
-	// "CZE");
-	// }
+        
+	@Test
+	public void testUpdate() {
+	c.setLanguage("CZE");
+        
+        courseService.update(c);
+        
+        verify(courseDao, times(1)).update(c);
+	}
 	//
 	// @Test
 	// public void testRemove() {
