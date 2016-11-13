@@ -32,7 +32,7 @@ public interface CourseFacade {
 	/**
 	 * updates given course
 	 * 
-	 * @param c
+	 * @param id
 	 *            course that has to be updated
 	 * @return updated course
 	 */
@@ -41,7 +41,7 @@ public interface CourseFacade {
 	/**
 	 * removes given course
 	 * 
-	 * @param c
+	 * @param id
 	 *            course that has to be removed
 	 */
 	public void deleteCourse(Long id);

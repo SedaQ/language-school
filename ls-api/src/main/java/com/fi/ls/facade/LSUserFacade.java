@@ -23,7 +23,7 @@ public interface LSUserFacade {
 	/**
 	 * updates given user
 	 * 
-	 * @param c
+	 * @param userId
 	 *            user that has to be updated
 	 * @return updated user
 	 */
@@ -32,7 +32,7 @@ public interface LSUserFacade {
 	/**
 	 * removes given user
 	 * 
-	 * @param c
+	 * @param userId
 	 *            user that has to be removed
 	 */
 	public void deleteUser(Long userId);
@@ -53,15 +53,19 @@ public interface LSUserFacade {
 	 */
 	public Optional<LSUserDTO> getUserByEmail(String email);
 
-	/**
-	 * Register the given user with the given unencrypted password.
-	 */
+        /**
+         * Register the given user with the given unencrypted password.
+         * @param u
+         * @param unencryptedPassword 
+         */
 	public void registerUser(LSUserDTO u, String unencryptedPassword);
 
 	/**
-	 * Try to authenticate a user. Return true only if the hashed password
+         * Try to authenticate a user. Return true only if the hashed password
 	 * matches the records.
-	 */
+         * @param u
+         * @return 
+         */
 	public boolean authenticate(LSUserDTO u);
 
 }
