@@ -20,6 +20,9 @@ public class BeanMappingImpl implements BeanMapping {
 	@Inject
 	private Mapper dozer;
         
+        public BeanMappingImpl() {
+        }
+        
         public BeanMappingImpl(Mapper mapper) {
             this.dozer = mapper;
         }
