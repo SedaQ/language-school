@@ -66,6 +66,14 @@ public class Lecturer extends LSUser {
 	public void setSurname(String surname) {
 		this.surname = surname;
 	}
+	
+	public void deleteLecture(Lecture lecture){
+		this.listOfLectures.remove(lecture);
+	}
+	
+	public void deleteLectures(List<Lecture> lectures){
+		lectures.forEach(lect -> listOfLectures.remove(lect));
+	}
 
 	public List<Language> getListOfLanguages() {
 		return Collections.unmodifiableList(listOfLanguages);

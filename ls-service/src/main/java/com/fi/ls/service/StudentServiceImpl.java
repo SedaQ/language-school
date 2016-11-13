@@ -1,6 +1,8 @@
 package com.fi.ls.service;
 
 import com.fi.ls.dao.StudentDao;
+import com.fi.ls.entity.Course;
+import com.fi.ls.entity.Lecture;
 import com.fi.ls.entity.Student;
 import java.util.List;
 import javax.inject.Inject;
@@ -65,6 +67,26 @@ public class StudentServiceImpl implements StudentService {
 	@Override
 	public boolean authenticateStudent(Student s, String password) {
 		return UserPasswordEncryption.validatePassword(password, s.getPasswordHash());
+	}
+
+	@Override
+	public void enrollCourse(Course c, Student s) {
+		c.getListOfLectures().forEach(lecture -> s.addLecture(lecture));
+	}
+
+	@Override
+	public void enrollLecture(Lecture l, Student s) {
+		s.addLecture(l);
+	}
+
+	@Override
+	public void cancelLectureFromStudentsList(Lecture l, Student s) {
+		s.removeLecture(l);
+	}
+
+	@Override
+	public void cancelLecturesFromStudentsList(List<Lecture> l, Student s) {
+		s.removeLectures(l);
 	}
 
 }

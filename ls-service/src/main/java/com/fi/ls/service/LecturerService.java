@@ -1,5 +1,6 @@
 package com.fi.ls.service;
 
+import com.fi.ls.entity.Lecture;
 import com.fi.ls.entity.Lecturer;
 import com.fi.ls.exceptions.ServiceException;
 import java.util.List;
@@ -56,5 +57,23 @@ public interface LecturerService {
      * @throws ServiceException
      */
     Lecturer update(Lecturer l) throws ServiceException;
+    
+	/**
+	 * delete particular lecture
+	 * 
+	 * @param l lecture which will be removed
+	 * @param lect lecturer which remove lecture
+	 * @throws ServiceException
+	 */
+	public void deleteLecture(Lecturer lect, Lecture l) throws ServiceException;
+
+	/**
+	 * delete particular lectures
+	 * 
+	 * @param l lectures which will be removed
+	 * @param lect lecturer which remove lectures
+	 * @throws ServiceException
+	 */
+	public void deleteLectures(Lecturer lect, List<Lecture> l) throws ServiceException;
     
 }

@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.fi.ls.dao.CourseDao;
 import com.fi.ls.entity.Course;
+import com.fi.ls.entity.Lecture;
+import com.fi.ls.entity.Lecturer;
 
 /**
  * @author Pavel Šeda (441048)
@@ -48,6 +50,21 @@ public class CourseServiceImpl implements CourseService {
 	@Override
 	public List<Course> findAll() {
 		return courseDao.findAll();
+	}
+
+	@Override
+	public void synchronizeLectures() {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void addLecture(Course c, Lecture l) {
+		c.addLecture(l);
+	}
+
+	@Override
+	public void addLectures(Course c, List<Lecture> l) {
+		c.addLectures(l);
 	}
 
 }

@@ -1,6 +1,9 @@
 package com.fi.ls.facade;
 
+import com.fi.ls.dto.CourseDTO;
+import com.fi.ls.dto.LectureDTO;
 import com.fi.ls.dto.StudentDTO;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -77,4 +80,32 @@ public interface StudentFacade {
      * @return true is hashed password matches
      */
     public boolean authenticateStudent(StudentDTO s);
+    
+	/**
+	 * students enroll to specific course
+	 * @param c - course to be enrolled
+	 * @param s - student enrolling to course
+	 */ 
+	public void enrollCourse(CourseDTO c, StudentDTO s);
+	
+	/**
+	 * students enroll to specific lecture
+	 * @param l - lecture to be enrolled
+	 * @param s - student enrolling to lecture
+	 */
+	public void enrollLecture(LectureDTO l, StudentDTO s);
+	
+	/**
+	 * students cancel lecture
+	 * @param l - lecture which will be canceled 
+	 * @param s - student which will cancel some lecture
+	 */
+	public void cancelLectureFromStudentsList(LectureDTO l, StudentDTO s);
+	
+	/**
+	 * students cancel lectures
+	 * @param l - lectures which will be canceled 
+	 * @param s - student which will cancel some lecture
+	 */
+	public void cancelLecturesFromStudentsList(List<LectureDTO> l, StudentDTO s);
 }

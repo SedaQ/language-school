@@ -55,6 +55,10 @@ public class Course {
 		this.listOfLectures.add(lecture);
 	}
 
+	public void addLectures(List<Lecture> lectures) {
+		lectures.forEach(l -> listOfLectures.add(l));
+	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
