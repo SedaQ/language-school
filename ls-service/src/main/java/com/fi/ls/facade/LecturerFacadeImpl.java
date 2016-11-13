@@ -1,7 +1,8 @@
 package com.fi.ls.facade;
 
-import com.fi.ls.dto.LectureDTO;
-import com.fi.ls.dto.LecturerDTO;
+import com.fi.ls.dto.lecture.LectureDTO;
+import com.fi.ls.dto.lecturer.LecturerCreateDTO;
+import com.fi.ls.dto.lecturer.LecturerDTO;
 import com.fi.ls.entity.Lecture;
 import com.fi.ls.entity.Lecturer;
 import com.fi.ls.exceptions.ServiceException;
@@ -29,7 +30,7 @@ public class LecturerFacadeImpl implements LecturerFacade {
     private BeanMapping beanMapping;
     
     @Override
-    public Optional<LecturerDTO> createLecturer(LecturerDTO l) {
+    public Optional<LecturerDTO> createLecturer(LecturerCreateDTO l) {
         if(l == null)
             throw new IllegalArgumentException("LecturerDTO parameter is null");
         

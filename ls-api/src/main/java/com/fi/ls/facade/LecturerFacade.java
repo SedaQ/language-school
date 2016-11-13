@@ -1,7 +1,9 @@
 package com.fi.ls.facade;
 
-import com.fi.ls.dto.LectureDTO;
-import com.fi.ls.dto.LecturerDTO;
+import com.fi.ls.dto.lecture.LectureDTO;
+import com.fi.ls.dto.lecturer.LecturerCreateDTO;
+import com.fi.ls.dto.lecturer.LecturerDTO;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -18,7 +20,7 @@ public interface LecturerFacade {
 	 *            specific Lecturer to be created
 	 * @return
 	 */
-	public Optional<LecturerDTO> createLecturer(LecturerDTO l);
+	public Optional<LecturerDTO> createLecturer(LecturerCreateDTO l);
 
 	/**
 	 * finds specific lecturer by id

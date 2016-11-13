@@ -1,8 +1,9 @@
 package com.fi.ls.facade;
 
-import com.fi.ls.dto.CourseDTO;
-import com.fi.ls.dto.LectureDTO;
-import com.fi.ls.dto.StudentDTO;
+import com.fi.ls.dto.course.CourseDTO;
+import com.fi.ls.dto.lecture.LectureDTO;
+import com.fi.ls.dto.student.StudentCreateDTO;
+import com.fi.ls.dto.student.StudentDTO;
 import com.fi.ls.entity.Course;
 import com.fi.ls.entity.Lecture;
 import com.fi.ls.entity.Student;
@@ -29,7 +30,7 @@ public class StudentFacadeImpl implements StudentFacade {
 	private BeanMapping beanMapping;
 
 	@Override
-	public void registerStudent(StudentDTO s, String unencryptedPassword) {
+	public void registerStudent(StudentCreateDTO s, String unencryptedPassword) {
 		Student studentEntity = beanMapping.mapTo(s, Student.class).get();
 		studentService.registerStudent(studentEntity, unencryptedPassword);
 		s.setId(studentEntity.getId());

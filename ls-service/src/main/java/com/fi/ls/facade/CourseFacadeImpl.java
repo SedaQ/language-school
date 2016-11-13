@@ -8,12 +8,11 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
-import com.fi.ls.dto.CourseDTO;
-import com.fi.ls.dto.LectureDTO;
-import com.fi.ls.dto.LecturerDTO;
+import com.fi.ls.dto.course.CourseCreateDTO;
+import com.fi.ls.dto.course.CourseDTO;
+import com.fi.ls.dto.lecture.LectureDTO;
 import com.fi.ls.entity.Course;
 import com.fi.ls.entity.Lecture;
-import com.fi.ls.entity.Lecturer;
 import com.fi.ls.mapping.BeanMapping;
 import com.fi.ls.service.CourseService;
 
@@ -41,7 +40,7 @@ public class CourseFacadeImpl implements CourseFacade {
 	}
 
 	@Override
-	public Optional<Long> create(CourseDTO c) {
+	public Optional<Long> create(CourseCreateDTO c) {
 		Optional<Course> course = Optional.of(courseService.create(beanMapping.mapTo(c, Course.class).get()));
 		return course.isPresent() ? Optional.of(course.get().getId()) : Optional.empty();
 	}

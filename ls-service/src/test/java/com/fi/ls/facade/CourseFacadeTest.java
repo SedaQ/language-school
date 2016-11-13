@@ -13,7 +13,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.fi.ls.config.BeanMappingConfiguration;
-import com.fi.ls.dto.CourseDTO;
+import com.fi.ls.dto.course.CourseDTO;
 import com.fi.ls.enums.ProficiencyLevel;
 
 /**

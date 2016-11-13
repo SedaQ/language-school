@@ -1,8 +1,9 @@
 package com.fi.ls.facade;
 
-import com.fi.ls.dto.CourseDTO;
-import com.fi.ls.dto.LectureDTO;
-import com.fi.ls.dto.StudentDTO;
+import com.fi.ls.dto.course.CourseDTO;
+import com.fi.ls.dto.lecture.LectureDTO;
+import com.fi.ls.dto.student.StudentCreateDTO;
+import com.fi.ls.dto.student.StudentDTO;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,7 +19,7 @@ public interface StudentFacade {
      * @param s - student to be created
      * @param unecryptedPassword of student
      */
-    public void registerStudent(StudentDTO s, String unecryptedPassword);
+    public void registerStudent(StudentCreateDTO s, String unecryptedPassword);
     
     /**
      * finds specific student from database by birth number

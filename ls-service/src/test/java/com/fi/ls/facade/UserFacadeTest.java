@@ -12,7 +12,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.fi.ls.config.BeanMappingConfiguration;
-import com.fi.ls.dto.LSUserDTO;
+import com.fi.ls.dto.user.LSUserDTO;
 
 /**
  * @author Pavel Šeda (441048)

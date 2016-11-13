@@ -3,7 +3,8 @@ package com.fi.ls.facade;
 import java.util.List;
 import java.util.Optional;
 
-import com.fi.ls.dto.LSUserDTO;
+import com.fi.ls.dto.user.LSUserCreateDTO;
+import com.fi.ls.dto.user.LSUserDTO;
 
 /**
  * @author Pavel Šeda (441048)
@@ -58,7 +59,7 @@ public interface LSUserFacade {
          * @param u
          * @param unencryptedPassword 
          */
-	public void registerUser(LSUserDTO u, String unencryptedPassword);
+	public void registerUser(LSUserCreateDTO u, String unencryptedPassword);
 
 	/**
          * Try to authenticate a user. Return true only if the hashed password

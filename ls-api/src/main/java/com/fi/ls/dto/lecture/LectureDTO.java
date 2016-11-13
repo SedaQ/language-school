@@ -1,9 +1,13 @@
-package com.fi.ls.dto;
+package com.fi.ls.dto.lecture;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
+import com.fi.ls.dto.course.CourseDTO;
+import com.fi.ls.dto.lecturer.LecturerDTO;
+import com.fi.ls.dto.student.StudentDTO;
 
 /**
  * 

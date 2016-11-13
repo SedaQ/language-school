@@ -1,8 +1,10 @@
 package com.fi.ls.facade;
 
-import com.fi.ls.dto.LectureDTO;
 import java.util.List;
 import java.util.Optional;
+
+import com.fi.ls.dto.lecture.LectureCreateDTO;
+import com.fi.ls.dto.lecture.LectureDTO;
 
 /**
  *
@@ -14,7 +16,7 @@ public interface LectureFacade {
      * creates new lecture in database
      * @param lecture to be created
      */
-    public void createLecture(LectureDTO lecture);
+    public void createLecture(LectureCreateDTO lecture);
     
     /**
      * finds a lecture by given id and returns it

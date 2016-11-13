@@ -1,6 +1,7 @@
 package com.fi.ls.facade;
 
-import com.fi.ls.dto.LectureDTO;
+import com.fi.ls.dto.lecture.LectureCreateDTO;
+import com.fi.ls.dto.lecture.LectureDTO;
 import com.fi.ls.entity.Lecture;
 import com.fi.ls.mapping.BeanMapping;
 import com.fi.ls.service.LectureService;
@@ -25,7 +26,7 @@ public class LectureFacadeImpl implements LectureFacade {
     private BeanMapping beanMapping;
     
     @Override
-    public void createLecture(LectureDTO lecture) {
+    public void createLecture(LectureCreateDTO lecture) {
         
         lectureService.create(beanMapping.mapTo(lecture, Lecture.class).get());
         

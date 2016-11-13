@@ -1,6 +1,5 @@
 package com.fi.ls.service;
 
-
 import org.hibernate.service.spi.ServiceException;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -10,6 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.fi.ls.config.BeanMappingConfiguration;
@@ -38,11 +38,19 @@ public class CourseServiceTest extends AbstractTestNGSpringContextTests {
 		MockitoAnnotations.initMocks(this);
 	}
 
-	// @BeforeMethod
-	// public void init() {
-	//
-	// }
+	@BeforeMethod
+	public void init() {
+		c = new Course();
+		c.setName("testName");
+		c.setProficiencyLevel(ProficiencyLevel.A1);
+	}
 
+	
+	@Test
+	public void testFindById(){
+		Assert.assertNotNull(courseService.findById(c.getId()));
+	}
+	
 //	@Test
 //	public void testCreate() {
 //		c = new Course();
