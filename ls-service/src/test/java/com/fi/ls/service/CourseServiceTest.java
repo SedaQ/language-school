@@ -3,6 +3,7 @@ package com.fi.ls.service;
 import org.mockito.MockitoAnnotations;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import com.fi.ls.dao.CourseDao;
 import com.fi.ls.entity.Course;
@@ -24,7 +25,7 @@ public class CourseServiceTest {
 
 	private CourseService courseService;
 
-	Course c;
+	private Course c;
 
 	@BeforeClass
 	public void setup() {
@@ -35,10 +36,8 @@ public class CourseServiceTest {
 	@BeforeMethod
 	public void init() {
 		c = new Course();
-		c.setLanguage("eng");
-		c.setName("English 101");
+		c.setName("testName");
 		c.setProficiencyLevel(ProficiencyLevel.A1);
-		courseService.create(c);
 	}
 
 	// @Test

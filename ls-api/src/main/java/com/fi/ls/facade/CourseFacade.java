@@ -3,7 +3,9 @@ package com.fi.ls.facade;
 import java.util.List;
 import java.util.Optional;
 
-import com.fi.ls.dto.CourseDTO;
+import com.fi.ls.dto.course.CourseCreateDTO;
+import com.fi.ls.dto.course.CourseDTO;
+import com.fi.ls.dto.lecture.LectureDTO;
 
 /**
  * @author Pavel Šeda (441048)
@@ -18,7 +20,7 @@ public interface CourseFacade {
 	 *            specific Course to be created
 	 * @return
 	 */
-	public Optional<Long> create(CourseDTO c);
+	public Optional<Long> create(CourseCreateDTO c);
 
 	/**
 	 * finds specific course by id
@@ -32,7 +34,7 @@ public interface CourseFacade {
 	/**
 	 * updates given course
 	 * 
-	 * @param c
+	 * @param id
 	 *            course that has to be updated
 	 * @return updated course
 	 */
@@ -41,10 +43,19 @@ public interface CourseFacade {
 	/**
 	 * removes given course
 	 * 
-	 * @param c
+	 * @param id
 	 *            course that has to be removed
 	 */
 	public void deleteCourse(Long id);
+
+	/**
+	 * finds specific course by name
+	 * 
+	 * @param name
+	 *            of a course that would be returned
+	 * @return specific course by name
+	 */
+	public Optional<CourseDTO> getCourseByName(String name);
 
 	/**
 	 * Returns all courses in language school
@@ -52,4 +63,19 @@ public interface CourseFacade {
 	 * @return List of courses which are in language school
 	 */
 	public List<CourseDTO> getAllCourses();
+	
+	/**
+	 * add lecture to course
+	 * @param l lecture which will be added to course
+	 * @param c course to which lecture will be added
+	 */
+	public void addLecture(CourseDTO c, LectureDTO l);
+	
+	/**
+	 * add lectures to course
+	 * @param l list of lectures which will be added to course
+	 * @param c course to which lectures will be added
+	 */
+	public void addLectures(CourseDTO c, List<LectureDTO> l);
+	
 }

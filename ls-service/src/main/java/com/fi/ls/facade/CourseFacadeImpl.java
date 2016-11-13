@@ -8,8 +8,11 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
-import com.fi.ls.dto.CourseDTO;
+import com.fi.ls.dto.course.CourseCreateDTO;
+import com.fi.ls.dto.course.CourseDTO;
+import com.fi.ls.dto.lecture.LectureDTO;
 import com.fi.ls.entity.Course;
+import com.fi.ls.entity.Lecture;
 import com.fi.ls.mapping.BeanMapping;
 import com.fi.ls.service.CourseService;
 
@@ -37,7 +40,7 @@ public class CourseFacadeImpl implements CourseFacade {
 	}
 
 	@Override
-	public Optional<Long> create(CourseDTO c) {
+	public Optional<Long> create(CourseCreateDTO c) {
 		Optional<Course> course = Optional.of(courseService.create(beanMapping.mapTo(c, Course.class).get()));
 		return course.isPresent() ? Optional.of(course.get().getId()) : Optional.empty();
 	}
@@ -51,6 +54,22 @@ public class CourseFacadeImpl implements CourseFacade {
 	@Override
 	public void deleteCourse(Long courseId) {
 		courseService.remove(courseService.findById(courseId));
+	}
+
+	@Override
+	public Optional<CourseDTO> getCourseByName(String name) {
+		Optional<Course> course = Optional.of(courseService.findByName(""));
+		return course.isPresent() ? beanMapping.mapTo(course.get(), CourseDTO.class) : Optional.empty();
+	}
+
+	@Override
+	public void addLecture(CourseDTO c, LectureDTO l) {
+		courseService.addLecture(beanMapping.mapTo(c, Course.class).get(), beanMapping.mapTo(l, Lecture.class).get());
+	}
+
+	@Override
+	public void addLectures(CourseDTO c, List<LectureDTO> l) {
+		courseService.addLectures(beanMapping.mapTo(c, Course.class).get(), beanMapping.mapTo(l, Lecture.class));
 	}
 
 }

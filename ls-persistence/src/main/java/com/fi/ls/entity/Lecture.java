@@ -157,7 +157,6 @@ public class Lecture {
 		int hash = 7;
 		hash = 67 * hash + Objects.hashCode(this.dayTime);
 		hash = 67 * hash + Objects.hashCode(this.classroomId);
-		hash = 67 * hash + Objects.hashCode(this.topic);
 		return hash;
 
 	}

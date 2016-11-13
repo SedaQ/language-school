@@ -1,4 +1,4 @@
-package com.fi.ls.dto;
+package com.fi.ls.dto.user;
 
 /**
  * @author Pavel Šeda (441048)
@@ -7,8 +7,8 @@ package com.fi.ls.dto;
 public class LSUserDTO {
 
 	protected Long id;
-	private String passwordHash;
 	private String email;
+	private String passwordHash;
 
 	public LSUserDTO() {
 	}

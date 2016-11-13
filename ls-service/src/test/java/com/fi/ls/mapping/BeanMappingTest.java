@@ -6,7 +6,6 @@
 package com.fi.ls.mapping;
 
 import com.fi.ls.config.BeanMappingConfiguration;
-import com.fi.ls.dto.LanguageDTO;
 import com.fi.ls.entity.Language;
 import com.fi.ls.entity.Lecturer;
 import com.fi.ls.enums.ProficiencyLevel;

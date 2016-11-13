@@ -1,8 +1,9 @@
-package com.fi.ls.dto;
+package com.fi.ls.dto.course;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fi.ls.dto.lecture.LectureDTO;
 import com.fi.ls.enums.ProficiencyLevel;
 
 /**

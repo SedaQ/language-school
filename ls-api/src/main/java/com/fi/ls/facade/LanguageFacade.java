@@ -1,8 +1,9 @@
 package com.fi.ls.facade;
 
-import com.fi.ls.dto.LanguageDTO;
 import java.util.List;
 import java.util.Optional;
+
+import com.fi.ls.dto.language.LanguageDTO;
 
 /**
  *

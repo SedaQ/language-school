@@ -1,6 +1,9 @@
 package com.fi.ls.facade;
 
-import com.fi.ls.dto.LecturerDTO;
+import com.fi.ls.dto.lecture.LectureDTO;
+import com.fi.ls.dto.lecturer.LecturerCreateDTO;
+import com.fi.ls.dto.lecturer.LecturerDTO;
+import com.fi.ls.entity.Lecture;
 import com.fi.ls.entity.Lecturer;
 import com.fi.ls.exceptions.ServiceException;
 import com.fi.ls.mapping.BeanMapping;
@@ -27,7 +30,7 @@ public class LecturerFacadeImpl implements LecturerFacade {
     private BeanMapping beanMapping;
     
     @Override
-    public Optional<LecturerDTO> createLecturer(LecturerDTO l) {
+    public Optional<LecturerDTO> createLecturer(LecturerCreateDTO l) {
         if(l == null)
             throw new IllegalArgumentException("LecturerDTO parameter is null");
         
@@ -98,4 +101,32 @@ public class LecturerFacadeImpl implements LecturerFacade {
             return null;
         }
     }
+
+	@Override
+	public void deleteLecture(LecturerDTO lect, LectureDTO l) {
+		if(l == null)
+            throw new IllegalArgumentException("LectureDTO parameter is null");
+        
+        try {
+        	lecturerService.deleteLecture(beanMapping.mapTo(lect, Lecturer.class).get(), beanMapping.mapTo(l, Lecture.class).get());
+        }
+        catch( ServiceException | NoSuchElementException ex) {
+            //TODO Log!
+        }
+		
+	}
+
+	@Override
+	public void deleteLectures(LecturerDTO lect, List<LectureDTO> l) {
+		if(l == null)
+            throw new IllegalArgumentException("LectureDTO parameter is null");
+        
+        try {
+        	lecturerService.deleteLectures(beanMapping.mapTo(lect, Lecturer.class).get(), beanMapping.mapTo(l, Lecture.class));
+        }
+        catch( ServiceException | NoSuchElementException ex) {
+            //TODO Log!
+        }
+		
+	}
 }

@@ -1,6 +1,9 @@
 package com.fi.ls.facade;
 
-import com.fi.ls.dto.LecturerDTO;
+import com.fi.ls.dto.lecture.LectureDTO;
+import com.fi.ls.dto.lecturer.LecturerCreateDTO;
+import com.fi.ls.dto.lecturer.LecturerDTO;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -17,7 +20,7 @@ public interface LecturerFacade {
 	 *            specific Lecturer to be created
 	 * @return
 	 */
-	public Optional<LecturerDTO> createLecturer(LecturerDTO l);
+	public Optional<LecturerDTO> createLecturer(LecturerCreateDTO l);
 
 	/**
 	 * finds specific lecturer by id
@@ -51,4 +54,20 @@ public interface LecturerFacade {
 	 * @return List of lecturers which are in language school
 	 */
 	public List<LecturerDTO> getAllLecturers();
+
+	/**
+	 * delete particular lecture
+	 * 
+	 * @param l lecture which will be removed
+	 * @param lect lecturer which remove lecture
+	 */
+	public void deleteLecture(LecturerDTO lect, LectureDTO l);
+
+	/**
+	 * delete particular lectures
+	 * 
+	 * @param l lectures which will be removed
+	 * @param lect lecturer which remove lectures
+	 */
+	public void deleteLectures(LecturerDTO lect, List<LectureDTO> l);
 }

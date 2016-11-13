@@ -1,6 +1,6 @@
 package com.fi.ls.facade;
 
-import com.fi.ls.dto.LanguageDTO;
+import com.fi.ls.dto.language.LanguageDTO;
 import com.fi.ls.entity.Language;
 import com.fi.ls.exceptions.ServiceException;
 import com.fi.ls.mapping.BeanMapping;

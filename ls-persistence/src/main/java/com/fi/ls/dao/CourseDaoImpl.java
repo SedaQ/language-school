@@ -39,6 +39,12 @@ public class CourseDaoImpl implements CourseDao {
 	}
 
 	@Override
+	public Course findByName(String name) {
+		return em.createQuery("SELECT c FROM Course c WHERE c.name=:name", Course.class).setParameter("name", name)
+				.getSingleResult();
+	}
+
+	@Override
 	public List<Course> findAll() {
 		return em.createNamedQuery("Course.findAll", Course.class).getResultList();
 	}
