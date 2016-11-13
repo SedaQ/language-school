@@ -41,6 +41,11 @@ public class CourseServiceImpl implements CourseService {
 	}
 
 	@Override
+	public Course findByName(String name) {
+		return courseDao.findByName(name);
+	}
+
+	@Override
 	public List<Course> findAll() {
 		return courseDao.findAll();
 	}

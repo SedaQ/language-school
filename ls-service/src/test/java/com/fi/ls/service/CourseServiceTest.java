@@ -1,13 +1,19 @@
 package com.fi.ls.service;
 
+import javax.inject.Inject;
+import javax.transaction.Transactional;
+
 import org.hibernate.service.spi.ServiceException;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
+import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import com.fi.ls.config.BeanMappingConfiguration;
 import com.fi.ls.dao.CourseDao;
@@ -19,35 +25,38 @@ import com.fi.ls.enums.ProficiencyLevel;
  *
  */
 @ContextConfiguration(classes = BeanMappingConfiguration.class)
+@Transactional
 public class CourseServiceTest extends AbstractTestNGSpringContextTests {
 
-	@Autowired
+	@Mock
 	private CourseDao courseDao;
 
 	@Autowired
 	@InjectMocks
 	private CourseService courseService;
 
-	Course c;
+	private Course c;
 
 	@BeforeClass
 	public void setup() throws ServiceException {
 		MockitoAnnotations.initMocks(this);
 	}
 
-	@BeforeMethod
-	public void init() {
-		c = new Course();
-		c.setLanguage("eng");
-		c.setName("English 101");
-		c.setProficiencyLevel(ProficiencyLevel.A1);
-		courseService.create(c);
-	}
-
-	// @Test
-	// public void testCreate() {
-	// Assert.assertNotNull(courseService.findById(c.getId()));
+	// @BeforeMethod
+	// public void init() {
+	//
 	// }
+
+//	@Test
+//	public void testCreate() {
+//		c = new Course();
+//		c.setLanguage("eng");
+//		c.setName("English 101");
+//		c.setProficiencyLevel(ProficiencyLevel.A1);
+//		courseService.create(c);
+//		Assert.assertNotNull(courseService.findById(c.getId()));
+//	}
+
 	//
 	// @Test
 	// public void testUpdate() {

@@ -47,6 +47,15 @@ public interface CourseFacade {
 	public void deleteCourse(Long id);
 
 	/**
+	 * finds specific course by name
+	 * 
+	 * @param name
+	 *            of a course that would be returned
+	 * @return specific course by name
+	 */
+	public Optional<CourseDTO> getCourseByName(String name);
+
+	/**
 	 * Returns all courses in language school
 	 * 
 	 * @return List of courses which are in language school

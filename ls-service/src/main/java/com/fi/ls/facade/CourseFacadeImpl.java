@@ -53,4 +53,10 @@ public class CourseFacadeImpl implements CourseFacade {
 		courseService.remove(courseService.findById(courseId));
 	}
 
+	@Override
+	public Optional<CourseDTO> getCourseByName(String name) {
+		Optional<Course> course = Optional.of(courseService.findByName(""));
+		return course.isPresent() ? beanMapping.mapTo(course.get(), CourseDTO.class) : Optional.empty();
+	}
+
 }
