@@ -153,7 +153,8 @@ public class StudentDaoTest extends AbstractTestNGSpringContextTests {
 
 		em.persist(student1);
 		Assert.assertNotNull(studentDao.findByFirstName(student1.getFirstName()));
-		//Assert.assertEquals(student1.getFirstName(), studentDao.findByFirstName(student1.getFirstName()));
+		Assert.assertEquals(studentDao.findByFirstName(student1.getFirstName()).get(0).getFirstName(),
+				student1.getFirstName());
 
 	}
 
@@ -162,7 +163,7 @@ public class StudentDaoTest extends AbstractTestNGSpringContextTests {
 
 		em.persist(student1);
 		Assert.assertNotNull(studentDao.findBySurname(student1.getSurname()));
-		//Assert.assertEquals(student1.getSurname(), studentDao.findBySurname(student1.getSurname()));
+		Assert.assertEquals(studentDao.findBySurname(student1.getSurname()).get(0).getSurname(), student1.getSurname());
 
 	}
 
@@ -171,7 +172,8 @@ public class StudentDaoTest extends AbstractTestNGSpringContextTests {
 
 		em.persist(student1);
 		Assert.assertNotNull(studentDao.findByBirthNumber(student1.getBirthNumber()));
-		//Assert.assertEquals(student1.getBirthNumber(), studentDao.findByBirthNumber(student1.getBirthNumber()));
+		Assert.assertEquals(studentDao.findByBirthNumber(student1.getBirthNumber()).getBirthNumber(),
+				student1.getBirthNumber());
 
 	}
 
@@ -180,7 +182,7 @@ public class StudentDaoTest extends AbstractTestNGSpringContextTests {
 
 		em.persist(student1);
 		Assert.assertNotNull(studentDao.findByEmail(student1.getEmail()));
-		//Assert.assertEquals(student1.getEmail(), studentDao.findByEmail(student1.getEmail()));
+		Assert.assertEquals(studentDao.findByEmail(student1.getEmail()).getEmail(), student1.getEmail());
 
 	}
 
