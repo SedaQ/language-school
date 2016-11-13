@@ -60,17 +60,24 @@ public class CourseFacadeTest extends AbstractTestNGSpringContextTests {
 		Assert.assertEquals(courseFacade.getCourseById(c.getId()).get().getLanguage(), "eng");
 		Assert.assertNotEquals(courseFacade.getCourseById(c.getId()).get().getLanguage(), "ENG");
 	}
-	
+
 	@Test
-	public void testRemove(){
-		//TODO need implemented this
+	public void testFindByName() {
+		// Assert.assertEquals(courseFacade.getCourseByName(c.getName()).get().getName(),
+		// "English 101");
 	}
 
-//	 @Test
-//	 public void testUpdate() {
-//		 c.setName("testUpdate");
-//		 courseFacade.updateCourse(c.getId());
-//		 Assert.assertEquals(courseFacade.getCourseById(c.getId()).get().getName(), "testUpdate");
-//	 }
+	@Test
+	public void testRemove() {
+		// TODO need implemented this
+	}
+
+	// @Test
+	// public void testUpdate() {
+	// c.setName("testUpdate");
+	// courseFacade.updateCourse(c.getId());
+	// Assert.assertEquals(courseFacade.getCourseById(c.getId()).get().getName(),
+	// "testUpdate");
+	// }
 
 }

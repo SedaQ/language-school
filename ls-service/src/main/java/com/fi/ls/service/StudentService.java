@@ -12,13 +12,6 @@ import org.springframework.stereotype.Service;
 public interface StudentService {
 
     /**
-     * creates new student in database
-     * @param s - student to be created
-     * @param unecryptedPassword of student
-     */
-    public void create(Student s, String unecryptedPassword);
-    
-    /**
      * finds specific student from database by birth number
      * @param birthNumber of student
      * @return student that is found by birth number
@@ -79,4 +72,11 @@ public interface StudentService {
      * @return true is hashed password matches
      */
     public boolean authenticateStudent(Student s, String password);
+
+    /**
+     * creates new student in database
+     * @param s - student to be created
+     * @param unecryptedPassword of student
+     */
+	void registerStudent(Student s, String unencryptedPassword);
 }

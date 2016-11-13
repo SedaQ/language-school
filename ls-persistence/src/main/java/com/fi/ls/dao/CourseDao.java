@@ -24,6 +24,13 @@ public interface CourseDao {
 	public Course findById(Long id);
 	
 	/**
+	 * finds specific course by name
+	 * @param name of a course that would be returned
+	 * @return specific course by name 
+	 */
+	public Course findByName(String name);
+	
+	/**
 	 * updates given course
 	 * @param c course that has to be updated
 	 * @return updated course
