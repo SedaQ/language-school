@@ -6,12 +6,17 @@
 package com.fi.ls.mapping;
 
 import com.fi.ls.config.BeanMappingConfiguration;
+import com.fi.ls.dto.language.LanguageDTO;
+import com.fi.ls.dto.lecturer.LecturerDTO;
 import com.fi.ls.entity.Language;
 import com.fi.ls.entity.Lecturer;
 import com.fi.ls.enums.ProficiencyLevel;
 import java.util.Optional;
-import javax.inject.Inject;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import static org.testng.Assert.*;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -21,34 +26,78 @@ import org.testng.annotations.Test;
  * @author lukas
  */
 @ContextConfiguration(classes = BeanMappingConfiguration.class)
-public class BeanMappingTest {
+public class BeanMappingTest extends AbstractTestNGSpringContextTests {
     
-    @Inject
+    @Autowired
     private BeanMapping beanMapping;
     
     @BeforeClass
     public void beforeClass() {
     }
     
-    /*
     @Test
-    public void mapLanguageEntitytoDTO() {
+    public void mapEntityToDTO() {
         Lecturer l = new Lecturer();
-        l.setNickname("Dude");
-        l.setFirstName("Where is my");
-        l.setSurname("Car?");
+        l.setNickname("Christ");
+        l.setFirstName("Jesus");
+        l.setSurname("of Nazareth");
+        l.setEmail("Christ@savior.org");
+        l.setPasswordHash("testHashtestHashtestHashtestHash7841267871s!@$%");
         
-        Language lan = new Language();
-        lan.setLanguage("English");
-        lan.setLecturer(l);
-        lan.setProficiencyLevel(ProficiencyLevel.C1);
+        Language lan1 = new Language();
+        lan1.setLanguage("English");
+        lan1.setLecturer(l);        
+        lan1.setProficiencyLevel(ProficiencyLevel.C1);
         
-        Optional<LanguageDTO> dto = beanMapping.mapTo(lan, LanguageDTO.class);
+        Language lan2 = new Language();
+        lan2.setLanguage("Herbew");
+        lan2.setLecturer(l);        
+        lan2.setProficiencyLevel(ProficiencyLevel.C1);
+        
+        l.addLanguage(lan1);
+        l.addLanguage(lan2);
+        
+        Optional<LecturerDTO> dto = beanMapping.mapTo(l, LecturerDTO.class);
         
         assertTrue(dto.isPresent());
-        assertEquals(lan.getLanguage(), dto.get().getLanguage());
-        assertEquals(lan.getProficiencyLevel(), dto.get().getProficiencyLevel());
-        assertEquals(lan.getLecturer(), dto.get().getLecturer());
-        }
-    */
+        assertEquals(l.getNickname(), dto.get().getNickname());
+        assertEquals(l.getFirstName(), dto.get().getFirstName());
+        assertEquals(l.getSurname(), dto.get().getSurname());
+        assertEquals(l.getEmail(), dto.get().getEmail());
+        assertEquals(l.getPasswordHash(), dto.get().getPasswordHash());
+        assertEquals(l.getListOfLanguages().size(), dto.get().getListOfLanguages().size());
+    }
+    
+    @Test
+    public void mapDTOToEntity() {
+        LecturerDTO l = new LecturerDTO();
+        l.setNickname("Christ");
+        l.setFirstName("Jesus");
+        l.setSurname("of Nazareth");
+        l.setEmail("Christ@savior.org");
+        l.setPasswordHash("testHashtestHashtestHashtestHash7841267871s!@$%");
+        
+        LanguageDTO lan1 = new LanguageDTO();
+        lan1.setLanguage("English");
+        lan1.setLecturer(l);        
+        lan1.setProficiencyLevel(ProficiencyLevel.C1);
+        
+        LanguageDTO lan2 = new LanguageDTO();
+        lan2.setLanguage("Herbew");
+        lan2.setLecturer(l);        
+        lan2.setProficiencyLevel(ProficiencyLevel.C1);
+        
+        l.addLanguage(lan1);
+        l.addLanguage(lan2);
+        
+        Optional<Lecturer> dto = beanMapping.mapTo(l, Lecturer.class);
+        
+        assertTrue(dto.isPresent());
+        assertEquals(l.getNickname(), dto.get().getNickname());
+        assertEquals(l.getFirstName(), dto.get().getFirstName());
+        assertEquals(l.getSurname(), dto.get().getSurname());
+        assertEquals(l.getEmail(), dto.get().getEmail());
+        assertEquals(l.getPasswordHash(), dto.get().getPasswordHash());
+        assertEquals(l.getListOfLanguages().size(), dto.get().getListOfLanguages().size());
+    }
 }
