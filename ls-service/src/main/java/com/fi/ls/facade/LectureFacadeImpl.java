@@ -18,48 +18,52 @@ import org.springframework.stereotype.Service;
 @Service
 @Transactional
 public class LectureFacadeImpl implements LectureFacade {
-    
-    @Inject
-    private LectureService lectureService;
-    
-    @Inject
-    private BeanMapping beanMapping;
-    
-    @Override
-    public void createLecture(LectureCreateDTO lecture) {
-        
-        lectureService.create(beanMapping.mapTo(lecture, Lecture.class).get());
-        
-    }
 
-    @Override
-    public Optional<LectureDTO> getLectureById(Long id) {
-        
-        Optional<Lecture> lecture = Optional.of(lectureService.findById(id));
-        return lecture.isPresent() ? beanMapping.mapTo(lecture.get(), LectureDTO.class) : Optional.empty();
-        
-    }
+	private LectureService lectureService;
 
-    @Override
-    public List<LectureDTO> getAllLectures() {
-        
-        return beanMapping.mapTo(lectureService.findAll(), LectureDTO.class);
-        
-    }
+	private BeanMapping beanMapping;
 
-    @Override
-    public Optional<LectureDTO> updateLecture(Long id) {
-        
-        Optional<Lecture> lecture = Optional.of(lectureService.update(lectureService.findById(id)));
-        return lecture.isPresent() ? beanMapping.mapTo(lecture.get(), LectureDTO.class) : Optional.empty();
-        
-    }
+	@Inject
+	public LectureFacadeImpl(LectureService lectureService, BeanMapping beanMapping) {
+		this.lectureService = lectureService;
+		this.beanMapping = beanMapping;
+	}
 
-    @Override
-    public void deleteLecture(Long id) {
-        
-        lectureService.remove(lectureService.findById(id));
-        
-    }
-    
+	@Override
+	public void createLecture(LectureCreateDTO lecture) {
+
+		lectureService.create(beanMapping.mapTo(lecture, Lecture.class).get());
+
+	}
+
+	@Override
+	public Optional<LectureDTO> getLectureById(Long id) {
+
+		Optional<Lecture> lecture = Optional.of(lectureService.findById(id));
+		return lecture.isPresent() ? beanMapping.mapTo(lecture.get(), LectureDTO.class) : Optional.empty();
+
+	}
+
+	@Override
+	public List<LectureDTO> getAllLectures() {
+
+		return beanMapping.mapTo(lectureService.findAll(), LectureDTO.class);
+
+	}
+
+	@Override
+	public Optional<LectureDTO> updateLecture(Long id) {
+
+		Optional<Lecture> lecture = Optional.of(lectureService.update(lectureService.findById(id)));
+		return lecture.isPresent() ? beanMapping.mapTo(lecture.get(), LectureDTO.class) : Optional.empty();
+
+	}
+
+	@Override
+	public void deleteLecture(Long id) {
+
+		lectureService.remove(lectureService.findById(id));
+
+	}
+
 }

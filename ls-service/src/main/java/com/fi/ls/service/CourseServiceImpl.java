@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.fi.ls.dao.CourseDao;
 import com.fi.ls.entity.Course;
 import com.fi.ls.entity.Lecture;
-import com.fi.ls.entity.Lecturer;
 
 /**
  * @author Pavel Šeda (441048)
@@ -18,15 +17,15 @@ import com.fi.ls.entity.Lecturer;
 @Service
 public class CourseServiceImpl implements CourseService {
 
-	@Inject
 	private CourseDao courseDao;
 
-        public CourseServiceImpl() {
-        }
-        
-        public CourseServiceImpl(CourseDao courseDao) {
-            this.courseDao = courseDao;
-        }
+    public CourseServiceImpl() {
+    }
+    
+    @Inject
+    public CourseServiceImpl(CourseDao courseDao) {
+        this.courseDao = courseDao;
+    }
         
 	@Override
 	public Course create(Course c) {

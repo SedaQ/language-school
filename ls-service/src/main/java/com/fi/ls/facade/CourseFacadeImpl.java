@@ -24,11 +24,14 @@ import com.fi.ls.service.CourseService;
 @Transactional
 public class CourseFacadeImpl implements CourseFacade {
 
-	@Inject
 	private CourseService courseService;
+	private BeanMapping beanMapping;
 
 	@Inject
-	private BeanMapping beanMapping;
+	public CourseFacadeImpl(BeanMapping beanMapping, CourseService courseService) {
+		this.courseService = courseService;
+		this.beanMapping = beanMapping;
+	}
 
 	public List<CourseDTO> getAllCourses() {
 		return beanMapping.mapTo(courseService.findAll(), CourseDTO.class);

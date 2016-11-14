@@ -22,11 +22,14 @@ import com.fi.ls.service.LSUserService;
 @Transactional
 public class LSUserFacadeImpl implements LSUserFacade {
 
-	@Inject
 	private LSUserService userService;
+	private BeanMapping beanMapping;
 
 	@Inject
-	private BeanMapping beanMapping;
+	public LSUserFacadeImpl(LSUserService userService, BeanMapping beanMapping) {
+		this.userService = userService;
+		this.beanMapping = beanMapping;
+	}
 
 	@Override
 	public List<LSUserDTO> getAllUsers() {

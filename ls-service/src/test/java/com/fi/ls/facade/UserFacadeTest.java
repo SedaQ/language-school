@@ -12,7 +12,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.fi.ls.config.BeanMappingConfiguration;
-import com.fi.ls.dto.user.LSUserDTO;
+import com.fi.ls.dto.user.LSUserCreateDTO;
 
 /**
  * @author Pavel Šeda (441048)
@@ -26,20 +26,20 @@ public class UserFacadeTest extends AbstractTestNGSpringContextTests {
 	@Inject
 	private LSUserFacade userFacade;
 
-	private LSUserDTO user1;
+	private LSUserCreateDTO user1;
 
-//	@BeforeClass
-//	public void init() {
-//		user1 = new LSUserDTO();
-//		user1.setEmail("testemail@email.cz");
-//		userFacade.registerUser(user1, "Password123!");
-//	}
-//
+	@BeforeClass
+	public void init() {
+		user1 = new LSUserCreateDTO();
+		user1.setEmail("testemail@email.cz");
+		userFacade.registerUser(user1, "Password123!");
+	}
+
 //	@Test
 //	public void testRegisterUser() {
 //		Assert.assertNotNull(userFacade.getUserById(user1.getId()));
 //	}
-//
+
 //	@Test
 //	public void testPasswordHash() {
 //		Assert.assertNotEquals(userFacade.getUserById(user1.getId()).get().getPasswordHash(), "Password123!");

@@ -17,15 +17,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class BeanMappingImpl implements BeanMapping {
 
-	@Inject
 	private Mapper dozer;
         
-        public BeanMappingImpl() {
-        }
-        
-        public BeanMappingImpl(Mapper mapper) {
-            this.dozer = mapper;
-        }
+    @Inject
+    public BeanMappingImpl(Mapper mapper) {
+        this.dozer = mapper;
+    }
 
 	public <T> List<T> mapTo(Collection<?> objects, Class<T> mapToClass) {
 		List<T> mappedCollection = new ArrayList<>();

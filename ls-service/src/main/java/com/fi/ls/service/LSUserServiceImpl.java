@@ -2,7 +2,8 @@ package com.fi.ls.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.inject.Inject;
+
 import org.springframework.stereotype.Service;
 
 import com.fi.ls.dao.LSUserRepository;
@@ -15,8 +16,12 @@ import com.fi.ls.entity.LSUser;
 @Service
 public class LSUserServiceImpl implements LSUserService {
 
-	@Autowired
 	private LSUserRepository userDao;
+	
+	@Inject
+	public LSUserServiceImpl(LSUserRepository userDao){
+		this.userDao = userDao;
+	}
 
 	@Override
 	public void registerUser(LSUser u, String unencryptedPassword) {

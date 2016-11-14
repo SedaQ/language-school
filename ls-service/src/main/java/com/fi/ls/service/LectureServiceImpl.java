@@ -11,8 +11,12 @@ import javax.inject.Inject;
  */
 public class LectureServiceImpl implements LectureService {
     
-    @Inject
     private LectureDao lectureDao;
+    
+    @Inject
+    public LectureServiceImpl(LectureDao lectureDao){
+    	this.lectureDao = lectureDao;
+    }
     
     @Override
     public void create(Lecture lecture) {

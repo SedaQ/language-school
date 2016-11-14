@@ -23,11 +23,14 @@ import org.springframework.stereotype.Service;
 @Transactional
 public class StudentFacadeImpl implements StudentFacade {
 
-	@Inject
 	private StudentService studentService;
+	private BeanMapping beanMapping;
 
 	@Inject
-	private BeanMapping beanMapping;
+	public StudentFacadeImpl(StudentService studentService, BeanMapping beanMapping) {
+		this.studentService = studentService;
+		this.beanMapping = beanMapping;
+	}
 
 	@Override
 	public void registerStudent(StudentCreateDTO s, String unencryptedPassword) {

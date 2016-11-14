@@ -3,6 +3,8 @@ package com.fi.ls.facade;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
@@ -13,8 +15,14 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.fi.ls.config.BeanMappingConfiguration;
+import com.fi.ls.dto.course.CourseCreateDTO;
 import com.fi.ls.dto.course.CourseDTO;
+import com.fi.ls.entity.Course;
 import com.fi.ls.enums.ProficiencyLevel;
+import com.fi.ls.mapping.BeanMapping;
+import com.fi.ls.service.CourseService;
+import com.fi.ls.service.CourseServiceImpl;
+import com.fi.ls.service.LSUserService;
 
 /**
  * @author Pavel Šeda (441048)
@@ -25,52 +33,69 @@ import com.fi.ls.enums.ProficiencyLevel;
 @Transactional
 public class CourseFacadeTest extends AbstractTestNGSpringContextTests {
 
-	@Inject
+	@Mock
+	private CourseService courseService;
+
+	@Mock
+	private BeanMapping beanMapping;
+
 	private CourseFacade courseFacade;
 
-	private CourseDTO c;
+	private CourseCreateDTO c;
+
+	@BeforeClass
+	public void setup() {
+		MockitoAnnotations.initMocks(this);
+		courseFacade = new CourseFacadeImpl(beanMapping, courseService);
+	}
 
 //	@BeforeClass
 //	public void init() {
-//		c = new CourseDTO();
+//		c = new CourseCreateDTO();
 //		c.setLanguage("eng");
 //		c.setName("English 101");
 //		c.setProficiencyLevel(ProficiencyLevel.A1);
-//		c.setId(courseFacade.create(c).get());
 //	}
-//
-//	@Test
-//	public void getAllCourses() {
-//		CourseDTO c1 = new CourseDTO();
-//		c1.setLanguage("CZE");
-//		c1.setName("Cestina je cool");
-//		c1.setProficiencyLevel(ProficiencyLevel.C1);
-//		courseFacade.create(c1);
-//
-//		Assert.assertEquals(courseFacade.getAllCourses().size(), 2);
-//	}
-//
-//	@Test
-//	public void testCreate() {
-//		Assert.assertNotNull(courseFacade.getCourseById(c.getId()));
-//	}
-//
-//	@Test
-//	public void testFindById() {
-//		Assert.assertEquals(courseFacade.getCourseById(c.getId()).get().getLanguage(), "eng");
-//		Assert.assertNotEquals(courseFacade.getCourseById(c.getId()).get().getLanguage(), "ENG");
-//	}
-//
-//	@Test
-//	public void testFindByName() {
-//		// Assert.assertEquals(courseFacade.getCourseByName(c.getName()).get().getName(),
-//		// "English 101");
-//	}
-//
-//	@Test
-//	public void testRemove() {
-//		// TODO need implemented this
-//	}
+//	
+//	 @Test
+//	 public void testCreate() {
+//		 Long courseId = courseFacade.create(c).get();
+//		 Assert.assertNotNull(courseFacade.getCourseById(courseId));
+//	 }
+	
+	//
+	// @Test
+	// public void getAllCourses() {
+	// CourseDTO c1 = new CourseDTO();
+	// c1.setLanguage("CZE");
+	// c1.setName("Cestina je cool");
+	// c1.setProficiencyLevel(ProficiencyLevel.C1);
+	// courseFacade.create(c1);
+	//
+	// Assert.assertEquals(courseFacade.getAllCourses().size(), 2);
+	// }
+	//
+	 
+	//
+	// @Test
+	// public void testFindById() {
+	// Assert.assertEquals(courseFacade.getCourseById(c.getId()).get().getLanguage(),
+	// "eng");
+	// Assert.assertNotEquals(courseFacade.getCourseById(c.getId()).get().getLanguage(),
+	// "ENG");
+	// }
+	//
+	// @Test
+	// public void testFindByName() {
+	// //
+	// Assert.assertEquals(courseFacade.getCourseByName(c.getName()).get().getName(),
+	// // "English 101");
+	// }
+	//
+	// @Test
+	// public void testRemove() {
+	// // TODO need implemented this
+	// }
 
 	// @Test
 	// public void testUpdate() {
