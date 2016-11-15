@@ -1,8 +1,12 @@
-package com.fi.ls.dto;
+package com.fi.ls.dto.lecturer;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import com.fi.ls.dto.language.LanguageDTO;
+import com.fi.ls.dto.lecture.LectureDTO;
+import com.fi.ls.dto.user.LSUserDTO;
 
 /**
  *

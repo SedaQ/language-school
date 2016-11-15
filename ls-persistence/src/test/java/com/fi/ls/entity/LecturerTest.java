@@ -3,7 +3,11 @@ package com.fi.ls.entity;
 import com.fi.ls.entity.Language;
 import com.fi.ls.entity.Lecturer;
 import com.fi.ls.enums.ProficiencyLevel;
+
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -44,7 +48,7 @@ public class LecturerTest {
 		l3.setEmail("Superhero@test.cz");
 		l3.setPasswordHash("testHashtestHashtestHashtestHash7841267871s!@$%");
 	}
-
+	
 	@Test
 	public void testEqualsSame() {
 		Assert.assertTrue(l1.equals(l1));

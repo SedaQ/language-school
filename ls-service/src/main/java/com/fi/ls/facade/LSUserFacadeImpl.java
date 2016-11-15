@@ -8,7 +8,8 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
-import com.fi.ls.dto.LSUserDTO;
+import com.fi.ls.dto.user.LSUserCreateDTO;
+import com.fi.ls.dto.user.LSUserDTO;
 import com.fi.ls.entity.LSUser;
 import com.fi.ls.mapping.BeanMapping;
 import com.fi.ls.service.LSUserService;
@@ -21,11 +22,14 @@ import com.fi.ls.service.LSUserService;
 @Transactional
 public class LSUserFacadeImpl implements LSUserFacade {
 
-	@Inject
 	private LSUserService userService;
+	private BeanMapping beanMapping;
 
 	@Inject
-	private BeanMapping beanMapping;
+	public LSUserFacadeImpl(LSUserService userService, BeanMapping beanMapping) {
+		this.userService = userService;
+		this.beanMapping = beanMapping;
+	}
 
 	@Override
 	public List<LSUserDTO> getAllUsers() {
@@ -56,7 +60,7 @@ public class LSUserFacadeImpl implements LSUserFacade {
 	}
 
 	@Override
-	public void registerUser(LSUserDTO u, String unencryptedPassword) {
+	public void registerUser(LSUserCreateDTO u, String unencryptedPassword) {
 		LSUser userEntity = beanMapping.mapTo(u, LSUser.class).get();
 		userService.registerUser(userEntity, unencryptedPassword);
 		u.setId(userEntity.getId());

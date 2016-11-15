@@ -15,9 +15,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class StudentServiceImpl implements StudentService {
 
-	@Inject
+	
 	private StudentDao studentDao;
 
+	@Inject
+	public StudentServiceImpl(StudentDao studentDao){
+		this.studentDao = studentDao;
+	}
+	
 	@Override
 	public Student findByBirthNumber(String birthNumber) {
 		return studentDao.findByBirthNumber(birthNumber);

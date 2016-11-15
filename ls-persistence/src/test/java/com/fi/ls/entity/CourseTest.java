@@ -3,6 +3,9 @@
  */
 package com.fi.ls.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -48,6 +51,16 @@ public class CourseTest {
 		c5.setName("Java Course");
 		c5.setLanguage("CZK");
 		c5.setProficiencyLevel(ProficiencyLevel.C2);
+	}
+	
+	@Test
+	public void testAddListOfLectures() {
+		List<Lecture> lectures = new ArrayList<>();
+		lectures.add(new Lecture());
+		lectures.add(new Lecture());
+		lectures.add(new Lecture());
+		c1.addLectures(lectures);
+		Assert.assertEquals(c1.getListOfLectures().size(), 3);
 	}
 
 	@Test

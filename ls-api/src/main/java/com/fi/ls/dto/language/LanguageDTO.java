@@ -1,7 +1,7 @@
-package com.fi.ls.dto;
+package com.fi.ls.dto.language;
 
+import com.fi.ls.dto.lecturer.LecturerDTO;
 import com.fi.ls.enums.ProficiencyLevel;
-import java.util.Locale;
 
 /**
  *

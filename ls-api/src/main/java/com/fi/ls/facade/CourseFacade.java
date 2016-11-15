@@ -3,9 +3,9 @@ package com.fi.ls.facade;
 import java.util.List;
 import java.util.Optional;
 
-import com.fi.ls.dto.CourseDTO;
-import com.fi.ls.dto.LectureDTO;
-import com.fi.ls.dto.LecturerDTO;
+import com.fi.ls.dto.course.CourseCreateDTO;
+import com.fi.ls.dto.course.CourseDTO;
+import com.fi.ls.dto.lecture.LectureDTO;
 
 /**
  * @author Pavel Šeda (441048)
@@ -20,7 +20,7 @@ public interface CourseFacade {
 	 *            specific Course to be created
 	 * @return
 	 */
-	public Optional<Long> create(CourseDTO c);
+	public Optional<Long> create(CourseCreateDTO c);
 
 	/**
 	 * finds specific course by id

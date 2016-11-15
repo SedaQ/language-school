@@ -11,7 +11,7 @@ import com.fi.ls.context.PersistenceApplicationContext;
 
 @Configuration
 @Import(PersistenceApplicationContext.class)
-@ComponentScan(basePackages = { "com.fi.ls" })
+@ComponentScan(basePackages = { "com.fi.ls.mapping", "com.fi.ls.service", "com.fi.ls.facade"})
 public class BeanMappingConfiguration {
 
 	@Bean

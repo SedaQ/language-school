@@ -19,8 +19,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class LanguageServiceImpl implements LanguageService {
     
-    @Inject
     private LanguageDao languageDao;
+    
+    @Inject
+    public LanguageServiceImpl(LanguageDao languageDao){
+    	this.languageDao = languageDao;
+    }
     
     @Override
     public Language create(Language lan) throws ServiceException {

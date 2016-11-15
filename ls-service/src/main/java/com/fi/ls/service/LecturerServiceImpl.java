@@ -19,9 +19,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class LecturerServiceImpl implements LecturerService {
 
-	@Inject
 	private LecturerDao lecturerDao;
 
+	@Inject
+	public LecturerServiceImpl(LecturerDao lecturerDao){
+		this.lecturerDao = lecturerDao;
+	}
+	
 	@Override
 	public Lecturer create(Lecturer l) throws ServiceException {
 		if (l == null)
