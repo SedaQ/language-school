@@ -5,7 +5,7 @@ import com.fi.ls.dto.lecturer.LecturerCreateDTO;
 import com.fi.ls.dto.lecturer.LecturerDTO;
 import com.fi.ls.entity.Lecture;
 import com.fi.ls.entity.Lecturer;
-import com.fi.ls.exceptions.ServiceException;
+import com.fi.ls.exceptions.ServiceLayerException;
 import com.fi.ls.mapping.BeanMapping;
 import com.fi.ls.service.LecturerService;
 import java.util.List;
@@ -42,7 +42,7 @@ public class LecturerFacadeImpl implements LecturerFacade {
 		try {
 			Lecturer created = lecturerService.create(entity.get());
 			return beanMapping.mapTo(created, LecturerDTO.class);
-		} catch (ServiceException | NoSuchElementException ex) {
+		} catch (ServiceLayerException | NoSuchElementException ex) {
 			// TODO Log!
 			return Optional.empty();
 		}
@@ -56,7 +56,7 @@ public class LecturerFacadeImpl implements LecturerFacade {
 		try {
 			Lecturer entity = lecturerService.findById(id);
 			return beanMapping.mapTo(entity, LecturerDTO.class);
-		} catch (ServiceException | NoSuchElementException ex) {
+		} catch (ServiceLayerException | NoSuchElementException ex) {
 			// TODO Log!
 			return Optional.empty();
 		}
@@ -71,7 +71,7 @@ public class LecturerFacadeImpl implements LecturerFacade {
 		try {
 			Lecturer updated = lecturerService.update(entity.get());
 			return beanMapping.mapTo(updated, LecturerDTO.class);
-		} catch (ServiceException | NoSuchElementException ex) {
+		} catch (ServiceLayerException | NoSuchElementException ex) {
 			// TODO Log!
 			return Optional.empty();
 		}
@@ -85,7 +85,7 @@ public class LecturerFacadeImpl implements LecturerFacade {
 		Optional<Lecturer> entity = beanMapping.mapTo(l, Lecturer.class);
 		try {
 			lecturerService.remove(entity.get());
-		} catch (ServiceException | NoSuchElementException ex) {
+		} catch (ServiceLayerException | NoSuchElementException ex) {
 			// TODO Log!
 		}
 	}
@@ -95,7 +95,7 @@ public class LecturerFacadeImpl implements LecturerFacade {
 		try {
 			List<Lecturer> entities = lecturerService.findAll();
 			return beanMapping.mapTo(entities, LecturerDTO.class);
-		} catch (ServiceException | NoSuchElementException ex) {
+		} catch (ServiceLayerException | NoSuchElementException ex) {
 			// TODO Log!
 			return null;
 		}
@@ -109,7 +109,7 @@ public class LecturerFacadeImpl implements LecturerFacade {
 		try {
 			lecturerService.deleteLecture(beanMapping.mapTo(lect, Lecturer.class).get(),
 					beanMapping.mapTo(l, Lecture.class).get());
-		} catch (ServiceException | NoSuchElementException ex) {
+		} catch (ServiceLayerException | NoSuchElementException ex) {
 			// TODO Log!
 		}
 
@@ -123,7 +123,7 @@ public class LecturerFacadeImpl implements LecturerFacade {
 		try {
 			lecturerService.deleteLectures(beanMapping.mapTo(lect, Lecturer.class).get(),
 					beanMapping.mapTo(l, Lecture.class));
-		} catch (ServiceException | NoSuchElementException ex) {
+		} catch (ServiceLayerException | NoSuchElementException ex) {
 			// TODO Log!
 		}
 
