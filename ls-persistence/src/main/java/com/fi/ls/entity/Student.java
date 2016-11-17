@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -29,7 +30,7 @@ public class Student extends LSUser {
 	@Column(unique = true, name = "birth_number")
 	private String birthNumber;
 
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.LAZY)
 	@Column(name = "list_of_lectures")
 	private List<Lecture> listOfLectures = new ArrayList<>();
 

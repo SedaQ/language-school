@@ -49,13 +49,13 @@ public class CourseFacadeTest extends AbstractTestNGSpringContextTests {
 		courseFacade = new CourseFacadeImpl(beanMapping, courseService);
 	}
 
-//	@BeforeClass
-//	public void init() {
-//		c = new CourseCreateDTO();
-//		c.setLanguage("eng");
-//		c.setName("English 101");
-//		c.setProficiencyLevel(ProficiencyLevel.A1);
-//	}
+	@BeforeClass
+	public void init() {
+		c = new CourseCreateDTO();
+		c.setLanguage("eng");
+		c.setName("English 101");
+		c.setProficiencyLevel(ProficiencyLevel.A1);
+	}
 //	
 //	 @Test
 //	 public void testCreate() {

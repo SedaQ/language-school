@@ -7,6 +7,7 @@ import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -39,15 +40,15 @@ public class Lecture {
 	@NotNull
 	private String topic;
 
-	@ManyToMany(targetEntity = Student.class, mappedBy = "listOfLectures")
+	@ManyToMany(fetch = FetchType.LAZY, targetEntity = Student.class, mappedBy = "listOfLectures")
 	@Column(name = "list_of_students")
 	private List<Student> listOfStudents = new ArrayList<>();
 
-	@ManyToMany(targetEntity = Lecturer.class, mappedBy = "listOfLectures")
+	@ManyToMany(fetch = FetchType.LAZY, targetEntity = Lecturer.class, mappedBy = "listOfLectures")
 	@Column(name = "list_of_lecturers")
 	private List<Lecturer> listOfLecturers = new ArrayList<>();
 
-	@ManyToMany(targetEntity = Course.class, mappedBy = "listOfLectures")
+	@ManyToMany(fetch = FetchType.LAZY, targetEntity = Course.class, mappedBy = "listOfLectures")
 	@Column(name = "list_of_courses")
 	private List<Course> listOfCourses = new ArrayList<>();
 
