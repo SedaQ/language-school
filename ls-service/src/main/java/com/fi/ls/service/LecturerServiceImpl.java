@@ -3,7 +3,7 @@ package com.fi.ls.service;
 import com.fi.ls.dao.LecturerDao;
 import com.fi.ls.entity.Lecture;
 import com.fi.ls.entity.Lecturer;
-import com.fi.ls.exceptions.ServiceException;
+import com.fi.ls.exceptions.ServiceLayerException;
 import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.PersistenceException;
@@ -27,7 +27,7 @@ public class LecturerServiceImpl implements LecturerService {
 	}
 	
 	@Override
-	public Lecturer create(Lecturer l) throws ServiceException {
+	public Lecturer create(Lecturer l) {
 		if (l == null)
 			throw new IllegalArgumentException("Lecturer parameter is null");
 
@@ -36,45 +36,45 @@ public class LecturerServiceImpl implements LecturerService {
 			return l;
 		} catch (PersistenceException | InvalidDataAccessApiUsageException | ConstraintViolationException
 				| JpaSystemException ex) {
-			throw new ServiceException("Problem with creating Lecturer, see inner exception.", ex);
+			throw new ServiceLayerException("Problem with creating Lecturer, see inner exception.", ex);
 		}
 	}
 
 	@Override
-	public List<Lecturer> findAll() throws ServiceException {
+	public List<Lecturer> findAll() {
 		try {
 			return lecturerDao.findAll();
 		} catch (PersistenceException | JpaSystemException ex) {
-			throw new ServiceException("Problem with finding Lecturer, see inner exception.", ex);
+			throw new ServiceLayerException("Problem with finding Lecturer, see inner exception.", ex);
 		}
 	}
 
 	@Override
-	public Lecturer findById(Long id) throws ServiceException {
+	public Lecturer findById(Long id) {
 		if (id == null)
 			throw new IllegalArgumentException("Id parameter is null");
 
 		try {
 			return lecturerDao.findById(id);
 		} catch (PersistenceException | InvalidDataAccessApiUsageException | JpaSystemException ex) {
-			throw new ServiceException("Problem with finding Lecturer, see inner exception.", ex);
+			throw new ServiceLayerException("Problem with finding Lecturer, see inner exception.", ex);
 		}
 	}
 
 	@Override
-	public void remove(Lecturer l) throws ServiceException {
+	public void remove(Lecturer l) {
 		if (l == null)
 			throw new IllegalArgumentException("Lecturer parameter is null");
 
 		try {
 			lecturerDao.remove(l);
 		} catch (PersistenceException | InvalidDataAccessApiUsageException | JpaSystemException ex) {
-			throw new ServiceException("Problem with removing Lecturer, see inner exception.", ex);
+			throw new ServiceLayerException("Problem with removing Lecturer, see inner exception.", ex);
 		}
 	}
 
 	@Override
-	public Lecturer update(Lecturer l) throws ServiceException {
+	public Lecturer update(Lecturer l) {
 		if (l == null)
 			throw new IllegalArgumentException("Lecturer parameter is null");
 
@@ -82,21 +82,23 @@ public class LecturerServiceImpl implements LecturerService {
 			return lecturerDao.update(l);
 		} catch (PersistenceException | InvalidDataAccessApiUsageException | ConstraintViolationException
 				| JpaSystemException ex) {
-			throw new ServiceException("Problem with updating Lecturer, see inner exception.", ex);
+			throw new ServiceLayerException("Problem with updating Lecturer, see inner exception.", ex);
 		}
 	}
 
 	@Override
-	public void deleteLecture(Lecturer lect, Lecture l) throws ServiceException {
+	public void deleteLecture(Lecturer lect, Lecture l) {
 		if (lect == null || l == null)
 			throw new IllegalArgumentException("Lecturer parameter is null or Lecture parameter is null");
 		lect.deleteLecture(l);
+                this.update(lect);
 	}
 
 	@Override
-	public void deleteLectures(Lecturer lect, List<Lecture> l) throws ServiceException {
+	public void deleteLectures(Lecturer lect, List<Lecture> l) {
 		if (lect == null || l == null)
 			throw new IllegalArgumentException("Lecturer parameter is null or Lecture parameter is null");
 		lect.deleteLectures(l);
+                this.update(lect);
 	}
 }

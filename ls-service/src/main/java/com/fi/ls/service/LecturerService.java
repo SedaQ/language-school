@@ -2,7 +2,7 @@ package com.fi.ls.service;
 
 import com.fi.ls.entity.Lecture;
 import com.fi.ls.entity.Lecturer;
-import com.fi.ls.exceptions.ServiceException;
+import com.fi.ls.exceptions.ServiceLayerException;
 import java.util.List;
 
 /**
@@ -17,17 +17,18 @@ public interface LecturerService {
      * @param l
      *            specific Lecturer to be created
      * @return created Lecturer
-     * @throws ServiceException
+     * @exception ServiceLayerException
+     * @exception IllegalArgumentException
      */
-    Lecturer create(Lecturer l) throws ServiceException;
+    Lecturer create(Lecturer l);
          
     /**
      * Returns all lecturers in language school
      * 
      * @return List of all lecturers which are in language school
-     * @throws ServiceException 
+     * @exception ServiceLayerException
      */
-    List<Lecturer> findAll() throws ServiceException;
+    List<Lecturer> findAll();
     
     /**
      * finds specific lecturer by id
@@ -35,18 +36,20 @@ public interface LecturerService {
      * @param id
      *            id of a Lecturer that would be returned
      * @return specific Lecturer by id
-     * @throws ServiceException
+     * @exception ServiceLayerException
+     * @exception IllegalArgumentException
      */  
-    Lecturer findById(Long id) throws ServiceException;
+    Lecturer findById(Long id);
 
     /**
      * removes given lecturer from database
      *       
      * @param l
      *            Lecturer that has to be removed
-     * @throws ServiceException 
+     * @exception ServiceLayerException
+     * @exception IllegalArgumentException
      */
-    void remove(Lecturer l) throws ServiceException;
+    void remove(Lecturer l);
     
     /**
      * updates given lecturer in database
@@ -54,26 +57,29 @@ public interface LecturerService {
      * @param l
      *            Lecturer that has to be updated
      * @return updated Lecturer
-     * @throws ServiceException
+     * @exception ServiceLayerException
+     * @exception IllegalArgumentException
      */
-    Lecturer update(Lecturer l) throws ServiceException;
+    Lecturer update(Lecturer l);
     
-	/**
-	 * delete particular lecture
-	 * 
-	 * @param l lecture which will be removed
-	 * @param lect lecturer which remove lecture
-	 * @throws ServiceException
-	 */
-	public void deleteLecture(Lecturer lect, Lecture l) throws ServiceException;
+    /**
+     * delete particular lecture
+     * 
+     * @param l lecture which will be removed
+     * @param lect lecturer which remove lecture
+     * @exception ServiceLayerException
+     * @exception IllegalArgumentException
+     */
+    public void deleteLecture(Lecturer lect, Lecture l);
 
-	/**
-	 * delete particular lectures
-	 * 
-	 * @param l lectures which will be removed
-	 * @param lect lecturer which remove lectures
-	 * @throws ServiceException
-	 */
-	public void deleteLectures(Lecturer lect, List<Lecture> l) throws ServiceException;
+    /**
+     * delete particular lectures
+     * 
+     * @param l lectures which will be removed
+     * @param lect lecturer which remove lectures
+     * @exception ServiceLayerException
+     * @exception IllegalArgumentException
+     */
+    public void deleteLectures(Lecturer lect, List<Lecture> l);
     
 }

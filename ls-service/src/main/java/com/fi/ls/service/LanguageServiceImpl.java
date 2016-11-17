@@ -2,7 +2,7 @@ package com.fi.ls.service;
 
 import com.fi.ls.dao.LanguageDao;
 import com.fi.ls.entity.Language;
-import com.fi.ls.exceptions.ServiceException;
+import com.fi.ls.exceptions.ServiceLayerException;
 import java.util.List;
 import java.util.NoSuchElementException;
 import javax.inject.Inject;
@@ -27,7 +27,7 @@ public class LanguageServiceImpl implements LanguageService {
     }
     
     @Override
-    public Language create(Language lan) throws ServiceException {
+    public Language create(Language lan) {
         if(lan == null)
             throw new IllegalArgumentException("Language parameter is null");
         
@@ -39,23 +39,23 @@ public class LanguageServiceImpl implements LanguageService {
                 InvalidDataAccessApiUsageException |
                 ConstraintViolationException |
                 JpaSystemException ex) {
-            throw new ServiceException("Problem with creating Language, see inner exception.", ex);
+            throw new ServiceLayerException("Problem with creating Language, see inner exception.", ex);
         }
     }
 
     @Override
-    public List<Language> findAll() throws ServiceException {
+    public List<Language> findAll() {
         try {
             return languageDao.findAll();
         }
         catch(  PersistenceException |
                 JpaSystemException ex) {
-            throw new ServiceException("Problem with finding Language, see inner exception.", ex);
+            throw new ServiceLayerException("Problem with finding Language, see inner exception.", ex);
         }
     }
 
     @Override
-    public Language findById(Long id) throws ServiceException {
+    public Language findById(Long id) {
         if(id == null)
             throw new IllegalArgumentException("Id parameter is null");
         
@@ -65,12 +65,12 @@ public class LanguageServiceImpl implements LanguageService {
         catch(  PersistenceException |
                 InvalidDataAccessApiUsageException |
                 JpaSystemException ex) {
-            throw new ServiceException("Problem with finding Language, see inner exception.", ex);
+            throw new ServiceLayerException("Problem with finding Language, see inner exception.", ex);
         }
     }
 
     @Override
-    public void remove(Language lan) throws ServiceException {
+    public void remove(Language lan) {
         if(lan == null)
             throw new IllegalArgumentException("Language parameter is null");
         
@@ -80,12 +80,12 @@ public class LanguageServiceImpl implements LanguageService {
         catch(  PersistenceException |
                 InvalidDataAccessApiUsageException |
                 JpaSystemException ex) {
-            throw new ServiceException("Problem with removing Language, see inner exception.", ex);
+            throw new ServiceLayerException("Problem with removing Language, see inner exception.", ex);
         }
     }
 
     @Override
-    public Language update(Language lan) throws ServiceException {
+    public Language update(Language lan) {
         if(lan == null)
             throw new IllegalArgumentException("Language parameter is null");
         
@@ -97,7 +97,7 @@ public class LanguageServiceImpl implements LanguageService {
                 ConstraintViolationException |
                 JpaSystemException |
                 NoSuchElementException ex) {
-            throw new ServiceException("Problem with updating Language, see inner exception.", ex);
+            throw new ServiceLayerException("Problem with updating Language, see inner exception.", ex);
         }
     }
 }

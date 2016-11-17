@@ -2,7 +2,7 @@ package com.fi.ls.facade;
 
 import com.fi.ls.dto.language.LanguageDTO;
 import com.fi.ls.entity.Language;
-import com.fi.ls.exceptions.ServiceException;
+import com.fi.ls.exceptions.ServiceLayerException;
 import com.fi.ls.mapping.BeanMapping;
 import com.fi.ls.service.LanguageService;
 import java.util.List;
@@ -39,7 +39,7 @@ public class LanguageFacadeImpl implements LanguageFacade {
 		try {
 			Language created = languageService.create(entity.get());
 			return beanMapping.mapTo(created, LanguageDTO.class);
-		} catch (ServiceException | NoSuchElementException ex) {
+		} catch (ServiceLayerException | NoSuchElementException ex) {
 			// TODO Log!
 			return Optional.empty();
 		}
@@ -53,7 +53,7 @@ public class LanguageFacadeImpl implements LanguageFacade {
 		try {
 			Language entity = languageService.findById(id);
 			return beanMapping.mapTo(entity, LanguageDTO.class);
-		} catch (ServiceException | NoSuchElementException ex) {
+		} catch (ServiceLayerException | NoSuchElementException ex) {
 			// TODO Log!
 			return Optional.empty();
 		}
@@ -69,7 +69,7 @@ public class LanguageFacadeImpl implements LanguageFacade {
 			Language updated = languageService.update(entity.get());
 			return beanMapping.mapTo(updated, LanguageDTO.class);
 
-		} catch (ServiceException | NoSuchElementException ex) {
+		} catch (ServiceLayerException | NoSuchElementException ex) {
 			// TODO Log!
 			return Optional.empty();
 		}
@@ -83,7 +83,7 @@ public class LanguageFacadeImpl implements LanguageFacade {
 		Optional<Language> entity = beanMapping.mapTo(lan, Language.class);
 		try {
 			languageService.remove(entity.get());
-		} catch (ServiceException | NoSuchElementException ex) {
+		} catch (ServiceLayerException | NoSuchElementException ex) {
 			// TODO Log!
 		}
 	}
@@ -93,7 +93,7 @@ public class LanguageFacadeImpl implements LanguageFacade {
 		try {
 			List<Language> entities = languageService.findAll();
 			return beanMapping.mapTo(entities, LanguageDTO.class);
-		} catch (ServiceException | NoSuchElementException ex) {
+		} catch (ServiceLayerException | NoSuchElementException ex) {
 			// TODO Log!
 			return null;
 		}
