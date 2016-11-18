@@ -15,11 +15,23 @@ import java.util.Optional;
 public interface StudentFacade {
     
     /**
-     * creates new student in database
-     * @param s - student to be created
-     * @param unecryptedPassword of student
+     * creates specific student in database
+     * @param s - student that is created
      */
-    public void registerStudent(StudentCreateDTO s, String unecryptedPassword);
+    public void createStudent(StudentCreateDTO s);
+    
+    /**
+     * updates specific student in database
+     * @param s - student that is updated
+     * @return updated student
+     */
+    public Optional<StudentDTO> updateStudent(StudentDTO s);
+    
+    /**
+     * removes specific student from database
+     * @param s - student to be removed
+     */
+    public void deleteStudent(StudentDTO s);
     
     /**
      * finds specific student from database by birth number
@@ -33,7 +45,7 @@ public interface StudentFacade {
      * @param email of student
      * @return student that is found by email
      */
-    public Optional<StudentDTO> getStudentByEmail(String email);
+    //public Optional<StudentDTO> getStudentByEmail(String email);
     
     /**
      * finds specific student from database by id
@@ -63,50 +75,30 @@ public interface StudentFacade {
     public List<StudentDTO> getStudentsBySurname(String surname);
     
     /**
-     * updates specific student in database
-     * @param s - student that is updated
-     * @return updated student
-     */
-    public Optional<StudentDTO> updateStudent(StudentDTO s);
-    
+     * students enroll to specific course
+     * @param c - course to be enrolled
+     * @param s - student enrolling to course
+     */ 
+    public void enrollCourse(CourseDTO c, StudentDTO s);
+	
     /**
-     * removes specific student from database
-     * @param s - student to be removed
+     * students enroll to specific lecture
+     * @param l - lecture to be enrolled
+     * @param s - student enrolling to lecture
      */
-    public void deleteStudent(StudentDTO s);
-    
+    public void enrollLecture(LectureDTO l, StudentDTO s);
+
     /**
-     * authenticates student
-     * @param s student object with hashed password
-     * @return true is hashed password matches
+     * students cancel lecture
+     * @param l - lecture which will be canceled 
+     * @param s - student which will cancel some lecture
      */
-    public boolean authenticateStudent(StudentDTO s);
-    
-	/**
-	 * students enroll to specific course
-	 * @param c - course to be enrolled
-	 * @param s - student enrolling to course
-	 */ 
-	public void enrollCourse(CourseDTO c, StudentDTO s);
+    public void cancelLectureFromStudentsList(LectureDTO l, StudentDTO s);
 	
-	/**
-	 * students enroll to specific lecture
-	 * @param l - lecture to be enrolled
-	 * @param s - student enrolling to lecture
-	 */
-	public void enrollLecture(LectureDTO l, StudentDTO s);
-	
-	/**
-	 * students cancel lecture
-	 * @param l - lecture which will be canceled 
-	 * @param s - student which will cancel some lecture
-	 */
-	public void cancelLectureFromStudentsList(LectureDTO l, StudentDTO s);
-	
-	/**
-	 * students cancel lectures
-	 * @param l - lectures which will be canceled 
-	 * @param s - student which will cancel some lecture
-	 */
-	public void cancelLecturesFromStudentsList(List<LectureDTO> l, StudentDTO s);
+    /**
+     * students cancel lectures
+     * @param l - lectures which will be canceled 
+     * @param s - student which will cancel some lecture
+     */
+    public void cancelListOfLecturesFromStudentsList(List<LectureDTO> l, StudentDTO s);
 }

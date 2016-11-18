@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -44,7 +45,7 @@ public class Course {
 	@Column(name = "proficiency_level")
 	private ProficiencyLevel proficiencyLevel;
 
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.LAZY)
 	@Column(name = "list_of_lectures")
 	private List<Lecture> listOfLectures = new ArrayList<>();
 

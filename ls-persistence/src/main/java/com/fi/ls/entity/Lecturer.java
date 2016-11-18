@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -31,11 +32,11 @@ public class Lecturer extends LSUser {
 	@NotNull
 	private String surname;
 
-	@OneToMany(targetEntity = Language.class, mappedBy = "lecturer")
+	@OneToMany(fetch = FetchType.LAZY, targetEntity = Language.class, mappedBy = "lecturer")
 	@Column(name = "list_of_languages")
 	private List<Language> listOfLanguages = new ArrayList<>();
 
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.LAZY)
 	@Column(name = "list_of_lectures")
 	private List<Lecture> listOfLectures = new ArrayList<>();
 
@@ -66,12 +67,12 @@ public class Lecturer extends LSUser {
 	public void setSurname(String surname) {
 		this.surname = surname;
 	}
-	
-	public void deleteLecture(Lecture lecture){
+
+	public void deleteLecture(Lecture lecture) {
 		this.listOfLectures.remove(lecture);
 	}
-	
-	public void deleteLectures(List<Lecture> lectures){
+
+	public void deleteLectures(List<Lecture> lectures) {
 		lectures.forEach(lect -> listOfLectures.remove(lect));
 	}
 
