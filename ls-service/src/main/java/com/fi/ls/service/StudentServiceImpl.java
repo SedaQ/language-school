@@ -128,28 +128,28 @@ public class StudentServiceImpl implements StudentService {
     public void enrollCourse(Course c, Student s) {
         if (c == null || s == null) throw new IllegalArgumentException("Course or student is null.");
         s.addListOfLectures(c.getListOfLectures());
-        this.update(s);
+        this.studentDao.update(s);
     }
 
     @Override
     public void enrollLecture(Lecture l, Student s) {
         if (l == null || s == null) throw new IllegalArgumentException("Lecture or student is null.");
         s.addLecture(l);
-        this.update(s);
+        this.studentDao.update(s);
     }
 
     @Override
     public void cancelLectureFromStudentsList(Lecture l, Student s) {
         if (l == null || s == null) throw new IllegalArgumentException("Lecture or student is null.");
         s.removeLecture(l);
-        this.update(s);
+        this.studentDao.update(s);
     }
 
     @Override
     public void cancelListOfLecturesFromStudentsList(List<Lecture> l, Student s) {
         if (l == null || s == null) throw new IllegalArgumentException("Lecture or student is null.");
         s.removeListOfLectures(l);
-        this.update(s);
+        this.studentDao.update(s);
     }
 
 }

@@ -43,9 +43,9 @@ public class CourseFacadeImpl implements CourseFacade {
 	}
 
 	@Override
-	public Optional<Long> create(CourseCreateDTO c) {
+	public Optional<CourseDTO> create(CourseCreateDTO c) {
 		Optional<Course> course = Optional.of(courseService.create(beanMapping.mapTo(c, Course.class).get()));
-		return course.isPresent() ? Optional.of(course.get().getId()) : Optional.empty();
+		return course.isPresent() ? beanMapping.mapTo(course.get(), CourseDTO.class) : Optional.empty();
 	}
 
 	@Override

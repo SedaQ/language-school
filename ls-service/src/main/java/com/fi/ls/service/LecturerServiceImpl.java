@@ -22,10 +22,10 @@ public class LecturerServiceImpl implements LecturerService {
 	private LecturerDao lecturerDao;
 
 	@Inject
-	public LecturerServiceImpl(LecturerDao lecturerDao){
+	public LecturerServiceImpl(LecturerDao lecturerDao) {
 		this.lecturerDao = lecturerDao;
 	}
-	
+
 	@Override
 	public Lecturer create(Lecturer l) {
 		if (l == null)
@@ -91,7 +91,7 @@ public class LecturerServiceImpl implements LecturerService {
 		if (lect == null || l == null)
 			throw new IllegalArgumentException("Lecturer parameter is null or Lecture parameter is null");
 		lect.deleteLecture(l);
-                this.update(lect);
+		lecturerDao.update(lect);
 	}
 
 	@Override
@@ -99,6 +99,6 @@ public class LecturerServiceImpl implements LecturerService {
 		if (lect == null || l == null)
 			throw new IllegalArgumentException("Lecturer parameter is null or Lecture parameter is null");
 		lect.deleteLectures(l);
-                this.update(lect);
+		lecturerDao.update(lect);
 	}
 }

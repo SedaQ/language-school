@@ -56,13 +56,13 @@ public class CourseFacadeTest extends AbstractTestNGSpringContextTests {
 		c.setName("English 101");
 		c.setProficiencyLevel(ProficiencyLevel.A1);
 	}
-//	
-//	 @Test
-//	 public void testCreate() {
-//		 Long courseId = courseFacade.create(c).get();
-//		 Assert.assertNotNull(courseFacade.getCourseById(courseId));
-//	 }
-	
+
+	@Test
+	public void testCreate() {
+		CourseDTO courseId = courseFacade.create(c).get();
+		//Assert.assertNotNull(courseFacade.getCourseByName(courseId.getName()));
+	}
+
 	//
 	// @Test
 	// public void getAllCourses() {
@@ -75,7 +75,7 @@ public class CourseFacadeTest extends AbstractTestNGSpringContextTests {
 	// Assert.assertEquals(courseFacade.getAllCourses().size(), 2);
 	// }
 	//
-	 
+
 	//
 	// @Test
 	// public void testFindById() {
