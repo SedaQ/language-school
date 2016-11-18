@@ -100,6 +100,6 @@ public interface StudentService {
      * @param l - lectures which will be canceled 
      * @param s - student which will cancel some lecture
      */
-    public void cancelLecturesFromStudentsList(List<Lecture> l, Student s);
+    public void cancelListOfLecturesFromStudentsList(List<Lecture> l, Student s);
 
 }
