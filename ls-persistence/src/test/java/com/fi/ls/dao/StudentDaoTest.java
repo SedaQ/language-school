@@ -178,14 +178,14 @@ public class StudentDaoTest extends AbstractTestNGSpringContextTests {
 
 	}
 
-	@Test
+/*	@Test
 	public void testFindByEmail() {
 
 		em.persist(student1);
 		Assert.assertNotNull(studentDao.findByEmail(student1.getEmail()));
 		Assert.assertEquals(studentDao.findByEmail(student1.getEmail()).getEmail(), student1.getEmail());
 
-	}
+	}*/
 
 	@Test
 	public void testRemove() {
