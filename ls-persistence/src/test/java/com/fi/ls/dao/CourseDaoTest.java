@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import javax.validation.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.test.context.ContextConfiguration;
@@ -51,7 +52,7 @@ public class CourseDaoTest extends AbstractTestNGSpringContextTests {
 		Assert.assertNotNull(em.find(Course.class, c.getId()));
 	}
 
-	@Test(expectedExceptions = InvalidDataAccessApiUsageException.class)
+	@Test(expectedExceptions = DataAccessException.class)
 	public void testCreateNull() {
 
 		courseDao.create(null);
@@ -93,7 +94,7 @@ public class CourseDaoTest extends AbstractTestNGSpringContextTests {
 		Assert.assertEquals(c, found);
 	}
 
-	@Test(expectedExceptions = InvalidDataAccessApiUsageException.class)
+	@Test(expectedExceptions = DataAccessException.class)
 	public void testFindByIdNull() {
 
 		em.persist(c);
@@ -114,7 +115,7 @@ public class CourseDaoTest extends AbstractTestNGSpringContextTests {
 		Assert.assertEquals(c, em.find(Course.class, c.getId()));
 	}
 
-	@Test(expectedExceptions = InvalidDataAccessApiUsageException.class)
+	@Test(expectedExceptions = DataAccessException.class)
 	public void testUpdateNull() {
 
 		em.persist(c);

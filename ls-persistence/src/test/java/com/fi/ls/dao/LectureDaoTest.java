@@ -9,6 +9,7 @@ import javax.transaction.Transactional;
 import javax.validation.ConstraintViolationException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
@@ -143,7 +144,7 @@ public class LectureDaoTest extends AbstractTestNGSpringContextTests {
         Assert.assertEquals(l.getTopic(), lectureDao.findById(l.getId()).getTopic());
     }
     
-    @Test(expectedExceptions = InvalidDataAccessApiUsageException.class)
+    @Test(expectedExceptions = DataAccessException.class)
     public void testUpdateNull() {
 	lectureDao.update(null);
         
