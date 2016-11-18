@@ -56,5 +56,4 @@ public class StudentDTO extends LSUserDTO {
         this.listOfLectures = listOfLectures;
     }
     
-    
 }

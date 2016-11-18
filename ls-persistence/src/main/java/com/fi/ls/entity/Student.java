@@ -20,96 +20,94 @@ import javax.validation.constraints.NotNull;
 @NamedQuery(name = "Student.findAll", query = "SELECT s FROM Student s")
 public class Student extends LSUser {
 
-	@NotNull
-	private String firstName;
+    @NotNull
+    private String firstName;
 
-	@NotNull
-	private String surname;
+    @NotNull
+    private String surname;
+    
+    @NotNull
+    @Column(unique = true, name = "birth_number")
+    private String birthNumber;
 
-	@NotNull
-	@Column(unique = true, name = "birth_number")
-	private String birthNumber;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @Column(name = "list_of_lectures")
+    private List<Lecture> listOfLectures = new ArrayList<>();
 
-	@ManyToMany(fetch = FetchType.LAZY)
-	@Column(name = "list_of_lectures")
-	private List<Lecture> listOfLectures = new ArrayList<>();
+    public Student() {
+    }
 
-	public Student() {
+    public void setFirstName(String firstName) {
+    	this.firstName = firstName;
+    }
+
+    public void setSurname(String surname) {
+    	this.surname = surname;
+    }
+
+    public void setListOfLectures(List<Lecture> listOfLectures) {
+    	this.listOfLectures = listOfLectures;
+    }
+
+    public void setBirthNumber(String birthNumber) {
+	this.birthNumber = birthNumber;
+    }
+
+    public Long getId() {
+	return id;
+    }
+
+    public String getFirstName() {
+	return firstName;
+    }
+
+    public String getSurname() {
+    	return surname;
+    }
+
+    public List<Lecture> getListOfLectures() {
+	return listOfLectures;
+    }
+
+    public String getBirthNumber() {
+    	return birthNumber;
+    }
+    
+    public void addLecture(Lecture lecture) {
+	this.listOfLectures.add(lecture);
+    }
+
+    public void addListOfLectures(List<Lecture> lectures){
+        this.listOfLectures.addAll(lectures);
+    }
+        
+    public void removeLecture(Lecture lecture) {
+        this.listOfLectures.remove(lecture);
+    }
+
+    public void removeListOfLectures(List<Lecture> lectures) {
+        for (Lecture l : lectures) this.listOfLectures.remove(l);
+    }
+
+    @Override
+    public int hashCode() {
+    	int hash = 7;
+	hash = 59 * hash + Objects.hashCode(this.birthNumber);
+	return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+	if (obj == null) {
+            return false;
 	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	if (!(obj instanceof Student)) {
+            return false;
 	}
-
-	public void setSurname(String surname) {
-		this.surname = surname;
+	final Student other = (Student) obj;
+	if (!Objects.equals(this.birthNumber, other.getBirthNumber())) {
+            return false;
 	}
-
-	public void setListOfLectures(List<Lecture> listOfLectures) {
-		this.listOfLectures = listOfLectures;
-	}
-
-	public void setBirthNumber(String birthNumber) {
-		this.birthNumber = birthNumber;
-	}
-
-	public void addLecture(Lecture lecture) {
-		this.listOfLectures.add(lecture);
-	}
-
-	public void removeLecture(Lecture lecture) {
-		if (lecture == null) {
-			throw new NullPointerException("Cannot remove null lecture from listOfLectures");
-		}
-		this.listOfLectures.remove(lecture);
-	}
-
-	public void removeLectures(List<Lecture> lectures) {
-		if (lectures == null) {
-			throw new NullPointerException("Cannot remove lectures which are null from listOfLectures");
-		}
-		lectures.forEach(lecture -> listOfLectures.remove(lecture));
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public String getSurname() {
-		return surname;
-	}
-
-	public List<Lecture> getListOfLectures() {
-		return listOfLectures;
-	}
-
-	public String getBirthNumber() {
-		return birthNumber;
-	}
-
-	@Override
-	public int hashCode() {
-		int hash = 7;
-		hash = 59 * hash + Objects.hashCode(this.birthNumber);
-		return hash;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (obj == null) {
-			return false;
-		}
-		if (!(obj instanceof Student)) {
-			return false;
-		}
-		final Student other = (Student) obj;
-		if (!Objects.equals(this.birthNumber, other.getBirthNumber())) {
-			return false;
-		}
-		return true;
-	}
+	return true;
+    }
 }
