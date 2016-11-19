@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 
-	<property name="LOGS_PATH" value="./language-school/logs" />
+	<property name="LOGS_PATH" value="./logs" />
 
 	<appender name="FILE-ENGINE-ERROR" class="ch.qos.logback.core.FileAppender">
 		<file>${LOGS_PATH}/${log.name}.error</file>

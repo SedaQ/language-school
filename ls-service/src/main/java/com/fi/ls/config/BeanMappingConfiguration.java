@@ -4,6 +4,7 @@ import javax.inject.Inject;
 
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
+import org.dozer.loader.api.BeanMappingBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -12,6 +13,14 @@ import com.fi.ls.context.PersistenceApplicationContext;
 import com.fi.ls.mapping.*;
 import com.fi.ls.security.*;
 import com.fi.ls.dao.*;
+import com.fi.ls.dto.course.CourseDTO;
+import com.fi.ls.dto.lecture.LectureDTO;
+import com.fi.ls.dto.lecturer.LecturerDTO;
+import com.fi.ls.dto.student.StudentDTO;
+import com.fi.ls.entity.Course;
+import com.fi.ls.entity.Lecture;
+import com.fi.ls.entity.Lecturer;
+import com.fi.ls.entity.Student;
 import com.fi.ls.service.*;
 import com.fi.ls.facade.*;
 
@@ -25,6 +34,27 @@ public class BeanMappingConfiguration {
 		DozerBeanMapper dozer = new DozerBeanMapper();
 		return dozer;
 	}
+	
+	/**
+	 * Mapping is done via @Mapper annotation on persistence level
+	 * @param mapper
+	 * @return
+	 */
+	/*
+	public class DozerInnerCollectionsMappingConfig extends BeanMappingBuilder {
+	    @Override
+	    protected void configure() {
+	        mapping(Course.class, CourseDTO.class).fields("listOfLectures", "listOfLectures");
+	        mapping(Lecture.class, LectureDTO.class).fields("listOfStudents","listOfStudents");
+	        mapping(Lecture.class, LectureDTO.class).fields("listOfLecturers","listOfLecturers");
+	        mapping(Lecture.class, LectureDTO.class).fields("listOfCourses","listOfCourses");
+	        mapping(Lecturer.class, LecturerDTO.class).fields("listOfLanguages","listOfLanguages");
+	        mapping(Lecturer.class, LecturerDTO.class).fields("listOfLectures","listOfLectures");
+	        mapping(Student.class, StudentDTO.class).fields("listOfLectures","listOfLectures");
+	    }
+	}
+	*/
+	
 
 	@Bean
 	public BeanMapping beanMapping(Mapper mapper) {

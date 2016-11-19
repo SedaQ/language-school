@@ -15,6 +15,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.dozer.Mapping;
+
 import com.fi.ls.enums.ProficiencyLevel;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -47,6 +49,7 @@ public class Course {
 
 	@ManyToMany(fetch = FetchType.LAZY)
 	@Column(name = "list_of_lectures")
+	@Mapping("listOfLectures")
 	private List<Lecture> listOfLectures = new ArrayList<>();
 
 	public Course() {

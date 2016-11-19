@@ -13,6 +13,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.dozer.Mapping;
+
 /**
  *
  * @author Lukas Daubner (410034)
@@ -38,10 +40,12 @@ public class Lecturer extends LSUser {
 
 	@OneToMany(fetch = FetchType.LAZY, targetEntity = Language.class, mappedBy = "lecturer")
 	@Column(name = "list_of_languages")
+	@Mapping("listOfLanguages")
 	private List<Language> listOfLanguages = new ArrayList<>();
 
 	@ManyToMany(fetch = FetchType.LAZY)
 	@Column(name = "list_of_lectures")
+	@Mapping("listOfLectures")
 	private List<Lecture> listOfLectures = new ArrayList<>();
 
 	public Long getId() {

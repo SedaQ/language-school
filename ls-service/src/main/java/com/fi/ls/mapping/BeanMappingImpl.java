@@ -3,6 +3,7 @@ package com.fi.ls.mapping;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import javax.inject.Inject;
@@ -17,30 +18,34 @@ import org.dozer.Mapper;
 @Named
 public class BeanMappingImpl implements BeanMapping {
 
-    private Mapper dozer;
-    
-    @Inject
-    public BeanMappingImpl(Mapper mapper) {
-        this.dozer = mapper;
-    }
+	private Mapper dozer;
 
-    @Override
-    public <T> List<T> mapTo(Collection<?> objects, Class<T> mapToClass) {
-            List<T> mappedCollection = new ArrayList<>();
-            for (Object object : objects) {
-                    mappedCollection.add(dozer.map(object, mapToClass));
-            }
-            return mappedCollection;
-    }
+	@Inject
+	public BeanMappingImpl(Mapper mapper) {
+		this.dozer = mapper;
+	}
 
-    @Override
-    public <T> Optional<T> mapTo(Object u, Class<T> mapToClass) {
-            return Optional.of(dozer.map(u, mapToClass));
-    }
+	@Override
+	public <T> List<T> mapTo(Collection<?> objects, Class<T> mapToClass) {
+		List<T> mappedCollection = new ArrayList<>();
+		for (Object object : objects) {
+			mappedCollection.add(dozer.map(object, mapToClass));
+		}
+		return mappedCollection;
+	}
 
-    @Override
-    public Mapper getMapper() {
-            return dozer;
-    }
+	@Override
+	public <T> Optional<T> mapTo(Object u, Class<T> mapToClass) {
+		return Optional.of(dozer.map(u, mapToClass));
+	}
+
+	@Override
+	public Mapper getMapper() {
+		return dozer;
+	}
+
+	public boolean isCollection(Object obj) {
+		return (obj instanceof Collection) || (obj instanceof Map);
+	}
 
 }
