@@ -27,7 +27,7 @@ import org.testng.annotations.Test;
  * @author lukas & Pavel Šeda (441048)
  */
 @ContextConfiguration(classes = BeanMappingConfiguration.class)
-public class BeanMappingTest {
+public class BeanMappingTest extends AbstractTestNGSpringContextTests {
 
 	@Autowired
 	private BeanMapping beanMapping;
