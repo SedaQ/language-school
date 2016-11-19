@@ -23,6 +23,8 @@ import com.fi.ls.mapping.BeanMapping;
 import com.fi.ls.service.CourseService;
 import com.fi.ls.service.CourseServiceImpl;
 import com.fi.ls.service.LSUserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.testng.annotations.BeforeMethod;
 
 /**
  * @author Pavel Šeda (441048)
@@ -46,10 +48,10 @@ public class CourseFacadeTest extends AbstractTestNGSpringContextTests {
 	@BeforeClass
 	public void setup() {
 		MockitoAnnotations.initMocks(this);
-		courseFacade = new CourseFacadeImpl(beanMapping, courseService);
+		courseFacade = new CourseFacadeImpl(courseService, beanMapping);
 	}
 
-	@BeforeClass
+	@BeforeMethod
 	public void init() {
 		c = new CourseCreateDTO();
 		c.setLanguage("eng");

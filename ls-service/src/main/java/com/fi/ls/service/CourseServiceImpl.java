@@ -19,9 +19,6 @@ public class CourseServiceImpl implements CourseService {
 
 	private CourseDao courseDao;
 
-	public CourseServiceImpl() {
-	}
-
 	@Inject
 	public CourseServiceImpl(CourseDao courseDao) {
 		this.courseDao = courseDao;

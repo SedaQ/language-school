@@ -28,7 +28,7 @@ public class CourseFacadeImpl implements CourseFacade {
 	private BeanMapping beanMapping;
 
 	@Inject
-	public CourseFacadeImpl(BeanMapping beanMapping, CourseService courseService) {
+	public CourseFacadeImpl(CourseService courseService, BeanMapping beanMapping) {
 		this.courseService = courseService;
 		this.beanMapping = beanMapping;
 	}
