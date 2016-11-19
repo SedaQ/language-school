@@ -58,7 +58,7 @@ public class LanguageServiceTest {
     }
     
     @Test
-    public void testCreate() throws ServiceLayerException {
+    public void testCreate() {
         Language lan3 = new Language();
         lan3.setLanguage("LOGO");
         lan3.setProficiencyLevel(ProficiencyLevel.C1);
@@ -70,7 +70,7 @@ public class LanguageServiceTest {
     }
     
     @Test(expectedExceptions = {ServiceLayerException.class})
-    public void testCreateThrows() throws ServiceLayerException {
+    public void testCreateThrows() {
         doThrow(new PersistenceException("")).when(languageDao).create(any(Language.class));
         Language lan3 = new Language();
         lan3.setLanguage("LOGO");
@@ -83,7 +83,7 @@ public class LanguageServiceTest {
     }
     
     @Test(expectedExceptions = {IllegalArgumentException.class})
-    public void testCreateNull() throws ServiceLayerException {
+    public void testCreateNull() {
         
         languageService.create(null);
         
@@ -99,7 +99,7 @@ public class LanguageServiceTest {
     }
     
     @Test(expectedExceptions = {ServiceLayerException.class})
-    public void testFindAllThrows() throws ServiceLayerException {
+    public void testFindAllThrows() {
         doThrow(new PersistenceException("")).when(languageDao).findAll();
         
         languageService.findAll();
@@ -108,7 +108,7 @@ public class LanguageServiceTest {
     }
     
     @Test
-    public void testfindById() throws ServiceLayerException {
+    public void testfindById() {
         
         languageService.findById(Long.MAX_VALUE);
         
@@ -125,7 +125,7 @@ public class LanguageServiceTest {
     }
     
     @Test(expectedExceptions = {IllegalArgumentException.class})
-    public void testfindByIdNull() throws ServiceLayerException {
+    public void testfindByIdNull() {
         
         languageService.findById(null);
         
@@ -133,7 +133,7 @@ public class LanguageServiceTest {
     }
     
     @Test
-    public void testRemove() throws ServiceLayerException {
+    public void testRemove() {
         
         languageService.remove(lan1);
         
@@ -141,7 +141,7 @@ public class LanguageServiceTest {
     }
     
     @Test(expectedExceptions = {ServiceLayerException.class})
-    public void testRemoveThrows() throws ServiceLayerException {
+    public void testRemoveThrows() {
         doThrow(new PersistenceException("")).when(languageDao).remove(any(Language.class));
         
         languageService.remove(lan1);
@@ -150,7 +150,7 @@ public class LanguageServiceTest {
     }
     
     @Test(expectedExceptions = {IllegalArgumentException.class})
-    public void testRemoveNull() throws ServiceLayerException {
+    public void testRemoveNull() {
         
         languageService.remove(null);
         
@@ -158,7 +158,7 @@ public class LanguageServiceTest {
     }
     
     @Test
-    public void testUpdate() throws ServiceLayerException {
+    public void testUpdate() {
         lan1.setLanguage("LOGO");
 
         languageService.update(lan1);
@@ -167,7 +167,7 @@ public class LanguageServiceTest {
     }
     
     @Test(expectedExceptions = {ServiceLayerException.class})
-    public void testUpdateThrows() throws ServiceLayerException {
+    public void testUpdateThrows() {
         doThrow(new PersistenceException("")).when(languageDao).update(any(Language.class));
         lan1.setLanguage("LOGO");
         
@@ -177,7 +177,7 @@ public class LanguageServiceTest {
     }
     
     @Test(expectedExceptions = {IllegalArgumentException.class})
-    public void testUpdateNull() throws ServiceLayerException {
+    public void testUpdateNull() {
         
         languageService.update(null);
         

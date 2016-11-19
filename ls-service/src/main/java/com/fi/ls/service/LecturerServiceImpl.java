@@ -8,8 +8,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.PersistenceException;
 import javax.validation.ConstraintViolationException;
-import org.springframework.dao.InvalidDataAccessApiUsageException;
-import org.springframework.orm.jpa.JpaSystemException;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 /**
@@ -34,8 +33,7 @@ public class LecturerServiceImpl implements LecturerService {
 		try {
 			lecturerDao.create(l);
 			return l;
-		} catch (PersistenceException | InvalidDataAccessApiUsageException | ConstraintViolationException
-				| JpaSystemException ex) {
+		} catch (PersistenceException | ConstraintViolationException | DataAccessException ex) {
 			throw new ServiceLayerException("Problem with creating Lecturer, see inner exception.", ex);
 		}
 	}
@@ -44,7 +42,7 @@ public class LecturerServiceImpl implements LecturerService {
 	public List<Lecturer> findAll() {
 		try {
 			return lecturerDao.findAll();
-		} catch (PersistenceException | JpaSystemException ex) {
+		} catch (PersistenceException | DataAccessException ex) {
 			throw new ServiceLayerException("Problem with finding Lecturer, see inner exception.", ex);
 		}
 	}
@@ -56,7 +54,7 @@ public class LecturerServiceImpl implements LecturerService {
 
 		try {
 			return lecturerDao.findById(id);
-		} catch (PersistenceException | InvalidDataAccessApiUsageException | JpaSystemException ex) {
+		} catch (PersistenceException | DataAccessException ex) {
 			throw new ServiceLayerException("Problem with finding Lecturer, see inner exception.", ex);
 		}
 	}
@@ -68,7 +66,7 @@ public class LecturerServiceImpl implements LecturerService {
 
 		try {
 			lecturerDao.remove(l);
-		} catch (PersistenceException | InvalidDataAccessApiUsageException | JpaSystemException ex) {
+		} catch (PersistenceException | DataAccessException ex) {
 			throw new ServiceLayerException("Problem with removing Lecturer, see inner exception.", ex);
 		}
 	}
@@ -80,8 +78,7 @@ public class LecturerServiceImpl implements LecturerService {
 
 		try {
 			return lecturerDao.update(l);
-		} catch (PersistenceException | InvalidDataAccessApiUsageException | ConstraintViolationException
-				| JpaSystemException ex) {
+		} catch (PersistenceException | ConstraintViolationException | DataAccessException ex) {
 			throw new ServiceLayerException("Problem with updating Lecturer, see inner exception.", ex);
 		}
 	}
