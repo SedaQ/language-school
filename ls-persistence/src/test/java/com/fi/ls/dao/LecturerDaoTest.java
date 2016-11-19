@@ -5,6 +5,7 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
@@ -49,7 +50,7 @@ public class LecturerDaoTest extends AbstractTestNGSpringContextTests {
 		Assert.assertNotNull(em.find(Lecturer.class, lect1.getId()));
 	}
 
-	@Test(expectedExceptions = org.springframework.dao.InvalidDataAccessApiUsageException.class)
+	@Test(expectedExceptions = DataAccessException.class)
 	public void testCreateNull() {
 		lecturerDao.create(null);
 		Assert.fail(
@@ -93,7 +94,7 @@ public class LecturerDaoTest extends AbstractTestNGSpringContextTests {
 		Assert.assertNotEquals(lecturerDao.findById(lect1.getId()).getNickname(), "Some other weird name");
 	}
 
-	@Test(expectedExceptions = org.springframework.dao.InvalidDataAccessApiUsageException.class)
+	@Test(expectedExceptions = DataAccessException.class)
 	public void testFindByIdNull() {
 		em.persist(lect1);
 		lecturerDao.findById(null);
@@ -110,7 +111,7 @@ public class LecturerDaoTest extends AbstractTestNGSpringContextTests {
 		Assert.assertNotEquals(em.find(Lecturer.class, lect1.getId()).getNickname(), "nickname lect1");
 	}
 
-	@Test(expectedExceptions = org.springframework.dao.InvalidDataAccessApiUsageException.class)
+	@Test(expectedExceptions = DataAccessException.class)
 	public void testUpdateNull() {
 		em.persist(lect1);
 		lecturerDao.update(null);

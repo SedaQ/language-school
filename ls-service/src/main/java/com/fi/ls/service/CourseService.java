@@ -78,9 +78,4 @@ public interface CourseService {
 	 */
 	public void addLectures(Course c, List<Lecture> l);	
 	
-	/**
-	 * synchronize lectures
-	 */
-	public void synchronizeLectures();
-
 }

@@ -4,12 +4,10 @@ import com.fi.ls.dao.LanguageDao;
 import com.fi.ls.entity.Language;
 import com.fi.ls.exceptions.ServiceLayerException;
 import java.util.List;
-import java.util.NoSuchElementException;
 import javax.inject.Inject;
 import javax.persistence.PersistenceException;
 import javax.validation.ConstraintViolationException;
-import org.springframework.dao.InvalidDataAccessApiUsageException;
-import org.springframework.orm.jpa.JpaSystemException;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 /**
@@ -36,9 +34,8 @@ public class LanguageServiceImpl implements LanguageService {
             return lan;
         }
         catch(  PersistenceException |
-                InvalidDataAccessApiUsageException |
                 ConstraintViolationException |
-                JpaSystemException ex) {
+                DataAccessException ex) {
             throw new ServiceLayerException("Problem with creating Language, see inner exception.", ex);
         }
     }
@@ -49,7 +46,7 @@ public class LanguageServiceImpl implements LanguageService {
             return languageDao.findAll();
         }
         catch(  PersistenceException |
-                JpaSystemException ex) {
+                DataAccessException ex) {
             throw new ServiceLayerException("Problem with finding Language, see inner exception.", ex);
         }
     }
@@ -63,8 +60,7 @@ public class LanguageServiceImpl implements LanguageService {
             return languageDao.findById(id);
         }
         catch(  PersistenceException |
-                InvalidDataAccessApiUsageException |
-                JpaSystemException ex) {
+                DataAccessException ex) {
             throw new ServiceLayerException("Problem with finding Language, see inner exception.", ex);
         }
     }
@@ -78,8 +74,7 @@ public class LanguageServiceImpl implements LanguageService {
             languageDao.remove(lan);
         }
         catch(  PersistenceException |
-                InvalidDataAccessApiUsageException |
-                JpaSystemException ex) {
+                DataAccessException ex) {
             throw new ServiceLayerException("Problem with removing Language, see inner exception.", ex);
         }
     }
@@ -93,10 +88,8 @@ public class LanguageServiceImpl implements LanguageService {
             return languageDao.update(lan);
         }
         catch(  PersistenceException |
-                InvalidDataAccessApiUsageException |
                 ConstraintViolationException |
-                JpaSystemException |
-                NoSuchElementException ex) {
+                DataAccessException ex) {
             throw new ServiceLayerException("Problem with updating Language, see inner exception.", ex);
         }
     }

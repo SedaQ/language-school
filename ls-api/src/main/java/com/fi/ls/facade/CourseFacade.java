@@ -20,7 +20,7 @@ public interface CourseFacade {
 	 *            specific Course to be created
 	 * @return
 	 */
-	public Optional<Long> create(CourseCreateDTO c);
+	public Optional<CourseDTO> create(CourseCreateDTO c);
 
 	/**
 	 * finds specific course by id

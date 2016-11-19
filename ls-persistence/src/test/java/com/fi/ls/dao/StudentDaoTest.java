@@ -6,6 +6,7 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
@@ -49,7 +50,7 @@ public class StudentDaoTest extends AbstractTestNGSpringContextTests {
 		Assert.assertNotNull(em.find(Student.class, student1.getId()));
 	}
 
-	@Test(expectedExceptions = org.springframework.dao.InvalidDataAccessApiUsageException.class)
+	@Test(expectedExceptions = DataAccessException.class)
 	public void testCreateNullParam() {
 
 		studentDao.create(null);
@@ -107,7 +108,7 @@ public class StudentDaoTest extends AbstractTestNGSpringContextTests {
 
 	}
 
-	@Test(expectedExceptions = org.springframework.dao.InvalidDataAccessApiUsageException.class)
+	@Test(expectedExceptions = DataAccessException.class)
 	public void testFindByIdNull() {
 
 		studentDao.findById(null);
@@ -125,7 +126,7 @@ public class StudentDaoTest extends AbstractTestNGSpringContextTests {
 
 	}
 
-	@Test(expectedExceptions = org.springframework.dao.InvalidDataAccessApiUsageException.class)
+	@Test(expectedExceptions = DataAccessException.class)
 	public void testUpdateNull() {
 
 		studentDao.update(null);

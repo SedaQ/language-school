@@ -5,6 +5,7 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
@@ -59,7 +60,7 @@ public class LanguageDaoTest extends AbstractTestNGSpringContextTests {
 		Assert.assertNotNull(em.find(Language.class, lan1.getId()));
 	}
 
-	@Test(expectedExceptions = org.springframework.dao.InvalidDataAccessApiUsageException.class)
+	@Test(expectedExceptions = DataAccessException.class)
 	public void testCreateNull() {
 		languageDao.create(null);
 		Assert.fail(
@@ -97,7 +98,7 @@ public class LanguageDaoTest extends AbstractTestNGSpringContextTests {
 		Assert.assertNotEquals(languageDao.findById(lan1.getId()).getLanguage(), "Some other language");
 	}
 
-	@Test(expectedExceptions = org.springframework.dao.InvalidDataAccessApiUsageException.class)
+	@Test(expectedExceptions = DataAccessException.class)
 	public void testFindByIdNull() {
 		em.persist(lan1);
 		languageDao.findById(null);
@@ -114,7 +115,7 @@ public class LanguageDaoTest extends AbstractTestNGSpringContextTests {
 		Assert.assertNotEquals(languageDao.findById(lan1.getId()).getLanguage(), "ENG");
 	}
 
-	@Test(expectedExceptions = org.springframework.dao.InvalidDataAccessApiUsageException.class)
+	@Test(expectedExceptions = DataAccessException.class)
 	public void testUpdateNull() {
 		em.persist(lan1);
 		languageDao.update(null);

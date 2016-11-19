@@ -83,5 +83,6 @@
 		<module>ls-persistence</module>
 		<module>ls-service</module>
 		<module>ls-api</module>
+		<module>ls-rest</module>
 	</modules>
 </project>
