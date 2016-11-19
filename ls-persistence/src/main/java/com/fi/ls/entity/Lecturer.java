@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -18,7 +19,10 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 @Table(name = "lecturer")
-@NamedQuery(name = "Lecturer.findAll", query = "SELECT l FROM Lecturer l")
+@NamedQueries( {
+    @NamedQuery(name = "Lecturer.findAll", query = "SELECT l FROM Lecturer l"),
+    @NamedQuery(name = "Lecturer.findAllLecturerLanguages", query = "SELECT lan FROM Language lan WHERE lan.lecturer.id = :lID")
+} )
 public class Lecturer extends LSUser {
 
 	@NotNull

@@ -1,4 +1,4 @@
-package com.fi.ls.service;
+package com.fi.ls.security;
 
 import java.math.BigInteger;
 import java.security.SecureRandom;
