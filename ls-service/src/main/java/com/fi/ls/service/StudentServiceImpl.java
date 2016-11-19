@@ -9,8 +9,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.PersistenceException;
 import javax.validation.ConstraintViolationException;
-import org.springframework.dao.InvalidDataAccessApiUsageException;
-import org.springframework.orm.jpa.JpaSystemException;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 /**
@@ -34,9 +33,8 @@ public class StudentServiceImpl implements StudentService {
             this.studentDao.create(s);
             return s;
         } catch (PersistenceException | 
-                InvalidDataAccessApiUsageException | 
                 ConstraintViolationException |
-                JpaSystemException ex) {
+                DataAccessException ex) {
             throw new ServiceLayerException("Creating student failed.", ex);
 	}
     }
@@ -47,8 +45,7 @@ public class StudentServiceImpl implements StudentService {
         try {
             this.studentDao.remove(s);
         } catch (PersistenceException | 
-                InvalidDataAccessApiUsageException | 
-                JpaSystemException ex) {
+                DataAccessException ex) {
             throw new ServiceLayerException("Removing student failed.", ex);
 	}
     }
@@ -59,9 +56,8 @@ public class StudentServiceImpl implements StudentService {
         try {
             return this.studentDao.update(s);
         } catch (PersistenceException | 
-                InvalidDataAccessApiUsageException | 
                 ConstraintViolationException |
-                JpaSystemException ex) {
+                DataAccessException ex) {
             throw new ServiceLayerException("Updating student failed.", ex);
 	}
     }
@@ -72,8 +68,7 @@ public class StudentServiceImpl implements StudentService {
 	try {
             return this.studentDao.findByBirthNumber(birthNumber);
         } catch (PersistenceException | 
-                InvalidDataAccessApiUsageException | 
-                JpaSystemException ex) {
+                DataAccessException ex) {
             throw new ServiceLayerException("Student cannot be found by birth number.", ex);
 	}
     }
@@ -84,8 +79,7 @@ public class StudentServiceImpl implements StudentService {
 	try {
             return this.studentDao.findById(id);
         } catch (PersistenceException | 
-                InvalidDataAccessApiUsageException | 
-                JpaSystemException ex) {
+                DataAccessException ex) {
             throw new ServiceLayerException("Student cannot be found by id.", ex);
 	}
     }
@@ -95,7 +89,7 @@ public class StudentServiceImpl implements StudentService {
         try {
             return this.studentDao.findAll();
 	} catch (PersistenceException | 
-                JpaSystemException ex) {
+                DataAccessException ex) {
             throw new ServiceLayerException("Find all students failed.", ex);
 	}
     }
@@ -106,8 +100,7 @@ public class StudentServiceImpl implements StudentService {
         try {
             return this.studentDao.findByFirstName(firstName);
 	} catch (PersistenceException | 
-                InvalidDataAccessApiUsageException | 
-                JpaSystemException ex) {
+                DataAccessException ex) {
             throw new ServiceLayerException("Find students by fisrt name failed.", ex);
 	}
     }
@@ -118,8 +111,7 @@ public class StudentServiceImpl implements StudentService {
         try {
             return this.studentDao.findBySurname(surname);
 	} catch (PersistenceException | 
-                InvalidDataAccessApiUsageException | 
-                JpaSystemException ex) {
+                DataAccessException ex) {
             throw new ServiceLayerException("Find students by surname failed.", ex);
 	}
     }
