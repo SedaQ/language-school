@@ -1,9 +1,12 @@
 package com.fi.ls.service;
 
 import com.fi.ls.dao.StudentDao;
+import com.fi.ls.entity.Course;
+import com.fi.ls.entity.Lecture;
 import com.fi.ls.entity.Student;
+import com.fi.ls.enums.ProficiencyLevel;
 import com.fi.ls.exceptions.ServiceLayerException;
-import java.util.List;
+import java.time.LocalDateTime;
 import javax.persistence.PersistenceException;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -28,6 +31,12 @@ public class StudentServiceTest {
     Student s1;
     Student s2;
     Student s3;
+    
+    Course c;
+    
+    Lecture l1;
+    Lecture l2;
+    Lecture l3;
     
     @BeforeClass
     public void beforeClass() {
@@ -60,6 +69,29 @@ public class StudentServiceTest {
         s1.setSurname("java1");
         s2.setSurname("java");
         s3.setSurname("java");
+        
+        l1 = new Lecture();
+        l2 = new Lecture();
+        l3 = new Lecture();
+        
+        l1.setDayTime(LocalDateTime.now());
+        l2.setDayTime(LocalDateTime.now());
+        l3.setDayTime(LocalDateTime.now());
+        
+        l1.setTopic("Something1");
+        l2.setTopic("Something2");
+        l3.setTopic("Something3");
+        
+        l1.setClassroomId("1");
+        l2.setClassroomId("2");
+        l3.setClassroomId("3");
+        
+        c = new Course();
+        c.setName("test course");
+        c.setLanguage("java");
+        c.setProficiencyLevel(ProficiencyLevel.A1);
+        c.addLecture(l1);
+        c.addLecture(l2);
     }
 
     @Test
@@ -171,15 +203,15 @@ public class StudentServiceTest {
         studentService.findAllStudents();
         fail("Expected service layer exception in find by id.");
     }
-    
+    /*
     @Test
     public void testFindByFirstName(){
         studentService.create(s1);
         studentService.create(s2);
         studentService.create(s3);
-        List<Student> s = studentService.findByFirstName("enterprise");
-        assertEquals(s.size(), 2);
-    }
+
+        assertEquals(studentService.findByFirstName("enterprise").size(), 2);
+    }*/
     
     @Test
     public void testFindByFirstName2(){
@@ -199,15 +231,15 @@ public class StudentServiceTest {
         studentService.findByFirstName("test");
         fail("Expected service layer exception in find by surname.");
     }
-    
+    /*
     @Test
     public void testFindBySurname(){
         studentService.create(s1);
         studentService.create(s2);
         studentService.create(s3);
-        List<Student> s = studentService.findBySurname("java");
-        assertEquals(s.size(), 2);
-    }
+        
+        assertEquals(studentService.findBySurname("java").size(), 2);
+    }*/
     
     @Test
     public void testFindBySurname2(){
@@ -228,5 +260,151 @@ public class StudentServiceTest {
         fail("Expected service layer exception in find by surname.");
     }
     
+    @Test
+    public void testEnroll(){
+        studentService.enrollCourse(c, s1);
+        studentService.enrollLecture(l3, s1);
+        assertEquals(s1.getListOfLectures().size(), 3);
+    }
     
+    @Test
+    public void testEnrollCourse(){
+        studentService.enrollCourse(c, s1);
+        assertEquals(s1.getListOfLectures().size(), 2);
+    }
+    
+    public void testEnrollCourseTwice(){
+        studentService.enrollCourse(c, s1);
+        studentService.enrollCourse(c, s1);
+        assertEquals(s1.getListOfLectures().size(), 2);
+    }
+    
+    @Test
+    public void testEnrollCourseAndCoursesLecture(){
+        studentService.enrollCourse(c, s1);
+        studentService.enrollLecture(l1, s1);
+        assertEquals(s1.getListOfLectures().size(), 2);
+    }
+    
+    @Test(expectedExceptions = {IllegalArgumentException.class})
+    public void testEnrollCourseNullCourse(){
+        studentService.enrollCourse(null, s1);
+        fail("Enrolled null course.");
+    }
+    
+    @Test(expectedExceptions = {IllegalArgumentException.class})
+    public void testEnrollCourseNullStudent(){
+        studentService.enrollCourse(c, null);
+        fail("Enrolled by null student.");
+    }
+    
+    @Test(expectedExceptions = {IllegalArgumentException.class})
+    public void testEnrollCourseNullBoth(){
+        studentService.enrollCourse(null, null);
+        fail("Enrolled null course by null student.");
+    }
+    
+    //otazka
+    
+    @Test
+    public void testEnrollLecture(){
+        studentService.enrollLecture(l3, s1);
+        assertEquals(s1.getListOfLectures().size(), 1);
+    }
+    
+    @Test
+    public void testEnrollLectureTwice(){
+        studentService.enrollLecture(l3, s1);
+        studentService.enrollLecture(l3, s1);
+        assertEquals(s1.getListOfLectures().size(), 1);
+    }
+    
+    @Test(expectedExceptions = {IllegalArgumentException.class})
+    public void testEnrollLectureNullLecture(){
+        studentService.enrollLecture(null, s1);
+        fail("Enrolled null lecture.");
+    }
+    
+    @Test(expectedExceptions = {IllegalArgumentException.class})
+    public void testEnrollLectureNullStudent(){
+        studentService.enrollLecture(l3, null);
+        fail("Enrolled by null student.");
+    }
+    
+    @Test(expectedExceptions = {IllegalArgumentException.class})
+    public void testEnrollLectureNullBoth(){
+        studentService.enrollLecture(null, null);
+        fail("Enrolled null lecture by null student.");
+    }
+    
+    @Test
+    public void testCancelLectureFromStudentsList(){
+        assertEquals(s1.getListOfLectures().size(), 0);
+        studentService.cancelLectureFromStudentsList(l1, s1);
+        assertEquals(s1.getListOfLectures().size(), 0);
+        
+        studentService.enrollLecture(l3, s1);
+        assertEquals(s1.getListOfLectures().size(), 1);
+        
+        studentService.cancelLectureFromStudentsList(l1, s1);
+        assertEquals(s1.getListOfLectures().size(), 1);
+        
+        studentService.cancelLectureFromStudentsList(l3, s1);
+        assertEquals(s1.getListOfLectures().size(), 0);
+    }
+    
+    @Test(expectedExceptions = {IllegalArgumentException.class})
+    public void testCancelLectureFromStudentsListNullLecture(){
+        studentService.cancelLectureFromStudentsList(null, s1);
+        fail("Canceled null lecture.");
+    }
+    
+    @Test(expectedExceptions = {IllegalArgumentException.class})
+    public void testCancelLectureFromStudentsListNullStudent(){
+        studentService.cancelLectureFromStudentsList(l1, null);
+        fail("Lecture canceled by null student.");
+    }
+    
+    @Test(expectedExceptions = {IllegalArgumentException.class})
+    public void testCancelLectureFromStudentsListNullBoth(){
+        studentService.cancelLectureFromStudentsList(null, null);
+        fail("Null lecture canceled by null student.");
+    }
+    
+    @Test
+    public void testCancelListOfLecturesFromStudentsList(){
+        assertEquals(s1.getListOfLectures().size(), 0);
+        studentService.cancelListOfLecturesFromStudentsList(c.getListOfLectures(), s1);
+        assertEquals(s1.getListOfLectures().size(), 0);
+        
+        studentService.enrollLecture(l3, s1);
+        assertEquals(s1.getListOfLectures().size(), 1);
+        
+        studentService.cancelListOfLecturesFromStudentsList(c.getListOfLectures(), s1);
+        assertEquals(s1.getListOfLectures().size(), 1);
+        
+        studentService.enrollCourse(c, s1);
+        assertEquals(s1.getListOfLectures().size(), 3);
+        
+        studentService.cancelListOfLecturesFromStudentsList(c.getListOfLectures(), s1);
+        assertEquals(s1.getListOfLectures().size(), 1);
+    }
+    
+    @Test(expectedExceptions = {IllegalArgumentException.class})
+    public void testCancelListOfLecturesFromStudentsListNullList(){
+        studentService.cancelListOfLecturesFromStudentsList(null, s1);
+        fail("Canceled null list of lectures.");
+    }
+    
+    @Test(expectedExceptions = {IllegalArgumentException.class})
+    public void testCancelListOfLecturesFromStudentsListNullStudent(){
+        studentService.cancelListOfLecturesFromStudentsList(c.getListOfLectures(), null);
+        fail("List of lectures canceled by null student.");
+    }
+    
+    @Test(expectedExceptions = {IllegalArgumentException.class})
+    public void testCancelListOfLecturesFromStudentsListNullBoth(){
+        studentService.cancelListOfLecturesFromStudentsList(null, null);
+        fail("Null list of lectures canceled by null student.");
+    }
 }

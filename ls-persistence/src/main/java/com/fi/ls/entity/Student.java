@@ -74,7 +74,7 @@ public class Student extends LSUser {
     }
     
     public void addLecture(Lecture lecture) {
-	this.listOfLectures.add(lecture);
+	if (!(this.listOfLectures.contains(lecture))) this.listOfLectures.add(lecture);
     }
 
     public void addListOfLectures(List<Lecture> lectures){
