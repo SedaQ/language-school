@@ -78,7 +78,7 @@ public class Student extends LSUser {
     }
 
     public void addListOfLectures(List<Lecture> lectures){
-        this.listOfLectures.addAll(lectures);
+        for (Lecture l : lectures) addLecture(l);
     }
         
     public void removeLecture(Lecture lecture) {
