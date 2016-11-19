@@ -1,5 +1,6 @@
 package com.fi.ls.dao;
 
+import com.fi.ls.entity.Language;
 import com.fi.ls.entity.Lecturer;
 import java.util.List;
 
@@ -40,5 +41,12 @@ public interface LecturerDao {
 	 * @return List of Lecturers
 	 */
 	public List<Lecturer> findAll();
+        
+        /**
+	 * Returns all Languages of lecturer
+         * @param l Lecturer who's languages are returned
+	 * @return List of Languages
+	 */
+	public List<Language> findAllLecturerLanguages(Lecturer l);
 	
 }
