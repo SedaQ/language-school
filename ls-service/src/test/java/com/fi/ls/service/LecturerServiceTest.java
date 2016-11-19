@@ -9,6 +9,6 @@ package com.fi.ls.service;
  *
  * @author lukas
  */
-public class LectutrerServiceTest {
+public class LecturerServiceTest {
     
 }

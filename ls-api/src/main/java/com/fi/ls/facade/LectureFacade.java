@@ -15,8 +15,9 @@ public interface LectureFacade {
     /**
      * creates new lecture in database
      * @param lecture to be created
+     * @return 
      */
-    public void createLecture(LectureCreateDTO lecture);
+    public Optional<LectureDTO> createLecture(LectureCreateDTO lecture);
     
     /**
      * finds a lecture by given id and returns it

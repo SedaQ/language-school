@@ -6,20 +6,15 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.inject.Inject;
-import javax.inject.Qualifier;
+import javax.inject.Named;
 
 import org.dozer.Mapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Required;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 /**
  * @author Pavel Šeda (441048)
  *
  */
-@Component
+@Named
 public class BeanMappingImpl implements BeanMapping {
 
     private Mapper dozer;

@@ -5,11 +5,13 @@ import java.security.SecureRandom;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
+import javax.inject.Named;
 
 /**
  * @author Pavel Šeda (441048)
  *
  */
+@Named
 public class UserPasswordEncryption {
 
 	private byte[] pbkdf2(char[] password, byte[] salt, int iterations, int bytes) {

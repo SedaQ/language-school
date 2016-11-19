@@ -8,7 +8,9 @@ import org.springframework.dao.DataAccessException;
  */
 public class ServiceLayerException extends DataAccessException {
     
-    public ServiceLayerException(String message) {
+	private static final long serialVersionUID = 8606352464618478989L;
+
+	public ServiceLayerException(String message) {
         super(message);
     }
      

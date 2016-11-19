@@ -10,6 +10,9 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 /**
@@ -20,6 +23,8 @@ import org.springframework.stereotype.Service;
 @Transactional
 public class LanguageFacadeImpl implements LanguageFacade {
 
+	private final Logger logger = LoggerFactory.getLogger(LanguageFacadeImpl.class);
+	
 	private LanguageService languageService;
 
 	private BeanMapping beanMapping;
@@ -40,7 +45,7 @@ public class LanguageFacadeImpl implements LanguageFacade {
 			Language created = languageService.create(entity.get());
 			return beanMapping.mapTo(created, LanguageDTO.class);
 		} catch (ServiceLayerException | NoSuchElementException ex) {
-			// TODO Log!
+			logger.warn("createLanguage method invokes exception: " + ex);
 			return Optional.empty();
 		}
 	}
@@ -54,7 +59,7 @@ public class LanguageFacadeImpl implements LanguageFacade {
 			Language entity = languageService.findById(id);
 			return beanMapping.mapTo(entity, LanguageDTO.class);
 		} catch (ServiceLayerException | NoSuchElementException ex) {
-			// TODO Log!
+			logger.warn("getLanguageById method invokes exception: " + ex);
 			return Optional.empty();
 		}
 	}
@@ -70,7 +75,7 @@ public class LanguageFacadeImpl implements LanguageFacade {
 			return beanMapping.mapTo(updated, LanguageDTO.class);
 
 		} catch (ServiceLayerException | NoSuchElementException ex) {
-			// TODO Log!
+			logger.warn("updateLanguage method invokes exception: " + ex);
 			return Optional.empty();
 		}
 	}
@@ -84,7 +89,7 @@ public class LanguageFacadeImpl implements LanguageFacade {
 		try {
 			languageService.remove(entity.get());
 		} catch (ServiceLayerException | NoSuchElementException ex) {
-			// TODO Log!
+			logger.warn("deleteLanguage method invokes exception: " + ex);
 		}
 	}
 
@@ -94,7 +99,7 @@ public class LanguageFacadeImpl implements LanguageFacade {
 			List<Language> entities = languageService.findAll();
 			return beanMapping.mapTo(entities, LanguageDTO.class);
 		} catch (ServiceLayerException | NoSuchElementException ex) {
-			// TODO Log!
+			logger.warn("getAllLanguages method invokes exception: " + ex);
 			return null;
 		}
 	}

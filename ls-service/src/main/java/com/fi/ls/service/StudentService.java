@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
  *
  * @author Matúš
  */
-@Service
 public interface StudentService {
     
     /**
