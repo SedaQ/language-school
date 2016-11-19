@@ -8,11 +8,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 import com.fi.ls.context.PersistenceApplicationContext;
-import com.fi.ls.service.UserPasswordEncryption;
 
 @Configuration
 @Import(PersistenceApplicationContext.class)
-@ComponentScan(basePackages = { "com.fi.ls.mapping", "com.fi.ls.service" })
+@ComponentScan(basePackages = { "com.fi.ls.mapping", "com.fi.ls.service", "com.fi.ls.security" })
 public class BeanMappingConfiguration {
 
 	@Bean

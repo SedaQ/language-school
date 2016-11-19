@@ -1,5 +1,6 @@
 package com.fi.ls.service;
 
+import com.fi.ls.entity.Language;
 import com.fi.ls.entity.Lecture;
 import com.fi.ls.entity.Lecturer;
 import com.fi.ls.exceptions.ServiceLayerException;
@@ -82,4 +83,13 @@ public interface LecturerService {
      */
     public void deleteLectures(Lecturer lect, List<Lecture> l);
     
+    /**
+     * finds all languages of given lecturer
+     * 
+     * @param l specific lecturer 
+     * @return languages of given lecturer
+     * @exception ServiceLayerException
+     * @exception IllegalArgumentException
+     */
+    public List<Language> findAllLecturerLanguages(Lecturer l);
 }

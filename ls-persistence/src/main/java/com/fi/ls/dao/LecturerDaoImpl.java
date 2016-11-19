@@ -1,5 +1,6 @@
 package com.fi.ls.dao;
 
+import com.fi.ls.entity.Language;
 import com.fi.ls.entity.Lecturer;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -41,5 +42,10 @@ public class LecturerDaoImpl implements LecturerDao {
 	public List<Lecturer> findAll() {
 		return em.createNamedQuery("Lecturer.findAll", Lecturer.class).getResultList();
 	}
+
+        @Override
+        public List<Language> findAllLecturerLanguages(Lecturer l) {
+                return em.createNamedQuery("Lecturer.findAllLecturerLanguages", Language.class).setParameter("lID", l.getId()).getResultList();
+        }
 
 }

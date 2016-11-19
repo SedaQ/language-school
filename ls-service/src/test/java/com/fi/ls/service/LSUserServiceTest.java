@@ -1,5 +1,6 @@
 package com.fi.ls.service;
 
+import com.fi.ls.security.UserPasswordEncryption;
 import org.springframework.test.context.ContextConfiguration;
 
 import com.fi.ls.config.BeanMappingConfiguration;
