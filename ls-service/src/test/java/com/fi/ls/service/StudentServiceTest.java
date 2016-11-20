@@ -454,4 +454,5 @@ public class StudentServiceTest {
         studentService.cancelListOfLecturesFromStudentsList(null, null);
         fail("Null list of lectures canceled by null student.");
     }
+    
 }
