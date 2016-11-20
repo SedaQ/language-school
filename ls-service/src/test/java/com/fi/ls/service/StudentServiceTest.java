@@ -285,23 +285,19 @@ public class StudentServiceTest {
         verify(studentDao, times(1)).update(s4);
     }
     
-    /*
     @Test
     public void testEnrollCourseTwice(){
         studentService.enrollCourse(c, s1);
         studentService.enrollCourse(c, s1);
         assertEquals(s1.getListOfLectures().size(), 2);
     }
-    */
-    
-    /*
+
     @Test
     public void testEnrollCourseAndCoursesLecture(){
         studentService.enrollCourse(c, s1);
         studentService.enrollLecture(l1, s1);
         assertEquals(s1.getListOfLectures().size(), 2);
     }
-    */
     
     @Test(expectedExceptions = {IllegalArgumentException.class})
     public void testEnrollCourseNullCourse(){
@@ -338,15 +334,13 @@ public class StudentServiceTest {
         studentService.enrollLecture(l3, s5);
         verify(studentDao, times(1)).update(s5);
     }
-    
-    /*
+
     @Test
     public void testEnrollLectureTwice(){
         studentService.enrollLecture(l3, s1);
         studentService.enrollLecture(l3, s1);
         assertEquals(s1.getListOfLectures().size(), 1);
     }
-    */
     
     @Test(expectedExceptions = {IllegalArgumentException.class})
     public void testEnrollLectureNullLecture(){
