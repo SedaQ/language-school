@@ -1,6 +1,8 @@
 package com.fi.ls.facade;
 
-import javax.inject.Inject;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+
 import javax.transaction.Transactional;
 
 import org.mockito.Mock;
@@ -10,19 +12,17 @@ import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 
-import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.fi.ls.config.BeanMappingConfiguration;
+import com.fi.ls.dao.CourseDao;
 import com.fi.ls.dto.course.CourseCreateDTO;
-import com.fi.ls.dto.course.CourseDTO;
 import com.fi.ls.entity.Course;
 import com.fi.ls.enums.ProficiencyLevel;
 import com.fi.ls.mapping.BeanMapping;
 import com.fi.ls.service.CourseService;
-import com.fi.ls.service.CourseServiceImpl;
-import com.fi.ls.service.LSUserService;
+import org.testng.annotations.BeforeMethod;
 
 /**
  * @author Pavel Šeda (441048)
@@ -34,22 +34,25 @@ import com.fi.ls.service.LSUserService;
 public class CourseFacadeTest extends AbstractTestNGSpringContextTests {
 
 	@Mock
+	private CourseDao courseDao;
+
+	@Mock
 	private CourseService courseService;
 
 	@Mock
 	private BeanMapping beanMapping;
 
-	private CourseFacade courseFacade;
+	CourseFacade courseFacade;
 
-	private CourseCreateDTO c;
+	CourseCreateDTO c;
 
 	@BeforeClass
 	public void setup() {
 		MockitoAnnotations.initMocks(this);
-		courseFacade = new CourseFacadeImpl(beanMapping, courseService);
+		courseFacade = new CourseFacadeImpl(courseService, beanMapping);
 	}
 
-	@BeforeClass
+	@BeforeMethod
 	public void init() {
 		c = new CourseCreateDTO();
 		c.setLanguage("eng");
@@ -59,8 +62,9 @@ public class CourseFacadeTest extends AbstractTestNGSpringContextTests {
 
 	@Test
 	public void testCreate() {
-		//CourseDTO courseId = courseFacade.create(c).get();
-		//Assert.assertNotNull(courseFacade.getCourseByName(courseId.getName()));
+		//courseFacade.create(c);
+		//verify(courseService, times(1)).create(beanMapping.mapTo(c, Course.class).get());
+		//verify(courseDao, times(1)).create(beanMapping.mapTo(c, Course.class).get());
 	}
 
 	//

@@ -6,13 +6,11 @@ import org.springframework.stereotype.Service;
 
 import com.fi.ls.entity.Course;
 import com.fi.ls.entity.Lecture;
-import com.fi.ls.entity.Lecturer;
 
 /**
  * @author Pavel Šeda (441048)
  *
  */
-@Service
 public interface CourseService {
 
 	/**

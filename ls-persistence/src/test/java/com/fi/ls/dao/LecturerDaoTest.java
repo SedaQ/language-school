@@ -1,5 +1,6 @@
 package com.fi.ls.dao;
 
+import com.fi.ls.entity.Language;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
@@ -16,6 +17,9 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.fi.ls.entity.Lecturer;
+import com.fi.ls.enums.ProficiencyLevel;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Pavel Šeda (441048)
@@ -33,6 +37,8 @@ public class LecturerDaoTest extends AbstractTestNGSpringContextTests {
 	private LecturerDao lecturerDao;
 
 	Lecturer lect1;
+        Language lan1;
+        Language lan2;
 
 	@BeforeMethod
 	public void init() {
@@ -42,6 +48,17 @@ public class LecturerDaoTest extends AbstractTestNGSpringContextTests {
 		lect1.setSurname("surname lect1");
 		lect1.setEmail("test3@email.cz");
 		lect1.setPasswordHash("testHashtestHashtestHashtestHash7841267871s!@$%");
+                
+                lan1 = new Language();
+                lan1.setLanguage("Lang-1");
+                lan1.setProficiencyLevel(ProficiencyLevel.C1);
+                
+                lan2 = new Language();
+                lan2.setLanguage("Lang-2");
+                lan2.setProficiencyLevel(ProficiencyLevel.A2);
+                
+                lect1.addLanguage(lan1);
+                lect1.addLanguage(lan2);
 	}
 
 	@Test
@@ -148,6 +165,27 @@ public class LecturerDaoTest extends AbstractTestNGSpringContextTests {
 		Assert.fail(
 				"Remove function cannot be called with null parameter. Exception NullPointerException.class expected.");
 	}
+        
+        @Test
+        public void testFindAllLecturerLanguages() {
+            em.persist(lect1);
+            em.persist(lan1);
+            em.persist(lan2);
+            
+            List<Language> langs = lecturerDao.findAllLecturerLanguages(lect1);
+            
+            Assert.assertEquals(langs.size(), 2);
+            
+        }
+        
+        @Test(expectedExceptions = NullPointerException.class)
+        public void testFindAllLecturerLanguagesNull() {
+            
+            lecturerDao.findAllLecturerLanguages(null);
+            Assert.fail(
+                    "Find all lecturer languages function cannot be called with null parameter. Exception NullPointerException.class expected.");
+            
+        }
 
 	@AfterMethod
 	public void clearMemory() {

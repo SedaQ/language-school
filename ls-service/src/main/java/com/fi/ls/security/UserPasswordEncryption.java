@@ -1,15 +1,17 @@
-package com.fi.ls.service;
+package com.fi.ls.security;
 
 import java.math.BigInteger;
 import java.security.SecureRandom;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
+import javax.inject.Named;
 
 /**
  * @author Pavel Šeda (441048)
  *
  */
+@Named
 public class UserPasswordEncryption {
 
 	private byte[] pbkdf2(char[] password, byte[] salt, int iterations, int bytes) {

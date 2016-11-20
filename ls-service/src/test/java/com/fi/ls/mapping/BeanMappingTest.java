@@ -66,8 +66,7 @@ public class BeanMappingTest extends AbstractTestNGSpringContextTests {
 		assertEquals(l.getSurname(), dto.get().getSurname());
 		assertEquals(l.getEmail(), dto.get().getEmail());
 		assertEquals(l.getPasswordHash(), dto.get().getPasswordHash());
-		// assertEquals(l.getListOfLanguages().size(),
-		// dto.get().getListOfLanguages().size());
+		assertEquals(l.getListOfLanguages().size(), dto.get().getListOfLanguages().size());
 	}
 
 	@Test
@@ -100,8 +99,7 @@ public class BeanMappingTest extends AbstractTestNGSpringContextTests {
 		assertEquals(l.getSurname(), dto.get().getSurname());
 		assertEquals(l.getEmail(), dto.get().getEmail());
 		assertEquals(l.getPasswordHash(), dto.get().getPasswordHash());
-		// assertEquals(l.getListOfLanguages().size(),
-		// dto.get().getListOfLanguages().size());
+		assertEquals(l.getListOfLanguages().size(), dto.get().getListOfLanguages().size());
 	}
 
 	@Test

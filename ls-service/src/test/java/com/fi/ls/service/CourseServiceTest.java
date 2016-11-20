@@ -2,6 +2,7 @@ package com.fi.ls.service;
 
 import org.mockito.MockitoAnnotations;
 import org.springframework.dao.DataAccessException;
+import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -10,8 +11,6 @@ import com.fi.ls.dao.CourseDao;
 import com.fi.ls.entity.Course;
 import com.fi.ls.entity.Lecture;
 import com.fi.ls.enums.ProficiencyLevel;
-
-import junit.framework.Assert;
 
 import org.mockito.Mock;
 
@@ -63,17 +62,16 @@ public class CourseServiceTest {
 		verify(courseDao, times(1)).create(c);
 	}
 
-	// @Test(expectedExceptions = { DataAccessException.class })
-	// public void testCreateThrows() throws DataAccessException {
-	// doThrow(new
-	// PersistenceException("")).when(courseDao).create(any(Course.class));
-	// Course c1 = new Course();
-	// c1.setName("testName");
-	// c1.setProficiencyLevel(ProficiencyLevel.A1);
-	// courseService.create(c1);
-	//
-	// fail("Expected DataAccessException");
-	// }
+	@Test(expectedExceptions = { DataAccessException.class })
+	public void testCreateThrows() throws DataAccessException {
+		doThrow(new PersistenceException("")).when(courseDao).create(any(Course.class));
+		Course c1 = new Course();
+		c1.setName("testName");
+		c1.setProficiencyLevel(ProficiencyLevel.A1);
+		courseService.create(c1);
+
+		fail("Expected DataAccessException");
+	}
 
 	@Test(expectedExceptions = { IllegalArgumentException.class })
 	public void testCreateNull() {
@@ -88,13 +86,13 @@ public class CourseServiceTest {
 		verify(courseDao, times(1)).findAll();
 	}
 
-	// @Test(expectedExceptions = { DataAccessException.class })
-	// public void testFindAllThrows() throws DataAccessException {
-	// doThrow(new PersistenceException("")).when(courseDao).findAll();
-	// courseService.findAll();
-	//
-	// fail("Expected DataAccessException");
-	// }
+	@Test(expectedExceptions = { DataAccessException.class })
+	public void testFindAllThrows() throws DataAccessException {
+		doThrow(new PersistenceException("")).when(courseDao).findAll();
+		courseService.findAll();
+
+		fail("Expected DataAccessException");
+	}
 
 	@Test
 	public void testfindById() {
@@ -102,14 +100,13 @@ public class CourseServiceTest {
 		verify(courseDao, times(1)).findById(Long.MAX_VALUE);
 	}
 
-	// @Test(expectedExceptions = { DataAccessException.class })
-	// public void testfindByIdThrows() throws DataAccessException {
-	// doThrow(new
-	// PersistenceException("")).when(courseDao).findById(any(Long.class));
-	// courseService.findById(1L);
-	//
-	// fail("Expected DataAccessException");
-	// }
+	@Test(expectedExceptions = { DataAccessException.class })
+	public void testfindByIdThrows() throws DataAccessException {
+		doThrow(new PersistenceException("")).when(courseDao).findById(any(Long.class));
+		courseService.findById(1L);
+
+		fail("Expected DataAccessException");
+	}
 
 	@Test(expectedExceptions = { IllegalArgumentException.class })
 	public void testfindByIdNull() {
@@ -138,15 +135,14 @@ public class CourseServiceTest {
 		fail("Expected IllegalArgumentException");
 	}
 
-	// @Test(expectedExceptions = { DataAccessException.class })
-	// public void testUpdateThrows() throws DataAccessException {
-	// doThrow(new
-	// PersistenceException("")).when(courseDao).update(any(Course.class));
-	// c.setName("NameChanged");
-	// courseService.update(c);
-	//
-	// fail("Expected DataAccessException");
-	// }
+	@Test(expectedExceptions = { DataAccessException.class })
+	public void testUpdateThrows() throws DataAccessException {
+		doThrow(new PersistenceException("")).when(courseDao).update(any(Course.class));
+		c.setName("NameChanged");
+		courseService.update(c);
+
+		fail("Expected DataAccessException");
+	}
 
 	@Test(expectedExceptions = { IllegalArgumentException.class })
 	public void testUpdateNull() {
@@ -161,14 +157,13 @@ public class CourseServiceTest {
 		verify(courseDao, times(1)).remove(c2);
 	}
 
-	// @Test(expectedExceptions = { DataAccessException.class })
-	// public void testRemoveThrows() throws DataAccessException {
-	// doThrow(new
-	// PersistenceException("")).when(courseDao).remove(any(Course.class));
-	// courseService.remove(c2);
-	//
-	// //fail("Expected DataAccessException");
-	// }
+	@Test(expectedExceptions = { DataAccessException.class })
+	public void testRemoveThrows() throws DataAccessException {
+		doThrow(new PersistenceException("")).when(courseDao).remove(any(Course.class));
+		courseService.remove(c2);
+
+		// fail("Expected DataAccessException");
+	}
 
 	@Test(expectedExceptions = { IllegalArgumentException.class })
 	public void testRemoveNull() {
@@ -193,13 +188,12 @@ public class CourseServiceTest {
 		lecture2.setClassroomId("B402");
 		lecture2.setTopic("Czech");
 
-		courseService.create(course);
-
 		courseService.addLecture(course, lecture1);
 		courseService.addLecture(course, lecture2);
 
 		when(courseDao.findByName(any(String.class))).thenReturn(course);
 
+		verify(courseDao, times(2)).update(course);
 		Assert.assertEquals(courseService.findByName("testNameCourse").getListOfLectures().size(), 2);
 	}
 
@@ -254,11 +248,11 @@ public class CourseServiceTest {
 		lectures.add(lecture2);
 		lectures.add(lecture3);
 
-		courseService.create(course);
-
 		courseService.addLectures(course, lectures);
 
 		when(courseDao.findByName(any(String.class))).thenReturn(course);
+
+		verify(courseDao, times(1)).update(course);
 
 		Assert.assertEquals(courseService.findByName("testNameCourse").getListOfLectures().size(), 3);
 	}

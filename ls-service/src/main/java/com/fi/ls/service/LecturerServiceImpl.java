@@ -1,6 +1,7 @@
 package com.fi.ls.service;
 
 import com.fi.ls.dao.LecturerDao;
+import com.fi.ls.entity.Language;
 import com.fi.ls.entity.Lecture;
 import com.fi.ls.entity.Lecturer;
 import com.fi.ls.exceptions.ServiceLayerException;
@@ -66,6 +67,7 @@ public class LecturerServiceImpl implements LecturerService {
 
 		try {
 			lecturerDao.remove(l);
+                        //TODO remove langs;
 		} catch (PersistenceException | DataAccessException ex) {
 			throw new ServiceLayerException("Problem with removing Lecturer, see inner exception.", ex);
 		}
@@ -98,4 +100,9 @@ public class LecturerServiceImpl implements LecturerService {
 		lect.deleteLectures(l);
 		lecturerDao.update(lect);
 	}
+
+        @Override
+        public List<Language> findAllLecturerLanguages(Lecturer l) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
 }

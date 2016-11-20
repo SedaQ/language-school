@@ -13,14 +13,14 @@ import org.springframework.stereotype.Service;
  *
  * @author Moxy
  */
-@Service
 public interface LectureService {
 
     /**
      * creates new Lecture in database 
      * @param lecture Lecture to be created
+     * @return 
      */
-    public void create(Lecture lecture);
+    public Lecture create(Lecture lecture);
 	
     /**
      * finds Lecture specified by its id

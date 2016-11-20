@@ -10,7 +10,6 @@ import com.fi.ls.entity.LSUser;
  * @author Pavel Šeda (441048)
  *
  */
-@Service
 public interface LSUserService {
 
 	/**

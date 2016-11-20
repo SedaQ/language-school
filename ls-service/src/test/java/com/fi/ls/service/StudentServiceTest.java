@@ -273,12 +273,25 @@ public class StudentServiceTest {
         assertEquals(s1.getListOfLectures().size(), 2);
     }
     
+    @Test
+    public void testEnrollCourse2(){
+        Student s4 = new Student();
+        s4.setBirthNumber("4");
+        s4.setEmail("jj.jj@jjj.jj");
+        s4.setPasswordHash("hashtag");
+        s4.setFirstName("eee");
+        s4.setSurname("rrr");
+        studentService.enrollCourse(c, s4);
+        verify(studentDao, times(1)).update(s4);
+    }
+    
+    @Test
     public void testEnrollCourseTwice(){
         studentService.enrollCourse(c, s1);
         studentService.enrollCourse(c, s1);
         assertEquals(s1.getListOfLectures().size(), 2);
     }
-    
+
     @Test
     public void testEnrollCourseAndCoursesLecture(){
         studentService.enrollCourse(c, s1);
@@ -304,14 +317,24 @@ public class StudentServiceTest {
         fail("Enrolled null course by null student.");
     }
     
-    //otazka
-    
     @Test
     public void testEnrollLecture(){
         studentService.enrollLecture(l3, s1);
         assertEquals(s1.getListOfLectures().size(), 1);
     }
     
+    @Test
+    public void testEnrollLecture2(){
+        Student s5 = new Student();
+        s5.setBirthNumber("5");
+        s5.setEmail("jj.jj@jjj.jj");
+        s5.setPasswordHash("hashtag");
+        s5.setFirstName("eee");
+        s5.setSurname("rrr");
+        studentService.enrollLecture(l3, s5);
+        verify(studentDao, times(1)).update(s5);
+    }
+
     @Test
     public void testEnrollLectureTwice(){
         studentService.enrollLecture(l3, s1);
@@ -353,6 +376,18 @@ public class StudentServiceTest {
         assertEquals(s1.getListOfLectures().size(), 0);
     }
     
+    @Test
+    public void testCancelLectureFromStudentsList2(){
+        Student s6 = new Student();
+        s6.setBirthNumber("6");
+        s6.setEmail("jj.jj@jjj.jj");
+        s6.setPasswordHash("hashtag");
+        s6.setFirstName("eee");
+        s6.setSurname("rrr");
+        studentService.cancelLectureFromStudentsList(l3, s6);
+        verify(studentDao, times(1)).update(s6);
+    }
+    
     @Test(expectedExceptions = {IllegalArgumentException.class})
     public void testCancelLectureFromStudentsListNullLecture(){
         studentService.cancelLectureFromStudentsList(null, s1);
@@ -388,6 +423,18 @@ public class StudentServiceTest {
         
         studentService.cancelListOfLecturesFromStudentsList(c.getListOfLectures(), s1);
         assertEquals(s1.getListOfLectures().size(), 1);
+    }
+    
+    @Test
+    public void testCancelListOfLecturesFromStudentsList2(){
+        Student s7 = new Student();
+        s7.setBirthNumber("7");
+        s7.setEmail("jj.jj@jjj.jj");
+        s7.setPasswordHash("hashtag");
+        s7.setFirstName("eee");
+        s7.setSurname("rrr");
+        studentService.cancelListOfLecturesFromStudentsList(c.getListOfLectures(), s7);
+        verify(studentDao, times(1)).update(s7);
     }
     
     @Test(expectedExceptions = {IllegalArgumentException.class})

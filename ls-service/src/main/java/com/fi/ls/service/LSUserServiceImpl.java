@@ -1,5 +1,6 @@
 package com.fi.ls.service;
 
+import com.fi.ls.security.UserPasswordEncryption;
 import java.util.List;
 
 import javax.inject.Inject;

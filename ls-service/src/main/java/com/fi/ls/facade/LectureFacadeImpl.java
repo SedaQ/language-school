@@ -9,6 +9,9 @@ import java.util.List;
 import java.util.Optional;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 /**
@@ -19,6 +22,8 @@ import org.springframework.stereotype.Service;
 @Transactional
 public class LectureFacadeImpl implements LectureFacade {
 
+	private final Logger logger = LoggerFactory.getLogger(LectureFacadeImpl.class);
+	
 	private LectureService lectureService;
 
 	private BeanMapping beanMapping;
@@ -30,10 +35,11 @@ public class LectureFacadeImpl implements LectureFacade {
 	}
 
 	@Override
-	public void createLecture(LectureCreateDTO lecture) {
-
-		lectureService.create(beanMapping.mapTo(lecture, Lecture.class).get());
-
+	public Optional<LectureDTO> createLecture(LectureCreateDTO lecture) {
+		
+		Optional<Lecture> lect = Optional.of(lectureService.create(beanMapping.mapTo(lecture, Lecture.class).get()));
+		return lect.isPresent() ? beanMapping.mapTo(lect.get(), LectureDTO.class) : Optional.empty();
+		
 	}
 
 	@Override

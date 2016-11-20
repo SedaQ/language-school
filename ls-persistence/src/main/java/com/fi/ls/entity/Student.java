@@ -11,6 +11,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.dozer.Mapping;
+
 /**
  *
  * @author Matúš
@@ -32,6 +34,7 @@ public class Student extends LSUser {
 
     @ManyToMany(fetch = FetchType.LAZY)
     @Column(name = "list_of_lectures")
+    @Mapping("listOfLectures")
     private List<Lecture> listOfLectures = new ArrayList<>();
 
     public Student() {
@@ -78,7 +81,7 @@ public class Student extends LSUser {
     }
 
     public void addListOfLectures(List<Lecture> lectures){
-        this.listOfLectures.addAll(lectures);
+        for (Lecture l : lectures) addLecture(l);
     }
         
     public void removeLecture(Lecture lecture) {

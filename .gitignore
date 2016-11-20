@@ -4,5 +4,6 @@
 .classpath
 *.iml
 *~
+logs
 target
 nb-configuration.xml

@@ -7,10 +7,13 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+
+import org.dozer.Mapping;
 
 /**
  *
@@ -18,7 +21,10 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 @Table(name = "lecturer")
-@NamedQuery(name = "Lecturer.findAll", query = "SELECT l FROM Lecturer l")
+@NamedQueries( {
+    @NamedQuery(name = "Lecturer.findAll", query = "SELECT l FROM Lecturer l"),
+    @NamedQuery(name = "Lecturer.findAllLecturerLanguages", query = "SELECT lan FROM Language lan WHERE lan.lecturer.id = :lID")
+} )
 public class Lecturer extends LSUser {
 
 	@NotNull
@@ -34,10 +40,12 @@ public class Lecturer extends LSUser {
 
 	@OneToMany(fetch = FetchType.LAZY, targetEntity = Language.class, mappedBy = "lecturer")
 	@Column(name = "list_of_languages")
+	@Mapping("listOfLanguages")
 	private List<Language> listOfLanguages = new ArrayList<>();
 
 	@ManyToMany(fetch = FetchType.LAZY)
 	@Column(name = "list_of_lectures")
+	@Mapping("listOfLectures")
 	private List<Lecture> listOfLectures = new ArrayList<>();
 
 	public Long getId() {

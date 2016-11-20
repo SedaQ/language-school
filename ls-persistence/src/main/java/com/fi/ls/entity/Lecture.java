@@ -16,6 +16,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.dozer.Mapping;
+
 /**
  * 
  * @author Marek Nedbal (357293)
@@ -42,14 +44,17 @@ public class Lecture {
 
 	@ManyToMany(fetch = FetchType.LAZY, targetEntity = Student.class, mappedBy = "listOfLectures")
 	@Column(name = "list_of_students")
+	@Mapping("listOfStudents")
 	private List<Student> listOfStudents = new ArrayList<>();
 
 	@ManyToMany(fetch = FetchType.LAZY, targetEntity = Lecturer.class, mappedBy = "listOfLectures")
 	@Column(name = "list_of_lecturers")
+	@Mapping("listOfLecturers")
 	private List<Lecturer> listOfLecturers = new ArrayList<>();
 
 	@ManyToMany(fetch = FetchType.LAZY, targetEntity = Course.class, mappedBy = "listOfLectures")
 	@Column(name = "list_of_courses")
+	@Mapping("listOfCourses")
 	private List<Course> listOfCourses = new ArrayList<>();
 
 	public Lecture() {
