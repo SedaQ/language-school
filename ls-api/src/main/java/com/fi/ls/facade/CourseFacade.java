@@ -18,7 +18,7 @@ public interface CourseFacade {
 	 * 
 	 * @param c
 	 *            specific Course to be created
-	 * @return
+	 * @return created course
 	 */
 	public Optional<CourseDTO> create(CourseCreateDTO c);
 
@@ -45,8 +45,9 @@ public interface CourseFacade {
 	 * 
 	 * @param id
 	 *            course that has to be removed
+         * @return true, if successfully removed
 	 */
-	public void deleteCourse(Long id);
+	public Boolean deleteCourse(Long id);
 
 	/**
 	 * finds specific course by name
@@ -68,14 +69,16 @@ public interface CourseFacade {
 	 * add lecture to course
 	 * @param l lecture which will be added to course
 	 * @param c course to which lecture will be added
+         * @return true, if successfully added
 	 */
-	public void addLecture(CourseDTO c, LectureDTO l);
+	public Boolean addLecture(CourseDTO c, LectureDTO l);
 	
 	/**
 	 * add lectures to course
 	 * @param l list of lectures which will be added to course
 	 * @param c course to which lectures will be added
+         * @return true, if successfully added
 	 */
-	public void addLectures(CourseDTO c, List<LectureDTO> l);
+	public Boolean addLectures(CourseDTO c, List<LectureDTO> l);
 	
 }

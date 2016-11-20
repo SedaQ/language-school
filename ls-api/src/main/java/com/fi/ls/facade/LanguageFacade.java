@@ -16,7 +16,7 @@ public interface LanguageFacade {
 	 * 
 	 * @param lan
 	 *            specific lecturers language to be created
-	 * @return
+	 * @return created language
 	 */
 	public Optional<LanguageDTO> createLanguage(LanguageDTO lan);
 
@@ -43,8 +43,9 @@ public interface LanguageFacade {
 	 * 
 	 * @param lan
 	 *            lecturers language that has to be removed
+         * @return true, if successfully removed
 	 */
-	public void deleteLanguage(LanguageDTO lan);
+	public Boolean deleteLanguage(LanguageDTO lan);
 
 	/**
 	 * Returns all lecturers languages in language school

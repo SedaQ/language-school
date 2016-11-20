@@ -35,8 +35,9 @@ public interface LSUserFacade {
 	 * 
 	 * @param userId
 	 *            user that has to be removed
+         * @return true, if successfully removed
 	 */
-	public void deleteUser(Long userId);
+	public Boolean deleteUser(Long userId);
 
 	/**
 	 * Returns all courses in language school
@@ -58,15 +59,16 @@ public interface LSUserFacade {
          * Register the given user with the given unencrypted password.
          * @param u
          * @param unencryptedPassword 
+         * @return true, if successful removed
          */
-	public void registerUser(LSUserCreateDTO u, String unencryptedPassword);
+	public Boolean registerUser(LSUserCreateDTO u, String unencryptedPassword);
 
 	/**
          * Try to authenticate a user. Return true only if the hashed password
 	 * matches the records.
          * @param u
-         * @return 
+         * @return true, if successful
          */
-	public boolean authenticate(LSUserDTO u);
+	public Boolean authenticate(LSUserDTO u);
 
 }

@@ -1,8 +1,10 @@
 package com.fi.ls.facade;
 
+import com.fi.ls.dto.language.LanguageDTO;
 import com.fi.ls.dto.lecture.LectureDTO;
 import com.fi.ls.dto.lecturer.LecturerCreateDTO;
 import com.fi.ls.dto.lecturer.LecturerDTO;
+import com.fi.ls.entity.Language;
 import com.fi.ls.entity.Lecture;
 import com.fi.ls.entity.Lecturer;
 import com.fi.ls.exceptions.ServiceLayerException;
@@ -85,15 +87,17 @@ public class LecturerFacadeImpl implements LecturerFacade {
 	}
 
 	@Override
-	public void deleteLecturer(LecturerDTO l) {
+	public Boolean deleteLecturer(LecturerDTO l) {
 		if (l == null)
 			throw new IllegalArgumentException("LecturerDTO parameter is null");
 
 		Optional<Lecturer> entity = beanMapping.mapTo(l, Lecturer.class);
 		try {
 			lecturerService.remove(entity.get());
+                        return true;
 		} catch (ServiceLayerException | NoSuchElementException ex) {
 			logger.debug("deleteLecturer method invokes exception: " + ex);
+                        return false;
 		}
 	}
 
@@ -109,30 +113,53 @@ public class LecturerFacadeImpl implements LecturerFacade {
 	}
 
 	@Override
-	public void deleteLecture(LecturerDTO lect, LectureDTO l) {
+	public Boolean deleteLecture(LecturerDTO lect, LectureDTO l) {
 		if (l == null)
 			throw new IllegalArgumentException("LectureDTO parameter is null");
+		if (lect == null)
+			throw new IllegalArgumentException("LecturerDTO parameter is null");
 
 		try {
 			lecturerService.deleteLecture(beanMapping.mapTo(lect, Lecturer.class).get(),
 					beanMapping.mapTo(l, Lecture.class).get());
+                        return true;
 		} catch (ServiceLayerException | NoSuchElementException ex) {
 			logger.warn("deleteLecture method invokes exception: " + ex);
+                        return false;
 		}
 
 	}
 
 	@Override
-	public void deleteLectures(LecturerDTO lect, List<LectureDTO> l) {
+	public Boolean deleteLectures(LecturerDTO lect, List<LectureDTO> l) {
 		if (l == null)
-			throw new IllegalArgumentException("LectureDTO parameter is null");
+			throw new IllegalArgumentException("List<LectureDTO> parameter is null");
+		if (lect == null)
+			throw new IllegalArgumentException("LecturerDTO parameter is null");
 
 		try {
 			lecturerService.deleteLectures(beanMapping.mapTo(lect, Lecturer.class).get(),
 					beanMapping.mapTo(l, Lecture.class));
+                        return true;
 		} catch (ServiceLayerException | NoSuchElementException ex) {
 			logger.warn("deleteLectures method invokes exception: " + ex);
+                        return false;
 		}
 
 	}
+
+        @Override
+        public List<LanguageDTO> findAllLecturerLanguages(LecturerDTO l) {
+                if (l == null)
+                    throw new IllegalArgumentException("LectureDTO parameter is null");
+            
+		try {
+                        Optional<Lecturer> entity = beanMapping.mapTo(l, Lecturer.class);
+			List<Language> entities = lecturerService.findAllLecturerLanguages(entity.get());
+			return beanMapping.mapTo(entities, LanguageDTO.class);
+		} catch (ServiceLayerException | NoSuchElementException ex) {
+			logger.warn("findAllLecturerLanguages method invokes exception: " + ex);
+			return Collections.emptyList();
+		}
+        }
 }

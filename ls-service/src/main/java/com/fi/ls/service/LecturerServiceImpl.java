@@ -1,5 +1,6 @@
 package com.fi.ls.service;
 
+import com.fi.ls.dao.LanguageDao;
 import com.fi.ls.dao.LecturerDao;
 import com.fi.ls.entity.Language;
 import com.fi.ls.entity.Lecture;
@@ -8,6 +9,7 @@ import com.fi.ls.exceptions.ServiceLayerException;
 import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.PersistenceException;
+import javax.transaction.Transactional;
 import javax.validation.ConstraintViolationException;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -20,10 +22,12 @@ import org.springframework.stereotype.Service;
 public class LecturerServiceImpl implements LecturerService {
 
 	private LecturerDao lecturerDao;
+        private LanguageDao languageDao;
 
 	@Inject
-	public LecturerServiceImpl(LecturerDao lecturerDao) {
+	public LecturerServiceImpl(LecturerDao lecturerDao, LanguageDao languageDao) {
 		this.lecturerDao = lecturerDao;
+                this.languageDao = languageDao;
 	}
 
 	@Override
@@ -61,13 +65,16 @@ public class LecturerServiceImpl implements LecturerService {
 	}
 
 	@Override
+        @Transactional
 	public void remove(Lecturer l) {
 		if (l == null)
 			throw new IllegalArgumentException("Lecturer parameter is null");
-
 		try {
-			lecturerDao.remove(l);
-                        //TODO remove langs;
+                        for(Language lan : lecturerDao.findAllLecturerLanguages(l)) {
+                            languageDao.remove(lan);
+                        }
+                        lecturerDao.remove(l);
+                        
 		} catch (PersistenceException | DataAccessException ex) {
 			throw new ServiceLayerException("Problem with removing Lecturer, see inner exception.", ex);
 		}
@@ -103,6 +110,12 @@ public class LecturerServiceImpl implements LecturerService {
 
         @Override
         public List<Language> findAllLecturerLanguages(Lecturer l) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		if (l == null)
+			throw new IllegalArgumentException("Lecturer parameter is null");
+		try {
+			return lecturerDao.findAllLecturerLanguages(l);
+		} catch (PersistenceException | DataAccessException ex) {
+			throw new ServiceLayerException("Problem with finding Lecturer, see inner exception.", ex);
+		}
         }
 }

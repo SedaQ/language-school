@@ -106,7 +106,7 @@ public class BeanMappingConfiguration {
 
 	@Bean
 	public LecturerService lecturerService() {
-		return new LecturerServiceImpl(lecturerDao);
+		return new LecturerServiceImpl(lecturerDao, languageDao);
 	}
 
 	@Bean
