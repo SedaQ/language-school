@@ -32,9 +32,7 @@ public class StudentServiceImpl implements StudentService {
         try {
             this.studentDao.create(s);
             return s;
-        } catch (PersistenceException | 
-                ConstraintViolationException |
-                DataAccessException ex) {
+        } catch (PersistenceException | ConstraintViolationException | DataAccessException ex) {
             throw new ServiceLayerException("Creating student failed.", ex);
 	}
     }
@@ -44,8 +42,7 @@ public class StudentServiceImpl implements StudentService {
         if (s == null) throw new IllegalArgumentException("Student is null.");
         try {
             this.studentDao.remove(s);
-        } catch (PersistenceException | 
-                DataAccessException ex) {
+        } catch (PersistenceException | DataAccessException ex) {
             throw new ServiceLayerException("Removing student failed.", ex);
 	}
     }
@@ -55,9 +52,7 @@ public class StudentServiceImpl implements StudentService {
         if (s == null) throw new IllegalArgumentException("Student is null.");
         try {
             return this.studentDao.update(s);
-        } catch (PersistenceException | 
-                ConstraintViolationException |
-                DataAccessException ex) {
+        } catch (PersistenceException | ConstraintViolationException | DataAccessException ex) {
             throw new ServiceLayerException("Updating student failed.", ex);
 	}
     }
@@ -67,8 +62,7 @@ public class StudentServiceImpl implements StudentService {
         if (birthNumber == null) throw new IllegalArgumentException("Id is null");
 	try {
             return this.studentDao.findByBirthNumber(birthNumber);
-        } catch (PersistenceException | 
-                DataAccessException ex) {
+        } catch (PersistenceException | DataAccessException ex) {
             throw new ServiceLayerException("Student cannot be found by birth number.", ex);
 	}
     }
@@ -78,8 +72,7 @@ public class StudentServiceImpl implements StudentService {
         if (id == null) throw new IllegalArgumentException("Id is null");
 	try {
             return this.studentDao.findById(id);
-        } catch (PersistenceException | 
-                DataAccessException ex) {
+        } catch (PersistenceException | DataAccessException ex) {
             throw new ServiceLayerException("Student cannot be found by id.", ex);
 	}
     }
@@ -88,8 +81,7 @@ public class StudentServiceImpl implements StudentService {
     public List<Student> findAllStudents() {
         try {
             return this.studentDao.findAll();
-	} catch (PersistenceException | 
-                DataAccessException ex) {
+	} catch (PersistenceException | DataAccessException ex) {
             throw new ServiceLayerException("Find all students failed.", ex);
 	}
     }
@@ -99,9 +91,8 @@ public class StudentServiceImpl implements StudentService {
         if (firstName == null) throw new IllegalArgumentException("First name is null.");
         try {
             return this.studentDao.findByFirstName(firstName);
-	} catch (PersistenceException | 
-                DataAccessException ex) {
-            throw new ServiceLayerException("Find students by fisrt name failed.", ex);
+	} catch (PersistenceException | DataAccessException ex) {
+            throw new ServiceLayerException("Find students by first name failed.", ex);
 	}
     }
 
@@ -110,8 +101,7 @@ public class StudentServiceImpl implements StudentService {
         if (surname == null) throw new IllegalArgumentException("Surname is null.");
         try {
             return this.studentDao.findBySurname(surname);
-	} catch (PersistenceException | 
-                DataAccessException ex) {
+	} catch (PersistenceException | DataAccessException ex) {
             throw new ServiceLayerException("Find students by surname failed.", ex);
 	}
     }

@@ -28,7 +28,7 @@ import org.springframework.stereotype.Service;
 @Transactional
 public class StudentFacadeImpl implements StudentFacade {
     
-    private final Logger logger = LoggerFactory.getLogger(CourseFacadeImpl.class);
+    private final Logger logger = LoggerFactory.getLogger(StudentFacadeImpl.class);
 
     private StudentService studentService;
     private BeanMapping beanMapping;
