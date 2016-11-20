@@ -7,18 +7,17 @@ package com.fi.ls.service;
 
 import com.fi.ls.entity.Lecture;
 import java.util.List;
-import org.springframework.stereotype.Service;
 
 /**
  *
- * @author Moxy
+ * @author Marek Nedbal (357293)
  */
 public interface LectureService {
 
     /**
      * creates new Lecture in database 
      * @param lecture Lecture to be created
-     * @return 
+     * @return created Lecture
      */
     public Lecture create(Lecture lecture);
 	
