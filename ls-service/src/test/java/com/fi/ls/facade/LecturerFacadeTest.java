@@ -24,6 +24,7 @@ import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
 import static org.mockito.Mockito.*;
@@ -67,6 +68,11 @@ public class LecturerFacadeTest extends AbstractTestNGSpringContextTests {
         lecturer = new LecturerDTO();
         lecturerCreate = new LecturerCreateDTO();
         lecture = new LectureDTO();
+    }
+    
+    @AfterMethod
+    public void afterMethod() {
+        reset(lecturerService);
     }
     
     @Test

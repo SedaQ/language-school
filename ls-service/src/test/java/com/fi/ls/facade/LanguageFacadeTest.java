@@ -10,7 +10,12 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+
+import static org.mockito.Mockito.*;
+import static org.testng.Assert.*;
 
 /**
  *
@@ -32,6 +37,15 @@ public class LanguageFacadeTest extends AbstractTestNGSpringContextTests {
     @BeforeClass
     public void beforeClass() {
         MockitoAnnotations.initMocks(this);
+    }
+    
+    @BeforeMethod
+    public void beforeMethod() {
+    }
+    
+    @AfterMethod
+    public void afterMethod() {
+        reset(languageService);
     }
     
 }

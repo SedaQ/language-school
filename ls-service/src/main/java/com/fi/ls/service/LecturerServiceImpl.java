@@ -96,16 +96,24 @@ public class LecturerServiceImpl implements LecturerService {
 	public void deleteLecture(Lecturer lect, Lecture l) {
 		if (lect == null || l == null)
 			throw new IllegalArgumentException("Lecturer parameter is null or Lecture parameter is null");
-		lect.deleteLecture(l);
-		lecturerDao.update(lect);
+                try {
+                    lect.deleteLecture(l);
+                    lecturerDao.update(lect);
+                } catch (PersistenceException | ConstraintViolationException | DataAccessException ex) {
+			throw new ServiceLayerException("Problem with updating Lecturer, see inner exception.", ex);
+                }
 	}
 
 	@Override
 	public void deleteLectures(Lecturer lect, List<Lecture> l) {
 		if (lect == null || l == null)
 			throw new IllegalArgumentException("Lecturer parameter is null or Lecture parameter is null");
-		lect.deleteLectures(l);
-		lecturerDao.update(lect);
+                try {
+                    lect.deleteLectures(l);
+                    lecturerDao.update(lect);
+                } catch (PersistenceException | ConstraintViolationException | DataAccessException ex) {
+			throw new ServiceLayerException("Problem with updating Lecturer, see inner exception.", ex);
+                }
 	}
 
         @Override
