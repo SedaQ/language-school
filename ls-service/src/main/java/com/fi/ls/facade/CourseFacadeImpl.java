@@ -1,6 +1,8 @@
 package com.fi.ls.facade;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import javax.inject.Inject;
@@ -15,6 +17,7 @@ import com.fi.ls.dto.course.CourseDTO;
 import com.fi.ls.dto.lecture.LectureDTO;
 import com.fi.ls.entity.Course;
 import com.fi.ls.entity.Lecture;
+import com.fi.ls.exceptions.ServiceLayerException;
 import com.fi.ls.mapping.BeanMapping;
 import com.fi.ls.service.CourseService;
 
@@ -27,7 +30,7 @@ import com.fi.ls.service.CourseService;
 public class CourseFacadeImpl implements CourseFacade {
 
 	private final Logger logger = LoggerFactory.getLogger(CourseFacadeImpl.class);
-	
+
 	private CourseService courseService;
 	private BeanMapping beanMapping;
 
@@ -38,45 +41,98 @@ public class CourseFacadeImpl implements CourseFacade {
 	}
 
 	public List<CourseDTO> getAllCourses() {
-		return beanMapping.mapTo(courseService.findAll(), CourseDTO.class);
+		try {
+			return beanMapping.mapTo(courseService.findAll(), CourseDTO.class);
+		} catch (ServiceLayerException | NoSuchElementException ex) {
+			logger.warn("getAllCourses method invokes exception: " + ex);
+			return Collections.emptyList();
+		}
 	}
 
 	public Optional<CourseDTO> getCourseById(Long id) {
-		Optional<Course> course = Optional.of(courseService.findById(id));
-		return course.isPresent() ? beanMapping.mapTo(course.get(), CourseDTO.class) : Optional.empty();
+		if (id == null)
+			throw new IllegalArgumentException("Id parameter is null");
+		try {
+			Optional<Course> course = Optional.of(courseService.findById(id));
+			return course.isPresent() ? beanMapping.mapTo(course.get(), CourseDTO.class) : Optional.empty();
+		} catch (ServiceLayerException | NoSuchElementException ex) {
+			logger.warn("getCourseById method invokes exception: " + ex);
+			return Optional.empty();
+		}
 	}
 
 	@Override
 	public Optional<CourseDTO> create(CourseCreateDTO c) {
-		Optional<Course> course = Optional.of(courseService.create(beanMapping.mapTo(c, Course.class).get()));
-		return course.isPresent() ? beanMapping.mapTo(course.get(), CourseDTO.class) : Optional.empty();
+		if (c == null)
+			throw new IllegalArgumentException("CourseCreateDTO c parameter is null");
+		try {
+			Optional<Course> course = Optional.of(courseService.create(beanMapping.mapTo(c, Course.class).get()));
+			return course.isPresent() ? beanMapping.mapTo(course.get(), CourseDTO.class) : Optional.empty();
+		} catch (ServiceLayerException | NoSuchElementException ex) {
+			logger.warn("create method invokes exception: " + ex);
+			return Optional.empty();
+		}
 	}
 
 	@Override
 	public Optional<CourseDTO> updateCourse(Long courseId) {
-		Optional<Course> course = Optional.of(courseService.update(courseService.findById(courseId)));
-		return course.isPresent() ? beanMapping.mapTo(course.get(), CourseDTO.class) : Optional.empty();
+		if (courseId == null)
+			throw new IllegalArgumentException("courseId parameter is null in updateCourse method");
+		try {
+			Optional<Course> course = Optional.of(courseService.update(courseService.findById(courseId)));
+			return course.isPresent() ? beanMapping.mapTo(course.get(), CourseDTO.class) : Optional.empty();
+		} catch (ServiceLayerException | NoSuchElementException ex) {
+			logger.warn("updateCourse method invokes exception: " + ex);
+			return Optional.empty();
+		}
 	}
 
 	@Override
 	public void deleteCourse(Long courseId) {
-		courseService.remove(courseService.findById(courseId));
+		if (courseId == null)
+			throw new IllegalArgumentException("courseId parameter is null in deleteCourse method");
+		try {
+			courseService.remove(courseService.findById(courseId));
+		} catch (ServiceLayerException | NoSuchElementException ex) {
+			logger.warn("deleteCourse method invokes exception: " + ex);
+		}
 	}
 
 	@Override
 	public Optional<CourseDTO> getCourseByName(String name) {
-		Optional<Course> course = Optional.of(courseService.findByName(""));
-		return course.isPresent() ? beanMapping.mapTo(course.get(), CourseDTO.class) : Optional.empty();
+		if (name == null)
+			throw new IllegalArgumentException("String parameter is null in deleteCourse method");
+		try {
+			Optional<Course> course = Optional.of(courseService.findByName(""));
+			return course.isPresent() ? beanMapping.mapTo(course.get(), CourseDTO.class) : Optional.empty();
+		} catch (ServiceLayerException | NoSuchElementException ex) {
+			logger.warn("getCourseByName method invokes exception: " + ex);
+			return Optional.empty();
+		}
 	}
 
 	@Override
 	public void addLecture(CourseDTO c, LectureDTO l) {
-		courseService.addLecture(beanMapping.mapTo(c, Course.class).get(), beanMapping.mapTo(l, Lecture.class).get());
+		if (c == null || l == null)
+			throw new IllegalArgumentException("CourseDTO c parameter or LectureDTO l is null in addLecture method");
+		try {
+			courseService.addLecture(beanMapping.mapTo(c, Course.class).get(),
+					beanMapping.mapTo(l, Lecture.class).get());
+		} catch (ServiceLayerException | NoSuchElementException ex) {
+			logger.warn("addLecture method invokes exception: " + ex);
+		}
 	}
 
 	@Override
 	public void addLectures(CourseDTO c, List<LectureDTO> l) {
-		courseService.addLectures(beanMapping.mapTo(c, Course.class).get(), beanMapping.mapTo(l, Lecture.class));
+		if (c == null || l == null)
+			throw new IllegalArgumentException(
+					"CourseDTO c parameter or List<LectureDTO> l is null in addLectures method");
+		try {
+			courseService.addLectures(beanMapping.mapTo(c, Course.class).get(), beanMapping.mapTo(l, Lecture.class));
+		} catch (ServiceLayerException | NoSuchElementException ex) {
+			logger.warn("addLectures method invokes exception: " + ex);
+		}
 	}
 
 }

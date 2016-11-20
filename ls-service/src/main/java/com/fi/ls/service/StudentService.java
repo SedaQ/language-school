@@ -4,7 +4,6 @@ import com.fi.ls.entity.Course;
 import com.fi.ls.entity.Lecture;
 import com.fi.ls.entity.Student;
 import java.util.List;
-import org.springframework.stereotype.Service;
 
 /**
  *
@@ -38,13 +37,6 @@ public interface StudentService {
      * @return student that is found by birth number
      */
     public Student findByBirthNumber(String birthNumber);
-    
-    /**
-     * finds specific student from database by email
-     * @param email of student
-     * @return student that is found by email
-     */
-//    public Student findByEmail(String email);
     
     /**
      * finds specific student from database by id

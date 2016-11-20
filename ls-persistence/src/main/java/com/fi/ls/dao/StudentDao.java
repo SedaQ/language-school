@@ -36,13 +36,6 @@ public interface StudentDao {
     public Student findByBirthNumber(String birthNumber);
     
     /**
-     * finds specific student from database by email
-     * @param email of student
-     * @return student that is found by email
-     */
-    //public Student findByEmail(String email); 
-    
-    /**
      * finds specific Student by id
      * @param id of a Student that would be returned
      * @return specific Student by id

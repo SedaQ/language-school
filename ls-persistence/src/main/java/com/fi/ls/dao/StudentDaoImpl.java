@@ -38,12 +38,6 @@ public class StudentDaoImpl implements StudentDao {
 			.setParameter("birthNumber", birthNumber).getSingleResult();
     }
     
-/*  @Override
-    public Student findByEmail(String email) {
-	return em.createQuery("SELECT s FROM Student s WHERE s.email=:email", Student.class)
-			.setParameter("email", email).getSingleResult();
-    }*/
-    
     @Override
     public Student findById(Long id) {
 	return em.find(Student.class, id);

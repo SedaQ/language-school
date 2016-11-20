@@ -27,7 +27,7 @@ public class Student extends LSUser {
 
     @NotNull
     private String surname;
-    
+
     @NotNull
     @Column(unique = true, name = "birth_number")
     private String birthNumber;
@@ -41,7 +41,7 @@ public class Student extends LSUser {
     }
 
     public void setFirstName(String firstName) {
-    	this.firstName = firstName;
+        this.firstName = firstName;
     }
 
     public void setSurname(String surname) {
@@ -53,15 +53,15 @@ public class Student extends LSUser {
     }
 
     public void setBirthNumber(String birthNumber) {
-	this.birthNumber = birthNumber;
+    	this.birthNumber = birthNumber;
     }
 
     public Long getId() {
-	return id;
+    	return id;
     }
 
     public String getFirstName() {
-	return firstName;
+    	return firstName;
     }
 
     public String getSurname() {
@@ -69,39 +69,39 @@ public class Student extends LSUser {
     }
 
     public List<Lecture> getListOfLectures() {
-	return listOfLectures;
+    	return listOfLectures;
     }
 
     public String getBirthNumber() {
-    	return birthNumber;
-    }
-    
-    public void addLecture(Lecture lecture) {
-	if (!(this.listOfLectures.contains(lecture))) this.listOfLectures.add(lecture);
+	return birthNumber;
     }
 
-    public void addListOfLectures(List<Lecture> lectures){
-        for (Lecture l : lectures) addLecture(l);
+    public void addLecture(Lecture lecture) {
+    	if (!(this.listOfLectures.contains(lecture))) this.listOfLectures.add(lecture);
     }
-        
+
+    public void addListOfLectures(List<Lecture> lectures) {
+    	lectures.forEach(l -> addLecture(l));
+    }
+
     public void removeLecture(Lecture lecture) {
-        this.listOfLectures.remove(lecture);
+	this.listOfLectures.remove(lecture);
     }
 
     public void removeListOfLectures(List<Lecture> lectures) {
-        for (Lecture l : lectures) this.listOfLectures.remove(l);
+	lectures.forEach(l -> removeLecture(l));
     }
 
     @Override
     public int hashCode() {
     	int hash = 7;
-	hash = 59 * hash + Objects.hashCode(this.birthNumber);
-	return hash;
+    	hash = 59 * hash + Objects.hashCode(this.birthNumber);
+    	return hash;
     }
 
     @Override
     public boolean equals(Object obj) {
-	if (obj == null) {
+    	if (obj == null) {
             return false;
 	}
 	if (!(obj instanceof Student)) {
@@ -113,4 +113,5 @@ public class Student extends LSUser {
 	}
 	return true;
     }
+    
 }

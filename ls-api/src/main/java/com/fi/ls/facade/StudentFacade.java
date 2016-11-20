@@ -18,7 +18,7 @@ public interface StudentFacade {
      * creates specific student in database
      * @param s - student that is created
      */
-    public void createStudent(StudentCreateDTO s);
+    public Optional<StudentDTO> createStudent(StudentCreateDTO s);
     
     /**
      * updates specific student in database
@@ -39,13 +39,6 @@ public interface StudentFacade {
      * @return student that is found by birth number
      */
     public Optional<StudentDTO> getStudentByBirthNumber(String birthNumber);
-    
-    /**
-     * finds specific student from database by email
-     * @param email of student
-     * @return student that is found by email
-     */
-    //public Optional<StudentDTO> getStudentByEmail(String email);
     
     /**
      * finds specific student from database by id
