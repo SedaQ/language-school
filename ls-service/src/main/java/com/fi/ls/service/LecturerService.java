@@ -43,7 +43,7 @@ public interface LecturerService {
     Lecturer findById(Long id);
 
     /**
-     * removes given lecturer from database
+     * removes given lecturer from database. This also removes his languages from database.
      *       
      * @param l
      *            Lecturer that has to be removed

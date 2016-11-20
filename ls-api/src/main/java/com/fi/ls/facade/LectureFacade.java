@@ -15,7 +15,7 @@ public interface LectureFacade {
     /**
      * creates new lecture in database
      * @param lecture to be created
-     * @return 
+     * @return created lecture
      */
     public Optional<LectureDTO> createLecture(LectureCreateDTO lecture);
     
@@ -42,6 +42,7 @@ public interface LectureFacade {
     /**
      * deletes given lecture
      * @param id of lecture to be deleted
+     * @return true, if successfully removed
      */
-    public void deleteLecture(Long id);
+    public Boolean deleteLecture(Long id);
 }

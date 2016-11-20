@@ -113,7 +113,7 @@ public class LectureFacadeImpl implements LectureFacade {
     }
 
     @Override
-    public void deleteLecture(Long id) {
+    public Boolean deleteLecture(Long id) {
         
         if(id == null) {
             
@@ -123,10 +123,12 @@ public class LectureFacadeImpl implements LectureFacade {
         try {
             
             lectureService.remove(lectureService.findById(id));
+            return true;
             
         } catch (NoSuchElementException | ServiceException e) {
             
             logger.warn("Error occured while deleting the Lecture!" + e);
+            return false;
             
         }
 
