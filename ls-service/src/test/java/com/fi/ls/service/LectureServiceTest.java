@@ -69,12 +69,12 @@ public class LectureServiceTest {
     @Test(expectedExceptions = ServiceLayerException.class)
     public void testCreateWithException() throws ServiceLayerException {
         
-       doThrow(new PersistenceException()).when(lectureDao).create(any(Lecture.class)); 
+       doThrow(new PersistenceException()).doNothing().when(lectureDao).create(any(Lecture.class)); 
        lectureService.create(lecture1);
        fail("ServiceLayerException expected!");
        
     }
-
+    
     @Test(expectedExceptions = IllegalArgumentException.class)
     public void testCreateWithNullArgument() throws ServiceLayerException {
         
@@ -153,10 +153,10 @@ public class LectureServiceTest {
     @Test
     public void testUpdate() throws ServiceLayerException {
         
-        lectureService.create(lecture1);
-        lecture1.setTopic("Something boring..");
-        lectureService.update(lecture1);
-        verify(lectureDao, times(1)).update(lecture1);
+        lectureService.create(lecture3);
+        lecture3.setTopic("Something boring..");
+        lectureService.update(lecture3);
+        verify(lectureDao, times(1)).update(lecture3);
         
     }
 
