@@ -94,7 +94,7 @@ public class LectureServiceTest {
     @Test(expectedExceptions = ServiceLayerException.class)
     public void testFindAllWithException() throws ServiceLayerException {
         
-        doThrow(new PersistenceException()).when(lectureDao).findAll();
+        doThrow(new PersistenceException()).doNothing().when(lectureDao).findAll();
         lectureService.findAll();
         fail("ServiceLayerException expected!");
         
@@ -111,7 +111,7 @@ public class LectureServiceTest {
     @Test(expectedExceptions = ServiceLayerException.class)
     public void testFindByIdWithException() throws ServiceLayerException {
         
-        doThrow(new PersistenceException()).when(lectureDao).findById(any(Long.class));
+        doThrow(new PersistenceException()).doNothing().when(lectureDao).findById(any(Long.class));
         lectureService.findById(Long.MAX_VALUE);
         fail("ServiceLayerException expected!");
         
@@ -136,7 +136,7 @@ public class LectureServiceTest {
     @Test(expectedExceptions = ServiceLayerException.class)
     public void testRemoveWithException() throws ServiceLayerException {
         
-        doThrow(new PersistenceException()).when(lectureDao).remove(any(Lecture.class));
+        doThrow(new PersistenceException()).doNothing().when(lectureDao).remove(any(Lecture.class));
         lectureService.remove(lecture1);
         fail("ServiceLayerException expected!");
         
@@ -163,7 +163,7 @@ public class LectureServiceTest {
     @Test(expectedExceptions = ServiceLayerException.class)
     public void testUpdateWithException() throws ServiceLayerException {
         
-        doThrow(new PersistenceException()).when(lectureDao).update(any(Lecture.class));
+        doThrow(new PersistenceException()).doNothing().when(lectureDao).update(any(Lecture.class));
         lectureService.create(lecture1);
         lecture1.setTopic("Something boring..");
         lectureService.update(lecture1);
