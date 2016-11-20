@@ -1,5 +1,6 @@
 package com.fi.ls.facade;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -43,7 +44,7 @@ public class LSUserFacadeImpl implements LSUserFacade {
 			return beanMapping.mapTo(userService.findAll(), LSUserDTO.class);
 		} catch (ServiceLayerException | NoSuchElementException ex) {
 			logger.warn("getAllUsers method invokes exception: " + ex);
-			return null;
+			return Collections.emptyList();
 		}
 	}
 
