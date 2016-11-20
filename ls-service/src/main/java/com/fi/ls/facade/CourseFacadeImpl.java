@@ -1,5 +1,6 @@
 package com.fi.ls.facade;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -44,7 +45,7 @@ public class CourseFacadeImpl implements CourseFacade {
 			return beanMapping.mapTo(courseService.findAll(), CourseDTO.class);
 		} catch (ServiceLayerException | NoSuchElementException ex) {
 			logger.warn("getAllCourses method invokes exception: " + ex);
-			return null;
+			return Collections.emptyList();
 		}
 	}
 
