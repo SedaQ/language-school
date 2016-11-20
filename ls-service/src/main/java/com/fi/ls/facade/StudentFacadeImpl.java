@@ -42,7 +42,6 @@ public class StudentFacadeImpl implements StudentFacade {
     @Override
     public Optional<StudentDTO> createStudent(StudentCreateDTO s){
         if (s == null) throw new IllegalArgumentException("Student is null");
-        this.studentService.create(this.beanMapping.mapTo(s, Student.class).get());
         try {
             Optional<Student> student = Optional.of(studentService.create(beanMapping.mapTo(s, Student.class).get()));
             return student.isPresent() ? beanMapping.mapTo(student.get(), StudentDTO.class) : Optional.empty();
