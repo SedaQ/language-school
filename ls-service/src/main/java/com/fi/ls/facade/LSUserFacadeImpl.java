@@ -27,7 +27,7 @@ import com.fi.ls.service.LSUserService;
 @Transactional
 public class LSUserFacadeImpl implements LSUserFacade {
 
-	private final Logger logger = LoggerFactory.getLogger(LecturerFacadeImpl.class);
+	private final Logger logger = LoggerFactory.getLogger(LSUserFacadeImpl.class);
 
 	private LSUserService userService;
 	private BeanMapping beanMapping;
