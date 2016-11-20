@@ -26,7 +26,7 @@ import org.springframework.stereotype.Service;
 public class LanguageFacadeImpl implements LanguageFacade {
 
 	private final Logger logger = LoggerFactory.getLogger(LanguageFacadeImpl.class);
-	
+
 	private LanguageService languageService;
 
 	private BeanMapping beanMapping;
@@ -90,10 +90,10 @@ public class LanguageFacadeImpl implements LanguageFacade {
 		Optional<Language> entity = beanMapping.mapTo(lan, Language.class);
 		try {
 			languageService.remove(entity.get());
-                        return true;
+			return true;
 		} catch (ServiceLayerException | NoSuchElementException ex) {
 			logger.warn("deleteLanguage method invokes exception: " + ex);
-                        return false;
+			return false;
 		}
 	}
 

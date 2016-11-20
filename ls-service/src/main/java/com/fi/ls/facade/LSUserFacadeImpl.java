@@ -93,10 +93,10 @@ public class LSUserFacadeImpl implements LSUserFacade {
 			throw new IllegalArgumentException("userId parameter is null in deleteUser method");
 		try {
 			userService.remove(userService.findById(userId));
-                        return true;
+			return true;
 		} catch (ServiceLayerException | NoSuchElementException ex) {
 			logger.warn("deleteUser method invokes exception: " + ex);
-                        return true;
+			return true;
 		}
 	}
 
@@ -109,10 +109,10 @@ public class LSUserFacadeImpl implements LSUserFacade {
 			LSUser userEntity = beanMapping.mapTo(u, LSUser.class).get();
 			userService.registerUser(userEntity, unencryptedPassword);
 			u.setId(userEntity.getId());
-                        return true;
+			return true;
 		} catch (ServiceLayerException | NoSuchElementException ex) {
 			logger.warn("registerUser method invokes exception: " + ex);
-                        return false;
+			return false;
 		}
 	}
 
@@ -126,5 +126,5 @@ public class LSUserFacadeImpl implements LSUserFacade {
 			logger.warn("authenticate method invokes exception: " + ex);
 			return false;
 		}
-        }
+	}
 }

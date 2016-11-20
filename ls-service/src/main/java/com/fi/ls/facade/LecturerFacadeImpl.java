@@ -94,10 +94,10 @@ public class LecturerFacadeImpl implements LecturerFacade {
 		Optional<Lecturer> entity = beanMapping.mapTo(l, Lecturer.class);
 		try {
 			lecturerService.remove(entity.get());
-                        return true;
+			return true;
 		} catch (ServiceLayerException | NoSuchElementException ex) {
 			logger.debug("deleteLecturer method invokes exception: " + ex);
-                        return false;
+			return false;
 		}
 	}
 
@@ -122,10 +122,10 @@ public class LecturerFacadeImpl implements LecturerFacade {
 		try {
 			lecturerService.deleteLecture(beanMapping.mapTo(lect, Lecturer.class).get(),
 					beanMapping.mapTo(l, Lecture.class).get());
-                        return true;
+			return true;
 		} catch (ServiceLayerException | NoSuchElementException ex) {
 			logger.warn("deleteLecture method invokes exception: " + ex);
-                        return false;
+			return false;
 		}
 
 	}
@@ -140,26 +140,26 @@ public class LecturerFacadeImpl implements LecturerFacade {
 		try {
 			lecturerService.deleteLectures(beanMapping.mapTo(lect, Lecturer.class).get(),
 					beanMapping.mapTo(l, Lecture.class));
-                        return true;
+			return true;
 		} catch (ServiceLayerException | NoSuchElementException ex) {
 			logger.warn("deleteLectures method invokes exception: " + ex);
-                        return false;
+			return false;
 		}
 
 	}
 
-        @Override
-        public List<LanguageDTO> findAllLecturerLanguages(LecturerDTO l) {
-                if (l == null)
-                    throw new IllegalArgumentException("LectureDTO parameter is null");
-            
+	@Override
+	public List<LanguageDTO> findAllLecturerLanguages(LecturerDTO l) {
+		if (l == null)
+			throw new IllegalArgumentException("LectureDTO parameter is null");
+
 		try {
-                        Optional<Lecturer> entity = beanMapping.mapTo(l, Lecturer.class);
+			Optional<Lecturer> entity = beanMapping.mapTo(l, Lecturer.class);
 			List<Language> entities = lecturerService.findAllLecturerLanguages(entity.get());
 			return beanMapping.mapTo(entities, LanguageDTO.class);
 		} catch (ServiceLayerException | NoSuchElementException ex) {
 			logger.warn("findAllLecturerLanguages method invokes exception: " + ex);
 			return Collections.emptyList();
 		}
-        }
+	}
 }

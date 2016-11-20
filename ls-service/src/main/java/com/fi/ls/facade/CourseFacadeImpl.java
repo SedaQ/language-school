@@ -93,10 +93,10 @@ public class CourseFacadeImpl implements CourseFacade {
 			throw new IllegalArgumentException("courseId parameter is null in deleteCourse method");
 		try {
 			courseService.remove(courseService.findById(courseId));
-                        return true;
+			return true;
 		} catch (ServiceLayerException | NoSuchElementException ex) {
 			logger.warn("deleteCourse method invokes exception: " + ex);
-                        return false;
+			return false;
 		}
 	}
 
@@ -120,10 +120,10 @@ public class CourseFacadeImpl implements CourseFacade {
 		try {
 			courseService.addLecture(beanMapping.mapTo(c, Course.class).get(),
 					beanMapping.mapTo(l, Lecture.class).get());
-                        return true;
+			return true;
 		} catch (ServiceLayerException | NoSuchElementException ex) {
 			logger.warn("addLecture method invokes exception: " + ex);
-                        return false;
+			return false;
 		}
 	}
 
@@ -134,10 +134,10 @@ public class CourseFacadeImpl implements CourseFacade {
 					"CourseDTO c parameter or List<LectureDTO> l is null in addLectures method");
 		try {
 			courseService.addLectures(beanMapping.mapTo(c, Course.class).get(), beanMapping.mapTo(l, Lecture.class));
-                        return true;
+			return true;
 		} catch (ServiceLayerException | NoSuchElementException ex) {
 			logger.warn("addLectures method invokes exception: " + ex);
-                        return false;
+			return false;
 		}
 	}
 
