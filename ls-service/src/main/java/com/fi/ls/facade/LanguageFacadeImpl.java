@@ -5,6 +5,8 @@ import com.fi.ls.entity.Language;
 import com.fi.ls.exceptions.ServiceLayerException;
 import com.fi.ls.mapping.BeanMapping;
 import com.fi.ls.service.LanguageService;
+
+import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -100,7 +102,7 @@ public class LanguageFacadeImpl implements LanguageFacade {
 			return beanMapping.mapTo(entities, LanguageDTO.class);
 		} catch (ServiceLayerException | NoSuchElementException ex) {
 			logger.warn("getAllLanguages method invokes exception: " + ex);
-			return null;
+			return Collections.emptyList();
 		}
 	}
 }

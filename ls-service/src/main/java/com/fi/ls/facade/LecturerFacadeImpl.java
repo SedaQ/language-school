@@ -8,6 +8,8 @@ import com.fi.ls.entity.Lecturer;
 import com.fi.ls.exceptions.ServiceLayerException;
 import com.fi.ls.mapping.BeanMapping;
 import com.fi.ls.service.LecturerService;
+
+import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -48,7 +50,7 @@ public class LecturerFacadeImpl implements LecturerFacade {
 			Lecturer created = lecturerService.create(entity.get());
 			return beanMapping.mapTo(created, LecturerDTO.class);
 		} catch (ServiceLayerException | NoSuchElementException ex) {
-			logger.debug("createLecturer method invokes exception: " + ex);
+			logger.warn("createLecturer method invokes exception: " + ex);
 			return Optional.empty();
 		}
 	}
@@ -62,7 +64,7 @@ public class LecturerFacadeImpl implements LecturerFacade {
 			Lecturer entity = lecturerService.findById(id);
 			return beanMapping.mapTo(entity, LecturerDTO.class);
 		} catch (ServiceLayerException | NoSuchElementException ex) {
-			logger.debug("getLecturerById method invokes exception: " + ex);
+			logger.warn("getLecturerById method invokes exception: " + ex);
 			return Optional.empty();
 		}
 	}
@@ -77,7 +79,7 @@ public class LecturerFacadeImpl implements LecturerFacade {
 			Lecturer updated = lecturerService.update(entity.get());
 			return beanMapping.mapTo(updated, LecturerDTO.class);
 		} catch (ServiceLayerException | NoSuchElementException ex) {
-			logger.debug("updateLecturer method invokes exception: " + ex);
+			logger.warn("updateLecturer method invokes exception: " + ex);
 			return Optional.empty();
 		}
 	}
@@ -101,8 +103,8 @@ public class LecturerFacadeImpl implements LecturerFacade {
 			List<Lecturer> entities = lecturerService.findAll();
 			return beanMapping.mapTo(entities, LecturerDTO.class);
 		} catch (ServiceLayerException | NoSuchElementException ex) {
-			logger.debug("getAllLecturers method invokes exception: " + ex);
-			return null;
+			logger.warn("getAllLecturers method invokes exception: " + ex);
+			return Collections.emptyList();
 		}
 	}
 
@@ -115,7 +117,7 @@ public class LecturerFacadeImpl implements LecturerFacade {
 			lecturerService.deleteLecture(beanMapping.mapTo(lect, Lecturer.class).get(),
 					beanMapping.mapTo(l, Lecture.class).get());
 		} catch (ServiceLayerException | NoSuchElementException ex) {
-			logger.debug("deleteLecture method invokes exception: " + ex);
+			logger.warn("deleteLecture method invokes exception: " + ex);
 		}
 
 	}
@@ -129,7 +131,7 @@ public class LecturerFacadeImpl implements LecturerFacade {
 			lecturerService.deleteLectures(beanMapping.mapTo(lect, Lecturer.class).get(),
 					beanMapping.mapTo(l, Lecture.class));
 		} catch (ServiceLayerException | NoSuchElementException ex) {
-			logger.debug("deleteLectures method invokes exception: " + ex);
+			logger.warn("deleteLectures method invokes exception: " + ex);
 		}
 
 	}
