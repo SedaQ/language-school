@@ -162,7 +162,7 @@ public class CourseServiceTest {
 		doThrow(new PersistenceException("")).when(courseDao).remove(any(Course.class));
 		courseService.remove(c2);
 
-		// fail("Expected DataAccessException");
+		fail("Expected DataAccessException");
 	}
 
 	@Test(expectedExceptions = { IllegalArgumentException.class })
