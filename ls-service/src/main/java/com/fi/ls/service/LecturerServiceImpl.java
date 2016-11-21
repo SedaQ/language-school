@@ -22,12 +22,12 @@ import org.springframework.stereotype.Service;
 public class LecturerServiceImpl implements LecturerService {
 
 	private LecturerDao lecturerDao;
-        private LanguageDao languageDao;
+	private LanguageDao languageDao;
 
 	@Inject
 	public LecturerServiceImpl(LecturerDao lecturerDao, LanguageDao languageDao) {
 		this.lecturerDao = lecturerDao;
-                this.languageDao = languageDao;
+		this.languageDao = languageDao;
 	}
 
 	@Override
@@ -65,16 +65,14 @@ public class LecturerServiceImpl implements LecturerService {
 	}
 
 	@Override
-        @Transactional
+	@Transactional
 	public void remove(Lecturer l) {
 		if (l == null)
 			throw new IllegalArgumentException("Lecturer parameter is null");
 		try {
-                        for(Language lan : lecturerDao.findAllLecturerLanguages(l)) {
-                            languageDao.remove(lan);
-                        }
-                        lecturerDao.remove(l);
-                        
+			lecturerDao.findAllLecturerLanguages(l).forEach(lan -> languageDao.remove(lan));
+			lecturerDao.remove(l);
+
 		} catch (PersistenceException | DataAccessException ex) {
 			throw new ServiceLayerException("Problem with removing Lecturer, see inner exception.", ex);
 		}
@@ -96,28 +94,28 @@ public class LecturerServiceImpl implements LecturerService {
 	public void deleteLecture(Lecturer lect, Lecture l) {
 		if (lect == null || l == null)
 			throw new IllegalArgumentException("Lecturer parameter is null or Lecture parameter is null");
-                try {
-                    lect.deleteLecture(l);
-                    lecturerDao.update(lect);
-                } catch (PersistenceException | ConstraintViolationException | DataAccessException ex) {
+		try {
+			lect.deleteLecture(l);
+			lecturerDao.update(lect);
+		} catch (PersistenceException | ConstraintViolationException | DataAccessException ex) {
 			throw new ServiceLayerException("Problem with updating Lecturer, see inner exception.", ex);
-                }
+		}
 	}
 
 	@Override
 	public void deleteLectures(Lecturer lect, List<Lecture> l) {
 		if (lect == null || l == null)
 			throw new IllegalArgumentException("Lecturer parameter is null or Lecture parameter is null");
-                try {
-                    lect.deleteLectures(l);
-                    lecturerDao.update(lect);
-                } catch (PersistenceException | ConstraintViolationException | DataAccessException ex) {
+		try {
+			lect.deleteLectures(l);
+			lecturerDao.update(lect);
+		} catch (PersistenceException | ConstraintViolationException | DataAccessException ex) {
 			throw new ServiceLayerException("Problem with updating Lecturer, see inner exception.", ex);
-                }
+		}
 	}
 
-        @Override
-        public List<Language> findAllLecturerLanguages(Lecturer l) {
+	@Override
+	public List<Language> findAllLecturerLanguages(Lecturer l) {
 		if (l == null)
 			throw new IllegalArgumentException("Lecturer parameter is null");
 		try {
@@ -125,5 +123,5 @@ public class LecturerServiceImpl implements LecturerService {
 		} catch (PersistenceException | DataAccessException ex) {
 			throw new ServiceLayerException("Problem with finding Lecturer, see inner exception.", ex);
 		}
-        }
+	}
 }
