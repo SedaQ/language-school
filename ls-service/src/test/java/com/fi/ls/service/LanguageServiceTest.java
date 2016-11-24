@@ -14,6 +14,7 @@ import org.testng.annotations.Test;
 
 import static org.mockito.Mockito.*;
 import static org.testng.Assert.*;
+import org.testng.annotations.AfterMethod;
 
 /**
  *
@@ -55,6 +56,11 @@ public class LanguageServiceTest {
             
             l.addLanguage(lan1);
             l.addLanguage(lan2);
+    }
+    
+    @AfterMethod
+    public void afterMethod() {
+        reset(languageDao);
     }
     
     @Test

@@ -26,7 +26,7 @@ import org.springframework.stereotype.Service;
 public class LanguageFacadeImpl implements LanguageFacade {
 
 	private final Logger logger = LoggerFactory.getLogger(LanguageFacadeImpl.class);
-	
+
 	private LanguageService languageService;
 
 	private BeanMapping beanMapping;
@@ -83,15 +83,17 @@ public class LanguageFacadeImpl implements LanguageFacade {
 	}
 
 	@Override
-	public void deleteLanguage(LanguageDTO lan) {
+	public Boolean deleteLanguage(LanguageDTO lan) {
 		if (lan == null)
 			throw new IllegalArgumentException("LanguageDTO parameter is null");
 
 		Optional<Language> entity = beanMapping.mapTo(lan, Language.class);
 		try {
 			languageService.remove(entity.get());
+			return true;
 		} catch (ServiceLayerException | NoSuchElementException ex) {
 			logger.warn("deleteLanguage method invokes exception: " + ex);
+			return false;
 		}
 	}
 
