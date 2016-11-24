@@ -79,7 +79,7 @@ public class LSUserFacadeImpl implements LSUserFacade {
 		if (userId == null)
 			throw new IllegalArgumentException("userId parameter is null in update method");
 		try {
-			Optional<LSUser> user = Optional.ofNullable(userService.findById(userId));
+			Optional<LSUser> user = Optional.ofNullable(userService.update(userService.findById(userId)));
 			return user.isPresent() ? beanMapping.mapTo(user.get(), LSUserDTO.class) : Optional.empty();
 		} catch (ServiceLayerException | NoSuchElementException ex) {
 			logger.warn("update method invokes exception: " + ex);

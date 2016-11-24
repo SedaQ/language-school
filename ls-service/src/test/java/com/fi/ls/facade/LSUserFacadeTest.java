@@ -88,12 +88,14 @@ public class LSUserFacadeTest extends AbstractTestNGSpringContextTests {
 	@Test
 	public void testUpdate() {
 		userFacade.update(Long.MAX_VALUE);
-		verify(userService, times(1)).findById(Long.MAX_VALUE);
+		verify(userService, times(1)).findById(any(Long.class));
+		verify(userService, times(1)).update(any(LSUser.class));
 	}
 
 	@Test
 	public void testDeleteUser() {
 		userFacade.deleteUser(Long.MAX_VALUE);
+		verify(userService, times(1)).findById(any(Long.class));
 		verify(userService, times(1)).remove(any(LSUser.class));
 	}
 
