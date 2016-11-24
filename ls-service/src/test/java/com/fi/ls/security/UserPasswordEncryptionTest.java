@@ -1,15 +1,23 @@
 package com.fi.ls.security;
 
+import javax.inject.Inject;
+
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
+import com.fi.ls.config.BeanMappingConfiguration;
 
 /**
  * @author Pavel Šeda (441048)
  *
  */
-public class UserPasswordEncryptionTest {
+@ContextConfiguration(classes = BeanMappingConfiguration.class)
+public class UserPasswordEncryptionTest extends AbstractTestNGSpringContextTests{
 
+	@Inject
 	private UserPasswordEncryption userPwdEncryption;
 
 	private String password;
@@ -18,7 +26,6 @@ public class UserPasswordEncryptionTest {
 	@BeforeClass()
 	public void init() {
 		password = "testPassword";
-		userPwdEncryption = new UserPasswordEncryption();
 	}
 
 	@Test
