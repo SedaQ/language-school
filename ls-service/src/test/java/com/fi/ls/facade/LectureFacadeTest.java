@@ -38,7 +38,7 @@ import org.testng.annotations.Test;
 @ContextConfiguration(classes = BeanMappingConfiguration.class)
 @TestExecutionListeners(TransactionalTestExecutionListener.class)
 @Transactional
-public class LectureFacadeTest {//extends AbstractTestNGSpringContextTests {
+public class LectureFacadeTest extends AbstractTestNGSpringContextTests {
    
     @Mock
     LectureService lectureService;
