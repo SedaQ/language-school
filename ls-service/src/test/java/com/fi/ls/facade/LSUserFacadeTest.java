@@ -20,8 +20,6 @@ import com.fi.ls.entity.LSUser;
 import com.fi.ls.mapping.BeanMapping;
 import com.fi.ls.service.LSUserService;
 
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.*;
 
 import java.util.Optional;
@@ -36,15 +34,15 @@ import java.util.Optional;
 public class LSUserFacadeTest extends AbstractTestNGSpringContextTests {
 
 	@Mock
-	private LSUserService userService;
+	LSUserService userService;
 
 	@Mock
-	private BeanMapping beanMapping;
+	BeanMapping beanMapping;
 
-	private LSUserFacade userFacade;
+	LSUserFacade userFacade;
 
-	private LSUserDTO user1;
-	private LSUserCreateDTO user2;
+	LSUserDTO user1;
+	LSUserCreateDTO user2;
 
 	@BeforeClass
 	public void init() {
@@ -75,6 +73,8 @@ public class LSUserFacadeTest extends AbstractTestNGSpringContextTests {
 
 	@Test
 	public void testGetUserById() {
+		LSUser user = new LSUser();
+		when(userService.findById(Long.MAX_VALUE)).thenReturn(user);
 		userFacade.getUserById(Long.MAX_VALUE);
 		verify(userService, times(1)).findById(any(Long.class));
 	}
@@ -91,8 +91,8 @@ public class LSUserFacadeTest extends AbstractTestNGSpringContextTests {
 		userDTO.setId(Long.MAX_VALUE);
 		LSUser user = beanMapping.mapTo(userDTO, LSUser.class).get();
 
-		when(userService.findById(Long.MAX_VALUE)).thenReturn(user);
-
+		when(userService.update(user)).thenReturn(user);
+		
 		userFacade.update(Long.MAX_VALUE);
 		verify(userService, times(1)).update(user);
 	}
@@ -104,7 +104,7 @@ public class LSUserFacadeTest extends AbstractTestNGSpringContextTests {
 		LSUser user = beanMapping.mapTo(userDTO, LSUser.class).get();
 
 		userFacade.deleteUser(Long.MAX_VALUE);
-		verify(userService, times(1)).update(user);
+		verify(userService, times(1)).remove(user);
 	}
 
 	@Test

@@ -22,8 +22,6 @@ import com.fi.ls.exceptions.ServiceLayerException;
 import com.fi.ls.mapping.BeanMapping;
 import com.fi.ls.service.CourseService;
 
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.*;
 import static org.testng.Assert.*;
 
@@ -44,10 +42,10 @@ import org.testng.annotations.BeforeMethod;
 public class CourseFacadeTest extends AbstractTestNGSpringContextTests {
 
 	@Mock
-	private CourseService courseService;
+	CourseService courseService;
 
 	@Mock
-	private BeanMapping beanMapping;
+	BeanMapping beanMapping;
 
 	CourseFacade courseFacade;
 
@@ -85,7 +83,7 @@ public class CourseFacadeTest extends AbstractTestNGSpringContextTests {
 	@Test
 	public void testCreate() {
 		courseFacade.create(courseCreateDTO1);
-		verify(courseService, times(1)).create(any(Course.class));
+		verify(courseService, times(1)).create(beanMapping.mapTo(courseCreateDTO1, Course.class).get());
 	}
 
 	@Test
