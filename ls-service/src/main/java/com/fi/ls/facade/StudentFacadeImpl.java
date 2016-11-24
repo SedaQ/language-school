@@ -44,7 +44,7 @@ public class StudentFacadeImpl implements StudentFacade {
 		if (s == null)
 			throw new IllegalArgumentException("Student is null");
 		try {
-			Optional<Student> student = Optional.of(studentService.create(beanMapping.mapTo(s, Student.class).get()));
+			Optional<Student> student = Optional.ofNullable(studentService.create(beanMapping.mapTo(s, Student.class).get()));
 			return student.isPresent() ? beanMapping.mapTo(student.get(), StudentDTO.class) : Optional.empty();
 		} catch (ServiceLayerException | NoSuchElementException ex) {
 			logger.warn("error in create student: " + ex);
@@ -57,7 +57,7 @@ public class StudentFacadeImpl implements StudentFacade {
 		if (s == null)
 			throw new IllegalArgumentException("Student is null");
 		try {
-			Optional<Student> student = Optional.of(studentService.findById(s.getId()));
+			Optional<Student> student = Optional.ofNullable(studentService.findById(s.getId()));
 			return student.isPresent() ? beanMapping.mapTo(student.get(), StudentDTO.class) : Optional.empty();
 		} catch (ServiceLayerException | NoSuchElementException ex) {
 			logger.warn("error in update student: " + ex);
@@ -81,7 +81,7 @@ public class StudentFacadeImpl implements StudentFacade {
 		if (id == null)
 			throw new IllegalArgumentException("Id is null");
 		try {
-			Optional<Student> student = Optional.of(studentService.findById(id));
+			Optional<Student> student = Optional.ofNullable(studentService.findById(id));
 			return student.isPresent() ? beanMapping.mapTo(student.get(), StudentDTO.class) : Optional.empty();
 		} catch (ServiceLayerException | NoSuchElementException ex) {
 			logger.warn("error in get student by id: " + ex);
@@ -104,7 +104,7 @@ public class StudentFacadeImpl implements StudentFacade {
 		if (birthNumber == null)
 			throw new IllegalArgumentException("Birth number is null");
 		try {
-			Optional<Student> student = Optional.of(studentService.findByBirthNumber(birthNumber));
+			Optional<Student> student = Optional.ofNullable(studentService.findByBirthNumber(birthNumber));
 			return student.isPresent() ? beanMapping.mapTo(student.get(), StudentDTO.class) : Optional.empty();
 		} catch (ServiceLayerException | NoSuchElementException ex) {
 			logger.warn("error in get student by birth number: " + ex);

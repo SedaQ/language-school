@@ -251,7 +251,7 @@ public class LecturerFacadeTest extends AbstractTestNGSpringContextTests {
     }
     
     @Test(expectedExceptions = {IllegalArgumentException.class})
-    public void testDeleteLecturesLecturesNull() {
+    public void testDeleteLecturerLecturesNull() {
         
         lecturerFacade.deleteLectures(lecturer, null);
         

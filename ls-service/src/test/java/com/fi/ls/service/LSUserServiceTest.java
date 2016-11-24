@@ -23,7 +23,6 @@ import static org.mockito.Mockito.*;
  * @author Pavel Šeda (441048)
  *
  */
-@ContextConfiguration(classes = BeanMappingConfiguration.class)
 public class LSUserServiceTest {
     
     @Mock

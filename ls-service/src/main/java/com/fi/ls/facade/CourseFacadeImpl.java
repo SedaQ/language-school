@@ -53,7 +53,7 @@ public class CourseFacadeImpl implements CourseFacade {
 		if (id == null)
 			throw new IllegalArgumentException("Id parameter is null");
 		try {
-			Optional<Course> course = Optional.of(courseService.findById(id));
+			Optional<Course> course = Optional.ofNullable(courseService.findById(id));
 			return course.isPresent() ? beanMapping.mapTo(course.get(), CourseDTO.class) : Optional.empty();
 		} catch (ServiceLayerException | NoSuchElementException ex) {
 			logger.warn("getCourseById method invokes exception: " + ex);
@@ -66,7 +66,7 @@ public class CourseFacadeImpl implements CourseFacade {
 		if (c == null)
 			throw new IllegalArgumentException("CourseCreateDTO c parameter is null");
 		try {
-			Optional<Course> course = Optional.of(courseService.create(beanMapping.mapTo(c, Course.class).get()));
+			Optional<Course> course = Optional.ofNullable(courseService.create(beanMapping.mapTo(c, Course.class).get()));
 			return course.isPresent() ? beanMapping.mapTo(course.get(), CourseDTO.class) : Optional.empty();
 		} catch (ServiceLayerException | NoSuchElementException ex) {
 			logger.warn("create method invokes exception: " + ex);
@@ -79,7 +79,7 @@ public class CourseFacadeImpl implements CourseFacade {
 		if (courseId == null)
 			throw new IllegalArgumentException("courseId parameter is null in updateCourse method");
 		try {
-			Optional<Course> course = Optional.of(courseService.update(courseService.findById(courseId)));
+			Optional<Course> course = Optional.ofNullable(courseService.update(courseService.findById(courseId)));
 			return course.isPresent() ? beanMapping.mapTo(course.get(), CourseDTO.class) : Optional.empty();
 		} catch (ServiceLayerException | NoSuchElementException ex) {
 			logger.warn("updateCourse method invokes exception: " + ex);
@@ -102,10 +102,10 @@ public class CourseFacadeImpl implements CourseFacade {
 
 	@Override
 	public Optional<CourseDTO> getCourseByName(String name) {
-		if (name == null)
-			throw new IllegalArgumentException("String parameter is null in deleteCourse method");
+		if (name == null || name.isEmpty())
+			throw new IllegalArgumentException("String parameter is null or empty in deleteCourse method");
 		try {
-			Optional<Course> course = Optional.of(courseService.findByName(""));
+			Optional<Course> course = Optional.ofNullable(courseService.findByName(""));
 			return course.isPresent() ? beanMapping.mapTo(course.get(), CourseDTO.class) : Optional.empty();
 		} catch (ServiceLayerException | NoSuchElementException ex) {
 			logger.warn("getCourseByName method invokes exception: " + ex);

@@ -53,7 +53,7 @@ public class LSUserFacadeImpl implements LSUserFacade {
 		if (id == null)
 			throw new IllegalArgumentException("Id parameter is null");
 		try {
-			Optional<LSUser> user = Optional.of(userService.findById(id));
+			Optional<LSUser> user = Optional.ofNullable(userService.findById(id));
 			return user.isPresent() ? beanMapping.mapTo(user.get(), LSUserDTO.class) : Optional.empty();
 		} catch (ServiceLayerException | NoSuchElementException ex) {
 			logger.warn("getUserById method invokes exception: " + ex);
@@ -66,7 +66,7 @@ public class LSUserFacadeImpl implements LSUserFacade {
 		if (email == null || email.isEmpty())
 			throw new IllegalArgumentException("email parameter is null or empty");
 		try {
-			Optional<LSUser> user = Optional.of(userService.findByEmail(email));
+			Optional<LSUser> user = Optional.ofNullable(userService.findByEmail(email));
 			return user.isPresent() ? beanMapping.mapTo(user.get(), LSUserDTO.class) : Optional.empty();
 		} catch (ServiceLayerException | NoSuchElementException ex) {
 			logger.warn("getUserByEmail method invokes exception: " + ex);
@@ -79,7 +79,7 @@ public class LSUserFacadeImpl implements LSUserFacade {
 		if (userId == null)
 			throw new IllegalArgumentException("userId parameter is null in update method");
 		try {
-			Optional<LSUser> user = Optional.of(userService.findById(userId));
+			Optional<LSUser> user = Optional.ofNullable(userService.findById(userId));
 			return user.isPresent() ? beanMapping.mapTo(user.get(), LSUserDTO.class) : Optional.empty();
 		} catch (ServiceLayerException | NoSuchElementException ex) {
 			logger.warn("update method invokes exception: " + ex);

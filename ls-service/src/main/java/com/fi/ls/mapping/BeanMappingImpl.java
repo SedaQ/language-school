@@ -36,7 +36,7 @@ public class BeanMappingImpl implements BeanMapping {
 
 	@Override
 	public <T> Optional<T> mapTo(Object u, Class<T> mapToClass) {
-		return Optional.of(dozer.map(u, mapToClass));
+		return Optional.ofNullable(dozer.map(u, mapToClass));
 	}
 
 	@Override
