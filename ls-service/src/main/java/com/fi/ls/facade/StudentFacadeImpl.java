@@ -57,7 +57,7 @@ public class StudentFacadeImpl implements StudentFacade {
 		if (s == null)
 			throw new IllegalArgumentException("Student is null");
 		try {
-			Optional<Student> student = Optional.ofNullable(studentService.findById(s.getId()));
+			Optional<Student> student = Optional.ofNullable(studentService.update(beanMapping.mapTo(s, Student.class).get()));
 			return student.isPresent() ? beanMapping.mapTo(student.get(), StudentDTO.class) : Optional.empty();
 		} catch (ServiceLayerException | NoSuchElementException ex) {
 			logger.warn("error in update student: " + ex);
