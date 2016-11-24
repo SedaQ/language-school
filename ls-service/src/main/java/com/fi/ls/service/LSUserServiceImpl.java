@@ -23,7 +23,7 @@ public class LSUserServiceImpl implements LSUserService {
 
 	private LSUserRepository userDao;
         
-        private UserPasswordEncryption userPasswordEncryption;
+    private UserPasswordEncryption userPasswordEncryption;
 	
 	@Inject
 	public LSUserServiceImpl(LSUserRepository userDao, UserPasswordEncryption userPasswordEncryption){

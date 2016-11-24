@@ -87,24 +87,14 @@ public class LSUserFacadeTest extends AbstractTestNGSpringContextTests {
 
 	@Test
 	public void testUpdate() {
-		LSUserDTO userDTO = new LSUserDTO();
-		userDTO.setId(Long.MAX_VALUE);
-		LSUser user = beanMapping.mapTo(userDTO, LSUser.class).get();
-
-		when(userService.update(user)).thenReturn(user);
-		
 		userFacade.update(Long.MAX_VALUE);
-		verify(userService, times(1)).update(user);
+		verify(userService, times(1)).findById(Long.MAX_VALUE);
 	}
 
 	@Test
 	public void testDeleteUser() {
-		LSUserDTO userDTO = new LSUserDTO();
-		userDTO.setId(Long.MAX_VALUE);
-		LSUser user = beanMapping.mapTo(userDTO, LSUser.class).get();
-
 		userFacade.deleteUser(Long.MAX_VALUE);
-		verify(userService, times(1)).remove(user);
+		verify(userService, times(1)).remove(any(LSUser.class));
 	}
 
 	@Test
