@@ -23,12 +23,12 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fi.ls.config.BeanMappingConfiguration;
 import com.fi.ls.dto.user.LSUserDTO;
 import com.fi.ls.rest.mixin.LSUserDTOMixin;
+import com.fi.ls.sampleData.SampleDataConfiguration;
 
 @EnableWebMvc
 @Configuration
-//@Import({ServiceConfiguration.class, EshopWithSampleDataConfiguration.class})
-@Import({BeanMappingConfiguration.class})
-@ComponentScan(basePackages = {"com.fi.ls.rest.controllers", "com.fi.ls.rest.assemblers"})
+@Import({BeanMappingConfiguration.class, SampleDataConfiguration.class})
+@ComponentScan(basePackages = {"com.fi.ls.rest.controller"})
 public class RootWebContext extends WebMvcConfigurerAdapter {
 
     @Override

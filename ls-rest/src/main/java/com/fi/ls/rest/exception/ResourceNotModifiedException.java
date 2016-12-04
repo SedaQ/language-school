@@ -5,7 +5,5 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(value = HttpStatus.NOT_MODIFIED, reason = "The requested resource was not modified")
 public class ResourceNotModifiedException extends RuntimeException {
-
-	private static final long serialVersionUID = 6822719992934850819L;
-
+    //304
 }
