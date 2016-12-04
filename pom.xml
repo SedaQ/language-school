@@ -84,5 +84,6 @@
 		<module>ls-service</module>
 		<module>ls-api</module>
 		<module>ls-rest</module>
+	 <module>LanguageSchoolSampleData</module>
 	</modules>
 </project>

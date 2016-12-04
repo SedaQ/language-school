@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import com.fi.ls.dto.lecturer.LecturerDTO;
 import com.fi.ls.facade.LecturerFacade;
 import com.fi.ls.rest.ApiEndpoints;
+import java.util.Arrays;
 
 @RestController
 @RequestMapping(ApiEndpoints.ROOT_URI_LECTURERS)
