@@ -18,7 +18,7 @@
 				<artifactId>tomcat7-maven-plugin</artifactId>
 				<version>2.2</version>
 				<configuration>
-					<path>/ls-rest</path>
+					<path>/pa165/rest</path>
 				</configuration>
 			</plugin>
 		</plugins>
@@ -45,7 +45,6 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.hateoas</groupId>
 			<artifactId>spring-hateoas</artifactId>
@@ -70,7 +69,6 @@
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
 		</dependency>
-
 		<!-- librarries needed for unit tests -->
 		<dependency>
 			<groupId>org.testng</groupId>
@@ -87,14 +85,11 @@
 			<artifactId>mockito-all</artifactId>
 			<scope>test</scope>
 		</dependency>
-
 		<dependency>
 			<groupId>org.glassfish</groupId>
 			<artifactId>javax.el</artifactId>
 			<scope>test</scope> <!-- conflicts with tomcat libraries, but needed for tests to run -->
 		</dependency>
-
 	</dependencies>
-
 
 </project>
