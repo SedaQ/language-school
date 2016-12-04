@@ -27,7 +27,6 @@
 			<plugin>
 				<groupId>org.apache.tomcat.maven</groupId>
 				<artifactId>tomcat7-maven-plugin</artifactId>
-				<version>2.2</version>
 				<configuration>
 					<path>/pa165</path>
 				</configuration>
@@ -48,10 +47,17 @@
 		</dependency>
 		<!-- servlet, JSP, JSTL -->
 		<!-- must be this instead of javaee-web for the springmvc-tests to succeed -->
+		<!-- <dependency> <groupId>javax</groupId> <artifactId>javaee-web-api</artifactId> 
+			<version>7.0</version> <scope>provided</scope> </dependency> -->
 		<dependency>
-			<groupId>javax</groupId>
-			<artifactId>javaee-web-api</artifactId>
-			<version>7.0</version> <!-- Put here the version of your Java EE app, in my case 7.0 -->
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>tomcat-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>2.1</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>

@@ -3,6 +3,7 @@ package com.fi.ls.facade;
 import java.util.List;
 import java.util.Optional;
 
+import com.fi.ls.dto.user.LSUserAuthenticateDTO;
 import com.fi.ls.dto.user.LSUserCreateDTO;
 import com.fi.ls.dto.user.LSUserDTO;
 
@@ -55,20 +56,20 @@ public interface LSUserFacade {
 	 */
 	public Optional<LSUserDTO> getUserByEmail(String email);
 
-        /**
-         * Register the given user with the given unencrypted password.
-         * @param u
-         * @param unencryptedPassword 
-         * @return true, if successful removed
-         */
+    /**
+     * Register the given user with the given unencrypted password.
+     * @param u
+     * @param unencryptedPassword 
+     * @return true, if successful removed
+     */
 	public Boolean registerUser(LSUserCreateDTO u, String unencryptedPassword);
 
 	/**
-         * Try to authenticate a user. Return true only if the hashed password
-	 * matches the records.
-         * @param u
-         * @return true, if successful
-         */
+     * Try to authenticate a user. Return true only if the hashed password
+     * matches the records.
+     * @param u
+     * @return true, if successful
+     */
 	public Boolean authenticate(LSUserDTO u);
 
 }

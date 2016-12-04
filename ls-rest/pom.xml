@@ -16,7 +16,6 @@
 			<plugin>
 				<groupId>org.apache.tomcat.maven</groupId>
 				<artifactId>tomcat7-maven-plugin</artifactId>
-				<version>2.2</version>
 				<configuration>
 					<path>/pa165/rest</path>
 				</configuration>
@@ -31,15 +30,13 @@
 			<version>${project.parent.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>com.fi.languageschool</groupId>
+			<groupId>${project.parent.groupId}</groupId>
 			<artifactId>ls-service</artifactId>
 			<version>${project.parent.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.tomcat</groupId>
 			<artifactId>tomcat-api</artifactId>
-			<!-- <version>${tomcat.version}</version> -->
-			<version>8.0.22</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
