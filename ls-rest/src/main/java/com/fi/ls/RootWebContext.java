@@ -28,7 +28,7 @@ import com.fi.ls.sampleData.SampleDataConfiguration;
 @EnableWebMvc
 @Configuration
 @Import({BeanMappingConfiguration.class, SampleDataConfiguration.class})
-@ComponentScan(basePackages = {"com.fi.ls.rest.controller"})
+@ComponentScan(basePackages = {"com.fi.ls.rest.controller", "com.fi.ls.rest.assembler"})
 public class RootWebContext extends WebMvcConfigurerAdapter {
 
     @Override

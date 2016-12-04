@@ -35,6 +35,6 @@ public class LecturersController {
 	public final List<LecturerDTO> getLecturers() {
 
 		logger.debug("rest getLecturers()");
-		return Arrays.asList(new LecturerDTO());
+		return lecturerFacade.getAllLecturers();
 	}
 }
