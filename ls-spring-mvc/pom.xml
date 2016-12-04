@@ -38,6 +38,11 @@
 	<dependencies>
 		<dependency>
 			<groupId>${project.parent.groupId}</groupId>
+			<artifactId>LanguageSchoolSampleData</artifactId>
+			<version>${project.parent.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>${project.parent.groupId}</groupId>
 			<artifactId>ls-service</artifactId>
 			<version>${project.parent.version}</version>
 		</dependency>

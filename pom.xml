@@ -62,12 +62,7 @@
 				<scope>test</scope>
 			</dependency>
 			<!-- please check version of these taglibs and tomcat -->
-			<dependency>
-				<groupId>org.apache.tomcat</groupId>
-				<artifactId>tomcat-api</artifactId>
-				<version>9.0.0.M13</version>
-				<scope>provided</scope>
-			</dependency>
+
 			<dependency>
 				<groupId>org.apache.taglibs</groupId>
 				<artifactId>taglibs-standard-spec</artifactId>
@@ -102,5 +97,6 @@
 		<module>ls-api</module>
 		<module>ls-rest</module>
 		<module>ls-spring-mvc</module>
+		<module>LanguageSchoolSampleData</module>
 	</modules>
 </project>

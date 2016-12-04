@@ -92,6 +92,10 @@ public class Lecturer extends LSUser {
 		return Collections.unmodifiableList(listOfLectures);
 	}
 
+        public void setListOfLectures(List<Lecture> listOfLectures) {
+            this.listOfLectures = listOfLectures;
+        }
+
 	public void addLanguage(Language lan) {
 		listOfLanguages.add(lan);
 		lan.setLecturer(this);
