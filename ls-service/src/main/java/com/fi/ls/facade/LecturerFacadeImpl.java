@@ -64,7 +64,11 @@ public class LecturerFacadeImpl implements LecturerFacade {
 
 		try {
 			Lecturer entity = lecturerService.findById(id);
-			return beanMapping.mapTo(entity, LecturerDTO.class);
+                        //ist<LanguageDTO> languages = beanMapping.mapTo(lecturerService.findAllLecturerLanguages(entity), LanguageDTO.class);
+                        
+			Optional<LecturerDTO> dto = beanMapping.mapTo(entity, LecturerDTO.class);
+                        //dto.get().addLanguage(languageDTO);
+                        return dto;
 		} catch (ServiceLayerException | NoSuchElementException ex) {
 			logger.warn("getLecturerById method invokes exception: " + ex);
 			return Optional.empty();

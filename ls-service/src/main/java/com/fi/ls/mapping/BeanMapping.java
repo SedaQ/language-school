@@ -16,6 +16,4 @@ public interface BeanMapping {
 
 	public <T> Optional<T> mapTo(Object u, Class<T> mapToClass);
 
-	public Mapper getMapper();
-
 }

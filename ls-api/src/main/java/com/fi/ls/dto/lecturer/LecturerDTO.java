@@ -47,8 +47,16 @@ public class LecturerDTO extends LSUserDTO {
             return Collections.unmodifiableList(listOfLanguages);
     }
 
+    public void setListOfLanguages(List<LanguageDTO> listOfLanguages) {
+        this.listOfLanguages = listOfLanguages;
+    }
+
     public List<LectureDTO> getListOfLectures() {
             return Collections.unmodifiableList(listOfLectures);
+    }
+
+    public void setListOfLectures(List<LectureDTO> listOfLectures) {
+        this.listOfLectures = listOfLectures;
     }
 
     public void addLanguage(LanguageDTO languageDTO) {

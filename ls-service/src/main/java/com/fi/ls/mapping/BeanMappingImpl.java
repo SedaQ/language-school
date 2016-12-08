@@ -9,7 +9,7 @@ import java.util.Optional;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.dozer.Mapper;
+import org.modelmapper.ModelMapper;
 
 /**
  * @author Pavel Šeda (441048)
@@ -18,30 +18,25 @@ import org.dozer.Mapper;
 @Named
 public class BeanMappingImpl implements BeanMapping {
 
-	private Mapper dozer;
+    	private ModelMapper modelMapper;
 
 	@Inject
-	public BeanMappingImpl(Mapper mapper) {
-		this.dozer = mapper;
-	}
+	public BeanMappingImpl(ModelMapper modelMapper) {
+		this.modelMapper = modelMapper;
+        }
 
 	@Override
 	public <T> List<T> mapTo(Collection<?> objects, Class<T> mapToClass) {
 		List<T> mappedCollection = new ArrayList<>();
 		for (Object object : objects) {
-			mappedCollection.add(dozer.map(object, mapToClass));
+			mappedCollection.add(modelMapper.map(object, mapToClass));
 		}
 		return mappedCollection;
 	}
 
 	@Override
 	public <T> Optional<T> mapTo(Object u, Class<T> mapToClass) {
-		return Optional.ofNullable(dozer.map(u, mapToClass));
-	}
-
-	@Override
-	public Mapper getMapper() {
-		return dozer;
+		return Optional.ofNullable(modelMapper.map(u, mapToClass));
 	}
 
 	public boolean isCollection(Object obj) {
