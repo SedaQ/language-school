@@ -24,7 +24,7 @@ import org.testng.annotations.Test;
 
 /**
  *
- * @author lukas & Pavel Šeda (441048)
+ * @author Lukas Daubner (410034) & Pavel Šeda (441048)
  */
 @ContextConfiguration(classes = BeanMappingConfiguration.class)
 public class BeanMappingTest extends AbstractTestNGSpringContextTests {

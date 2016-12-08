@@ -2,6 +2,7 @@ package com.fi.ls.rest.assembler;
 
 import com.fi.ls.dto.language.LanguageDTO;
 import com.fi.ls.rest.controller.LanguagesController;
+import com.fi.ls.rest.controller.LecturersController;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.hateoas.Resource;
@@ -16,16 +17,17 @@ public class LanguageResourceAssembler implements ResourceAssembler<LanguageDTO,
     @Override
     public Resource<LanguageDTO> toResource(LanguageDTO languageDTO) {
         long id = languageDTO.getId();
-        Resource<LanguageDTO> productResource = new Resource<>(languageDTO);
+        Resource<LanguageDTO> languageResource = new Resource<>(languageDTO);
 
         try {
-            productResource.add(linkTo(LanguagesController.class).slash(languageDTO.getId()).withSelfRel());
-            productResource.add(linkTo(LanguagesController.class).slash(languageDTO.getId()).withRel("DELETE"));
+            languageResource.add(linkTo(LecturersController.class).slash(languageDTO.getLecturer().getId()).withRel("lecturer"));
+            languageResource.add(linkTo(LanguagesController.class).slash(languageDTO.getId()).withSelfRel());
+            languageResource.add(linkTo(LanguagesController.class).slash(languageDTO.getId()).withRel("DELETE"));
 
         } catch (Exception ex) {
             Logger.getLogger(LanguageResourceAssembler.class.getName()).log(Level.SEVERE, "could not link resource from LanguagesController", ex);
         }
 
-        return productResource;
+        return languageResource;
     }
 }
