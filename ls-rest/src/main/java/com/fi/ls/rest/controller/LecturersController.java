@@ -44,7 +44,7 @@ public class LecturersController {
         
 	/**
 	 * get all the lecturers (with HTTP caching)
-         * curl -i -X GET http://localhost:8080/ls-rest/lecturers/
+         * curl -i -X GET http://localhost:8080/pa165/rest/lecturers
 	 * 
          * @param webRequest
 	 * @return list of LecturerDTOs
@@ -55,7 +55,7 @@ public class LecturersController {
             logger.debug("rest getLecturers()");
                 
             Collection<LecturerDTO> lecturersDTO = lecturerFacade.getAllLecturers();
-            Collection<Resource<LecturerDTO>> languageResourceCollection = new ArrayList();
+            Collection<Resource<LecturerDTO>> languageResourceCollection = new ArrayList<>();
 
             for (LecturerDTO l : lecturersDTO) {
                 languageResourceCollection.add(lecturerResourceAssembler.toResource(l));
@@ -77,7 +77,7 @@ public class LecturersController {
         
         /**
          * get lecturer by id (with HTTP caching)
-         * curl -i -X GET http://localhost:8080/ls-rest/lecturers/{id}
+         * curl -i -X GET http://localhost:8080/pa165/rest/lecturers/{id}
          * 
          * @param id
          * @param webRequest

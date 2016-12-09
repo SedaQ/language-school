@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.xml.bind.DatatypeConverter;
 import java.io.IOException;
 
-@WebFilter(urlPatterns = { "/lsuser/*", "/course/*", "/lecture/*" })
+@WebFilter(urlPatterns = { "/lsuser/*","/language-school/*" })
 public class ProtectFilter implements Filter {
 
 	final static Logger log = LoggerFactory.getLogger(ProtectFilter.class);
@@ -66,7 +66,8 @@ public class ProtectFilter implements Filter {
 	private void response401(HttpServletResponse response) throws IOException {
 		response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 		response.setHeader("WWW-Authenticate", "Basic realm=\"type email and password\"");
-		response.getWriter().println("<html><body><h1>401 Unauthorized</h1> First of all you have to login!</body></html>");
+		response.getWriter()
+				.println("<html><body><h1>401 Unauthorized</h1> First of all you have to login!</body></html>");
 	}
 
 	@Override

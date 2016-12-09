@@ -4,13 +4,9 @@ import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
-
-import com.fi.ls.dto.user.LSUserAuthenticateDTO;
 import com.fi.ls.dto.user.LSUserCreateDTO;
 import com.fi.ls.dto.user.LSUserDTO;
 import com.fi.ls.facade.LSUserFacade;
@@ -38,8 +34,9 @@ public class LoginController {
 		}
 	}
 
-	@RequestMapping(value = "/login")
-	public String login(@RequestParam(value="form-username") String email, @RequestParam(value="form-password") String password) {
+	@RequestMapping(value = "/language-school", method = RequestMethod.POST)
+	public String login(@RequestParam(value = "form-username") String email,
+			@RequestParam(value = "form-password") String password) {
 		try {
 			LSUserDTO userDTO = new LSUserDTO();
 			userDTO.setId(userFacade.getUserByEmail(email).get().getId());
@@ -48,12 +45,10 @@ public class LoginController {
 
 			boolean isUserValid = userFacade.authenticate(userDTO);
 			if (isUserValid) {
-				System.out.println("GOOOOOD LOGIN PARAMETERS");
-				return "home";
+				return "index";
 			} else {
 				System.out.println("Bad Login parameters:!!!");
-				return "badlogin";
-				// model = new ModelAndView("bad login");
+				return "login";
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -57,11 +57,11 @@
 				<div class="row">
 					<div class="col-sm-8 col-sm-offset-2 text">
 						<h1>
-							<strong>Language School login</strong>
+							<strong>Language School</strong>
 						</h1>
 						<div class="description">
-							<p>This is one of the best language schools in Czech Republic
-								oriented on English and French languages.</p>
+							<p>This is one of the best language school in Czech Republic
+								oriented especially on English and French languages.</p>
 						</div>
 					</div>
 				</div>
@@ -71,18 +71,19 @@
 							<div class="form-top-left">
 								<h3>Login to our site</h3>
 								<p>Enter your username and password to log on:</p>
-								
+
 								<c:if test="${not empty error}">
 									<div class="error">${error}</div>
 								</c:if>
-								
+
 							</div>
 							<div class="form-top-right">
 								<i class="fa fa-lock"></i>
 							</div>
 						</div>
 						<div class="form-bottom">
-							<form role="form" action="" method="post" class="login-form">
+							<form role="form" action="<c:url value="/language-school"/>" method="post"
+								class="login-form">
 								<div class="form-group">
 									<label class="sr-only" for="form-username">Username</label> <input
 										type="text" name="form-username" placeholder="Username..."
@@ -93,9 +94,7 @@
 										type="password" name="form-password" placeholder="Password..."
 										class="form-password form-control" id="form-password">
 								</div>
-								<button type="submit" class="btn"
-									href="${pageContext.request.contextPath}/login">Sign
-									in!</button>
+								<button type="submit" class="btn">Sign in!</button>
 							</form>
 						</div>
 					</div>
