@@ -25,7 +25,7 @@ public class StudentController {
 
 	@RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
 	public String view(@PathVariable Long id, Model model) {
-		model.addAttribute("student", studentFacade.getStudentById(id));
+		model.addAttribute("student", studentFacade.getStudentById(id).get());
 		return "student/studentView";
 	}
 
