@@ -11,17 +11,20 @@ import org.springframework.stereotype.Component;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 
+/**
+ * @author Lukáš Daubner (410034)
+ *
+ */
 @Component
 public class LanguageResourceAssembler implements ResourceAssembler<LanguageDTO, Resource<LanguageDTO>> {
 
     @Override
     public Resource<LanguageDTO> toResource(LanguageDTO languageDTO) {
-        long id = languageDTO.getId();
         Resource<LanguageDTO> languageResource = new Resource<>(languageDTO);
 
         try {
-            languageResource.add(linkTo(LecturersController.class).slash(languageDTO.getLecturer().getId()).withRel("lecturer"));
             languageResource.add(linkTo(LanguagesController.class).slash(languageDTO.getId()).withSelfRel());
+            languageResource.add(linkTo(LecturersController.class).slash(languageDTO.getLecturer().getId()).withRel("lecturer"));
             languageResource.add(linkTo(LanguagesController.class).slash(languageDTO.getId()).withRel("DELETE"));
 
         } catch (Exception ex) {

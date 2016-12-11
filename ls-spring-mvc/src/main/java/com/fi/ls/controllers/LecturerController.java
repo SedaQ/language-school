@@ -25,7 +25,7 @@ public class LecturerController {
 
 	@RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
 	public String view(@PathVariable Long id, Model model) {
-		model.addAttribute("lecturer", lecturerFacade.getLecturerById(id));
+		model.addAttribute("lecturer", lecturerFacade.getLecturerById(id).get());
 		return "lecturer/lecturerView";
 	}
 }

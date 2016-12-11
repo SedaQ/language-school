@@ -26,10 +26,13 @@ import com.fi.ls.dto.language.LanguageDTO;
 import com.fi.ls.dto.lecture.LectureDTO;
 import com.fi.ls.dto.lecturer.LecturerDTO;
 import com.fi.ls.dto.student.StudentDTO;
-import com.fi.ls.dto.user.LSUserDTO;
 import com.fi.ls.rest.mixin.*;
 import com.fi.ls.sampleData.SampleDataConfiguration;
 
+/**
+ * @author Pavel Šeda (441048) & Lukáš Daubner (410034)
+ *
+ */
 @EnableWebMvc
 @Configuration
 @Import({BeanMappingConfiguration.class, SampleDataConfiguration.class})

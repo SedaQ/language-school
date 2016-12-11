@@ -78,10 +78,11 @@ public class CourseController {
 	}
 
 	@RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
-	public String view(@PathVariable Long id, Model model) {
+	public String view(@PathVariable long id, Model model) {
 		logger.debug("view: ", id);
-                CourseDTO kurz = courseFacade.getCourseById(id).get();
-		model.addAttribute("course", kurz);
+
+		model.addAttribute("course", courseFacade.getCourseById(id).get());
+
 		return "course/courseView";
 	}
         
