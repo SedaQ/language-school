@@ -11,6 +11,7 @@
 	<table class="table">
 		<thead>
 			<tr>
+                                <th>id</th>
 				<th>name</th>
 				<th>language</th>
 				<th>proficiency level</th>
@@ -26,7 +27,8 @@
 			</tr>
 		</tbody>
 	</table>
-
+        <my:a href="${pageContext.request.contextPath}/course/edit/${course.id}" class="btn btn-primary">Edit</my:a>
+        <my:a href="${pageContext.request.contextPath}/course/delete/${course.id}" class="btn btn-primary">Delete</my:a>
 	<%@ include file="../common/footer.jsp"%>
 </body>
 </html>

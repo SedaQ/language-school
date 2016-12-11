@@ -14,7 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.xml.bind.DatatypeConverter;
 import java.io.IOException;
 
-@WebFilter(urlPatterns = { "/lsuser/*","/language-school/*" })
+@WebFilter(urlPatterns = { })
+//@WebFilter(urlPatterns = { "/lsuser/*","/language-school/*" })
 public class ProtectFilter implements Filter {
 
 	final static Logger log = LoggerFactory.getLogger(ProtectFilter.class);

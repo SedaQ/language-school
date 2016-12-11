@@ -34,7 +34,7 @@
 		</tbody>
 
 	</table>
-
+        <my:a href="/course/new/" class="btn btn-primary">new</my:a>
 	<%@ include file="../common/footer.jsp"%>
 </body>
 </html>
