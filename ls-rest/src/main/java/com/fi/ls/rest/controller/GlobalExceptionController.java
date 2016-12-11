@@ -9,13 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-/**
- * This shows how a @ControllerAdvice can be used so that all the handlers can
- * be managed from a central location. It is also possible to associate one
- * handler to a set of Controllers See
- * https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/
- * web/bind/annotation/ControllerAdvice.html
- */
+//TODO
 @ControllerAdvice
 public class GlobalExceptionController {
 

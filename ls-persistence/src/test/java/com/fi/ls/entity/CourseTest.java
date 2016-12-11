@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.fi.ls.entity;
 
 import java.util.ArrayList;

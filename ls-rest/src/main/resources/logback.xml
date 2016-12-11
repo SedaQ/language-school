@@ -1,28 +1,26 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<!-- configuration for logback http://logback.qos.ch/ -->
 <configuration>
+    <!-- logs to console -->
+    <appender name="APP" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <!--  log message format    http://logback.qos.ch/manual/layouts.html#conversionWord
+             %date ... date and time of event
+             %-5level ... level (debug/info/warn), left justified, minimum 5 characters
+             %logger{36} ... logger name, shortened to at most 36 characters
+             - ... literal dash
+             %message ... the logged text
+             %n - OS-dependent end of line, \n on Unix, \r\n on Windows
+            -->
+            <pattern>%date %-5level %logger - %message%n</pattern>
+        </encoder>
+    </appender>
 
-	<property name="LOGS_PATH" value="./logs" />
+    <!-- default logging level -->
+    <root level="info">
+        <!-- reference to the used appender -->
+        <appender-ref ref="APP"/>
+    </root>
 
-	<appender name="FILE-ENGINE-ERROR" class="ch.qos.logback.core.FileAppender">
-		<file>${LOGS_PATH}/${log.name}.error</file>
-		<encoder>
-			<pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
-		</encoder>
-	</appender>
-
-	<appender name="FILE-ENGINE" class="ch.qos.logback.core.FileAppender">
-		<file>${LOGS_PATH}/${log.name}.log</file>
-		<encoder>
-			<pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{35} - %msg%n</pattern>
-		</encoder>
-	</appender>
-
-	<logger level="debug">
-		<appender-ref ref="FILE-ENGINE" />
-	</logger>
-
-	<root level="error">
-		<appender-ref ref="FILE-ENGINE-ERROR" />
-	</root>
-
+    <!-- list of logger prefixes with non-default logging levels -->
+    <logger name="org" level="info"/>
 </configuration>

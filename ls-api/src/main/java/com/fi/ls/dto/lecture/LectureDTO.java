@@ -39,6 +39,11 @@ public class LectureDTO {
 
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
+
     public LocalDateTime getDayTime() {
 
     	return this.dayTime;

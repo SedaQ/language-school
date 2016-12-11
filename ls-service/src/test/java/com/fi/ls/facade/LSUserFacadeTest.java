@@ -14,6 +14,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.fi.ls.config.BeanMappingConfiguration;
+import com.fi.ls.dto.user.LSUserAuthenticateDTO;
 import com.fi.ls.dto.user.LSUserCreateDTO;
 import com.fi.ls.dto.user.LSUserDTO;
 import com.fi.ls.entity.LSUser;
@@ -107,6 +108,7 @@ public class LSUserFacadeTest extends AbstractTestNGSpringContextTests {
 
 	@Test
 	public void testAuthenticate() {
+		LSUserDTO user1 = new LSUserDTO();
 		userFacade.authenticate(user1);
 		verify(userService, times(1)).authenticate(any(LSUser.class), any(String.class));
 	}

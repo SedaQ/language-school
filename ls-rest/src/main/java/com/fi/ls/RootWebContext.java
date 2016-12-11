@@ -21,14 +21,22 @@ import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fi.ls.config.BeanMappingConfiguration;
-import com.fi.ls.dto.user.LSUserDTO;
-import com.fi.ls.rest.mixin.LSUserDTOMixin;
+import com.fi.ls.dto.course.CourseDTO;
+import com.fi.ls.dto.language.LanguageDTO;
+import com.fi.ls.dto.lecture.LectureDTO;
+import com.fi.ls.dto.lecturer.LecturerDTO;
+import com.fi.ls.dto.student.StudentDTO;
+import com.fi.ls.rest.mixin.*;
+import com.fi.ls.sampleData.SampleDataConfiguration;
 
+/**
+ * @author Pavel Šeda (441048) & Lukáš Daubner (410034)
+ *
+ */
 @EnableWebMvc
 @Configuration
-//@Import({ServiceConfiguration.class, EshopWithSampleDataConfiguration.class})
-@Import({BeanMappingConfiguration.class})
-@ComponentScan(basePackages = {"com.fi.ls.rest.controllers", "com.fi.ls.rest.assemblers"})
+@Import({BeanMappingConfiguration.class, SampleDataConfiguration.class})
+@ComponentScan(basePackages = {"com.fi.ls.rest.controller", "com.fi.ls.rest.assembler"})
 public class RootWebContext extends WebMvcConfigurerAdapter {
 
     @Override
@@ -50,7 +58,11 @@ public class RootWebContext extends WebMvcConfigurerAdapter {
         objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
         objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.ENGLISH));
         
-        objectMapper.addMixIn(LSUserDTO.class, LSUserDTOMixin.class);
+        objectMapper.addMixIn(LanguageDTO.class, LanguageDTOMixin.class);
+        objectMapper.addMixIn(LecturerDTO.class, LecturerDTOMixin.class);
+        objectMapper.addMixIn(LectureDTO.class, LectureDTOMixin.class);
+        objectMapper.addMixIn(StudentDTO.class, StudentDTOMixin.class);
+        objectMapper.addMixIn(CourseDTO.class, CourseDTOMixin.class);
         
         objectMapper.disable(MapperFeature.DEFAULT_VIEW_INCLUSION);
    
