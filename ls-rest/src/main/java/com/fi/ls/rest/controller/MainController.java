@@ -1,44 +1,48 @@
 package com.fi.ls.rest.controller;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fi.ls.rest.ApiEndpoints;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.hateoas.Resource;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.context.request.WebRequest;
 
 /**
- * @author Pavel Šeda (441048)
+ * @author Pavel Šeda (441048) & Lukáš Daubner (410034)
  *
  */
 @RestController
 public class MainController {
-
+    
+    final static Logger logger = LoggerFactory.getLogger(MainController.class);
+    
 	/**
-	 * The main entry point of the REST API Provides access to all the resources
-	 * with links to resource URIs Can be even extended further so that all the
-	 * actions on all the resources are available and can be reused in all the
-	 * controllers (possibly in full HATEOAS style)
+	 * hub for REST
+         * curl -i -X GET http://localhost:8080/pa165/rest/
 	 * 
-	 * @return resources uris
+         * @param webRequest
+	 * @return links
 	 */
-	@RequestMapping(value = "/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public final Map<String, String> getResources() {
+    @RequestMapping(value = "/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public final HttpEntity<Resource> getHome(WebRequest webRequest) {
 
-		Map<String, String> resourcesMap = new HashMap<>();
+        logger.debug("rest getHome()");
 
-		resourcesMap.put("users_uri", ApiEndpoints.ROOT_URI_USERS);
-		resourcesMap.put("students_uri", ApiEndpoints.ROOT_URI_STUDENTS);
-		resourcesMap.put("lecturers_uri", ApiEndpoints.ROOT_URI_LECTURERS);
-		resourcesMap.put("courses_uri", ApiEndpoints.ROOT_URI_COURSES);
-		resourcesMap.put("lectures_uri", ApiEndpoints.ROOT_URI_LECTURES);
-		resourcesMap.put("languages_uri", ApiEndpoints.ROOT_URI_LANGUAGES);
+        Resource resource = new Resource("REST Home");
+        resource.add(linkTo(this.getClass()).withSelfRel());
+        resource.add(linkTo(StudentsController.class).withRel("Students"));
+        resource.add(linkTo(LecturersController.class).withRel("Lecturers"));
+        resource.add(linkTo(CoursesController.class).withRel("Courses"));
+        resource.add(linkTo(LecturesController.class).withRel("Lectures"));
+        resource.add(linkTo(LanguagesController.class).withRel("Languages"));
 
-		return Collections.unmodifiableMap(resourcesMap);
-	}
+        return ResponseEntity.ok().body(resource);
+    }
 
 }

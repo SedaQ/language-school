@@ -27,6 +27,10 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.context.request.WebRequest;
 
+/**
+ * @author Lukáš Daubner (410034)
+ *
+ */
 @RestController
 @RequestMapping(ApiEndpoints.ROOT_URI_LANGUAGES)
 public class LanguagesController {
@@ -41,7 +45,7 @@ public class LanguagesController {
 
 	/**
 	 * get all the languages (with HTTP caching)
-         * curl -i -X GET http://localhost:8080/ls-rest/languages/
+         * curl -i -X GET http://localhost:8080/pa165/rest/languages/
 	 * 
          * @param webRequest
 	 * @return list of LanguageDTOs
@@ -59,7 +63,7 @@ public class LanguagesController {
             }
 
             Resources<Resource<LanguageDTO>> languagesResources = new Resources<>(languageResourceCollection);
-            languagesResources.add(linkTo(LanguageResourceAssembler.class).withSelfRel());
+            languagesResources.add(linkTo(this.getClass()).withSelfRel());
 
             final StringBuffer eTag = new StringBuffer("\"");
             eTag.append(Integer.toString(languagesResources.hashCode()));
@@ -74,7 +78,7 @@ public class LanguagesController {
         
         /**
          * get language by id (with HTTP caching)
-         * curl -i -X GET http://localhost:8080/ls-rest/languages/{id}
+         * curl -i -X GET http://localhost:8080/pa165/rest/languages/{id}
          * 
          * @param id
          * @param webRequest
@@ -90,7 +94,7 @@ public class LanguagesController {
                 throw new ResourceNotFoundException();
 
             Resource<LanguageDTO> resource = languageResourceAssembler.toResource(languageDTO.get());
-
+            
             final StringBuffer eTag = new StringBuffer("\"");
             eTag.append(Integer.toString(languageDTO.get().hashCode()));
             eTag.append('\"');
@@ -104,7 +108,7 @@ public class LanguagesController {
         
         /**
          * delete language
-         * curl -i -X DELETE http://localhost:8080/ls-rest/languages/{id}
+         * curl -i -X DELETE http://localhost:8080/pa165/rest/languages/{id}
          * 
          * @param id 
          */
