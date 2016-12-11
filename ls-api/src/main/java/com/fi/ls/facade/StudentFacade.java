@@ -30,8 +30,9 @@ public interface StudentFacade {
     /**
      * removes specific student from database
      * @param s - student to be removed
+     * @return true, if successfully removed
      */
-    public void deleteStudent(StudentDTO s);
+    public Boolean deleteStudent(StudentDTO s);
     
     /**
      * finds specific student from database by birth number
