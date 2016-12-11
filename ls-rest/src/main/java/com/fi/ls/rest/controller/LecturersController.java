@@ -1,11 +1,11 @@
 package com.fi.ls.rest.controller;
 
+import com.fi.ls.dto.language.LanguageDTO;
+import com.fi.ls.dto.lecture.LectureDTO;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -15,11 +15,12 @@ import org.slf4j.LoggerFactory;
 import com.fi.ls.dto.lecturer.LecturerDTO;
 import com.fi.ls.facade.LecturerFacade;
 import com.fi.ls.rest.ApiEndpoints;
+import com.fi.ls.rest.assembler.LanguageResourceAssembler;
+import com.fi.ls.rest.assembler.LectureResourceAssembler;
 import com.fi.ls.rest.assembler.LecturerResourceAssembler;
 import com.fi.ls.rest.exception.ResourceNotFoundException;
 import com.fi.ls.rest.exception.ResourceNotModifiedException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Optional;
 import org.springframework.hateoas.Resource;
@@ -30,6 +31,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.context.request.WebRequest;
 
+/**
+ * @author Lukáš Daubner (410034)
+ *
+ */
 @RestController
 @RequestMapping(ApiEndpoints.ROOT_URI_LECTURERS)
 public class LecturersController {
@@ -42,6 +47,12 @@ public class LecturersController {
         @Inject
         private LecturerResourceAssembler lecturerResourceAssembler;
         
+        @Inject
+        private LanguageResourceAssembler languageResourceAssembler;
+        
+        @Inject
+        private LectureResourceAssembler lectureResourceAssembler;
+        
 	/**
 	 * get all the lecturers (with HTTP caching)
          * curl -i -X GET http://localhost:8080/pa165/rest/lecturers
@@ -50,7 +61,7 @@ public class LecturersController {
 	 * @return list of LecturerDTOs
 	 */
 	@RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public final HttpEntity<Resources<Resource<LecturerDTO>>> getLanguages(WebRequest webRequest) {
+	public final HttpEntity<Resources<Resource<LecturerDTO>>> getLecturers(WebRequest webRequest) {
 
             logger.debug("rest getLecturers()");
                 
@@ -61,18 +72,18 @@ public class LecturersController {
                 languageResourceCollection.add(lecturerResourceAssembler.toResource(l));
             }
 
-            Resources<Resource<LecturerDTO>> languagesResources = new Resources<>(languageResourceCollection);
-            languagesResources.add(linkTo(LecturerResourceAssembler.class).withSelfRel());
+            Resources<Resource<LecturerDTO>> lecturersResources = new Resources<>(languageResourceCollection);
+            lecturersResources.add(linkTo(this.getClass()).withSelfRel());
 
             final StringBuffer eTag = new StringBuffer("\"");
-            eTag.append(Integer.toString(languagesResources.hashCode()));
+            eTag.append(Integer.toString(lecturersResources.hashCode()));
             eTag.append('\"');
 
             if (webRequest.checkNotModified(eTag.toString())){
                 throw new ResourceNotModifiedException();
             }
 
-            return ResponseEntity.ok().eTag(eTag.toString()).body(languagesResources);
+            return ResponseEntity.ok().eTag(eTag.toString()).body(lecturersResources);
 	}
         
         /**
@@ -84,7 +95,7 @@ public class LecturersController {
          * @return 
          */
         @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-        public final HttpEntity<Resource<LecturerDTO>> getLanguage(@PathVariable("id") long id, WebRequest webRequest) {
+        public final HttpEntity<Resource<LecturerDTO>> getLecturer(@PathVariable("id") long id, WebRequest webRequest) {
         
             logger.debug("rest getLecturer({})", id);
 
@@ -93,7 +104,7 @@ public class LecturersController {
                 throw new ResourceNotFoundException();
 
             Resource<LecturerDTO> resource = lecturerResourceAssembler.toResource(lecturerDTO.get());
-
+            
             final StringBuffer eTag = new StringBuffer("\"");
             eTag.append(Integer.toString(lecturerDTO.get().hashCode()));
             eTag.append('\"');
@@ -103,5 +114,97 @@ public class LecturersController {
             }
 
             return ResponseEntity.ok().eTag(eTag.toString()).body(resource);
+        }
+        
+        /**
+         * get lecturer languages by lecturer id (with HTTP caching)
+         * curl -i -X GET http://localhost:8080/pa165/rest/lecturers/{id}/languages
+         * 
+         * @param id
+         * @param webRequest
+         * @return 
+         */
+        @RequestMapping(value = "/{id}/languages", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+        public final HttpEntity<Resources<Resource<LanguageDTO>>> getLecturerLanguages(@PathVariable("id") long id, WebRequest webRequest) {
+        
+            logger.debug("rest getLecturerLanguages({})", id);
+
+            Optional<LecturerDTO> lecturerDTO = lecturerFacade.getLecturerById(id);
+            if(!lecturerDTO.isPresent())
+                throw new ResourceNotFoundException();
+
+            Collection<Resource<LanguageDTO>> languageResourceCollection = new ArrayList<>();
+            for (LanguageDTO lang : lecturerDTO.get().getListOfLanguages()) {
+                languageResourceCollection.add(languageResourceAssembler.toResource(lang));
+            }
+            
+            Resources<Resource<LanguageDTO>> languagesResources = new Resources<>(languageResourceCollection);
+            languagesResources.add(linkTo(this.getClass()).slash(lecturerDTO.get().getId()).slash("languages").withSelfRel());
+
+            final StringBuffer eTag = new StringBuffer("\"");
+            eTag.append(Integer.toString(languagesResources.hashCode()));
+            eTag.append('\"');
+
+            if (webRequest.checkNotModified(eTag.toString())){
+                throw new ResourceNotModifiedException();
+            }
+
+            return ResponseEntity.ok().eTag(eTag.toString()).body(languagesResources);
+        }
+        
+        /**
+         * get lecturer lectures by lecturer id (with HTTP caching)
+         * curl -i -X GET http://localhost:8080/pa165/rest/lecturers/{id}/lectures
+         * 
+         * @param id
+         * @param webRequest
+         * @return 
+         */
+        @RequestMapping(value = "/{id}/lectures", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+        public final HttpEntity<Resources<Resource<LectureDTO>>> getLecturerLectures(@PathVariable("id") long id, WebRequest webRequest) {
+        
+            logger.debug("rest getLecturerLectures({})", id);
+
+            Optional<LecturerDTO> lecturerDTO = lecturerFacade.getLecturerById(id);
+            if(!lecturerDTO.isPresent())
+                throw new ResourceNotFoundException();
+
+            Collection<Resource<LectureDTO>> lectureResourceCollection = new ArrayList<>();
+            for (LectureDTO lect : lecturerDTO.get().getListOfLectures()) {
+                lectureResourceCollection.add(lectureResourceAssembler.toResource(lect));
+            }
+            
+            Resources<Resource<LectureDTO>> lecturesResources = new Resources<>(lectureResourceCollection);
+            lecturesResources.add(linkTo(this.getClass()).slash(lecturerDTO.get().getId()).slash("lectures").withSelfRel());
+
+            final StringBuffer eTag = new StringBuffer("\"");
+            eTag.append(Integer.toString(lecturesResources.hashCode()));
+            eTag.append('\"');
+
+            if (webRequest.checkNotModified(eTag.toString())){
+                throw new ResourceNotModifiedException();
+            }
+
+            return ResponseEntity.ok().eTag(eTag.toString()).body(lecturesResources);
+        }
+        
+        /**
+         * delete lecturer
+         * curl -i -X DELETE http://localhost:8080/pa165/rest/lecturers/{id}
+         * 
+         * @param id 
+         */
+        @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+        public final void deleteLecturer(@PathVariable("id") long id)  {
+            logger.debug("rest deleteLecturer({})", id);
+
+            Optional<LecturerDTO> lecturer = lecturerFacade.getLecturerById(id);
+            if(!lecturer.isPresent())
+                throw new ResourceNotFoundException();
+
+            Boolean deleted = lecturerFacade.deleteLecturer(lecturer.get());
+
+            if(!deleted)
+                throw new ResourceNotFoundException();
         }
 }
