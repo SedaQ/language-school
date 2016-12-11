@@ -66,13 +66,15 @@ public class StudentFacadeImpl implements StudentFacade {
 	}
 
 	@Override
-	public void deleteStudent(StudentDTO s) {
+	public Boolean deleteStudent(StudentDTO s) {
 		if (s == null)
 			throw new IllegalArgumentException("Student is null");
 		try {
 			this.studentService.remove(studentService.findById(s.getId()));
+                        return true;
 		} catch (ServiceLayerException | NoSuchElementException ex) {
 			logger.warn("error in delete student: " + ex);
+                        return false;
 		}
 	}
 
