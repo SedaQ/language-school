@@ -20,11 +20,6 @@ public class MenuController {
 		return "contact";
 	}
 
-	@RequestMapping(value = "/singlepage")
-	public String singlepage() {
-		return "singlepage";
-	}
-
 	@RequestMapping(value = "/about")
 	public String about() {
 		return "about";

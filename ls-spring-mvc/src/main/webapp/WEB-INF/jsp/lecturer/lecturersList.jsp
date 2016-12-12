@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="my"%>
 
 <!DOCTYPE html>
 <html>
@@ -9,7 +10,7 @@
 <body>
 	<%@ include file="../common/header.jsp"%>
 
-	<table class="table">
+	<table class="table table-striped">
 		<thead>
 			<tr>
 				<th>id</th>
@@ -18,19 +19,20 @@
 				<th>surname</th>
 			</tr>
 		</thead>
-		 
+
 		<tbody>
 			<c:forEach items="${lecturers}" var="lecturer">
 				<tr>
+					<td><c:out value="${lecturer.id}" /></td>
 					<td><c:out value="${lecturer.nickname}" /></td>
 					<td><c:out value="${lecturer.firstName}" /></td>
 					<td><c:out value="${lecturer.surname}" /></td>
-					<td><a href="/lecturer/view/${lecturer.id}"
-						class="btn btn-primary">view</a></td>
+					<td><my:a href="/lecturer/view/${lecturer.id}"
+							class="btn btn-primary">view</my:a></td>
 				</tr>
 			</c:forEach>
 		</tbody>
-		 
+
 	</table>
 
 

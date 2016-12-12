@@ -13,8 +13,12 @@ import org.springframework.ui.Model;
 
 import com.fi.ls.dto.course.CourseCreateDTO;
 import com.fi.ls.dto.course.CourseDTO;
+import com.fi.ls.dto.lecture.LectureCreateDTO;
 import com.fi.ls.enums.ProficiencyLevel;
 import com.fi.ls.facade.CourseFacade;
+import com.fi.ls.facade.LectureFacade;
+
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Optional;
@@ -43,6 +47,10 @@ public class CourseController {
 		course1.setName("course1");
 		course1.setLanguage("English");
 		course1.setProficiencyLevel(ProficiencyLevel.A1);
+		LectureCreateDTO lecture1 = new LectureCreateDTO();
+		lecture1.setClassroomId("4d");
+		lecture1.setDayTime(LocalDateTime.now());
+		lecture1.setTopic("Java EE for beginners");
 
 		CourseCreateDTO course2 = new CourseCreateDTO();
 		course2.setName("course2");
@@ -82,7 +90,7 @@ public class CourseController {
 		logger.debug("view: ", id);
 
 		model.addAttribute("course", courseFacade.getCourseById(id).get());
-
+		model.addAttribute("lecturesInCourse", courseFacade.getCourseById(id).get().getListOfLectures());
 		return "course/courseView";
 	}
 

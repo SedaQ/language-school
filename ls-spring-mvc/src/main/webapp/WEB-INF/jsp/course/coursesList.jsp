@@ -33,8 +33,8 @@
 				</tr>
 			</c:forEach>
 		</tbody>
-
 	</table>
+
 	<my:a href="/course/new/" class="btn btn-primary">new</my:a>
 
 </body>

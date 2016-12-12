@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,6 +24,11 @@
 				<td><c:out value="${lecturer.nickname}" /></td>
 				<td><c:out value="${lecturer.firstName}" /></td>
 				<td><c:out value="${lecturer.surname}" /></td>
+				<td><a
+					href="${pageContext.request.contextPath}/lecturer/edit/${lecturer.id}"
+					class="btn btn-primary">Edit</a> <a
+					href="${pageContext.request.contextPath}/lecturer/delete/${lecturer.id}"
+					class="btn btn-primary">Delete</a></td>
 			</tr>
 		</tbody>
 	</table>

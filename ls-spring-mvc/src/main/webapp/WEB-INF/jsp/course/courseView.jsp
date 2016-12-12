@@ -35,6 +35,22 @@
 		</tbody>
 	</table>
 
+	Lectures in Course:
+	<table class="table table-striped">
+		<tbody>
+			<c:forEach items="${lecturesInCourse}" var="lecture">
+				<tr>
+					<td><c:out value="${lecture.id}" /></td>
+					<td><c:out value="${lecture.dayTime}" /></td>
+					<td><c:out value="${lecture.classroomId}" /></td>
+					<td><c:out value="${lecture.topic}" /></td>
+					<td><my:a href="/lecture/view/${lecture.id}"
+							class="btn btn-primary">view</my:a></td>
+				</tr>
+			</c:forEach>
+		</tbody>
+	</table>
+
 
 </body>
 <%@ include file="../common/footer.jsp"%>

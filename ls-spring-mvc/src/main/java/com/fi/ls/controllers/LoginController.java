@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.fi.ls.dto.user.LSUserCreateDTO;
 import com.fi.ls.dto.user.LSUserDTO;
@@ -27,7 +26,6 @@ public class LoginController {
 
 	@PostConstruct
 	public void initUsers() {
-		// register user
 		LSUserCreateDTO user1 = new LSUserCreateDTO();
 		user1.setEmail("pavelseda@email.cz");
 		user1.setPassword("test");
@@ -70,49 +68,33 @@ public class LoginController {
 		}
 		return "badlogin";
 	}
-	
+
 	/*
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public ModelAndView login(@RequestParam(value = "error", required = false) String error,
-			@RequestParam(value = "logout", required = false) String logout,
-			@RequestParam(value = "username") String email, @RequestParam(value = "password") String password) {
-		ModelAndView model = new ModelAndView();
-		if (error != null) {
-			model.addObject("error", "Invalid username and password!");
-		}
-
-		if (logout != null) {
-			model.addObject("msg", "You've been logged out successfully.");
-		}
-		try {
-			LSUserDTO userId = userFacade.getUserByEmail(email).get();
-
-			LSUserDTO userDTO = new LSUserDTO();
-			userDTO.setId(userId.getId());
-			userDTO.setEmail(email);
-			userDTO.setPasswordHash(password);
-			userDTO.setUserRole(userId.getUserRole());
-
-			boolean isUserValid = userFacade.authenticate(userDTO);
-			if (isUserValid) {
-				if (userFacade.isAdmin(userDTO)) {
-					// do appropriate actions
-				} else {
-					// do appropriate actions
-				}
-				// model.addAttribute("userLoggedIn", userDTO);
-				model.addObject("userLoggedIn", email);
-				model.setViewName("index");
-				return model;
-			} else {
-				System.out.println("Bad Login parameters:!!!");
-				return model;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		model.setViewName("index");
-		return model;
-	}
-  	*/
+	 * @RequestMapping(value = "/login", method = RequestMethod.GET) public
+	 * ModelAndView login(@RequestParam(value = "error", required = false)
+	 * String error,
+	 * 
+	 * @RequestParam(value = "logout", required = false) String logout,
+	 * 
+	 * @RequestParam(value = "username") String email, @RequestParam(value =
+	 * "password") String password) { ModelAndView model = new ModelAndView();
+	 * if (error != null) { model.addObject("error",
+	 * "Invalid username and password!"); }
+	 * 
+	 * if (logout != null) { model.addObject("msg",
+	 * "You've been logged out successfully."); } try { LSUserDTO userId =
+	 * userFacade.getUserByEmail(email).get();
+	 * 
+	 * LSUserDTO userDTO = new LSUserDTO(); userDTO.setId(userId.getId());
+	 * userDTO.setEmail(email); userDTO.setPasswordHash(password);
+	 * userDTO.setUserRole(userId.getUserRole());
+	 * 
+	 * boolean isUserValid = userFacade.authenticate(userDTO); if (isUserValid)
+	 * { if (userFacade.isAdmin(userDTO)) { // do appropriate actions } else {
+	 * // do appropriate actions } // model.addAttribute("userLoggedIn",
+	 * userDTO); model.addObject("userLoggedIn", email);
+	 * model.setViewName("index"); return model; } else { System.out.println(
+	 * "Bad Login parameters:!!!"); return model; } } catch (Exception e) {
+	 * e.printStackTrace(); } model.setViewName("index"); return model; }
+	 */
 }

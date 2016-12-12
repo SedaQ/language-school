@@ -24,6 +24,11 @@
 				<td><c:out value="${lecture.dayTime}" /></td>
 				<td><c:out value="${lecture.classroomId}" /></td>
 				<td><c:out value="${lecture.topic}" /></td>
+				<td><a
+					href="${pageContext.request.contextPath}/lecture/edit/${lecture.id}"
+					class="btn btn-primary">Edit</a> <a
+					href="${pageContext.request.contextPath}/lecture/delete/${lecture.id}"
+					class="btn btn-primary">Delete</a></td>
 			</tr>
 		</tbody>
 	</table>
