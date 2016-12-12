@@ -20,7 +20,7 @@ public class LSUserCreateDTO {
 	private String password;
 
 	@NotNull
-	private String userRoles;
+	private String userRole;
 
 	public String getEmail() {
 		return email;
@@ -46,12 +46,12 @@ public class LSUserCreateDTO {
 		this.id = id;
 	}
 
-	public String getUserRoles() {
-		return userRoles;
+	public String getUserRole() {
+		return userRole;
 	}
 
-	public void setUserRoles(String userRoles) {
-		this.userRoles = userRoles;
+	public void setUserRole(String userRole) {
+		this.userRole = userRole;
 	}
 
 	@Override

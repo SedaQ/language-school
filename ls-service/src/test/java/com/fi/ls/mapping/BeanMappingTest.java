@@ -44,13 +44,13 @@ public class BeanMappingTest extends AbstractTestNGSpringContextTests {
 		LSUserDTO user = new LSUserDTO();
 		user.setEmail("pavelseda@email.cz");
 		user.setPasswordHash("test");
-		user.setUserRoles(UserRoles.USER_ADMIN.name());
+		user.setUserRole(UserRoles.USER_ADMIN.name());
 
 		Optional<LSUser> dto = beanMapping.mapTo(user, LSUser.class);
 		assertTrue(dto.isPresent());
 		assertEquals(user.getEmail(), dto.get().getEmail());
 		assertEquals(user.getPasswordHash(), dto.get().getPasswordHash());
-		// assertEquals(user.getUserRoles(), dto.get().getUserRole());
+		assertEquals(user.getUserRole(), dto.get().getUserRole());
 	}
 
 	@Test

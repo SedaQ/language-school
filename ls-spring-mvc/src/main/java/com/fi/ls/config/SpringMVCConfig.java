@@ -30,8 +30,8 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @EnableWebMvc
 @Configuration
-@Import(BeanMappingConfiguration.class)
-@ComponentScan(basePackages = {"com.fi.ls.controllers"})
+@Import({ BeanMappingConfiguration.class/*, SecurityConfig.class */})
+@ComponentScan(basePackages = { "com.fi.ls.controllers" })
 public class SpringMVCConfig extends WebMvcConfigurerAdapter {
 
 	private final Logger logger = LoggerFactory.getLogger(SpringMVCConfig.class);
@@ -59,17 +59,19 @@ public class SpringMVCConfig extends WebMvcConfigurerAdapter {
 	/**
 	 * Provides mapping for assets
 	 */
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        //registry.addResourceHandler("/WEB-INF/assets/**").addResourceLocations("/WEB-INF/assets/").setCachePeriod(31556926);
-        registry.addResourceHandler("/assets/bootstrap/**").addResourceLocations("/assets/bootstrap/").setCachePeriod(31556926);
-        registry.addResourceHandler("/assets/css/**").addResourceLocations("/assets/css/").setCachePeriod(31556926);
-        registry.addResourceHandler("/assets/font-awesome/**").addResourceLocations("/assets/font-awesome/").setCachePeriod(31556926);
-        registry.addResourceHandler("/assets/ico/**").addResourceLocations("/assets/ico/").setCachePeriod(31556926);
-        registry.addResourceHandler("/assets/img/**").addResourceLocations("/assets/img/").setCachePeriod(31556926);
-        registry.addResourceHandler("/assets/js/**").addResourceLocations("/assets/js/").setCachePeriod(31556926);
-    }
-	
+	@Override
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		// registry.addResourceHandler("/WEB-INF/assets/**").addResourceLocations("/WEB-INF/assets/").setCachePeriod(31556926);
+		registry.addResourceHandler("/assets/bootstrap/**").addResourceLocations("/assets/bootstrap/")
+				.setCachePeriod(31556926);
+		registry.addResourceHandler("/assets/css/**").addResourceLocations("/assets/css/").setCachePeriod(31556926);
+		registry.addResourceHandler("/assets/font-awesome/**").addResourceLocations("/assets/font-awesome/")
+				.setCachePeriod(31556926);
+		registry.addResourceHandler("/assets/ico/**").addResourceLocations("/assets/ico/").setCachePeriod(31556926);
+		registry.addResourceHandler("/assets/img/**").addResourceLocations("/assets/img/").setCachePeriod(31556926);
+		registry.addResourceHandler("/assets/js/**").addResourceLocations("/assets/js/").setCachePeriod(31556926);
+	}
+
 	/**
 	 * Provides mapping from view names to JSP pages in WEB-INF/jsp directory.
 	 */
