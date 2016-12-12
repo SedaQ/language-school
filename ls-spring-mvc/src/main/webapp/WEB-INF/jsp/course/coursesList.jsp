@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib tagdir="/WEB-INF/tags" prefix="my" %>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="my"%>
 
 <!DOCTYPE html>
 <html>
@@ -17,6 +17,7 @@
 				<th>name</th>
 				<th>language</th>
 				<th>proficiency level</th>
+				<th>action</th>
 			</tr>
 		</thead>
 
@@ -28,13 +29,14 @@
 					<td><c:out value="${course.language}" /></td>
 					<td><c:out value="${course.proficiencyLevel}" /></td>
 					<td><my:a href="/course/view/${course.id}"
-						class="btn btn-primary">view</my:a></td>
+							class="btn btn-primary">view</my:a></td>
 				</tr>
 			</c:forEach>
 		</tbody>
 
 	</table>
-        <my:a href="/course/new/" class="btn btn-primary">new</my:a>
-	<%@ include file="../common/footer.jsp"%>
+	<my:a href="/course/new/" class="btn btn-primary">new</my:a>
+
 </body>
+<%@ include file="../common/footer.jsp"%>
 </html>
