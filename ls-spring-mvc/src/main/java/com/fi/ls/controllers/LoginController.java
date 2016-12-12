@@ -4,9 +4,12 @@ import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.fi.ls.dto.lecturer.LecturerCreateDTO;
 import com.fi.ls.dto.user.LSUserCreateDTO;
 import com.fi.ls.dto.user.LSUserDTO;
 import com.fi.ls.facade.LSUserFacade;
@@ -33,11 +36,10 @@ public class LoginController {
 			e.printStackTrace();
 		}
 	}
-        
 
 	@RequestMapping(value = "/language-school", method = RequestMethod.POST)
 	public String login(@RequestParam(value = "form-username") String email,
-			@RequestParam(value = "form-password") String password) {
+			@RequestParam(value = "form-password") String password, Model model) {
 		try {
 			LSUserDTO userDTO = new LSUserDTO();
 			userDTO.setId(userFacade.getUserByEmail(email).get().getId());
@@ -46,6 +48,7 @@ public class LoginController {
 
 			boolean isUserValid = userFacade.authenticate(userDTO);
 			if (isUserValid) {
+				model.addAttribute("userLoggedIn", userDTO);
 				return "index";
 			} else {
 				System.out.println("Bad Login parameters:!!!");

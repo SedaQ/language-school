@@ -35,8 +35,9 @@
 				</div>
 			</form>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="${pageContext.request.contextPath}/"><span class="glyphicon glyphicon-log-in"></span>
-						Log out</a></li>
+				<li><a href="${pageContext.request.contextPath}/"><span
+						class="glyphicon glyphicon-log-in"></span> ${userLoggedIn.email} Log
+						out</a></li>
 			</ul>
 		</div>
 	</nav>
