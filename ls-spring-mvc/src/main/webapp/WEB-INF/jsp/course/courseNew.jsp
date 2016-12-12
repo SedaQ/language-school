@@ -9,34 +9,27 @@
 <body>
 	<%@ include file="../common/header.jsp"%>
 
-	<form:form method="post"
-		action="${pageContext.request.contextPath}/course/create"
-		modelAttribute="courseCreate" cssClass="form-horizontal">
-		<div class="form-group">
-			<form:label path="name">Name</form:label>
-			<div class="col-sm-10">
-				<form:input path="name" />
+	<div class="container center_div">
+		<form method="post"
+			action="${pageContext.request.contextPath}/course/create"
+			modelAttribute="courseCreate" cssClass="form-horizontal">
+			<div class="form-group">
+				<label path="name">Name</label> <input path="name" />
 			</div>
-		</div>
-		<div class="form-group row">
-			<form:label path="language">Language</form:label>
-			<div class="col-sm-10">
-				<form:input path="language" />
+			<div class="form-group row">
+				<label path="language">Language</label> <input path="language" />
 			</div>
-		</div>
-		<div class="form-group row">
-			<form:label path="proficiencyLevel">Proficiency level</form:label>
-			<div class="col-sm-10">
-				<form:select path="proficiencyLevel">
+			<div class="form-group row">
+				<label path="proficiencyLevel">Proficiency level</label> <select
+					path="proficiencyLevel">
 					<c:forEach items="${proficiencylevels}" var="proflvl">
-						<form:option value="${proflvl}">${proflvl}</form:option>
+						<option value="${proflvl}">${proflvl}</option>
 					</c:forEach>
-				</form:select>
+				</select>
 			</div>
-		</div>
-		<button class="btn btn-primary" type="submit">Create course</button>
-	</form:form>
-
+			<button class="btn btn-primary" type="submit">Create course</button>
+		</form>
+	</div>
 	<%@ include file="../common/footer.jsp"%>
 </body>
 </html>

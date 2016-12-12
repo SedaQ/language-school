@@ -10,35 +10,30 @@
 <body>
 	<%@ include file="../common/header.jsp"%>
 
-	<form:form class="table table-striped" method="post"
-		action="${pageContext.request.contextPath}/course/update/${course.id}"
-		modelAttribute="course">
+	<div class="container center_div">
+		<form:form class="table table-striped" method="post"
+			action="${pageContext.request.contextPath}/course/update/${course.id}"
+			modelAttribute="course">
 
-		<div>
-			<form:label path="name">Name</form:label>
-			<div class="col-sm-10">
+			<div>
+				<form:label path="name">Name</form:label>
 				<input path="name" />
 			</div>
-		</div>
-		<div>
-			<label path="language">Language</label>
-			<div class="col-sm-10">
+			<div>
+				<label path="language">Language</label>
 				<form:input path="language" />
 			</div>
-		</div>
-		<div>
-			<form:label path="proficiencyLevel">Proficiency level</form:label>
-			<div class="col-sm-10">
+			<div>
+				<form:label path="proficiencyLevel">Proficiency level</form:label>
 				<form:select path="proficiencyLevel">
 					<c:forEach items="${proficiencylevels}" var="proflvl">
 						<form:option value="${proflvl}">${proflvl}</form:option>
 					</c:forEach>
 				</form:select>
 			</div>
-		</div>
-		<button class="btn btn-primary" type="submit">Update course</button>
-	</form:form>
-
+			<button class="btn btn-primary" type="submit">Update course</button>
+		</form:form>
+	</div>
 	<%@ include file="../common/footer.jsp"%>
 </body>
 </html>
