@@ -8,9 +8,12 @@ package com.fi.ls.mapping;
 import com.fi.ls.config.BeanMappingConfiguration;
 import com.fi.ls.dto.language.LanguageDTO;
 import com.fi.ls.dto.lecturer.LecturerDTO;
+import com.fi.ls.dto.user.LSUserDTO;
+import com.fi.ls.entity.LSUser;
 import com.fi.ls.entity.Language;
 import com.fi.ls.entity.Lecturer;
 import com.fi.ls.enums.ProficiencyLevel;
+import com.fi.ls.enums.UserRoles;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +37,20 @@ public class BeanMappingTest extends AbstractTestNGSpringContextTests {
 
 	@BeforeClass
 	public void beforeClass() {
+	}
+
+	@Test
+	public void testUserRolesMapping() {
+		LSUserDTO user = new LSUserDTO();
+		user.setEmail("pavelseda@email.cz");
+		user.setPasswordHash("test");
+		user.setUserRoles(UserRoles.USER_ADMIN.name());
+
+		Optional<LSUser> dto = beanMapping.mapTo(user, LSUser.class);
+		assertTrue(dto.isPresent());
+		assertEquals(user.getEmail(), dto.get().getEmail());
+		assertEquals(user.getPasswordHash(), dto.get().getPasswordHash());
+		// assertEquals(user.getUserRoles(), dto.get().getUserRole());
 	}
 
 	@Test

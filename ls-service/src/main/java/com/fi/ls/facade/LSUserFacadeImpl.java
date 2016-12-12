@@ -128,4 +128,18 @@ public class LSUserFacadeImpl implements LSUserFacade {
 			return false;
 		}
 	}
+
+	@Override
+	public boolean isAdmin(LSUserDTO u) {
+		if (u == null)
+			throw new IllegalArgumentException("LSUserDTO u parametr is null in isAdmin method");
+		try {
+			Optional<Boolean> isAdminBool = Optional
+					.ofNullable(userService.isAdmin(beanMapping.mapTo(u, LSUser.class).get()));
+			return isAdminBool.isPresent() ? isAdminBool.get().booleanValue() : false;
+		} catch (ServiceLayerException | NoSuchElementException ex) {
+			logger.warn("authenticate method invokes exception: " + ex);
+			return false;
+		}
+	}
 }

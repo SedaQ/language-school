@@ -2,18 +2,19 @@ package com.fi.ls.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+
+import com.fi.ls.enums.UserRoles;
 
 /**
  * @author Pavel Šeda (441048)
@@ -37,16 +38,25 @@ public class LSUser {
 	private String email;
 
 	@NotNull
+	@Column(name = "password")
 	private String passwordHash;
 
-	@OneToOne(fetch = FetchType.LAZY, targetEntity = UserRoles.class, mappedBy = "user_role")
-	private UserRoles userRole;
+	@Column(name = "user_role")
+	private String userRole;
 
 	public LSUser() {
 	}
 
 	public Long getId() {
 		return id;
+	}
+
+	public String getUserRole() {
+		return userRole;
+	}
+
+	public void setUserRole(String userRole) {
+		this.userRole = userRole;
 	}
 
 	public String getPasswordHash() {

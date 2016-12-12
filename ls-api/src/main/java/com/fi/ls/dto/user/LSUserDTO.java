@@ -9,6 +9,7 @@ public class LSUserDTO {
 	protected Long id;
 	private String email;
 	private String passwordHash;
+	private String userRoles;
 
 	public LSUserDTO() {
 	}
@@ -35,6 +36,14 @@ public class LSUserDTO {
 
 	public Long getId() {
 		return id;
+	}
+
+	public String getUserRoles() {
+		return userRoles;
+	}
+
+	public void setUserRoles(String userRoles) {
+		this.userRoles = userRoles;
 	}
 
 	@Override

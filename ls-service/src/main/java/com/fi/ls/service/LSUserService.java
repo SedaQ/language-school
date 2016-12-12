@@ -2,7 +2,6 @@ package com.fi.ls.service;
 
 import java.util.List;
 
-import org.springframework.stereotype.Service;
 
 import com.fi.ls.entity.LSUser;
 
@@ -64,5 +63,10 @@ public interface LSUserService {
 	 * matches the records.
 	 */
 	public boolean authenticate(LSUser u, String password);
+
+	/**
+	 * Check if the given user is admin.
+	 */
+	public boolean isAdmin(LSUser u);
 
 }
