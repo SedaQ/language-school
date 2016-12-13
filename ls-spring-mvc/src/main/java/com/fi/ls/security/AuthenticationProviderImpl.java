@@ -46,10 +46,8 @@ public class AuthenticationProviderImpl implements AuthenticationProvider {
 		userForAuth.setPasswordHash(pwd);
 
 		if (!userFacade.authenticate(userForAuth)) {
-			System.out.println("USER NOT AUTHENTICATED");
 			throw new BadCredentialsException("Provide valid email or password");
 		}
-		System.out.println("USER AUTHENTICATED");
 		List<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList(user.getUserRole());
 		return new UsernamePasswordAuthenticationToken(email, pwd, authorities);
 	}

@@ -44,25 +44,6 @@ public class LoginController {
 		}
 	}
 
-	/*
-	 * @RequestMapping(value = "/language-school", method = RequestMethod.POST)
-	 * public String login(@RequestParam(value = "form-username") String email,
-	 * 
-	 * @RequestParam(value = "form-password") String password, Model model) {
-	 * try { LSUserDTO userId = userFacade.getUserByEmail(email).get();
-	 * 
-	 * LSUserDTO userDTO = new LSUserDTO(); userDTO.setId(userId.getId());
-	 * userDTO.setEmail(email); userDTO.setPasswordHash(password);
-	 * userDTO.setUserRole(userId.getUserRole());
-	 * 
-	 * boolean isUserValid = userFacade.authenticate(userDTO); if (isUserValid)
-	 * { if (userFacade.isAdmin(userDTO)) { // do appropriate actions } else {
-	 * // do appropriate actions } model.addAttribute("userLoggedIn", userDTO);
-	 * return "index"; } else { System.out.println("Bad Login parameters:!!!");
-	 * return "login"; } } catch (Exception e) { e.printStackTrace(); } return
-	 * "badlogin"; }
-	 */
-
 	@RequestMapping(value = "/login")
 	public String login(Model model) {
 		return "login";
