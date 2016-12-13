@@ -20,6 +20,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import com.fi.ls.sampleData.SampleDataConfiguration;
+import com.fi.ls.security.WebSecurityConfig;
 
 /**
  * The central Spring context and Spring MVC configuration. The @Configuration
@@ -32,7 +33,7 @@ import com.fi.ls.sampleData.SampleDataConfiguration;
 
 @EnableWebMvc
 @Configuration
-@Import({ BeanMappingConfiguration.class, SampleDataConfiguration.class/*, SecurityConfig.class */})
+@Import({ BeanMappingConfiguration.class, SampleDataConfiguration.class, WebSecurityConfig.class })
 @ComponentScan(basePackages = { "com.fi.ls.controllers" })
 public class SpringMVCConfig extends WebMvcConfigurerAdapter {
 

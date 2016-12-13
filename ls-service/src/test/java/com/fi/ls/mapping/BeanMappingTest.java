@@ -44,7 +44,7 @@ public class BeanMappingTest extends AbstractTestNGSpringContextTests {
 		LSUserDTO user = new LSUserDTO();
 		user.setEmail("pavelseda@email.cz");
 		user.setPasswordHash("test");
-		user.setUserRole(UserRoles.USER_ADMIN.name());
+		user.setUserRole(UserRoles.ROLE_ADMIN.name());
 
 		Optional<LSUser> dto = beanMapping.mapTo(user, LSUser.class);
 		assertTrue(dto.isPresent());

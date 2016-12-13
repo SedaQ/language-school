@@ -47,7 +47,7 @@ public class LSUserServiceTest {
 		user = new LSUser();
 		user.setEmail("franta@bfu.cz");
 		user.setPasswordHash("testHashtestHashtestHashtestHash7841267871s!@$%");
-		user.setUserRole(UserRoles.USER_ADMIN.name());
+		user.setUserRole(UserRoles.ROLE_ADMIN.name());
 	}
 
 	@Test
@@ -60,12 +60,6 @@ public class LSUserServiceTest {
 		verify(lsUserRepository, times(1)).save(user);
 		assertEquals(user.getPasswordHash(), "NEWtestHashtestHashtestHashtestHash7841267871s!@$%");
 	}
-
-	// @Test
-	// public void testUserRoles() {
-	// lsUserService.registerUser(user, "1234");
-	// verify(lsUserRepository, times(1)).save(user);
-	// }
 
 	@Test(expectedExceptions = { ServiceLayerException.class })
 	public void testRegisterUserThrows() {

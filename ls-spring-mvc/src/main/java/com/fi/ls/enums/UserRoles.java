@@ -6,5 +6,5 @@ package com.fi.ls.enums;
  */
 public enum UserRoles {
 
-	USER_ADMIN, USER_STUDENT, USER_LECTURER;
+	ROLE_ADMIN, ROLE_STUDENT, ROLE_LECTURER;
 }

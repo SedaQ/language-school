@@ -7,11 +7,11 @@
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<a class="navbar-brand"
-					href="${pageContext.request.contextPath}/index">Language School</a>
+					href="${pageContext.request.contextPath}/home">Language School</a>
 			</div>
 			<ul class="nav navbar-nav">
 				<li class="active"><a
-					href="${pageContext.request.contextPath}/index">Home</a></li>
+					href="${pageContext.request.contextPath}/home">Home</a></li>
 				<li class="dropdown"><a class="dropdown-toggle"
 					data-toggle="dropdown" href="#">Language School <span
 						class="caret"></span></a>
@@ -35,7 +35,7 @@
 				</div>
 			</form>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="${pageContext.request.contextPath}/"><span
+				<li><a href="<c:url value="/logout"/>"><span
 						class="glyphicon glyphicon-log-in"></span> ${userLoggedIn.email} Log
 						out</a></li>
 			</ul>

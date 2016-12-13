@@ -22,13 +22,6 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/assets/css/style.css">
 
-<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
-
 <!-- Favicon and touch icons -->
 <link rel="shortcut icon"
 	href="${pageContext.request.contextPath}/assets/ico/favicon.png">
@@ -76,6 +69,7 @@
 								<i class="fa fa-lock"></i>
 							</div>
 						</div>
+						<!-- 
 						<div class="form-bottom">
 							<form role="form"
 								action="<c:url value="/language-school"/>"
@@ -90,6 +84,35 @@
 										type="password" name="form-password" placeholder="Password..."
 										class="form-password form-control" id="form-password">
 								</div>
+								<button type="submit" class="btn">Sign in!</button>
+							</form>
+						</div>
+						 -->
+						<div class="form-bottom">
+							<c:if test="${param.error != null}">
+								<div class="alert alert-danger">
+									<p>Invalid username and password.</p>
+								</div>
+							</c:if>
+							<c:if test="${param.logout != null}">
+								<div class="alert alert-success">
+									<p>You have been logged out successfully.</p>
+								</div>
+							</c:if>
+							<c:url value="/login" var="loginUrl" />
+							<form role="form" action="${loginUrl}" method="post"
+								class="login-form">
+								<div class="form-group">
+									<label class="sr-only" for="username">Username</label> <input
+										type="text" name="username" placeholder="Username..."
+										class="form-username form-control" id="form-username">
+								</div>
+								<div class="form-group">
+									<label class="sr-only" for="password">Password</label> <input
+										type="password" name="password" placeholder="Password..."
+										class="form-password form-control" id="form-password">
+								</div>
+								<input type="hidden" name="${_csrf.parameterName}"   value="${_csrf.token}" />
 								<button type="submit" class="btn">Sign in!</button>
 							</form>
 						</div>

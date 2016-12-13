@@ -124,17 +124,8 @@ public class LSUserServiceImpl implements LSUserService {
 	public boolean isAdmin(LSUser u) {
 		if (u == null)
 			throw new IllegalArgumentException("LSUser u parameter is null");
-		if (u.getEmail() == null) {
-			throw new IllegalArgumentException("LSUser u.getEmail() is null ");
-		}
 		try {
-			LSUser userrr = userDao.findByEmail(u.getEmail());
-			System.out.println("User email je: " + userrr.getEmail());
-			System.out.println("User password je: " + userrr.getPasswordHash());
-			System.out.println("User id je: " + userrr.getId());
-			System.out.println("User role je: " + userrr.getUserRole());
-
-			return userDao.findByEmail(u.getEmail()).getUserRole().equals(UserRoles.USER_ADMIN.name());
+			return userDao.findByEmail(u.getEmail()).getUserRole().equals(UserRoles.ROLE_ADMIN.name());
 		} catch (DataAccessException | PersistenceException | ConstraintViolationException ex) {
 			throw new ServiceLayerException("Problem with finding LS-User, see inner exception.", ex);
 		}

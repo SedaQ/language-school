@@ -39,7 +39,7 @@ public class LSUserRepositoryTest extends AbstractTestNGSpringContextTests {
 		user = new LSUser();
 		user.setEmail("test123@email.cz");
 		user.setPasswordHash("testHashtestHashtestHashtestHash7841267871s!@$%");
-		user.setUserRole(UserRoles.USER_ADMIN.name());
+		user.setUserRole(UserRoles.ROLE_ADMIN.name());
 
 		userDao.save(user);
 	}
@@ -51,7 +51,7 @@ public class LSUserRepositoryTest extends AbstractTestNGSpringContextTests {
 
 	@Test
 	public void testUserIsAdmin() {
-		Assert.assertEquals(userDao.findByEmail("test123@email.cz").getUserRole(), UserRoles.USER_ADMIN.name());
+		Assert.assertEquals(userDao.findByEmail("test123@email.cz").getUserRole(), UserRoles.ROLE_ADMIN.name());
 	}
 
 	@Test
