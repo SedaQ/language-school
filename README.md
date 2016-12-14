@@ -25,7 +25,7 @@ mvn clean install
 
 ## REST API documentation
 
-REST API documentation is in [REST module](https://github.com/SedaQ/language-school/tree/master/ls-rest) submodule of this project.
+REST API documentation is in [REST](https://github.com/SedaQ/language-school/tree/master/ls-rest) submodule of this project.
 
 ## Use Case & Class diagram for entities
 
