@@ -33,7 +33,8 @@ or
 ```
 
 ### Testing
-For testing purposes there were created 3 different users in memory via ls-spring-data module. Each role has some differences in web view For example only admin could delete course, only student could enroll to course etc.
+For testing purposes there were created 3 different users in memory via ls-spring-data module. Each role has some differences in web view.
+For example only admin could delete course, only student could enroll to course etc.
 
 #### as admin:
 
