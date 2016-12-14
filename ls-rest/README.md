@@ -10,6 +10,28 @@ Apache Maven 3.3.9
 Java version: 1.8.0_101, vendor: Oracle Corporation
 ```
 
+### Installing & running the project
+Clone the master branch of this project to your directory via command
+
+```
+git clone https://github.com/SedaQ/language-school.git
+```
+
+Run command prompt in project root directory and build project via command:
+
+```
+mvn clean install
+```
+
+After succesfully build, change directory to rest module and run tomcat via:
+
+```
+> cd ls-rest
+> ...\ls-rest\mvn tomcat7:run
+or 
+> ...\ls-rest\mvn
+```
+
 ### Testing
 For easy testing purpose in GUI we reccomend you to use Advanced REST client for Chrome browser. https://advancedrestclient.com/
 
