@@ -15,13 +15,13 @@ UCO | Name
 422787 | Guoth Matúš
 357293 | Nedbal	Marek
 
-## Running Project &  Tests
+## Running Project & Tests
 
-put following command to cmd in language-school directory of project or mvn clean install it via IDE of your choice
+for running and testing project visit web submodule or rest submodule for more instructions.
 
-```
-mvn clean install
-```
+## Web application
+
+WEB app instructions is in [web](https://github.com/SedaQ/language-school/tree/master/ls-spring-mvc) submodule of this project.
 
 ## REST API documentation
 
