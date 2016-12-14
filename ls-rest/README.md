@@ -21,6 +21,22 @@ curl -i -X GET http://localhost:8080/pa165/rest/courses
 ```
 or in more general
 ```
-~/courses
+GET ~/courses
+```
+Find course by id
+```
+GET ~/courses/{id}
+```
+Delete specific course
+```
+DELETE ~/courses/{id}
+```
+Create new course
+```
+POST ~/courses/{id}
+```
+Update existing specific course
+```
+PUT ~/courses/{id}
 ```
 
