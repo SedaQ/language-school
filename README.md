@@ -23,6 +23,10 @@ put following command to cmd in language-school directory of project or mvn clea
 mvn clean install
 ```
 
+## REST API documentation
+
+REST API documentation is in [REST module](https://github.com/SedaQ/language-school/tree/master/ls-rest) submodule of this project.
+
 ## Use Case & Class diagram for entities
 
 Use Case & Class diagram are in [Wiki](https://github.com/SedaQ/language-school/wiki) folder of this project.
