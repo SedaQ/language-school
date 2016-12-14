@@ -92,4 +92,5 @@ public interface LecturerService {
      * @exception IllegalArgumentException
      */
     public List<Language> findAllLecturerLanguages(Lecturer l);
+    
 }

@@ -1,5 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="my"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 
 <!DOCTYPE html>
 <html>
@@ -26,9 +28,13 @@
 				<td><c:out value="${student.birthNumber}" /></td>
 				<td><a
 					href="${pageContext.request.contextPath}/student/edit/${student.id}"
-					class="btn btn-primary">Edit</a> <a
-					href="${pageContext.request.contextPath}/student/delete/${student.id}"
-					class="btn btn-primary">Delete</a></td>
+					class="btn btn-primary">Edit</a> 
+				<sec:authorize access="hasRole('ROLE_ADMIN')">
+					<a
+						href="${pageContext.request.contextPath}/student/delete/${student.id}"
+						class="btn btn-primary">Delete</a>
+				</sec:authorize></td>
+
 			</tr>
 		</tbody>
 	</table>

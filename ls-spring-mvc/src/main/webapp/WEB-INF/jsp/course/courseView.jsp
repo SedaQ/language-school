@@ -1,5 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="my"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 
 <!DOCTYPE html>
 <html>
@@ -26,11 +28,19 @@
 				<td><c:out value="${course.name}" /></td>
 				<td><c:out value="${course.language}" /></td>
 				<td><c:out value="${course.proficiencyLevel}" /></td>
-				<td><a
-					href="${pageContext.request.contextPath}/course/edit/${course.id}"
-					class="btn btn-primary">Edit</a> <a
-					href="${pageContext.request.contextPath}/course/delete/${course.id}"
-					class="btn btn-primary">Delete</a></td>
+				<td>
+				<sec:authorize access="hasRole('ROLE_ADMIN')">
+					<a
+						href="${pageContext.request.contextPath}/course/edit/${course.id}"
+						class="btn btn-primary">Edit</a>
+					<a
+						href="${pageContext.request.contextPath}/course/delete/${course.id}"
+						class="btn btn-primary">Delete</a>
+				</sec:authorize> <sec:authorize access="hasRole('ROLE_STUDENT')">
+					<a
+						href="{pageContext.request.contextPath}/course/enrollToCourse/${course.id}"
+						class="btn btn-primary">Enroll to Course</a>
+				</sec:authorize></td>
 			</tr>
 		</tbody>
 	</table>

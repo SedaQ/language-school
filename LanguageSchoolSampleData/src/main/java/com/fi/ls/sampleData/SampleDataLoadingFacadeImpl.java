@@ -39,12 +39,28 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
 	@Autowired
 	private LanguageService languageService;
 	@Autowired
-	private LSUserFacade userFacade;
-	@Autowired
-	private CourseFacade courseFacade;
+	private LSUserService userService;
 
 	@Override
 	public void loadData() {
+		LSUser user1 = new LSUser();
+		user1.setEmail("test@email.cz");
+		user1.setPasswordHash("test1");
+		user1.setUserRole(UserRoles.ROLE_ADMIN.name());
+		userService.registerUser(user1, user1.getPasswordHash());
+
+		LSUser user2 = new LSUser();
+		user2.setEmail("testtest@email.cz");
+		user2.setPasswordHash("test2");
+		user2.setUserRole(UserRoles.ROLE_LECTURER.name());
+		userService.registerUser(user2, user2.getPasswordHash());
+
+		LSUser user3 = new LSUser();
+		user3.setEmail("testtesttest@email.cz");
+		user3.setPasswordHash("test3");
+		user3.setUserRole(UserRoles.ROLE_STUDENT.name());
+		userService.registerUser(user3, user3.getPasswordHash());
+
 		log.info("Loading sample data...");
 
 		Student s1 = new Student();
@@ -193,4 +209,5 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
 
 		log.info("Sample data loaded...");
 	}
+
 }

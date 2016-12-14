@@ -73,6 +73,11 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
 		</dependency>
+		<!-- security taglibs for different point of view depending on roles etc. -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+		</dependency>
 		<!-- validator for bean properties -->
 		<dependency>
 			<groupId>javax.validation</groupId>

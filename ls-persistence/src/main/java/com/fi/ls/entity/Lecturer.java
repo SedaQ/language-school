@@ -88,8 +88,8 @@ public class Lecturer extends LSUser {
 		return Collections.unmodifiableList(listOfLanguages);
 	}
         
-        public void setListOfLanguages(List<Language> listOfLanguages) {
-            this.listOfLanguages = listOfLanguages;
+    public void setListOfLanguages(List<Language> listOfLanguages) {
+        this.listOfLanguages = listOfLanguages;
 	}
 
 	public List<Lecture> getListOfLectures() {
