@@ -10,3 +10,17 @@ Maven: apache-maven-3.3.9
 Java: 1.8.0_101
 ```
 
+### Testing
+For easy testing purpose in GUI we reccomend you to use Advanced REST client for Chrome browser. https://advancedrestclient.com/
+
+### Course entity commands
+find all courses
+
+```
+curl -i -X GET http://localhost:8080/pa165/rest/courses
+```
+or in more general
+```
+~/courses
+```
+
