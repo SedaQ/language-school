@@ -3,8 +3,11 @@ package com.fi.ls.controllers;
 import com.fi.ls.dto.language.LanguageDTO;
 import com.fi.ls.dto.lecturer.LecturerCreateDTO;
 import com.fi.ls.dto.lecturer.LecturerDTO;
+import com.fi.ls.enums.ProficiencyLevel;
 import com.fi.ls.facade.LanguageFacade;
 import com.fi.ls.facade.LecturerFacade;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Optional;
 import javax.inject.Inject;
 import javax.validation.Valid;
@@ -32,11 +35,15 @@ public class LanguageController {
 
 	@Inject
 	private LanguageFacade languageFacade;
+        
+        @Inject
+	private LecturerFacade lecturerFacade;
 
-	@RequestMapping(value = "/new", method = RequestMethod.GET)
-	public String newLecturer(Model model) {
+	@RequestMapping(value = "/new/{id}", method = RequestMethod.GET)
+	public String newLecturer(@PathVariable long id, Model model) {
 		logger.debug("new");
 		model.addAttribute("language", new LanguageDTO());
+                model.addAttribute("lecturerId", id );
 		return "language/languageNew";
 	}
 
@@ -46,12 +53,13 @@ public class LanguageController {
 			UriComponentsBuilder uriBuilder) {
 		logger.debug("create");
 		Optional<LanguageDTO> dto = languageFacade.createLanguage(language);
-		return "redirect:" + uriBuilder.pathSegment("/lecturer/view/", dto.get().getLecturer().getId().toString()).buildAndExpand().encode().toUriString();
+		return "redirect:" + uriBuilder.pathSegment("lecturer","view", dto.get().getLecturer().getId().toString()).buildAndExpand().encode().toUriString();
         }
 
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
 	public String edit(@PathVariable long id, Model model) {
-		model.addAttribute("language", languageFacade.getLanguageById(id));
+		model.addAttribute("language", languageFacade.getLanguageById(id).get());
+                model.addAttribute("proficiencylevels", new ArrayList<>(Arrays.asList(ProficiencyLevel.values())));
 		logger.debug("edit");
 		return "language/languageEdit";
 	}
@@ -62,13 +70,13 @@ public class LanguageController {
 			UriComponentsBuilder uriBuilder) {
 		logger.debug("update");
 		Optional<LanguageDTO> dto = languageFacade.updateLanguage(language);
-		return "redirect:" + uriBuilder.pathSegment("/lecturer/view/", dto.get().getLecturer().getId().toString()).buildAndExpand().encode().toUriString();
+		return "redirect:" + uriBuilder.pathSegment("lecturer","view", dto.get().getLecturer().getId().toString()).buildAndExpand().encode().toUriString();
 	}
 
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
 	public String delete(@PathVariable long id, Model model, UriComponentsBuilder uriBuilder) {
 		logger.debug("delete");
                 languageFacade.deleteLanguage(languageFacade.getLanguageById(id).get());
-		return "redirect:" + uriBuilder.pathSegment("/lecturer/view/", String.valueOf(id)).buildAndExpand().encode().toUriString();
+		return "redirect:" + uriBuilder.pathSegment("lecturer","view", String.valueOf(id)).buildAndExpand().encode().toUriString();
 	}
 }
