@@ -69,6 +69,9 @@
                     </c:forEach>
 		</tbody>
         </table>
+        <sec:authorize access="hasRole('ROLE_ADMIN')">
+            <my:a href="/language/new/${lecturer.id}" class="btn btn-primary">new</my:a>
+        </sec:authorize>
 	
 		
 	<!-- 

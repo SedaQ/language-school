@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Language School lecture</title>
+<title>Language School language</title>
 <%@ include file="../common/head.jsp"%>
 </head>
 <body>
@@ -16,21 +16,22 @@
         
 	<div class="container center_div">
 		<form:form method="post"
-			action="${pageContext.request.contextPath}/lecturer/create"
-			modelAttribute="lecturerCreate" cssClass="form-horizontal">
+			action="${pageContext.request.contextPath}/language/create"
+			modelAttribute="language" cssClass="form-horizontal">
+                        <form:hidden path="lecturerId" />
 			<div>
-				<label path="nickname">Nickname</label>
-				<form:input path="nickname" />
+				<label path="language">Language</label>
+				<form:input path="language" />
 			</div>
 			<div>
-				<label path="firstName">First name</label>
-				<form:input path="firstName" />
+				<form:label path="proficiencyLevel">Proficiency level</form:label>
+				<form:select path="proficiencyLevel">
+					<c:forEach items="${proficiencylevels}" var="proflvl">
+						<form:option value="${proflvl}">${proflvl}</form:option>
+					</c:forEach>
+				</form:select>
 			</div>
-			<div>
-				<label path="surname">Surname</label>
-				<form:input path="surname" />
-			</div>
-			<button class="btn btn-primary" type="submit">Create lecturer</button>
+			<button class="btn btn-primary" type="submit">Create language</button>
 		</form:form>
 	</div>
 
