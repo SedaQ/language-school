@@ -34,10 +34,10 @@ public interface LectureFacade {
     
     /**
      * updates given lecture and returns it
-     * @param id of lecture to be updated
+     * @param lecture lecture to be updated
      * @return updated lecture
      */
-    public Optional<LectureDTO> updateLecture(Long id);
+    public Optional<LectureDTO> updateLecture(LectureDTO lecture);
     
     /**
      * deletes given lecture

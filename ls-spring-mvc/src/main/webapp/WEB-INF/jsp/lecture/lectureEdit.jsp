@@ -17,7 +17,7 @@
 	<div class="container center_div">
 		<form:form class="table table-striped" method="post"
 			action="${pageContext.request.contextPath}/lecture/update/${lecture.id}"
-			modelAttribute="course">
+			modelAttribute="lecture">
 
 			<div>
 				<label path="dayTime">DateTime</label>

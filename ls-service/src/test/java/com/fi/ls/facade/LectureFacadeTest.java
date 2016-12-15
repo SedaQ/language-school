@@ -133,7 +133,7 @@ public class LectureFacadeTest extends AbstractTestNGSpringContextTests {
     @Test
     public void testUpdate() {
         
-        lectureFacade.updateLecture(Long.MIN_VALUE);
+        lectureFacade.updateLecture(lecture);
         verify(lectureService, times(1)).update(any(Lecture.class));
         
     }

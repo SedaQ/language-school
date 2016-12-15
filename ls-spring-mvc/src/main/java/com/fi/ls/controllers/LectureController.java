@@ -65,7 +65,7 @@ public class LectureController {
 			BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes,
 			UriComponentsBuilder uriBuilder) {
 		logger.debug("update");
-		//Optional<LecturerDTO> cdto = lectureFacade.updateLecture(formBean);
+		Optional<LectureDTO> cdto = lectureFacade.updateLecture(formBean);
 		return "redirect:" + uriBuilder.path("/lecture/list").buildAndExpand().encode().toUriString();
 	}	
 
@@ -78,8 +78,9 @@ public class LectureController {
 
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
 	public String deleteLecture(@PathVariable Long id, Model model, UriComponentsBuilder uriBuilder) {
+                Long myID = lectureFacade.getLectureById(id).get().getListOfCourses().get(0).getId();
 		logger.debug("delete");
 		lectureFacade.deleteLecture(id);
-		return "redirect:" + uriBuilder.path("/lecture/list").buildAndExpand().encode().toUriString();
+		return "redirect:" + uriBuilder.path("/course/view/{" + myID.toString() + "}").buildAndExpand().encode().toUriString();
 	}
 }
