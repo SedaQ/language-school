@@ -51,7 +51,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${lecturer.listOfLanguages}" var="language">
+			<c:forEach items="${lecturerLanguages}" var="language">
 				<tr>
 					<td>${language.id}</td>
 					<td><c:out value="${language.language}" /></td>
@@ -68,25 +68,6 @@
 			</c:forEach>
 		</tbody>
 	</table>
-
-
-	<!-- 
-	Lecturers lectures:
-	<table class="table table-striped">
-		<tbody>
-			<c:forEach items="${lectures}" var="lecture">
-				<tr>
-					<td><c:out value="${lecture.id}" /></td>
-					<td><c:out value="${courseLecturer.dayTime}" /></td>
-					<td><c:out value="${courseLecturer.classroomId}" /></td>
-					<td><c:out value="${courseLecturer.topic}" /></td>
-					<td><my:a href="/lecturer/view/${lecture.id}"
-							class="btn btn-primary">view</my:a></td>
-				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
-	 -->
 
 	<%@ include file="../common/footer.jsp"%>
 </body>

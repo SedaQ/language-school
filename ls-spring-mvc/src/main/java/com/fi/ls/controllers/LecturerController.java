@@ -38,6 +38,8 @@ public class LecturerController {
 
 	@RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
 	public String view(@PathVariable long id, Model model) {
+		model.addAttribute("lecturerLanguages",
+				lecturerFacade.findAllLecturerLanguages(lecturerFacade.getLecturerById(id).get()));
 		model.addAttribute("lecturer", lecturerFacade.getLecturerById(id).get());
 		return "lecturer/lecturerView";
 	}
