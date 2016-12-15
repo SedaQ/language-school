@@ -91,8 +91,8 @@ public class CourseController {
 			BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes,
 			UriComponentsBuilder uriBuilder) {
 		logger.debug("update");
-		Optional<CourseDTO> toUpdate = courseFacade.getCourseById(id);
-		Optional<CourseDTO> cdto = courseFacade.updateCourse(id);
+//		Optional<CourseDTO> toUpdate = courseFacade.getCourseById(id);
+		Optional<CourseDTO> cdto = courseFacade.updateCourse(formBean);
 		return "redirect:" + uriBuilder.path("/course/list").buildAndExpand().encode().toUriString();
 	}
 
