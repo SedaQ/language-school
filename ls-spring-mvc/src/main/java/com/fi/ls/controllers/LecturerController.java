@@ -25,7 +25,7 @@ import com.fi.ls.facade.LecturerFacade;
 @RequestMapping("/lecturer")
 public class LecturerController {
 
-	private final static Logger logger = LoggerFactory.getLogger(CourseController.class);
+	private final static Logger logger = LoggerFactory.getLogger(LecturerController.class);
 
 	@Inject
 	private LecturerFacade lecturerFacade;

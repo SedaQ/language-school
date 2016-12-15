@@ -41,6 +41,34 @@
 			</tr>
 		</tbody>
 	</table>
+        <table class="table">
+		<thead>
+			<tr>
+				<th>id</th>
+				<th>language</th>
+				<th>proficiency level</th>
+			</tr>
+		</thead>
+                <tbody>
+                    <c:forEach items="${lecturer.listOfLanguages}" var="language">
+			<tr>
+				<td>${language.id}</td>
+				<td><c:out value="${language.language}" /></td>
+				<td><c:out value="${language.proficiencyLevel}" /></td>
+                                <td>
+                                <sec:authorize access="hasRole('ROLE_ADMIN')">
+                                <a
+                                        href="${pageContext.request.contextPath}/language/edit/${language.id}"
+                                        class="btn btn-primary">Edit</a>
+                                <a
+                                        href="${pageContext.request.contextPath}/language/delete/${language.id}"
+                                        class="btn btn-primary">Delete</a>
+				</sec:authorize>
+                                </td>
+			</tr>
+                    </c:forEach>
+		</tbody>
+        </table>
 	
 		
 	<!-- 
