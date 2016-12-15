@@ -28,6 +28,7 @@ import com.fi.ls.facade.CourseFacade;
 import com.fi.ls.facade.LectureFacade;
 import com.fi.ls.facade.LecturerFacade;
 import com.fi.ls.facade.StudentFacade;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -95,10 +96,15 @@ public class LectureController {
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
 	public String deleteLecture(@PathVariable Long id, Model model, UriComponentsBuilder uriBuilder) {
                 Long myID = lectureFacade.getLectureById(id).get().getListOfCourses().get(0).getId();
-                List<LectureDTO> lectureList;
+                
                 for (CourseDTO courseDTO : lectureFacade.getLectureById(id).get().getListOfCourses()) {
-                     
-                    lectureList =  courseFacade.getCourseById(courseDTO.getId()).get().getListOfLectures();
+                    
+                    List<LectureDTO> lectureList;
+                    lectureList = new ArrayList<>();
+                    for (LectureDTO l : courseDTO.getListOfLectures()) {
+                        lectureList.add(l);
+                    }
+                    //lectureList =  courseDTO.getListOfLectures();
                     lectureList.remove(lectureFacade.getLectureById(id).get());
                     courseDTO.setListOfLectures(lectureList);
                     courseFacade.updateCourse(courseDTO);
@@ -106,8 +112,13 @@ public class LectureController {
                 }
 
                 for (LecturerDTO lecturerDTO : lectureFacade.getLectureById(id).get().getListOfLecturers()) {
-                     
-                    lectureList =  lecturerFacade.getLecturerById(lecturerDTO.getId()).get().getListOfLectures();
+                    
+                    List<LectureDTO> lectureList;
+                    lectureList = new ArrayList<>();
+                    for (LectureDTO l : lecturerDTO.getListOfLectures()) {
+                        lectureList.add(l);
+                    }
+                    //lectureList =  lecturerDTO.getListOfLectures();
                     lectureList.remove(lectureFacade.getLectureById(id).get());
                     lecturerDTO.setListOfLectures(lectureList);
                     lecturerFacade.updateLecturer(lecturerDTO);
@@ -115,8 +126,13 @@ public class LectureController {
                 }
 
                 for (StudentDTO studentDTO : lectureFacade.getLectureById(id).get().getListOfStudents()) {
-                     
-                    lectureList =  studentFacade.getStudentById(studentDTO.getId()).get().getListOfLectures();
+                    
+                    List<LectureDTO> lectureList;
+                    lectureList = new ArrayList<>();
+                    for (LectureDTO l : studentDTO.getListOfLectures()) {
+                        lectureList.add(l);
+                    }
+                    //lectureList =  studentDTO.getListOfLectures();
                     lectureList.remove(lectureFacade.getLectureById(id).get());
                     studentDTO.setListOfLectures(lectureList);
                     studentFacade.updateStudent(studentDTO);
