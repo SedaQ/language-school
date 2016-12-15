@@ -48,10 +48,6 @@ public class Lecturer extends LSUser {
 	@Mapping("listOfLectures")
 	private List<Lecture> listOfLectures = new ArrayList<>();
 
-	public Long getId() {
-		return id;
-	}
-
 	public String getNickname() {
 		return nickname;
 	}

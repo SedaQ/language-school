@@ -5,12 +5,15 @@ import javax.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.fi.ls.dto.course.CourseDTO;
+import com.fi.ls.dto.course.*;
 import com.fi.ls.dto.lecture.LectureDTO;
 import com.fi.ls.facade.CourseFacade;
 import com.fi.ls.rest.ApiEndpoints;
 import com.fi.ls.rest.assembler.CourseResourceAssembler;
 import com.fi.ls.rest.assembler.LectureResourceAssembler;
+import com.fi.ls.rest.exception.BadRequestException;
+import com.fi.ls.rest.exception.InvalidParameterException;
+import com.fi.ls.rest.exception.ResourceAlreadyExistingException;
 import com.fi.ls.rest.exception.ResourceNotFoundException;
 import com.fi.ls.rest.exception.ResourceNotModifiedException;
 import java.util.ArrayList;
@@ -28,6 +31,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import org.springframework.web.bind.annotation.RequestBody;
 
 /**
  * @author Lukáš Daubner (410034)
@@ -165,5 +169,51 @@ public class CoursesController {
 
             if(!deleted)
                 throw new ResourceNotFoundException();
+        }
+        
+        /**
+         * create course
+         * curl -X POST -i -H "Content-Type: application/json" --data '{"name":"test","language":"test","proficiencyLevel":"A1"}' http://localhost:8080/pa165/rest/courses/create
+         * NOTE: You might need to escape " and ' characters
+         * 
+         * @param course
+         * @return 
+         */
+        @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+        public final CourseDTO createCourse(@RequestBody CourseCreateDTO course) {
+
+            logger.debug("rest createCourse()");
+
+            if(courseFacade.getCourseByName(course.getName()).isPresent())
+                throw new ResourceAlreadyExistingException();
+
+            Optional<CourseDTO> created = courseFacade.create(course);
+
+            if(created.isPresent())
+                return created.get();
+            else
+                throw new InvalidParameterException();
+        }
+        
+        /**
+         * 
+         * @param id
+         * @param newCourse
+         * @return 
+         */
+        @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+        public final CourseDTO updateCourse(@PathVariable("id") long id, @RequestBody CourseDTO newCourse) {
+
+            logger.debug("rest updateCourse({})", id);
+            
+            if(!courseFacade.getCourseById(id).isPresent())
+                throw new ResourceNotFoundException();
+            
+            Optional<CourseDTO> updated = courseFacade.updateCourse(id);
+            
+            if(updated.isPresent())
+                return updated.get();
+            else
+                throw new InvalidParameterException();
         }
 }
