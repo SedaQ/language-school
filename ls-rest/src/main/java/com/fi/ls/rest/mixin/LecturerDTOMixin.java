@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  * @author Lukáš Daubner (410034)
  *
  */
-@JsonIgnoreProperties({ "passwordHash", "listOfLanguages", "listOfLectures" })
+@JsonIgnoreProperties({ "passwordHash", "listOfLanguages", "listOfLectures", "userRole" })
 public class LecturerDTOMixin {
     
 }

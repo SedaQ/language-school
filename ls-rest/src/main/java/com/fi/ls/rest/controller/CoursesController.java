@@ -203,6 +203,7 @@ public class CoursesController {
         /**
          * update course
          * curl -X PUT -i -H "Content-Type: application/json" --data '{"id": 2, "name": "Klingon TEST", "language": "KlingonUpdated", "proficiencyLevel": "B1"}' http://localhost:8080/pa165/rest/courses/update
+         * NOTE: You might need to escape " and ' characters
          * 
          * @param newCourse
          * @return 

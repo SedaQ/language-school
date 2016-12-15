@@ -1,7 +1,10 @@
 package com.fi.ls.rest.controller;
 
+import com.fi.ls.dto.course.CourseCreateDTO;
+import com.fi.ls.dto.course.CourseDTO;
 import com.fi.ls.dto.language.LanguageDTO;
 import com.fi.ls.dto.lecture.LectureDTO;
+import com.fi.ls.dto.lecturer.LecturerCreateDTO;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,6 +21,9 @@ import com.fi.ls.rest.ApiEndpoints;
 import com.fi.ls.rest.assembler.LanguageResourceAssembler;
 import com.fi.ls.rest.assembler.LectureResourceAssembler;
 import com.fi.ls.rest.assembler.LecturerResourceAssembler;
+import static com.fi.ls.rest.controller.CoursesController.logger;
+import com.fi.ls.rest.exception.InvalidParameterException;
+import com.fi.ls.rest.exception.ResourceAlreadyExistingException;
 import com.fi.ls.rest.exception.ResourceNotFoundException;
 import com.fi.ls.rest.exception.ResourceNotModifiedException;
 import java.util.ArrayList;
@@ -29,6 +35,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.context.request.WebRequest;
 
 /**
@@ -206,5 +213,26 @@ public class LecturersController {
 
             if(!deleted)
                 throw new ResourceNotFoundException();
+        }
+        
+        /**
+         * create lecturer
+         * curl -X POST -i -H "Content-Type: application/json" --data '{"nickname":"ju","firstName":"hele","surname":"nedele"}' http://localhost:8080/pa165/rest/lecturers/create
+         * NOTE: You might need to escape " and ' characters
+         * 
+         * @param lecturer
+         * @return 
+         */
+        @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+        public final LecturerDTO createLecturer(@RequestBody LecturerCreateDTO lecturer) {
+
+            logger.debug("rest createLecturer()");
+
+            Optional<LecturerDTO> created = lecturerFacade.createLecturer(lecturer);
+
+            if(created.isPresent())
+                return created.get();
+            else
+                throw new InvalidParameterException();
         }
 }
