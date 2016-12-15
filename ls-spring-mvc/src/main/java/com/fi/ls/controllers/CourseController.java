@@ -17,6 +17,7 @@ import com.fi.ls.dto.lecture.LectureCreateDTO;
 import com.fi.ls.enums.ProficiencyLevel;
 import com.fi.ls.facade.CourseFacade;
 import com.fi.ls.facade.LectureFacade;
+import java.security.SecureRandom;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -40,11 +41,11 @@ public class CourseController {
 
 	@Inject
 	private CourseFacade courseFacade;
-
+        
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String list(Model model) {
 		model.addAttribute("courses", courseFacade.getAllCourses());
-		return "course/coursesList";
+		return "course/courseList";
 	}
 
 	@RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
@@ -73,6 +74,7 @@ public class CourseController {
 		logger.debug("create");
 		// formBean.setProficiencyLevel(ProficiencyLevel.C1);
 		Optional<CourseDTO> cdto = courseFacade.create(formBean);
+//                return "course/courseList";
 		return "redirect:" + uriBuilder.path("/course/list").buildAndExpand().encode().toUriString();
 	}
 

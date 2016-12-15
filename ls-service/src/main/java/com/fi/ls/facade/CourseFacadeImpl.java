@@ -75,14 +75,17 @@ public class CourseFacadeImpl implements CourseFacade {
 	}
 
 	@Override
-	public Optional<CourseDTO> updateCourse(Long courseId) {
-		if (courseId == null)
-			throw new IllegalArgumentException("courseId parameter is null in updateCourse method");
+	public Optional<CourseDTO> updateCourse(CourseDTO crs) {
+		if (crs == null)
+			throw new IllegalArgumentException("CourseDTO parameter is null");
+
+		Optional<Course> entity = beanMapping.mapTo(crs, Course.class);
 		try {
-			Optional<Course> course = Optional.ofNullable(courseService.update(courseService.findById(courseId)));
-			return course.isPresent() ? beanMapping.mapTo(course.get(), CourseDTO.class) : Optional.empty();
+			Course updated = courseService.update(entity.get());
+			return beanMapping.mapTo(updated, CourseDTO.class);
+
 		} catch (ServiceLayerException | NoSuchElementException ex) {
-			logger.warn("updateCourse method invokes exception: " + ex);
+			logger.warn("updateLanguage method invokes exception: " + ex);
 			return Optional.empty();
 		}
 	}

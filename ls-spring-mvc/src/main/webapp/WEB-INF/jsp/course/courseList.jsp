@@ -38,8 +38,9 @@
 			</c:forEach>
 		</tbody>
 	</table>
-
-	<my:a href="/course/new/" class="btn btn-primary">new</my:a>
+        <sec:authorize access="hasRole('ROLE_LECTURER')">
+            <my:a href="/course/new/" class="btn btn-primary">new</my:a>
+        </sec:authorize>
 
 </body>
 <%@ include file="../common/footer.jsp"%>

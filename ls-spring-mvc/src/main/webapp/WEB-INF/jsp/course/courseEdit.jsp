@@ -20,8 +20,8 @@
 			modelAttribute="course">
 
 			<div>
-				<form:label path="name">Name</form:label>
-				<input path="name" />
+				<label path="name">Name</label>
+				<form:input path="name" />
 			</div>
 			<div>
 				<label path="language">Language</label>
@@ -38,6 +38,7 @@
 			<button class="btn btn-primary" type="submit">Update course</button>
 		</form:form>
 	</div>
-	<%@ include file="../common/footer.jsp"%>
+	
 </body>
+<%@ include file="../common/footer.jsp"%>
 </html>

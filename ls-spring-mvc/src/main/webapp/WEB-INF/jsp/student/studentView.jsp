@@ -28,9 +28,12 @@
 				<td><c:out value="${student.firstName}" /></td>
 				<td><c:out value="${student.surname}" /></td>
 				<td><c:out value="${student.birthNumber}" /></td>
-				<td><a
-					href="${pageContext.request.contextPath}/student/edit/${student.id}"
-					class="btn btn-primary">Edit</a> 
+				<td>
+                                <sec:authorize access="hasRole('ROLE_ADMIN')">
+                                        <a
+                                                href="${pageContext.request.contextPath}/student/edit/${student.id}"
+                                                class="btn btn-primary">Edit</a> 
+                                </sec:authorize>
 				<sec:authorize access="hasRole('ROLE_ADMIN')">
 					<a
 						href="${pageContext.request.contextPath}/student/delete/${student.id}"

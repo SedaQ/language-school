@@ -29,7 +29,7 @@ public class LecturerController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String list(Model model) {
 		model.addAttribute("lecturers", lecturerFacade.getAllLecturers());
-		return "lecturer/lecturersList";
+		return "lecturer/lecturerList";
 	}
 
 	@RequestMapping(value = "/view/{id}", method = RequestMethod.GET)

@@ -34,11 +34,11 @@ public interface CourseFacade {
 	/**
 	 * updates given course
 	 * 
-	 * @param id
+	 * @param c
 	 *            course that has to be updated
 	 * @return updated course
 	 */
-	public Optional<CourseDTO> updateCourse(Long id);
+	public Optional<CourseDTO> updateCourse(CourseDTO c);
 
 	/**
 	 * removes given course

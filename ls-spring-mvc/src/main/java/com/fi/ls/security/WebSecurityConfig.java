@@ -38,9 +38,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.usernameParameter("username").passwordParameter("password")
 				.defaultSuccessUrl("/home")
 				.and()
-			.exceptionHandling()
-				.accessDeniedPage("/errorpage")
-				.and()
+//			.exceptionHandling()
+//				.accessDeniedPage("/errorpage")
+//				.and()
 			.csrf();
 		// @formatter:on
 	}
