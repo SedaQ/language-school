@@ -45,16 +45,16 @@ public class StudentController {
 	@RequestMapping(value = "/new", method = RequestMethod.GET)
 	public String newStudent(Model model) {
 		logger.debug("new");
-		model.addAttribute("studentCreate", new StudentCreateDTO());
+		model.addAttribute("studentCreate", new StudentDTO());
 		return "student/studentNew";
 	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public String createStudent(@Valid @ModelAttribute("studentCreate") StudentCreateDTO formBean,
+	public String createStudent(@Valid @ModelAttribute("studentCreate") StudentDTO formBean,
 			BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes,
 			UriComponentsBuilder uriBuilder) {
 		logger.debug("create");
-		Optional<StudentDTO> cdto = studentFacade.createStudent(formBean);
+		studentFacade.registerUser(formBean, formBean.getPasswordHash());
 		return "redirect:" + uriBuilder.path("/student/list").buildAndExpand().encode().toUriString();
 	}
 

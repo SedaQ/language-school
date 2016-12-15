@@ -16,6 +16,7 @@
 	<table class="table">
 		<thead>
 			<tr>
+				<th>email</th>
 				<th>first name</th>
 				<th>surname</th>
 				<th>birth number</th>
@@ -25,19 +26,18 @@
 		<tbody>
 			<tr>
 				<td>${student.id}</td>
+				<td><c:out value="${student.email}" /></td>
 				<td><c:out value="${student.firstName}" /></td>
 				<td><c:out value="${student.surname}" /></td>
 				<td><c:out value="${student.birthNumber}" /></td>
-				<td>
-	                <sec:authorize access="hasRole('ROLE_ADMIN')">
-                        <a
-                            href="${pageContext.request.contextPath}/student/edit/${student.id}"
-                            class="btn btn-primary">Edit</a> 
+				<td><sec:authorize access="hasRole('ROLE_ADMIN')">
+						<a
+							href="${pageContext.request.contextPath}/student/edit/${student.id}"
+							class="btn btn-primary">Edit</a>
 						<a
 							href="${pageContext.request.contextPath}/student/delete/${student.id}"
 							class="btn btn-primary">Delete</a>
-					</sec:authorize>
-				</td>
+					</sec:authorize></td>
 			</tr>
 		</tbody>
 	</table>

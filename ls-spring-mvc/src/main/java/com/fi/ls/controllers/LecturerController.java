@@ -38,24 +38,25 @@ public class LecturerController {
 
 	@RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
 	public String view(@PathVariable long id, Model model) {
+		model.addAttribute("lecturerLanguages",
+				lecturerFacade.findAllLecturerLanguages(lecturerFacade.getLecturerById(id).get()));
 		model.addAttribute("lecturer", lecturerFacade.getLecturerById(id).get());
 		return "lecturer/lecturerView";
 	}
-	
 
 	@RequestMapping(value = "/new", method = RequestMethod.GET)
 	public String newLecturer(Model model) {
 		logger.debug("new");
-		model.addAttribute("lecturerCreate", new LecturerCreateDTO());
+		model.addAttribute("lecturerCreate", new LecturerDTO());
 		return "lecturer/lecturerNew";
 	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public String createLecturer(@Valid @ModelAttribute("lecturerCreate") LecturerCreateDTO formBean,
+	public String createLecturer(@Valid @ModelAttribute("lecturerCreate") LecturerDTO formBean,
 			BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes,
 			UriComponentsBuilder uriBuilder) {
 		logger.debug("create");
-		Optional<LecturerDTO> cdto = lecturerFacade.createLecturer(formBean);
+		lecturerFacade.registerUser(formBean, formBean.getPasswordHash());
 		return "redirect:" + uriBuilder.path("/lecturer/list").buildAndExpand().encode().toUriString();
 	}
 
@@ -67,7 +68,6 @@ public class LecturerController {
 		Optional<LecturerDTO> cdto = lecturerFacade.updateLecturer(formBean);
 		return "redirect:" + uriBuilder.path("/lecturer/list").buildAndExpand().encode().toUriString();
 	}
-	
 
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
 	public String edit(@PathVariable long id, Model model) {

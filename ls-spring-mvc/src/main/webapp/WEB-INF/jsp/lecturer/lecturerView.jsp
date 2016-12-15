@@ -17,6 +17,7 @@
 		<thead>
 			<tr>
 				<th>id</th>
+				<th>email</th>
 				<th>nickname</th>
 				<th>first Name</th>
 				<th>surname</th>
@@ -26,22 +27,22 @@
 		<tbody>
 			<tr>
 				<td>${lecturer.id}</td>
+				<td><c:out value="${lecturer.email}" /></td>
 				<td><c:out value="${lecturer.nickname}" /></td>
 				<td><c:out value="${lecturer.firstName}" /></td>
 				<td><c:out value="${lecturer.surname}" /></td>
-				<td>
-				<sec:authorize access="hasRole('ROLE_ADMIN')">
-					<a
-						href="${pageContext.request.contextPath}/lecturer/edit/${lecturer.id}"
-						class="btn btn-primary">Edit</a>
-					<a
-						href="${pageContext.request.contextPath}/lecturer/delete/${lecturer.id}"
-						class="btn btn-primary">Delete</a>
-				</sec:authorize></td>
+				<td><sec:authorize access="hasRole('ROLE_ADMIN')">
+						<a
+							href="${pageContext.request.contextPath}/lecturer/edit/${lecturer.id}"
+							class="btn btn-primary">Edit</a>
+						<a
+							href="${pageContext.request.contextPath}/lecturer/delete/${lecturer.id}"
+							class="btn btn-primary">Delete</a>
+					</sec:authorize></td>
 			</tr>
 		</tbody>
 	</table>
-        <table class="table">
+	<table class="table">
 		<thead>
 			<tr>
 				<th>id</th>
@@ -78,19 +79,23 @@
 	Lecturers lectures:
 	<table class="table table-striped">
 		<tbody>
-			<c:forEach items="${lectures}" var="lecture">
+			<c:forEach items="${lecturerLanguages}" var="language">
 				<tr>
-					<td><c:out value="${lecture.id}" /></td>
-					<td><c:out value="${courseLecturer.dayTime}" /></td>
-					<td><c:out value="${courseLecturer.classroomId}" /></td>
-					<td><c:out value="${courseLecturer.topic}" /></td>
-					<td><my:a href="/lecturer/view/${lecture.id}"
-							class="btn btn-primary">view</my:a></td>
+					<td>${language.id}</td>
+					<td><c:out value="${language.language}" /></td>
+					<td><c:out value="${language.proficiencyLevel}" /></td>
+					<td><sec:authorize access="hasRole('ROLE_ADMIN')">
+							<a
+								href="${pageContext.request.contextPath}/language/edit/${language.id}"
+								class="btn btn-primary">Edit</a>
+							<a
+								href="${pageContext.request.contextPath}/language/delete/${language.id}"
+								class="btn btn-primary">Delete</a>
+						</sec:authorize></td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
-	 -->
 
 	<%@ include file="../common/footer.jsp"%>
 </body>

@@ -4,7 +4,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
-	
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,6 +18,14 @@
 		<form:form method="post"
 			action="${pageContext.request.contextPath}/student/create"
 			modelAttribute="studentCreate" cssClass="form-horizontal">
+			<div>
+				<label path="email">E-mail</label>
+				<form:input path="email" />
+			</div>
+			<div>
+				<label path="passwordHash">Password</label>
+				<form:input path="passwordHash" />
+			</div>
 			<div>
 				<label path="firstName">First name</label>
 				<form:input path="firstName" />
