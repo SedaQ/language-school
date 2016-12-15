@@ -61,6 +61,24 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
 		user3.setUserRole(UserRoles.ROLE_STUDENT.name());
 		userService.registerUser(user3, user3.getPasswordHash());
 
+                LSUser user4 = new LSUser();
+		user4.setEmail("admin@email.cz");
+		user4.setPasswordHash("admin");
+		user4.setUserRole(UserRoles.ROLE_ADMIN.name());
+		userService.registerUser(user4, user4.getPasswordHash());
+
+		LSUser user5 = new LSUser();
+		user5.setEmail("lecturer@email.cz");
+		user5.setPasswordHash("lecturer");
+		user5.setUserRole(UserRoles.ROLE_LECTURER.name());
+		userService.registerUser(user5, user5.getPasswordHash());
+
+		LSUser user6 = new LSUser();
+		user6.setEmail("student@email.cz");
+		user6.setPasswordHash("student");
+		user6.setUserRole(UserRoles.ROLE_STUDENT.name());
+		userService.registerUser(user6, user6.getPasswordHash());
+                
 		log.info("Loading sample data...");
 
 		Student s1 = new Student();

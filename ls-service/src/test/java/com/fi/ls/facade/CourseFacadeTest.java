@@ -120,7 +120,7 @@ public class CourseFacadeTest extends AbstractTestNGSpringContextTests {
 
 	@Test
 	public void testUpdateCourse() {
-		courseFacade.updateCourse(Long.MAX_VALUE);
+		courseFacade.updateCourse(courseDTO1);
 		verify(courseService, times(1)).update(any(Course.class));
 	}
 
@@ -128,7 +128,7 @@ public class CourseFacadeTest extends AbstractTestNGSpringContextTests {
 	public void testUpdateCourseThrows() {
 		doThrow(new ServiceLayerException("")).when(courseService).update(any(Course.class));
 
-		Optional<CourseDTO> output = courseFacade.updateCourse(Long.MAX_VALUE);
+		Optional<CourseDTO> output = courseFacade.updateCourse(courseDTO1);
 		assertEquals(output, Optional.empty());
 	}
 

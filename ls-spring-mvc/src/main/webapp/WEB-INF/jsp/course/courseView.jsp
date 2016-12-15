@@ -31,7 +31,7 @@
 				<td><c:out value="${course.language}" /></td>
 				<td><c:out value="${course.proficiencyLevel}" /></td>
 				<td>
-				<sec:authorize access="hasRole('ROLE_ADMIN')">
+				<sec:authorize access="hasRole('ROLE_LECTURER')">
 					<a
 						href="${pageContext.request.contextPath}/course/edit/${course.id}"
 						class="btn btn-primary">Edit</a>

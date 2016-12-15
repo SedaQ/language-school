@@ -28,20 +28,19 @@
 				<td><c:out value="${lecture.dayTime}" /></td>
 				<td><c:out value="${lecture.classroomId}" /></td>
 				<td><c:out value="${lecture.topic}" /></td>
-				<sec:authorize access="hasRole('ROLE_LECTURER')">
-					<td><a
-						href="${pageContext.request.contextPath}/lecture/edit/${lecture.id}"
-						class="btn btn-primary">Edit</a> 
-				</sec:authorize>
-				<sec:authorize access="hasRole('ROLE_ADMIN')">
-					<a
-						href="${pageContext.request.contextPath}/lecture/delete/${lecture.id}"
-						class="btn btn-primary">Delete</a>
-				</sec:authorize>
-			</td>
 			</tr>
 		</tbody>
 	</table>
+	<sec:authorize access="hasRole('ROLE_LECTURER')">
+        <a
+		href="${pageContext.request.contextPath}/lecture/edit/${lecture.id}"
+		class="btn btn-primary">Edit</a> 
+	</sec:authorize>
+	<sec:authorize access="hasRole('ROLE_LECTURER')">
+	<a
+		href="${pageContext.request.contextPath}/lecture/delete/${lecture.id}"
+		class="btn btn-primary">Delete</a>
+	</sec:authorize>
 
 	<%@ include file="../common/footer.jsp"%>
 </body>
