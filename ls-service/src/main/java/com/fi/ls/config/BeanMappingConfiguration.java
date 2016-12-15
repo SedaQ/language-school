@@ -23,8 +23,6 @@ public class BeanMappingConfiguration {
         @Bean
         public ModelMapper modelMapper() {
             ModelMapper mapper = new ModelMapper();
-            mapper.addMappings(new CourseToDTO());
-            mapper.addMappings(new CourseFromDTO());
             return mapper;
         }
 }

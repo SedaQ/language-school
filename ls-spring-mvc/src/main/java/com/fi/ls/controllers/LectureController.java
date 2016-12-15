@@ -40,13 +40,13 @@ public class LectureController {
 	@Inject
 	private LectureFacade lectureFacade;
         
-        @Inject
+    @Inject
 	private CourseFacade courseFacade;
         
-        @Inject
+    @Inject
 	private LecturerFacade lecturerFacade;
         
-        @Inject
+    @Inject
 	private StudentFacade studentFacade;
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -95,49 +95,49 @@ public class LectureController {
 
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
 	public String deleteLecture(@PathVariable Long id, Model model, UriComponentsBuilder uriBuilder) {
-                Long myID = lectureFacade.getLectureById(id).get().getListOfCourses().get(0).getId();
-                
-                for (CourseDTO courseDTO : lectureFacade.getLectureById(id).get().getListOfCourses()) {
-                    
-                    List<LectureDTO> lectureList;
-                    lectureList = new ArrayList<>();
-                    for (LectureDTO l : courseDTO.getListOfLectures()) {
-                        lectureList.add(l);
-                    }
-                    //lectureList =  courseDTO.getListOfLectures();
-                    lectureList.remove(lectureFacade.getLectureById(id).get());
-                    courseDTO.setListOfLectures(lectureList);
-                    courseFacade.updateCourse(courseDTO);
-                    
-                }
+        Long myID = lectureFacade.getLectureById(id).get().getListOfCourses().get(0).getId();
+        
+        for (CourseDTO courseDTO : lectureFacade.getLectureById(id).get().getListOfCourses()) {
+            
+            List<LectureDTO> lectureList;
+            lectureList = new ArrayList<>();
+            for (LectureDTO l : courseDTO.getListOfLectures()) {
+                lectureList.add(l);
+            }
+            //lectureList =  courseDTO.getListOfLectures();
+            lectureList.remove(lectureFacade.getLectureById(id).get());
+            courseDTO.setListOfLectures(lectureList);
+            courseFacade.updateCourse(courseDTO);
+            
+        }
 
-                for (LecturerDTO lecturerDTO : lectureFacade.getLectureById(id).get().getListOfLecturers()) {
-                    
-                    List<LectureDTO> lectureList;
-                    lectureList = new ArrayList<>();
-                    for (LectureDTO l : lecturerDTO.getListOfLectures()) {
-                        lectureList.add(l);
-                    }
-                    //lectureList =  lecturerDTO.getListOfLectures();
-                    lectureList.remove(lectureFacade.getLectureById(id).get());
-                    lecturerDTO.setListOfLectures(lectureList);
-                    lecturerFacade.updateLecturer(lecturerDTO);
-                    
-                }
+        for (LecturerDTO lecturerDTO : lectureFacade.getLectureById(id).get().getListOfLecturers()) {
+            
+            List<LectureDTO> lectureList;
+            lectureList = new ArrayList<>();
+            for (LectureDTO l : lecturerDTO.getListOfLectures()) {
+                lectureList.add(l);
+            }
+            //lectureList =  lecturerDTO.getListOfLectures();
+            lectureList.remove(lectureFacade.getLectureById(id).get());
+            lecturerDTO.setListOfLectures(lectureList);
+            lecturerFacade.updateLecturer(lecturerDTO);
+            
+        }
 
-                for (StudentDTO studentDTO : lectureFacade.getLectureById(id).get().getListOfStudents()) {
-                    
-                    List<LectureDTO> lectureList;
-                    lectureList = new ArrayList<>();
-                    for (LectureDTO l : studentDTO.getListOfLectures()) {
-                        lectureList.add(l);
-                    }
-                    //lectureList =  studentDTO.getListOfLectures();
-                    lectureList.remove(lectureFacade.getLectureById(id).get());
-                    studentDTO.setListOfLectures(lectureList);
-                    studentFacade.updateStudent(studentDTO);
-                    
-                }
+        for (StudentDTO studentDTO : lectureFacade.getLectureById(id).get().getListOfStudents()) {
+            
+            List<LectureDTO> lectureList;
+            lectureList = new ArrayList<>();
+            for (LectureDTO l : studentDTO.getListOfLectures()) {
+                lectureList.add(l);
+            }
+            //lectureList =  studentDTO.getListOfLectures();
+            lectureList.remove(lectureFacade.getLectureById(id).get());
+            studentDTO.setListOfLectures(lectureList);
+            studentFacade.updateStudent(studentDTO);
+            
+        }
                 
 
 		logger.debug("delete");

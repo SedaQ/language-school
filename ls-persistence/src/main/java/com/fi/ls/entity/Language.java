@@ -32,7 +32,7 @@ public class Language {
 	private String language;
 
 	@NotNull
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	private Lecturer lecturer;
 
 	@NotNull

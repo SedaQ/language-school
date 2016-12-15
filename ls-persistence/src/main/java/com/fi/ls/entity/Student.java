@@ -32,7 +32,7 @@ public class Student extends LSUser {
     @Column(unique = true, name = "birth_number")
     private String birthNumber;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @Column(name = "list_of_lectures")
     @Mapping("listOfLectures")
     private List<Lecture> listOfLectures = new ArrayList<>();

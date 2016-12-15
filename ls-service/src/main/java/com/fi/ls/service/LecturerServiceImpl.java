@@ -6,6 +6,8 @@ import com.fi.ls.entity.Language;
 import com.fi.ls.entity.Lecture;
 import com.fi.ls.entity.Lecturer;
 import com.fi.ls.exceptions.ServiceLayerException;
+import com.fi.ls.security.UserPasswordEncryption;
+
 import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.PersistenceException;
@@ -24,10 +26,14 @@ public class LecturerServiceImpl implements LecturerService {
 	private LecturerDao lecturerDao;
 	private LanguageDao languageDao;
 
+	private UserPasswordEncryption userPasswordEncryption;
+
 	@Inject
-	public LecturerServiceImpl(LecturerDao lecturerDao, LanguageDao languageDao) {
+	public LecturerServiceImpl(LecturerDao lecturerDao, LanguageDao languageDao,
+			UserPasswordEncryption userPasswordEncryption) {
 		this.lecturerDao = lecturerDao;
 		this.languageDao = languageDao;
+		this.userPasswordEncryption = userPasswordEncryption;
 	}
 
 	@Override
@@ -65,7 +71,7 @@ public class LecturerServiceImpl implements LecturerService {
 	}
 
 	@Override
-	@Transactional
+	// @Transactional
 	public void remove(Lecturer l) {
 		if (l == null)
 			throw new IllegalArgumentException("Lecturer parameter is null");
@@ -124,4 +130,35 @@ public class LecturerServiceImpl implements LecturerService {
 			throw new ServiceLayerException("Problem with finding Lecturer, see inner exception.", ex);
 		}
 	}
+
+	@Override
+	public Boolean registerUser(Lecturer u, String unencryptedPassword) {
+		if (u == null)
+			throw new IllegalArgumentException("LSUser u parameter is null");
+		if (unencryptedPassword == null)
+			throw new IllegalArgumentException("String unencryptedPassword parameter is null");
+
+		try {
+			u.setPasswordHash(userPasswordEncryption.createHash(unencryptedPassword));
+			lecturerDao.create(u);
+		} catch (RuntimeException ex) {
+			throw new ServiceLayerException("Problem with registering Lecturer, see inner exception.", ex);
+		}
+		return Boolean.TRUE;
+	}
+
+	@Override
+	public boolean authenticate(Lecturer u, String password) {
+		if (u == null)
+			throw new IllegalArgumentException("Lecturer u parameter is null");
+		if (password == null)
+			throw new IllegalArgumentException("String password parameter is null");
+
+		try {
+			return userPasswordEncryption.validatePassword(password, u.getPasswordHash());
+		} catch (RuntimeException ex) {
+			throw new ServiceLayerException("Problem with authenticating Lecturer, see inner exception.", ex);
+		}
+	}
+
 }
