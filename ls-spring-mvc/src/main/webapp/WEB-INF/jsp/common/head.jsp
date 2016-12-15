@@ -13,8 +13,6 @@ Smartphone Compatible Web template, free Webdesigns for Nokia, Samsung, LG, Sony
 	
 	
 	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
-
-
 </script>
 <!-- //Custom Theme files -->
 

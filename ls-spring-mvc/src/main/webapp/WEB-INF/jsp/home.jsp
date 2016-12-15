@@ -11,7 +11,6 @@
 <%@ include file="common/head.jsp"%>
 </head>
 
-
 <%@ include file="common/header.jsp"%>
 <body>
 	<section class="container">
@@ -90,7 +89,6 @@
 			</div>
 		</article>
 	</section>
-
 
 	<%@ include file="common/footer.jsp"%>
 

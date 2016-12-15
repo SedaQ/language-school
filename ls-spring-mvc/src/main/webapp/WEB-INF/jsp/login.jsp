@@ -16,25 +16,24 @@
 <link rel="stylesheet"
 	href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/assets/bootstrap/css/bootstrap.min.css">
+	href="<c:url value="/assets/bootstrap/css/bootstrap.min.css"/>">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/assets/font-awesome/css/font-awesome.min.css">
+	href="<c:url value="/assets/font-awesome/css/font-awesome.min.css"/>">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/assets/css/form-elements.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/assets/css/style.css">
+	href="<c:url value="/assets/css/form-elements.css"/>">
+<link rel="stylesheet" href="<c:url value="/assets/css/style.css"/>">
 
 <!-- Favicon and touch icons -->
 <link rel="shortcut icon"
-	href="${pageContext.request.contextPath}/assets/ico/favicon.png">
+	href="<c:url value="/assets/ico/favicon.png"/>">
 <link rel="apple-touch-icon-precomposed" sizes="144x144"
-	href="${pageContext.request.contextPath}/assets/ico/apple-touch-icon-144-precomposed.png">
+	href="<c:url value="/assets/ico/apple-touch-icon-144-precomposed.png"/>">
 <link rel="apple-touch-icon-precomposed" sizes="114x114"
-	href="${pageContext.request.contextPath}/assets/ico/apple-touch-icon-114-precomposed.png">
+	href="<c:url value="/assets/ico/apple-touch-icon-114-precomposed.png"/>">
 <link rel="apple-touch-icon-precomposed" sizes="72x72"
-	href="${pageContext.request.contextPath}/assets/ico/apple-touch-icon-72-precomposed.png">
+	href="<c:url value="/assets/ico/apple-touch-icon-72-precomposed.png"/>">
 <link rel="apple-touch-icon-precomposed"
-	href="${pageContext.request.contextPath}/assets/ico/apple-touch-icon-57-precomposed.png">
+	href="<c:url value="/assets/ico/apple-touch-icon-57-precomposed.png"/>">
 
 </head>
 
@@ -71,25 +70,6 @@
 								<i class="fa fa-lock"></i>
 							</div>
 						</div>
-						<!-- 
-						<div class="form-bottom">
-							<form role="form"
-								action="<c:url value="/language-school"/>"
-								method="post" class="login-form">
-								<div class="form-group">
-									<label class="sr-only" for="form-username">Username</label> <input
-										type="text" name="form-username" placeholder="Username..."
-										class="form-username form-control" id="form-username">
-								</div>
-								<div class="form-group">
-									<label class="sr-only" for="form-password">Password</label> <input
-										type="password" name="form-password" placeholder="Password..."
-										class="form-password form-control" id="form-password">
-								</div>
-								<button type="submit" class="btn">Sign in!</button>
-							</form>
-						</div>
-						 -->
 						<div class="form-bottom">
 							<c:if test="${param.error != null}">
 								<div class="alert alert-danger">
@@ -128,18 +108,10 @@
 
 
 	<!-- Javascript -->
-	<script
-		src="${pageContext.request.contextPath}/assets/js/jquery-1.11.1.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/assets/bootstrap/js/bootstrap.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/assets/js/jquery.backstretch.min.js"></script>
-	<script src="${pageContext.request.contextPath}/assets/js/scripts.js"></script>
-
-	<!--[if lt IE 10]>
-            <script src="assets/js/placeholder.js"></script>
-        <![endif]-->
-
+	<script src="<c:url value="/assets/js/jquery-1.11.1.min.js"/>"></script>
+	<script src="<c:url value="/assets/bootstrap/js/bootstrap.min.js"/>"></script>
+	<script src="<c:url value="/assets/js/jquery.backstretch.min.js"/>"></script>
+	<script src="<c:url value="/assets/js/scripts.js"/>"></script>
 </body>
 
 </html>
