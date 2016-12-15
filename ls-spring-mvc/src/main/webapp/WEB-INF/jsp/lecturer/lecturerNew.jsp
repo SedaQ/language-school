@@ -13,11 +13,19 @@
 </head>
 <body>
 	<%@ include file="../common/header.jsp"%>
-        
+
 	<div class="container center_div">
 		<form:form method="post"
 			action="${pageContext.request.contextPath}/lecturer/create"
 			modelAttribute="lecturerCreate" cssClass="form-horizontal">
+			<div>
+				<label path="email">E-mail</label>
+				<form:input path="email" />
+			</div>
+			<div>
+				<label path="passwordHash">Password</label>
+				<form:input path="passwordHash" />
+			</div>
 			<div>
 				<label path="nickname">Nickname</label>
 				<form:input path="nickname" />
@@ -30,7 +38,8 @@
 				<label path="surname">Surname</label>
 				<form:input path="surname" />
 			</div>
-			<button class="btn btn-primary" type="submit">Create lecturer</button>
+			<button class="btn btn-primary" type="submit">Create
+				lecturer</button>
 		</form:form>
 	</div>
 

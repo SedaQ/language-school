@@ -17,6 +17,7 @@
 		<thead>
 			<tr>
 				<th>id</th>
+				<th>email</th>
 				<th>nickname</th>
 				<th>first Name</th>
 				<th>surname</th>
@@ -26,22 +27,22 @@
 		<tbody>
 			<tr>
 				<td>${lecturer.id}</td>
+				<td><c:out value="${lecturer.email}" /></td>
 				<td><c:out value="${lecturer.nickname}" /></td>
 				<td><c:out value="${lecturer.firstName}" /></td>
 				<td><c:out value="${lecturer.surname}" /></td>
-				<td>
-				<sec:authorize access="hasRole('ROLE_ADMIN')">
-					<a
-						href="${pageContext.request.contextPath}/lecturer/edit/${lecturer.id}"
-						class="btn btn-primary">Edit</a>
-					<a
-						href="${pageContext.request.contextPath}/lecturer/delete/${lecturer.id}"
-						class="btn btn-primary">Delete</a>
-				</sec:authorize></td>
+				<td><sec:authorize access="hasRole('ROLE_ADMIN')">
+						<a
+							href="${pageContext.request.contextPath}/lecturer/edit/${lecturer.id}"
+							class="btn btn-primary">Edit</a>
+						<a
+							href="${pageContext.request.contextPath}/lecturer/delete/${lecturer.id}"
+							class="btn btn-primary">Delete</a>
+					</sec:authorize></td>
 			</tr>
 		</tbody>
 	</table>
-        <table class="table">
+	<table class="table">
 		<thead>
 			<tr>
 				<th>id</th>
@@ -49,28 +50,26 @@
 				<th>proficiency level</th>
 			</tr>
 		</thead>
-                <tbody>
-                    <c:forEach items="${lecturer.listOfLanguages}" var="language">
-			<tr>
-				<td>${language.id}</td>
-				<td><c:out value="${language.language}" /></td>
-				<td><c:out value="${language.proficiencyLevel}" /></td>
-                                <td>
-                                <sec:authorize access="hasRole('ROLE_ADMIN')">
-                                <a
-                                        href="${pageContext.request.contextPath}/language/edit/${language.id}"
-                                        class="btn btn-primary">Edit</a>
-                                <a
-                                        href="${pageContext.request.contextPath}/language/delete/${language.id}"
-                                        class="btn btn-primary">Delete</a>
-				</sec:authorize>
-                                </td>
-			</tr>
-                    </c:forEach>
+		<tbody>
+			<c:forEach items="${lecturer.listOfLanguages}" var="language">
+				<tr>
+					<td>${language.id}</td>
+					<td><c:out value="${language.language}" /></td>
+					<td><c:out value="${language.proficiencyLevel}" /></td>
+					<td><sec:authorize access="hasRole('ROLE_ADMIN')">
+							<a
+								href="${pageContext.request.contextPath}/language/edit/${language.id}"
+								class="btn btn-primary">Edit</a>
+							<a
+								href="${pageContext.request.contextPath}/language/delete/${language.id}"
+								class="btn btn-primary">Delete</a>
+						</sec:authorize></td>
+				</tr>
+			</c:forEach>
 		</tbody>
-        </table>
-	
-		
+	</table>
+
+
 	<!-- 
 	Lecturers lectures:
 	<table class="table table-striped">

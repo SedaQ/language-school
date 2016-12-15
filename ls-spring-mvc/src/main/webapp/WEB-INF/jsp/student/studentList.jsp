@@ -18,6 +18,7 @@
 		<thead>
 			<tr>
 				<th>id</th>
+				<th>email</th>
 				<th>first name</th>
 				<th>surname</th>
 				<th>birth number</th>
@@ -28,6 +29,7 @@
 			<c:forEach items="${students}" var="student">
 				<tr>
 					<td><c:out value="${student.id}" /></td>
+					<td><c:out value="${student.email}" /></td>
 					<td><c:out value="${student.firstName}" /></td>
 					<td><c:out value="${student.surname}" /></td>
 					<td><c:out value="${student.birthNumber}" /></td>
