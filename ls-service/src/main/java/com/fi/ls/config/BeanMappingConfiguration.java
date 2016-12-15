@@ -6,7 +6,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 import com.fi.ls.context.PersistenceApplicationContext;
-import com.fi.ls.mapping.*;
 import org.modelmapper.ModelMapper;
 
 
@@ -23,8 +22,6 @@ public class BeanMappingConfiguration {
         @Bean
         public ModelMapper modelMapper() {
             ModelMapper mapper = new ModelMapper();
-            mapper.addMappings(new CourseToDTO());
-            mapper.addMappings(new CourseFromDTO());
             return mapper;
         }
 }
