@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import com.fi.ls.dto.course.*;
 import com.fi.ls.dto.lecture.LectureDTO;
 import com.fi.ls.facade.CourseFacade;
+import com.fi.ls.facade.LectureFacade;
 import com.fi.ls.rest.ApiEndpoints;
 import com.fi.ls.rest.assembler.CourseResourceAssembler;
 import com.fi.ls.rest.assembler.LectureResourceAssembler;
@@ -45,6 +46,9 @@ public class CoursesController {
 
 	@Inject
 	private CourseFacade courseFacade;
+        
+        @Inject
+	private LectureFacade lectureFacade;
         
         @Inject
         private CourseResourceAssembler courseResourceAssembler;
@@ -134,7 +138,8 @@ public class CoursesController {
 
             Collection<Resource<LectureDTO>> lectureResourceCollection = new ArrayList<>();
             for (LectureDTO lect : courseDTO.get().getListOfLectures()) {
-                lectureResourceCollection.add(lectureResourceAssembler.toResource(lect));
+                Optional<LectureDTO> filled = lectureFacade.getLectureById(lect.getId());
+                lectureResourceCollection.add(lectureResourceAssembler.toResource(filled.get()));
             }
             
             Resources<Resource<LectureDTO>> lecturesResources = new Resources<>(lectureResourceCollection);
@@ -196,20 +201,23 @@ public class CoursesController {
         }
         
         /**
+         * update course
+         * curl -X PUT -i -H "Content-Type: application/json" --data '{"id": 2, "name": "Klingon TEST", "language": "KlingonUpdated", "proficiencyLevel": "B1"}' http://localhost:8080/pa165/rest/courses/update
          * 
-         * @param id
          * @param newCourse
          * @return 
          */
-        @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-        public final CourseDTO updateCourse(@PathVariable("id") long id, @RequestBody CourseDTO newCourse) {
+        @RequestMapping(value = "/update", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+        public final CourseDTO updateCourse(@RequestBody CourseDTO newCourse) {
 
-            logger.debug("rest updateCourse({})", id);
+            logger.debug("rest updateCourse()");
             
-            if(!courseFacade.getCourseById(id).isPresent())
+            Optional<CourseDTO> target = courseFacade.getCourseById(newCourse.getId());
+            if(!target.isPresent())
                 throw new ResourceNotFoundException();
             
-            Optional<CourseDTO> updated = courseFacade.updateCourse(id);
+            newCourse.setListOfLectures(target.get().getListOfLectures());
+            Optional<CourseDTO> updated = courseFacade.updateCourse(newCourse);
             
             if(updated.isPresent())
                 return updated.get();
