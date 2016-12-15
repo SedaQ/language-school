@@ -92,6 +92,7 @@ public class CourseController {
 			UriComponentsBuilder uriBuilder) {
 		logger.debug("update");
 //		Optional<CourseDTO> toUpdate = courseFacade.getCourseById(id);
+                logger.debug("ID: " + formBean.getId().toString() + " name: " + formBean.getName() + " language: " + formBean.getLanguage());
 		Optional<CourseDTO> cdto = courseFacade.updateCourse(formBean);
 		return "redirect:" + uriBuilder.path("/course/list").buildAndExpand().encode().toUriString();
 	}

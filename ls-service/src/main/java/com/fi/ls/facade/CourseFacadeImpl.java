@@ -79,10 +79,11 @@ public class CourseFacadeImpl implements CourseFacade {
 		if (crs == null)
 			throw new IllegalArgumentException("CourseDTO parameter is null");
 
-		Optional<Course> entity = beanMapping.mapTo(crs, Course.class);
+//		Optional<Course> entity = beanMapping.mapTo(crs, Course.class);
 		try {
-			Course updated = courseService.update(entity.get());
-			return beanMapping.mapTo(updated, CourseDTO.class);
+			Optional<Course> course = Optional.ofNullable(courseService.update(beanMapping.mapTo(crs, Course.class).get()));
+                        logger.warn("IDčko: " + course.get().getId().toString());
+			return course.isPresent() ? beanMapping.mapTo(course.get(), CourseDTO.class) : Optional.empty();
 
 		} catch (ServiceLayerException | NoSuchElementException ex) {
 			logger.warn("updateLanguage method invokes exception: " + ex);
