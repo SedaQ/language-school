@@ -32,14 +32,14 @@
 		</tbody>
 	</table>
 	<sec:authorize access="hasRole('ROLE_LECTURER')">
-        <a
-		href="${pageContext.request.contextPath}/lecture/edit/${lecture.id}"
-		class="btn btn-primary">Edit</a> 
+		<a
+			href="${pageContext.request.contextPath}/lecture/edit/${lecture.id}"
+			class="btn btn-primary">Edit</a>
 	</sec:authorize>
 	<sec:authorize access="hasRole('ROLE_LECTURER')">
-	<a
-		href="${pageContext.request.contextPath}/lecture/delete/${lecture.id}"
-		class="btn btn-primary">Delete</a>
+		<a
+			href="${pageContext.request.contextPath}/lecture/delete/${lecture.id}"
+			class="btn btn-primary">Delete</a>
 	</sec:authorize>
 
 	<%@ include file="../common/footer.jsp"%>

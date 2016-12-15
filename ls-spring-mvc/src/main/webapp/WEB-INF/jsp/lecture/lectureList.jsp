@@ -4,7 +4,7 @@
 <%@ taglib tagdir="/WEB-INF/tags" prefix="my"%>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
-	
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,13 +32,14 @@
 					<td><c:out value="${lecture.classroomId}" /></td>
 					<td><c:out value="${lecture.topic}" /></td>
 					<td><my:a href="/lecture/view/${lecture.id}"
-						class="btn btn-primary">view</my:a></td>
+							class="btn btn-primary">view</my:a></td>
 				</tr>
 			</c:forEach>
 		</tbody>
-
 	</table>
-
+	<sec:authorize access="hasRole('ROLE_LECTURER')">
+		<my:a href="/lecture/new/" class="btn btn-primary">new</my:a>
+	</sec:authorize>
 	<%@ include file="../common/footer.jsp"%>
 </body>
 </html>

@@ -29,17 +29,15 @@
 				<td><c:out value="${student.surname}" /></td>
 				<td><c:out value="${student.birthNumber}" /></td>
 				<td>
-                                <sec:authorize access="hasRole('ROLE_ADMIN')">
-                                        <a
-                                                href="${pageContext.request.contextPath}/student/edit/${student.id}"
-                                                class="btn btn-primary">Edit</a> 
-                                </sec:authorize>
-				<sec:authorize access="hasRole('ROLE_ADMIN')">
-					<a
-						href="${pageContext.request.contextPath}/student/delete/${student.id}"
-						class="btn btn-primary">Delete</a>
-				</sec:authorize></td>
-
+	                <sec:authorize access="hasRole('ROLE_ADMIN')">
+                        <a
+                            href="${pageContext.request.contextPath}/student/edit/${student.id}"
+                            class="btn btn-primary">Edit</a> 
+						<a
+							href="${pageContext.request.contextPath}/student/delete/${student.id}"
+							class="btn btn-primary">Delete</a>
+					</sec:authorize>
+				</td>
 			</tr>
 		</tbody>
 	</table>

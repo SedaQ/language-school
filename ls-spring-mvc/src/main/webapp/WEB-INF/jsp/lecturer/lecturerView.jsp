@@ -34,8 +34,6 @@
 					<a
 						href="${pageContext.request.contextPath}/lecturer/edit/${lecturer.id}"
 						class="btn btn-primary">Edit</a>
-				</sec:authorize> 
-				<sec:authorize access="hasRole('ROLE_ADMIN')">
 					<a
 						href="${pageContext.request.contextPath}/lecturer/delete/${lecturer.id}"
 						class="btn btn-primary">Delete</a>

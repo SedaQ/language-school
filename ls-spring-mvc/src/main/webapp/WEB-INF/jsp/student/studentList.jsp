@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="my"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 
 <!DOCTYPE html>
 <html>
@@ -36,7 +38,9 @@
 		</tbody>
 
 	</table>
-
+	<sec:authorize access="hasRole('ROLE_ADMIN')">
+		<my:a href="/student/new/" class="btn btn-primary">new</my:a>
+	</sec:authorize>
 
 	<%@ include file="../common/footer.jsp"%>
 </body>

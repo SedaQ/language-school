@@ -4,7 +4,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
-	
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,7 +38,7 @@
 			<button class="btn btn-primary" type="submit">Update course</button>
 		</form:form>
 	</div>
-	
+
 </body>
 <%@ include file="../common/footer.jsp"%>
 </html>

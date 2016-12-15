@@ -38,7 +38,9 @@
 		</tbody>
 
 	</table>
-
+        <sec:authorize access="hasRole('ROLE_ADMIN')">
+            <my:a href="/lecturer/new/" class="btn btn-primary">new</my:a>
+        </sec:authorize>
 
 	<%@ include file="../common/footer.jsp"%>
 </body>
