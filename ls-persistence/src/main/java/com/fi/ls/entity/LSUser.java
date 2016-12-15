@@ -51,6 +51,10 @@ public class LSUser {
 		return id;
 	}
 
+        public void setId(Long id) {
+            this.id = id;
+        }
+
 	public String getUserRole() {
 		return userRole;
 	}

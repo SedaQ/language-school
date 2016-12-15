@@ -67,6 +67,10 @@ public class Lecture {
 
 	}
 
+        public void setId(Long id) {
+            this.id = id;
+        }
+
 	public String getClassroomId() {
 
 		return this.classroomId;
