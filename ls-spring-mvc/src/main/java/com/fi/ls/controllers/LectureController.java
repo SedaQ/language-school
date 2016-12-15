@@ -1,5 +1,6 @@
 package com.fi.ls.controllers;
 
+import com.fi.ls.dto.course.CourseDTO;
 import java.util.Optional;
 
 import javax.inject.Inject;
@@ -21,7 +22,13 @@ import com.fi.ls.dto.lecture.LectureCreateDTO;
 import com.fi.ls.dto.lecture.LectureDTO;
 import com.fi.ls.dto.lecturer.LecturerCreateDTO;
 import com.fi.ls.dto.lecturer.LecturerDTO;
+import com.fi.ls.dto.student.StudentDTO;
+import com.fi.ls.entity.Lecture;
+import com.fi.ls.facade.CourseFacade;
 import com.fi.ls.facade.LectureFacade;
+import com.fi.ls.facade.LecturerFacade;
+import com.fi.ls.facade.StudentFacade;
+import java.util.List;
 
 @Controller
 @RequestMapping("/lecture")
@@ -31,6 +38,15 @@ public class LectureController {
 
 	@Inject
 	private LectureFacade lectureFacade;
+        
+        @Inject
+	private CourseFacade courseFacade;
+        
+        @Inject
+	private LecturerFacade lecturerFacade;
+        
+        @Inject
+	private StudentFacade studentFacade;
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String list(Model model) {
@@ -66,7 +82,7 @@ public class LectureController {
 			UriComponentsBuilder uriBuilder) {
 		logger.debug("update");
 		Optional<LectureDTO> cdto = lectureFacade.updateLecture(formBean);
-		return "redirect:" + uriBuilder.path("/lecture/list").buildAndExpand().encode().toUriString();
+		return "redirect:" + uriBuilder.path("/lecture/view/{id}").buildAndExpand(id).encode().toUriString();
 	}	
 
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
@@ -79,8 +95,38 @@ public class LectureController {
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
 	public String deleteLecture(@PathVariable Long id, Model model, UriComponentsBuilder uriBuilder) {
                 Long myID = lectureFacade.getLectureById(id).get().getListOfCourses().get(0).getId();
+                List<LectureDTO> lectureList;
+                for (CourseDTO courseDTO : lectureFacade.getLectureById(id).get().getListOfCourses()) {
+                     
+                    lectureList =  courseFacade.getCourseById(courseDTO.getId()).get().getListOfLectures();
+                    lectureList.remove(lectureFacade.getLectureById(id).get());
+                    courseDTO.setListOfLectures(lectureList);
+                    courseFacade.updateCourse(courseDTO);
+                    
+                }
+
+                for (LecturerDTO lecturerDTO : lectureFacade.getLectureById(id).get().getListOfLecturers()) {
+                     
+                    lectureList =  lecturerFacade.getLecturerById(lecturerDTO.getId()).get().getListOfLectures();
+                    lectureList.remove(lectureFacade.getLectureById(id).get());
+                    lecturerDTO.setListOfLectures(lectureList);
+                    lecturerFacade.updateLecturer(lecturerDTO);
+                    
+                }
+
+                for (StudentDTO studentDTO : lectureFacade.getLectureById(id).get().getListOfStudents()) {
+                     
+                    lectureList =  studentFacade.getStudentById(studentDTO.getId()).get().getListOfLectures();
+                    lectureList.remove(lectureFacade.getLectureById(id).get());
+                    studentDTO.setListOfLectures(lectureList);
+                    studentFacade.updateStudent(studentDTO);
+                    
+                }
+                
+
 		logger.debug("delete");
+                
 		lectureFacade.deleteLecture(id);
-		return "redirect:" + uriBuilder.path("/course/view/{" + myID.toString() + "}").buildAndExpand().encode().toUriString();
+		return "redirect:" + uriBuilder.path("/course/view/{id}").buildAndExpand(myID).encode().toUriString();
 	}
 }
