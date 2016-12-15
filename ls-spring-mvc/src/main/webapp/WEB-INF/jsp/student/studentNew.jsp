@@ -30,7 +30,7 @@
 				<label path="birthNumber">Birth number</label>
 				<form:input path="birthNumber" />
 			</div>
-			<button class="btn btn-primary" type="submit">Create course</button>
+			<button class="btn btn-primary" type="submit">Create student</button>
 		</form:form>
 	</div>
 
