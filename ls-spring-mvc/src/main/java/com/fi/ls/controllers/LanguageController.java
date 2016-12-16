@@ -1,8 +1,6 @@
 package com.fi.ls.controllers;
 
 import com.fi.ls.dto.language.LanguageDTO;
-import com.fi.ls.dto.lecturer.LecturerCreateDTO;
-import com.fi.ls.dto.lecturer.LecturerDTO;
 import com.fi.ls.enums.ProficiencyLevel;
 import com.fi.ls.facade.LanguageFacade;
 import com.fi.ls.facade.LecturerFacade;
@@ -42,8 +40,10 @@ public class LanguageController {
 	@RequestMapping(value = "/new/{id}", method = RequestMethod.GET)
 	public String newLecturer(@PathVariable long id, Model model) {
 		logger.debug("new");
-		model.addAttribute("language", new LanguageDTO());
-                model.addAttribute("lecturerId", id );
+                LanguageDTO language = new LanguageDTO();
+                language.setLecturer(lecturerFacade.getLecturerById(id).get());
+		model.addAttribute("language", language);
+                model.addAttribute("proficiencylevels", new ArrayList<>(Arrays.asList(ProficiencyLevel.values())));
 		return "language/languageNew";
 	}
 
@@ -58,9 +58,9 @@ public class LanguageController {
 
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
 	public String edit(@PathVariable long id, Model model) {
+                logger.debug("edit");
 		model.addAttribute("language", languageFacade.getLanguageById(id).get());
                 model.addAttribute("proficiencylevels", new ArrayList<>(Arrays.asList(ProficiencyLevel.values())));
-		logger.debug("edit");
 		return "language/languageEdit";
 	}
         
@@ -76,7 +76,9 @@ public class LanguageController {
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
 	public String delete(@PathVariable long id, Model model, UriComponentsBuilder uriBuilder) {
 		logger.debug("delete");
-                languageFacade.deleteLanguage(languageFacade.getLanguageById(id).get());
-		return "redirect:" + uriBuilder.pathSegment("lecturer","view", String.valueOf(id)).buildAndExpand().encode().toUriString();
+                Optional<LanguageDTO> dto = languageFacade.getLanguageById(id);
+                Long lecturerId = dto.get().getLecturer().getId();
+                languageFacade.deleteLanguage(dto.get());
+		return "redirect:" + uriBuilder.pathSegment("lecturer","view", lecturerId.toString()).buildAndExpand().encode().toUriString();
 	}
 }

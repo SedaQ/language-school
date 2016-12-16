@@ -70,7 +70,7 @@
 	</table>
 
 	<sec:authorize access="hasRole('ROLE_ADMIN')">
-		<my:a href="/language/new/${lecturer.id}" class="btn btn-primary">Add new lecturer</my:a>
+		<my:a href="/language/new/${lecturer.id}" class="btn btn-primary">Add new language</my:a>
 	</sec:authorize>
 
 	<%@ include file="../common/footer.jsp"%>

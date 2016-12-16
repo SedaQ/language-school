@@ -18,7 +18,7 @@
 		<form:form method="post"
 			action="${pageContext.request.contextPath}/language/create"
 			modelAttribute="language" cssClass="form-horizontal">
-                        <form:hidden path="lecturerId" />
+                        <form:hidden path="lecturer.id" /> 
 			<div>
 				<label path="language">Language</label>
 				<form:input path="language" />
