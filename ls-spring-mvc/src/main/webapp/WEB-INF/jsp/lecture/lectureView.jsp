@@ -41,6 +41,11 @@
 			href="${pageContext.request.contextPath}/lecture/delete/${lecture.id}"
 			class="btn btn-primary">Delete</a>
 	</sec:authorize>
+        <sec:authorize access="hasRole('ROLE_STUDENT')">
+            <a
+                    href="${pageContext.request.contextPath}/student/enrollToLecture/${lecture.id}"
+                    class="btn btn-primary">Enroll to Lecture</a>
+        </sec:authorize>
 
 	<%@ include file="../common/footer.jsp"%>
 </body>

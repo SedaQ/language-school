@@ -87,6 +87,8 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
 		s1.setBirthNumber("123456789");
 		s1.setEmail("a.dent42@email.uk");
 		s1.setPasswordHash("Hash");
+                s1.setUserRole(UserRoles.ROLE_STUDENT.name());
+                userService.registerUser(s1, s1.getPasswordHash());
 
 		Student s2 = new Student();
 		s2.setFirstName("Mister");
@@ -94,6 +96,8 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
 		s2.setBirthNumber("S15BEEPZORD78");
 		s2.setEmail("slarti@constructions.magrathea");
 		s2.setPasswordHash("Hash");
+                s2.setUserRole(UserRoles.ROLE_STUDENT.name());
+                userService.registerUser(s2, s2.getPasswordHash());
 
 		Course c1 = new Course();
 		c1.setLanguage("Errnglish");
