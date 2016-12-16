@@ -38,19 +38,15 @@ public class Lecturer extends LSUser {
 	@NotNull
 	private String surname;
 
-	@OneToMany(fetch = FetchType.LAZY, targetEntity = Language.class, mappedBy = "lecturer")
+	@OneToMany(fetch = FetchType.EAGER, targetEntity = Language.class, mappedBy = "lecturer")
 	@Column(name = "list_of_languages")
 	@Mapping("listOfLanguages")
 	private List<Language> listOfLanguages = new ArrayList<>();
 
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.EAGER)
 	@Column(name = "list_of_lectures")
 	@Mapping("listOfLectures")
 	private List<Lecture> listOfLectures = new ArrayList<>();
-
-	public Long getId() {
-		return id;
-	}
 
 	public String getNickname() {
 		return nickname;
@@ -87,10 +83,18 @@ public class Lecturer extends LSUser {
 	public List<Language> getListOfLanguages() {
 		return Collections.unmodifiableList(listOfLanguages);
 	}
+        
+    public void setListOfLanguages(List<Language> listOfLanguages) {
+        this.listOfLanguages = listOfLanguages;
+	}
 
 	public List<Lecture> getListOfLectures() {
 		return Collections.unmodifiableList(listOfLectures);
 	}
+
+        public void setListOfLectures(List<Lecture> listOfLectures) {
+            this.listOfLectures = listOfLectures;
+        }
 
 	public void addLanguage(Language lan) {
 		listOfLanguages.add(lan);

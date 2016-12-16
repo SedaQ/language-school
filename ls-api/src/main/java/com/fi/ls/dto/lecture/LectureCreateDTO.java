@@ -14,7 +14,6 @@ import javax.validation.constraints.Size;
 public class LectureCreateDTO {
 
     @NotNull
-    @Future
     private LocalDateTime dayTime;
 
     @NotNull

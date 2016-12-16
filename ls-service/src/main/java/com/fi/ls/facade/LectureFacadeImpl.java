@@ -47,10 +47,9 @@ public class LectureFacadeImpl implements LectureFacade {
 
 	}
 	try {
-                        
-            Optional<Lecture> optLect = Optional.ofNullable(lectureService.create(beanMapping.mapTo(lecture, Lecture.class).get()));
-            Lecture lect = lectureService.create(optLect.get());
-            return beanMapping.mapTo(lect, LectureDTO.class);
+            
+			Optional<Lecture> optLect = Optional.ofNullable(lectureService.create(beanMapping.mapTo(lecture, Lecture.class).get()));
+			return optLect.isPresent() ? beanMapping.mapTo(optLect.get(), LectureDTO.class) : Optional.empty();
 
 	} catch (NoSuchElementException | ServiceLayerException e) {
 
@@ -101,16 +100,16 @@ public class LectureFacadeImpl implements LectureFacade {
     }
 
     @Override
-    public Optional<LectureDTO> updateLecture(Long id) {
+    public Optional<LectureDTO> updateLecture(LectureDTO lecture) {
 
-	if (id == null) {
+	if (lecture == null) {
 
             throw new IllegalArgumentException("Param can not be null!");
 
 	}
 	try {
 
-            Optional<Lecture> optLect = Optional.ofNullable(lectureService.update(lectureService.findById(id)));
+            Optional<Lecture> optLect = Optional.ofNullable(lectureService.update(beanMapping.mapTo(lecture, Lecture.class).get()));
             return optLect.isPresent() ? beanMapping.mapTo(optLect.get(), LectureDTO.class) : Optional.empty();
 
         } catch (NoSuchElementException | ServiceLayerException e) {

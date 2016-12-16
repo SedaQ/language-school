@@ -2,10 +2,12 @@ package com.fi.ls.facade;
 
 import com.fi.ls.dto.course.CourseDTO;
 import com.fi.ls.dto.lecture.LectureDTO;
+import com.fi.ls.dto.lecturer.LecturerDTO;
 import com.fi.ls.dto.student.StudentCreateDTO;
 import com.fi.ls.dto.student.StudentDTO;
 import com.fi.ls.entity.Course;
 import com.fi.ls.entity.Lecture;
+import com.fi.ls.entity.Lecturer;
 import com.fi.ls.entity.Student;
 import com.fi.ls.exceptions.ServiceLayerException;
 import com.fi.ls.mapping.BeanMapping;
@@ -44,7 +46,8 @@ public class StudentFacadeImpl implements StudentFacade {
 		if (s == null)
 			throw new IllegalArgumentException("Student is null");
 		try {
-			Optional<Student> student = Optional.ofNullable(studentService.create(beanMapping.mapTo(s, Student.class).get()));
+			Optional<Student> student = Optional
+					.ofNullable(studentService.create(beanMapping.mapTo(s, Student.class).get()));
 			return student.isPresent() ? beanMapping.mapTo(student.get(), StudentDTO.class) : Optional.empty();
 		} catch (ServiceLayerException | NoSuchElementException ex) {
 			logger.warn("error in create student: " + ex);
@@ -57,7 +60,8 @@ public class StudentFacadeImpl implements StudentFacade {
 		if (s == null)
 			throw new IllegalArgumentException("Student is null");
 		try {
-			Optional<Student> student = Optional.ofNullable(studentService.update(beanMapping.mapTo(s, Student.class).get()));
+			Optional<Student> student = Optional
+					.ofNullable(studentService.update(beanMapping.mapTo(s, Student.class).get()));
 			return student.isPresent() ? beanMapping.mapTo(student.get(), StudentDTO.class) : Optional.empty();
 		} catch (ServiceLayerException | NoSuchElementException ex) {
 			logger.warn("error in update student: " + ex);
@@ -66,13 +70,15 @@ public class StudentFacadeImpl implements StudentFacade {
 	}
 
 	@Override
-	public void deleteStudent(StudentDTO s) {
+	public Boolean deleteStudent(StudentDTO s) {
 		if (s == null)
 			throw new IllegalArgumentException("Student is null");
 		try {
 			this.studentService.remove(studentService.findById(s.getId()));
+			return true;
 		} catch (ServiceLayerException | NoSuchElementException ex) {
 			logger.warn("error in delete student: " + ex);
+			return false;
 		}
 	}
 
@@ -181,6 +187,34 @@ public class StudentFacadeImpl implements StudentFacade {
 					beanMapping.mapTo(s, Student.class).get());
 		} catch (ServiceLayerException | NoSuchElementException ex) {
 			logger.warn("error in cancel list of lectures: " + ex);
+		}
+	}
+
+	@Override
+	public Boolean registerUser(StudentDTO u, String unencryptedPassword) {
+		if (u == null || unencryptedPassword == null || unencryptedPassword.isEmpty())
+			throw new IllegalArgumentException(
+					"u parameter is null or unencryptedPassword is null or unencryptedPassword is empty in registerUser method");
+		try {
+			Student userEntity = beanMapping.mapTo(u, Student.class).get();
+			studentService.registerUser(userEntity, unencryptedPassword);
+			u.setId(userEntity.getId());
+			return true;
+		} catch (ServiceLayerException | NoSuchElementException ex) {
+			logger.warn("registerUser method invokes exception: " + ex);
+			return false;
+		}
+	}
+
+	@Override
+	public Boolean authenticate(StudentDTO u) {
+		if (u == null)
+			throw new IllegalArgumentException("StudentDTO u parametr is null in authenticate method");
+		try {
+			return studentService.authenticate(studentService.findById(u.getId()), u.getPasswordHash());
+		} catch (ServiceLayerException | NoSuchElementException ex) {
+			logger.warn("authenticate method invokes exception: " + ex);
+			return false;
 		}
 	}
 

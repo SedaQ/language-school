@@ -6,13 +6,22 @@
 package com.fi.ls.mapping;
 
 import com.fi.ls.config.BeanMappingConfiguration;
+import com.fi.ls.dto.course.CourseDTO;
 import com.fi.ls.dto.language.LanguageDTO;
+import com.fi.ls.dto.lecture.LectureDTO;
 import com.fi.ls.dto.lecturer.LecturerDTO;
+import com.fi.ls.dto.user.LSUserDTO;
+import com.fi.ls.entity.Course;
+import com.fi.ls.entity.LSUser;
 import com.fi.ls.entity.Language;
+import com.fi.ls.entity.Lecture;
 import com.fi.ls.entity.Lecturer;
 import com.fi.ls.enums.ProficiencyLevel;
+import com.fi.ls.enums.UserRoles;
+import java.time.LocalDateTime;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +33,7 @@ import org.testng.annotations.Test;
 
 /**
  *
- * @author lukas & Pavel Šeda (441048)
+ * @author Lukas Daubner (410034) & Pavel Šeda (441048)
  */
 @ContextConfiguration(classes = BeanMappingConfiguration.class)
 public class BeanMappingTest extends AbstractTestNGSpringContextTests {
@@ -34,6 +43,20 @@ public class BeanMappingTest extends AbstractTestNGSpringContextTests {
 
 	@BeforeClass
 	public void beforeClass() {
+	}
+
+	@Test
+	public void testUserRolesMapping() {
+		LSUserDTO user = new LSUserDTO();
+		user.setEmail("pavelseda@email.cz");
+		user.setPasswordHash("test");
+		user.setUserRole(UserRoles.ROLE_ADMIN.name());
+
+		Optional<LSUser> dto = beanMapping.mapTo(user, LSUser.class);
+		assertTrue(dto.isPresent());
+		assertEquals(user.getEmail(), dto.get().getEmail());
+		assertEquals(user.getPasswordHash(), dto.get().getPasswordHash());
+		assertEquals(user.getUserRole(), dto.get().getUserRole());
 	}
 
 	@Test
@@ -175,5 +198,67 @@ public class BeanMappingTest extends AbstractTestNGSpringContextTests {
 		assertEquals(lecturer2.getEmail(), dto.get(1).getEmail());
 		assertEquals(lecturer2.getPasswordHash(), dto.get(1).getPasswordHash());
 	}
+        
+        @Test
+        public void testMappingCourseToDTO() {
+            Course c = new Course();
+            c.setId(5L);
+            c.setLanguage("Course");
+            c.setName("TEST");
+            c.setProficiencyLevel(ProficiencyLevel.C1);
+            
+            Lecture l1 = new Lecture();
+            l1.setId(8L);
+            l1.setTopic("L1");
+            l1.setClassroomId("1");
+            l1.setDayTime(LocalDateTime.MIN);
+            l1.addCourse(c);
+            
+            Lecture l2 = new Lecture();
+            l2.setId(9L);
+            l2.setTopic("L2");
+            l2.setClassroomId("2");
+            l2.setDayTime(LocalDateTime.MAX);
+            l2.addCourse(c);
+            
+            c.setListOfLectures(Arrays.asList(l1, l2));
+            
+            Optional<CourseDTO> dto = beanMapping.mapTo(c, CourseDTO.class);
+            assertTrue(dto.isPresent());
+            assertEquals(dto.get().getId(), c.getId());
+            assertEquals(dto.get().getListOfLectures().get(0).getId(), c.getListOfLectures().get(0).getId());
+            
+        }
+        
+        @Test
+        public void testMappingCourseFromDTO() {
+            CourseDTO c = new CourseDTO();
+            c.setId(5L);
+            c.setLanguage("Course");
+            c.setName("TEST");
+            c.setProficiencyLevel(ProficiencyLevel.C1);
+            
+            LectureDTO l1 = new LectureDTO();
+            l1.setId(8L);
+            l1.setTopic("L1");
+            l1.setClassroomId("1");
+            l1.setDayTime(LocalDateTime.MIN);
+            l1.addCourse(c);
+            
+            LectureDTO l2 = new LectureDTO();
+            l2.setId(9L);
+            l2.setTopic("L2");
+            l2.setClassroomId("2");
+            l2.setDayTime(LocalDateTime.MAX);
+            l2.addCourse(c);
+            
+            c.setListOfLectures(Arrays.asList(l1, l2));
+            
+            Optional<Course> entity = beanMapping.mapTo(c, Course.class);
+            assertTrue(entity.isPresent());
+            assertEquals(entity.get().getId(), c.getId());
+            assertEquals(entity.get().getListOfLectures().get(0).getId(), c.getListOfLectures().get(0).getId());
+            
+        }
 
 }

@@ -6,6 +6,8 @@ import com.fi.ls.entity.Lecture;
 import com.fi.ls.entity.Student;
 import com.fi.ls.enums.ProficiencyLevel;
 import com.fi.ls.exceptions.ServiceLayerException;
+import com.fi.ls.security.UserPasswordEncryption;
+
 import java.time.LocalDateTime;
 import javax.persistence.PersistenceException;
 import org.mockito.Mock;
@@ -29,6 +31,9 @@ public class StudentServiceTest {
     
     private StudentService studentService;
     
+    @Mock
+    private UserPasswordEncryption userPasswordEncryption;
+    
     Student s1;
     Student s2;
     Student s3;
@@ -42,7 +47,7 @@ public class StudentServiceTest {
     @BeforeClass
     public void beforeClass() {
         MockitoAnnotations.initMocks(this);
-        studentService = new StudentServiceImpl(studentDao);
+        studentService = new StudentServiceImpl(studentDao, userPasswordEncryption);
     }
     
     @BeforeMethod

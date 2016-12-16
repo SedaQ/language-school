@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import com.fi.ls.dto.user.LSUserAuthenticateDTO;
 import com.fi.ls.dto.user.LSUserCreateDTO;
 import com.fi.ls.dto.user.LSUserDTO;
 import com.fi.ls.entity.LSUser;
@@ -122,6 +123,20 @@ public class LSUserFacadeImpl implements LSUserFacade {
 			throw new IllegalArgumentException("LSUserDTO u parametr is null in authenticate method");
 		try {
 			return userService.authenticate(userService.findById(u.getId()), u.getPasswordHash());
+		} catch (ServiceLayerException | NoSuchElementException ex) {
+			logger.warn("authenticate method invokes exception: " + ex);
+			return false;
+		}
+	}
+
+	@Override
+	public boolean isAdmin(LSUserDTO u) {
+		if (u == null)
+			throw new IllegalArgumentException("LSUserDTO u parametr is null in isAdmin method");
+		try {
+			Optional<Boolean> isAdminBool = Optional
+					.ofNullable(userService.isAdmin(beanMapping.mapTo(u, LSUser.class).get()));
+			return isAdminBool.isPresent() ? isAdminBool.get().booleanValue() : false;
 		} catch (ServiceLayerException | NoSuchElementException ex) {
 			logger.warn("authenticate method invokes exception: " + ex);
 			return false;

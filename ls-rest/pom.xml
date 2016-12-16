@@ -12,13 +12,13 @@
 	<name>Language School Rest Layer</name>
 
 	<build>
+		<defaultGoal>tomcat7:run</defaultGoal>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.tomcat.maven</groupId>
 				<artifactId>tomcat7-maven-plugin</artifactId>
-				<version>2.2</version>
 				<configuration>
-					<path>/ls-rest</path>
+					<path>/pa165/rest</path>
 				</configuration>
 			</plugin>
 		</plugins>
@@ -26,16 +26,19 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>org.apache.tomcat</groupId>
-			<artifactId>tomcat-api</artifactId>
-			<!-- <version>${tomcat.version}</version> -->
-			<version>8.0.22</version>
-			<scope>provided</scope>
+			<groupId>${project.parent.groupId}</groupId>
+			<artifactId>LanguageSchoolSampleData</artifactId>
+			<version>${project.parent.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>com.fi.languageschool</groupId>
+			<groupId>${project.parent.groupId}</groupId>
 			<artifactId>ls-service</artifactId>
 			<version>${project.parent.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>tomcat-api</artifactId>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>javax.inject</groupId>
@@ -45,7 +48,6 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.hateoas</groupId>
 			<artifactId>spring-hateoas</artifactId>
@@ -70,7 +72,6 @@
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
 		</dependency>
-
 		<!-- librarries needed for unit tests -->
 		<dependency>
 			<groupId>org.testng</groupId>
@@ -87,14 +88,11 @@
 			<artifactId>mockito-all</artifactId>
 			<scope>test</scope>
 		</dependency>
-
 		<dependency>
 			<groupId>org.glassfish</groupId>
 			<artifactId>javax.el</artifactId>
 			<scope>test</scope> <!-- conflicts with tomcat libraries, but needed for tests to run -->
 		</dependency>
-
 	</dependencies>
-
 
 </project>

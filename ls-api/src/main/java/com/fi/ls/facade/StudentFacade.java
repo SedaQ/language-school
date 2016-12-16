@@ -2,6 +2,7 @@ package com.fi.ls.facade;
 
 import com.fi.ls.dto.course.CourseDTO;
 import com.fi.ls.dto.lecture.LectureDTO;
+import com.fi.ls.dto.lecturer.LecturerDTO;
 import com.fi.ls.dto.student.StudentCreateDTO;
 import com.fi.ls.dto.student.StudentDTO;
 
@@ -30,8 +31,9 @@ public interface StudentFacade {
     /**
      * removes specific student from database
      * @param s - student to be removed
+     * @return true, if successfully removed
      */
-    public void deleteStudent(StudentDTO s);
+    public Boolean deleteStudent(StudentDTO s);
     
     /**
      * finds specific student from database by birth number
@@ -94,4 +96,22 @@ public interface StudentFacade {
      * @param s - student which will cancel some lecture
      */
     public void cancelListOfLecturesFromStudentsList(List<LectureDTO> l, StudentDTO s);
+    
+	/**
+	 * Register the given user with the given unencrypted password.
+	 * 
+	 * @param u
+	 * @param unencryptedPassword
+	 * @return true, if successful removed
+	 */
+	public Boolean registerUser(StudentDTO u, String unencryptedPassword);
+
+	/**
+	 * Try to authenticate a user. Return true only if the hashed password
+	 * matches the records.
+	 * 
+	 * @param u
+	 * @return true, if successful
+	 */
+	public Boolean authenticate(StudentDTO u);      
 }

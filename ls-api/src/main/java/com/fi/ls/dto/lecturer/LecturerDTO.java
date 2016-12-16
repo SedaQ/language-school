@@ -42,13 +42,25 @@ public class LecturerDTO extends LSUserDTO {
     public void setSurname(String surname) {
             this.surname = surname;
     }
+    
+    public Long getId(){
+    	return super.getId();
+    }
 
     public List<LanguageDTO> getListOfLanguages() {
             return Collections.unmodifiableList(listOfLanguages);
     }
 
+    public void setListOfLanguages(List<LanguageDTO> listOfLanguages) {
+        this.listOfLanguages = listOfLanguages;
+    }
+
     public List<LectureDTO> getListOfLectures() {
             return Collections.unmodifiableList(listOfLectures);
+    }
+
+    public void setListOfLectures(List<LectureDTO> listOfLectures) {
+        this.listOfLectures = listOfLectures;
     }
 
     public void addLanguage(LanguageDTO languageDTO) {

@@ -61,6 +61,23 @@
 				<version>4.8</version>
 				<scope>test</scope>
 			</dependency>
+			<!-- please check version of these taglibs and tomcat -->
+			<dependency>
+				<groupId>org.apache.tomcat</groupId>
+				<artifactId>tomcat-api</artifactId>
+				<version>8.0.22</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.taglibs</groupId>
+				<artifactId>taglibs-standard-spec</artifactId>
+				<version>1.2.5</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.taglibs</groupId>
+				<artifactId>taglibs-standard-impl</artifactId>
+				<version>1.2.5</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
@@ -75,6 +92,11 @@
 						<target>${java.version}</target>
 					</configuration>
 				</plugin>
+				<plugin>
+					<groupId>org.apache.tomcat.maven</groupId>
+					<artifactId>tomcat7-maven-plugin</artifactId>
+					<version>2.2</version>
+				</plugin>
 			</plugins>
 		</pluginManagement>
 	</build>
@@ -84,5 +106,7 @@
 		<module>ls-service</module>
 		<module>ls-api</module>
 		<module>ls-rest</module>
+		<module>ls-spring-mvc</module>
+		<module>LanguageSchoolSampleData</module>
 	</modules>
 </project>

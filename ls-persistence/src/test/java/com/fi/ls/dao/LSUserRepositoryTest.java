@@ -15,6 +15,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.fi.ls.entity.LSUser;
+import com.fi.ls.enums.UserRoles;
 
 /**
  * @author Pavel Šeda (441048)
@@ -38,14 +39,19 @@ public class LSUserRepositoryTest extends AbstractTestNGSpringContextTests {
 		user = new LSUser();
 		user.setEmail("test123@email.cz");
 		user.setPasswordHash("testHashtestHashtestHashtestHash7841267871s!@$%");
-		userDao.deleteAll();
-		Assert.assertEquals(userDao.count(), 0);
+		user.setUserRole(UserRoles.ROLE_ADMIN.name());
+
+		userDao.save(user);
 	}
 
 	@Test
 	public void testCreate() {
-		userDao.save(user);
 		Assert.assertNotNull(em.find(LSUser.class, user.getId()));
+	}
+
+	@Test
+	public void testUserIsAdmin() {
+		Assert.assertEquals(userDao.findByEmail("test123@email.cz").getUserRole(), UserRoles.ROLE_ADMIN.name());
 	}
 
 	@Test

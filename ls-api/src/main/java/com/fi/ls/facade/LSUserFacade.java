@@ -35,7 +35,7 @@ public interface LSUserFacade {
 	 * 
 	 * @param userId
 	 *            user that has to be removed
-         * @return true, if successfully removed
+	 * @return true, if successfully removed
 	 */
 	public Boolean deleteUser(Long userId);
 
@@ -55,20 +55,27 @@ public interface LSUserFacade {
 	 */
 	public Optional<LSUserDTO> getUserByEmail(String email);
 
-        /**
-         * Register the given user with the given unencrypted password.
-         * @param u
-         * @param unencryptedPassword 
-         * @return true, if successful removed
-         */
+	/**
+	 * Register the given user with the given unencrypted password.
+	 * 
+	 * @param u
+	 * @param unencryptedPassword
+	 * @return true, if successful removed
+	 */
 	public Boolean registerUser(LSUserCreateDTO u, String unencryptedPassword);
 
 	/**
-         * Try to authenticate a user. Return true only if the hashed password
+	 * Try to authenticate a user. Return true only if the hashed password
 	 * matches the records.
-         * @param u
-         * @return true, if successful
-         */
+	 * 
+	 * @param u
+	 * @return true, if successful
+	 */
 	public Boolean authenticate(LSUserDTO u);
+
+	/**
+	 * Check if the given user is admin.
+	 */
+	public boolean isAdmin(LSUserDTO u);
 
 }

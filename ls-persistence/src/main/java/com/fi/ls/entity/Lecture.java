@@ -42,17 +42,17 @@ public class Lecture {
 	@NotNull
 	private String topic;
 
-	@ManyToMany(fetch = FetchType.LAZY, targetEntity = Student.class, mappedBy = "listOfLectures")
+	@ManyToMany(fetch = FetchType.EAGER, targetEntity = Student.class, mappedBy = "listOfLectures")
 	@Column(name = "list_of_students")
 	@Mapping("listOfStudents")
 	private List<Student> listOfStudents = new ArrayList<>();
 
-	@ManyToMany(fetch = FetchType.LAZY, targetEntity = Lecturer.class, mappedBy = "listOfLectures")
+	@ManyToMany(fetch = FetchType.EAGER, targetEntity = Lecturer.class, mappedBy = "listOfLectures")
 	@Column(name = "list_of_lecturers")
 	@Mapping("listOfLecturers")
 	private List<Lecturer> listOfLecturers = new ArrayList<>();
 
-	@ManyToMany(fetch = FetchType.LAZY, targetEntity = Course.class, mappedBy = "listOfLectures")
+	@ManyToMany(fetch = FetchType.EAGER, targetEntity = Course.class, mappedBy = "listOfLectures")
 	@Column(name = "list_of_courses")
 	@Mapping("listOfCourses")
 	private List<Course> listOfCourses = new ArrayList<>();
@@ -66,6 +66,10 @@ public class Lecture {
 		return this.id;
 
 	}
+
+        public void setId(Long id) {
+            this.id = id;
+        }
 
 	public String getClassroomId() {
 

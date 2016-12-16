@@ -1,5 +1,7 @@
 package com.fi.ls.service;
 
+import com.fi.ls.dto.lecturer.LecturerDTO;
+import com.fi.ls.entity.LSUser;
 import com.fi.ls.entity.Language;
 import com.fi.ls.entity.Lecture;
 import com.fi.ls.entity.Lecturer;
@@ -92,4 +94,19 @@ public interface LecturerService {
      * @exception IllegalArgumentException
      */
     public List<Language> findAllLecturerLanguages(Lecturer l);
+
+	/**
+	 * Register the given user with the given unencrypted password.
+	 * 
+	 * @param u
+	 * @param unencryptedPassword
+	 * @return true, if successful removed
+	 */
+	public Boolean registerUser(Lecturer u, String unencryptedPassword);
+
+	/**
+	 * Try to authenticate a user. Return true only if the hashed password
+	 * matches the records.
+	 */
+	public boolean authenticate(Lecturer u, String password);
 }

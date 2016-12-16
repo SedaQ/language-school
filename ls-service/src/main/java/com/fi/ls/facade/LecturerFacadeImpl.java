@@ -4,6 +4,9 @@ import com.fi.ls.dto.language.LanguageDTO;
 import com.fi.ls.dto.lecture.LectureDTO;
 import com.fi.ls.dto.lecturer.LecturerCreateDTO;
 import com.fi.ls.dto.lecturer.LecturerDTO;
+import com.fi.ls.dto.user.LSUserCreateDTO;
+import com.fi.ls.dto.user.LSUserDTO;
+import com.fi.ls.entity.LSUser;
 import com.fi.ls.entity.Language;
 import com.fi.ls.entity.Lecture;
 import com.fi.ls.entity.Lecturer;
@@ -16,11 +19,11 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import javax.inject.Inject;
-import javax.transaction.Transactional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -58,13 +61,18 @@ public class LecturerFacadeImpl implements LecturerFacade {
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public Optional<LecturerDTO> getLecturerById(Long id) {
 		if (id == null)
 			throw new IllegalArgumentException("Id parameter is null");
 
 		try {
 			Lecturer entity = lecturerService.findById(id);
-			return beanMapping.mapTo(entity, LecturerDTO.class);
+                        //ist<LanguageDTO> languages = beanMapping.mapTo(lecturerService.findAllLecturerLanguages(entity), LanguageDTO.class);
+                        
+			Optional<LecturerDTO> dto = beanMapping.mapTo(entity, LecturerDTO.class);
+                        //dto.get().addLanguage(languageDTO);
+                        return dto;
 		} catch (ServiceLayerException | NoSuchElementException ex) {
 			logger.warn("getLecturerById method invokes exception: " + ex);
 			return Optional.empty();
@@ -102,6 +110,7 @@ public class LecturerFacadeImpl implements LecturerFacade {
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public List<LecturerDTO> getAllLecturers() {
 		try {
 			List<Lecturer> entities = lecturerService.findAll();
@@ -149,6 +158,7 @@ public class LecturerFacadeImpl implements LecturerFacade {
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public List<LanguageDTO> findAllLecturerLanguages(LecturerDTO l) {
 		if (l == null)
 			throw new IllegalArgumentException("LectureDTO parameter is null");
@@ -162,4 +172,33 @@ public class LecturerFacadeImpl implements LecturerFacade {
 			return Collections.emptyList();
 		}
 	}
+
+	@Override
+	public Boolean registerUser(LecturerDTO u, String unencryptedPassword) {
+		if (u == null || unencryptedPassword == null || unencryptedPassword.isEmpty())
+			throw new IllegalArgumentException(
+					"u parameter is null or unencryptedPassword is null or unencryptedPassword is empty in registerUser method");
+		try {
+			Lecturer userEntity = beanMapping.mapTo(u, Lecturer.class).get();
+			lecturerService.registerUser(userEntity, unencryptedPassword);
+			u.setId(userEntity.getId());
+			return true;
+		} catch (ServiceLayerException | NoSuchElementException ex) {
+			logger.warn("registerUser method invokes exception: " + ex);
+			return false;
+		}
+	}
+
+	@Override
+	public Boolean authenticate(LecturerDTO u) {
+		if (u == null)
+			throw new IllegalArgumentException("LecturerDTO u parametr is null in authenticate method");
+		try {
+			return lecturerService.authenticate(lecturerService.findById(u.getId()), u.getPasswordHash());
+		} catch (ServiceLayerException | NoSuchElementException ex) {
+			logger.warn("authenticate method invokes exception: " + ex);
+			return false;
+		}
+	}
+	
 }

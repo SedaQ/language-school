@@ -32,7 +32,7 @@ public class Language {
 	private String language;
 
 	@NotNull
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	private Lecturer lecturer;
 
 	@NotNull
@@ -43,6 +43,10 @@ public class Language {
 	public Long getId() {
 		return id;
 	}
+
+        public void setId(Long id) {
+            this.id = id;
+        }        
 
 	public String getLanguage() {
 		return language;

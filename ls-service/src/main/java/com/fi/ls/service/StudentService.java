@@ -1,7 +1,9 @@
 package com.fi.ls.service;
 
+import com.fi.ls.dto.student.StudentDTO;
 import com.fi.ls.entity.Course;
 import com.fi.ls.entity.Lecture;
+import com.fi.ls.entity.Lecturer;
 import com.fi.ls.entity.Student;
 import java.util.List;
 
@@ -93,4 +95,18 @@ public interface StudentService {
      */
     public void cancelListOfLecturesFromStudentsList(List<Lecture> l, Student s);
 
+	/**
+	 * Register the given user with the given unencrypted password.
+	 * 
+	 * @param u
+	 * @param unencryptedPassword
+	 * @return true, if successful removed
+	 */
+	public Boolean registerUser(Student u, String unencryptedPassword);
+
+	/**
+	 * Try to authenticate a user. Return true only if the hashed password
+	 * matches the records.
+	 */
+	public boolean authenticate(Student u, String password);   
 }

@@ -10,7 +10,7 @@ import javax.validation.constraints.Pattern;
 public class LSUserCreateDTO {
 
 	private Long id;
-	
+
 	@NotNull
 	@Pattern(regexp = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")
 	private String email;
@@ -18,6 +18,9 @@ public class LSUserCreateDTO {
 	@NotNull
 	@Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$") // Minimum 8 characters at least 1 Alphabet and 1 Number
 	private String password;
+
+	@NotNull
+	private String userRole;
 
 	public String getEmail() {
 		return email;
@@ -41,6 +44,14 @@ public class LSUserCreateDTO {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getUserRole() {
+		return userRole;
+	}
+
+	public void setUserRole(String userRole) {
+		this.userRole = userRole;
 	}
 
 	@Override
