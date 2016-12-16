@@ -1,5 +1,7 @@
 package com.fi.ls.controllers;
 
+import com.fi.ls.dto.course.CourseDTO;
+import com.fi.ls.dto.lecture.LectureDTO;
 import java.util.Optional;
 
 import javax.inject.Inject;
@@ -19,7 +21,12 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.fi.ls.dto.student.StudentCreateDTO;
 import com.fi.ls.dto.student.StudentDTO;
+import com.fi.ls.facade.CourseFacade;
+import com.fi.ls.facade.LSUserFacade;
+import com.fi.ls.facade.LectureFacade;
 import com.fi.ls.facade.StudentFacade;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 @Controller
 @RequestMapping(value = "/student")
@@ -29,6 +36,15 @@ public class StudentController {
 
 	@Inject
 	private StudentFacade studentFacade;
+        
+        @Inject
+	private LectureFacade lectureFacade;
+                
+        @Inject
+	private CourseFacade courseFacade;
+        
+        @Inject
+	private LSUserFacade lsUserFacade;
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String list(Model model) {
@@ -79,6 +95,34 @@ public class StudentController {
 		logger.debug("delete");
 		studentFacade.deleteStudent(studentFacade.getStudentById(id).get());
 		return "redirect:" + uriBuilder.path("/student/list").buildAndExpand().encode().toUriString();
+	}
+        
+        @RequestMapping(value = "/enrollToLecture/{id}", method = RequestMethod.GET)
+	public String enrollToLecture(@PathVariable Long id, Model model, UriComponentsBuilder uriBuilder) {
+		logger.debug("enrollToLecture");
+                
+                Optional<LectureDTO> lectureDTO = lectureFacade.getLectureById(id);
+                String email = SecurityContextHolder.getContext().getAuthentication().getName();
+                Long studentId = lsUserFacade.getUserByEmail(email).get().getId();
+                Optional<StudentDTO> studentDTO = studentFacade.getStudentById(studentId);
+                
+                studentFacade.enrollLecture(lectureDTO.get(), studentDTO.get());
+                
+		return "redirect:" + uriBuilder.path("/lecture/list").buildAndExpand().encode().toUriString();
+	}
+        
+        @RequestMapping(value = "/enrollToCourse/{id}", method = RequestMethod.GET)
+	public String enrollToCourse(@PathVariable Long id, Model model, UriComponentsBuilder uriBuilder) {
+		logger.debug("enrollToCourse");
+                
+                Optional<CourseDTO> courseDTO = courseFacade.getCourseById(id);
+                String email = SecurityContextHolder.getContext().getAuthentication().getName();
+                Long studentId = lsUserFacade.getUserByEmail(email).get().getId();
+                Optional<StudentDTO> studentDTO = studentFacade.getStudentById(studentId);
+                
+                studentFacade.enrollCourse(courseDTO.get(), studentDTO.get());
+                
+		return "redirect:" + uriBuilder.path("/course/list").buildAndExpand().encode().toUriString();
 	}
 
 }

@@ -34,6 +34,13 @@
 					<td><c:out value="${course.proficiencyLevel}" /></td>
 					<td><my:a href="/course/view/${course.id}"
 							class="btn btn-primary">view</my:a></td>
+                                        <td>
+                                        <sec:authorize access="hasRole('ROLE_STUDENT')">
+                                            <a
+                                                    href="${pageContext.request.contextPath}/student/enrollToCourse/${course.id}"
+                                                    class="btn btn-primary">Enroll to Course</a>
+					</sec:authorize>
+                                        </td>
 				</tr>
 			</c:forEach>
 		</tbody>
