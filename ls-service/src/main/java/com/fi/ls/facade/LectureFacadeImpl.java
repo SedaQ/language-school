@@ -47,10 +47,9 @@ public class LectureFacadeImpl implements LectureFacade {
 
 	}
 	try {
-                        
-            Optional<Lecture> optLect = Optional.ofNullable(lectureService.create(beanMapping.mapTo(lecture, Lecture.class).get()));
-            Lecture lect = lectureService.create(optLect.get());
-            return beanMapping.mapTo(lect, LectureDTO.class);
+            
+			Optional<Lecture> optLect = Optional.ofNullable(lectureService.create(beanMapping.mapTo(lecture, Lecture.class).get()));
+			return optLect.isPresent() ? beanMapping.mapTo(optLect.get(), LectureDTO.class) : Optional.empty();
 
 	} catch (NoSuchElementException | ServiceLayerException e) {
 
