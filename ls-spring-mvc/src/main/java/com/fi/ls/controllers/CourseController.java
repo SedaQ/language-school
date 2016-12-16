@@ -1,6 +1,5 @@
 package com.fi.ls.controllers;
 
-import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
@@ -13,16 +12,16 @@ import org.springframework.ui.Model;
 
 import com.fi.ls.dto.course.CourseCreateDTO;
 import com.fi.ls.dto.course.CourseDTO;
-import com.fi.ls.dto.lecture.LectureCreateDTO;
+import com.fi.ls.dto.lecture.LectureDTO;
 import com.fi.ls.enums.ProficiencyLevel;
 import com.fi.ls.facade.CourseFacade;
-import com.fi.ls.facade.LectureFacade;
-import java.security.SecureRandom;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
+
 import javax.validation.Valid;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -41,7 +40,7 @@ public class CourseController {
 
 	@Inject
 	private CourseFacade courseFacade;
-        
+
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String list(Model model) {
 		model.addAttribute("courses", courseFacade.getAllCourses());
@@ -53,9 +52,10 @@ public class CourseController {
 		logger.debug("view: ", id);
 
 		CourseDTO course = courseFacade.getCourseById(id).get();
-
+		// should be set on persistence level..
+		Set<LectureDTO> lectInCourse = new HashSet<>(courseFacade.getCourseById(id).get().getListOfLectures());
 		model.addAttribute("course", course);
-		model.addAttribute("lecturesInCourse", courseFacade.getCourseById(id).get().getListOfLectures());
+		model.addAttribute("lecturesInCourse", lectInCourse);
 		return "course/courseView";
 	}
 
@@ -74,7 +74,7 @@ public class CourseController {
 		logger.debug("create");
 		// formBean.setProficiencyLevel(ProficiencyLevel.C1);
 		Optional<CourseDTO> cdto = courseFacade.create(formBean);
-//                return "course/courseList";
+		// return "course/courseList";
 		return "redirect:" + uriBuilder.path("/course/list").buildAndExpand().encode().toUriString();
 	}
 
@@ -91,8 +91,9 @@ public class CourseController {
 			BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes,
 			UriComponentsBuilder uriBuilder) {
 		logger.debug("update");
-//		Optional<CourseDTO> toUpdate = courseFacade.getCourseById(id);
-                logger.debug("ID: " + formBean.getId().toString() + " name: " + formBean.getName() + " language: " + formBean.getLanguage());
+		// Optional<CourseDTO> toUpdate = courseFacade.getCourseById(id);
+		logger.debug("ID: " + formBean.getId().toString() + " name: " + formBean.getName() + " language: "
+				+ formBean.getLanguage());
 		Optional<CourseDTO> cdto = courseFacade.updateCourse(formBean);
 		return "redirect:" + uriBuilder.path("/course/list").buildAndExpand().encode().toUriString();
 	}
