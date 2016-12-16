@@ -37,11 +37,13 @@
 	src="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/src/js/bootstrap-datetimepicker.js"></script>
 
 <script type="text/javascript">
-	$('#datetimepicker1').datetimepicker({
-		format : 'dd/MM/yyyy hh:mm:ss',
-		language : 'pt-BR'
-	});
+    $(function () {
+        $('#datetimepicker2').datetimepicker({
+            locale: 'ru'
+        });
+    });
 </script>
+
 </head>
 <body>
 	<%@ include file="../common/header.jsp"%>
@@ -52,14 +54,14 @@
 			cssClass="form-horizontal">
 			<div>
 				<label>Date Time</label>
-				<div id="datetimepicker1" class='input-group date'>
+				<div  class='input-group date' id="datetimepicker2">
 					<input type="text" name="dayTime" class="form-control" /> <span
 						class="input-group-addon"> <span
 						class="glyphicon glyphicon-calendar"></span>
 					</span>
 				</div>
 			</div>
-			<label>Classroom id</label>
+			<label>Classroom Id</label>
 			<div>
 				<input type="text" name="classroomId" />
 			</div>

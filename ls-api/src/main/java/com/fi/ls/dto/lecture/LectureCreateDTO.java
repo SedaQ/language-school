@@ -13,9 +13,8 @@ import org.springframework.format.annotation.DateTimeFormat;
  */
 public class LectureCreateDTO {
 
-	@NotNull
 	// @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
+	//@DateTimeFormat(pattern = "dd.MM.yyyy HH:mm")
 	private LocalDateTime dayTime;
 
 	@NotNull

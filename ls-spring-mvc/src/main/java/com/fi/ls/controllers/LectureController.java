@@ -93,38 +93,18 @@ public class LectureController {
 		return "lecture/lectureNew";
 	}
 
-	// @RequestMapping(value = "/create", method = RequestMethod.POST)
-	// public String createLecture(@Valid @ModelAttribute("lectureCreate")
-	// LectureCreateDTO formBean,
-	// BindingResult bindingResult, Model model, RedirectAttributes
-	// redirectAttributes,
-	// UriComponentsBuilder uriBuilder) {
-	// logger.debug("create");
-	// System.out.println("Class room id je: " + formBean.getClassroomId());
-	// System.out.println("Lecture datetime je: " + formBean.getDayTime());
-	// System.out.println("Lecture topic je: " + formBean.getTopic());
-	// Optional<LectureDTO> cdto = lectureFacade.createLecture(formBean);
-	// return "redirect:" +
-	// uriBuilder.path("/lecture/list").buildAndExpand().encode().toUriString();
-	// }
-
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public String createLecture(@RequestParam(value = "dayTime") String dayTime,
 			@RequestParam(value = "classroomId") String classroomId, @RequestParam(value = "topic") String topic,
 			Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder) {
 		logger.debug("create");
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
 
 		LocalDateTime localDateTime = LocalDateTime.parse(dayTime, formatter);
-
 		LectureCreateDTO lecture = new LectureCreateDTO();
-
 		lecture.setDayTime(localDateTime);
 		lecture.setClassroomId(classroomId);
 		lecture.setTopic(topic);
-		System.out.println("Class room id je: " + lecture.getClassroomId());
-		System.out.println("Lecture datetime je: " + lecture.getDayTime());
-		System.out.println("Lecture topic je: " + lecture.getTopic());
 
 		Optional<LectureDTO> cdto = lectureFacade.createLecture(lecture);
 		return "redirect:" + uriBuilder.path("/lecture/list").buildAndExpand().encode().toUriString();

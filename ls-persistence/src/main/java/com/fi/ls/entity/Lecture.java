@@ -32,7 +32,6 @@ public class Lecture {
 	@Column(name = "id_lecture")
 	private Long id;
 
-	@NotNull
 	private LocalDateTime dayTime;
 
 	@NotNull
