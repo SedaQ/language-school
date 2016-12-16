@@ -22,6 +22,7 @@
 				<th>nickname</th>
 				<th>first Name</th>
 				<th>surname</th>
+				<th>action</th>
 			</tr>
 		</thead>
 
@@ -40,9 +41,9 @@
 		</tbody>
 
 	</table>
-        <sec:authorize access="hasRole('ROLE_ADMIN')">
-            <my:a href="/lecturer/new/" class="btn btn-primary">New lecture</my:a>
-        </sec:authorize>
+    <sec:authorize access="hasRole('ROLE_ADMIN')">
+        <my:a href="/lecturer/new/" class="btn btn-primary">New lecture</my:a>
+    </sec:authorize>
 
 	<%@ include file="../common/footer.jsp"%>
 </body>

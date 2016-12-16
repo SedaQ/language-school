@@ -22,6 +22,7 @@
 				<th>first name</th>
 				<th>surname</th>
 				<th>birth number</th>
+				<th>action</th>
 			</tr>
 		</thead>
 
@@ -41,7 +42,7 @@
 
 	</table>
 	<sec:authorize access="hasRole('ROLE_ADMIN')">
-		<my:a href="/student/new/" class="btn btn-primary">new</my:a>
+		<my:a href="/student/new/" class="btn btn-primary">New student</my:a>
 	</sec:authorize>
 
 	<%@ include file="../common/footer.jsp"%>

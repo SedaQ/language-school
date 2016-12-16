@@ -20,6 +20,7 @@
 						<li><a
 							href="${pageContext.request.contextPath}/lecturer/list">Lecturers</a></li>
 						<li><a href="${pageContext.request.contextPath}/student/list">Students</a></li>
+						<li><a href="${pageContext.request.contextPath}/lecture/list">Lectures</a></li>
 					</ul></li>
 				<li><a href="${pageContext.request.contextPath}/about">About</a></li>
 				<li><a href="${pageContext.request.contextPath}/contact">Contact</a></li>

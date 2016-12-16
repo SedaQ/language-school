@@ -21,6 +21,7 @@
 				<th>dayTime</th>
 				<th>classroomId</th>
 				<th>topic</th>
+				<th>action</th>
 			</tr>
 		</thead>
 
