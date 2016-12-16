@@ -41,6 +41,9 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standal
 @ContextConfiguration(classes = {RootWebContext.class})
 public class CourseControllerTest extends AbstractTestNGSpringContextTests {
     
+    //TESTS ARE NOT WORKING - just state of art
+    //there is problem with null pointer exception on mockMvc.perform()
+    
     @Mock
     private CourseFacade courseFacade;
     
@@ -63,6 +66,12 @@ public class CourseControllerTest extends AbstractTestNGSpringContextTests {
         /*mockMvc.perform((RequestBuilder) get("/pa165/rest/courses"))
                 .andExpect(status().isOk())
                 .andExpect((ResultMatcher) content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON_VALUE));*/
+    }
+    
+    @Test
+    public void getInvalidCategory() throws Exception {
+        doReturn(null).when(courseFacade).getCourseById(1l);
+        //mockMvc.perform((RequestBuilder) get("/courses/1")).andExpect(status().is4xxClientError());
     }
     
     private List<CourseDTO> createCourses(){
