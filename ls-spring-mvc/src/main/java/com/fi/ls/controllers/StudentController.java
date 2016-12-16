@@ -146,4 +146,5 @@ public class StudentController {
 		return "redirect:" + uriBuilder.path("/course/list").buildAndExpand().encode().toUriString();
 	}
 
+
 }

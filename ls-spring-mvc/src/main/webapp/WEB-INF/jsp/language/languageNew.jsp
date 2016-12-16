@@ -13,12 +13,12 @@
 </head>
 <body>
 	<%@ include file="../common/header.jsp"%>
-        
+
 	<div class="container center_div">
 		<form:form method="post"
 			action="${pageContext.request.contextPath}/language/create"
 			modelAttribute="language" cssClass="form-horizontal">
-                        <form:hidden path="lecturer.id" /> 
+			<form:hidden path="lecturer.id" />
 			<div>
 				<label path="language">Language</label>
 				<form:input path="language" />
@@ -31,7 +31,8 @@
 					</c:forEach>
 				</form:select>
 			</div>
-			<button class="btn btn-primary" type="submit">Create language</button>
+			<button class="btn btn-primary" type="submit">Create
+				language</button>
 		</form:form>
 	</div>
 

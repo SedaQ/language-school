@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -48,6 +49,8 @@ public class AuthenticationProviderImpl implements AuthenticationProvider {
 		if (!userFacade.authenticate(userForAuth)) {
 			throw new BadCredentialsException("Provide valid email or password");
 		}
+
+		
 		List<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList(user.getUserRole());
 		return new UsernamePasswordAuthenticationToken(email, pwd, authorities);
 	}

@@ -4,7 +4,7 @@
 <%@ taglib tagdir="/WEB-INF/tags" prefix="my"%>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
-	
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,20 +34,18 @@
 					<td><c:out value="${course.proficiencyLevel}" /></td>
 					<td><my:a href="/course/view/${course.id}"
 							class="btn btn-primary">view</my:a></td>
-                                        <td>
-                                        <sec:authorize access="hasRole('ROLE_STUDENT')">
-                                            <a
-                                                    href="${pageContext.request.contextPath}/student/enrollToCourse/${course.id}"
-                                                    class="btn btn-primary">Enroll to Course</a>
-					</sec:authorize>
-                                        </td>
+					<td><sec:authorize access="hasRole('ROLE_STUDENT')">
+							<a
+								href="${pageContext.request.contextPath}/student/enrollToCourse/${course.id}"
+								class="btn btn-primary">Enroll to Course</a>
+						</sec:authorize></td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
-        <sec:authorize access="hasRole('ROLE_LECTURER')">
-            <my:a href="/course/new/" class="btn btn-primary">New Course</my:a>
-        </sec:authorize>
+	<sec:authorize access="hasRole('ROLE_LECTURER')">
+		<my:a href="/course/new/" class="btn btn-primary">New Course</my:a>
+	</sec:authorize>
 
 </body>
 <%@ include file="../common/footer.jsp"%>

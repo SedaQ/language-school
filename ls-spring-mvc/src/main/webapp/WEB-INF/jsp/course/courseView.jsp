@@ -36,11 +36,12 @@
 							class="btn btn-primary">Edit</a>
 						<a
 							href="${pageContext.request.contextPath}/course/delete/${course.id}"
-							class="btn btn-primary" onclick="return confirm('Are you sure you want to delete this course?')">Delete</a>
+							class="btn btn-primary"
+							onclick="return confirm('Are you sure you want to delete this course?')">Delete</a>
 					</sec:authorize> <sec:authorize access="hasRole('ROLE_STUDENT')">
 						<a
 							href="{pageContext.request.contextPath}/course/enrollToCourse/${course.id}"
-							class="btn btn-primary" >Enroll to Course</a>
+							class="btn btn-primary">Enroll to Course</a>
 					</sec:authorize></td>
 			</tr>
 		</tbody>
@@ -71,7 +72,8 @@
 								class="btn btn-primary">Edit</a>
 							<a
 								href="${pageContext.request.contextPath}/lecture/delete/${lecture.id}"
-								class="btn btn-primary" onclick="return confirm('Are you sure you want to delete this lecture?')">Delete</a>
+								class="btn btn-primary"
+								onclick="return confirm('Are you sure you want to delete this lecture?')">Delete</a>
 						</sec:authorize></td>
 				</tr>
 			</c:forEach>
