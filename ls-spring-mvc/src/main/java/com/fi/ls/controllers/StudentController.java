@@ -119,6 +119,19 @@ public class StudentController {
 		return "redirect:" + uriBuilder.path("/lecture/list").buildAndExpand().encode().toUriString();
 	}
 
+	@RequestMapping(value = "/unenrollLecture/{id}", method = RequestMethod.GET)
+	public String unenrollLecture(@PathVariable Long id, Model model, UriComponentsBuilder uriBuilder) {
+		logger.debug("unenrollLecture");
+
+		Optional<LectureDTO> lectureDTO = lectureFacade.getLectureById(id);
+		String email = SecurityContextHolder.getContext().getAuthentication().getName();
+		Long studentId = lsUserFacade.getUserByEmail(email).get().getId();
+		Optional<StudentDTO> studentDTO = studentFacade.getStudentById(studentId);
+
+		studentFacade.cancelLectureFromStudentsList(lectureDTO.get(), studentDTO.get());
+		return "redirect:" + uriBuilder.path("/lecture/list").buildAndExpand().encode().toUriString();
+	}
+
 	@RequestMapping(value = "/enrollToCourse/{id}", method = RequestMethod.GET)
 	public String enrollToCourse(@PathVariable Long id, Model model, UriComponentsBuilder uriBuilder) {
 		logger.debug("enrollToCourse");

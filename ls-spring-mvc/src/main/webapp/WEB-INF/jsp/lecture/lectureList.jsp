@@ -42,7 +42,9 @@
 										class="btn btn-primary">Enroll to Lecture</a>
 								</c:when>
 								<c:otherwise>
-									already enrolled
+									<a
+										href="${pageContext.request.contextPath}/student/unenrollLecture/${lecture.id}"
+										class="btn btn-primary">Unenroll</a>
 								</c:otherwise>
 							</c:choose>
 						</sec:authorize></td>
