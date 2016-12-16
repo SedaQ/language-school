@@ -48,6 +48,14 @@
 
 	Lectures in Course:
 	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>id</th>
+				<th>dayTime</th>
+				<th>classroomId</th>
+				<th>topic</th>
+			</tr>
+		</thead>
 		<tbody>
 			<c:forEach items="${lecturesInCourse}" var="lecture">
 				<tr>
