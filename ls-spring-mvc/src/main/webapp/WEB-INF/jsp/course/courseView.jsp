@@ -30,19 +30,18 @@
 				<td><c:out value="${course.name}" /></td>
 				<td><c:out value="${course.language}" /></td>
 				<td><c:out value="${course.proficiencyLevel}" /></td>
-				<td>
-				<sec:authorize access="hasRole('ROLE_LECTURER')">
-					<a
-						href="${pageContext.request.contextPath}/course/edit/${course.id}"
-						class="btn btn-primary">Edit</a>
-					<a
-						href="${pageContext.request.contextPath}/course/delete/${course.id}"
-						class="btn btn-primary">Delete</a>
-				</sec:authorize> <sec:authorize access="hasRole('ROLE_STUDENT')">
-					<a
-						href="{pageContext.request.contextPath}/course/enrollToCourse/${course.id}"
-						class="btn btn-primary">Enroll to Course</a>
-				</sec:authorize></td>
+				<td><sec:authorize access="hasRole('ROLE_LECTURER')">
+						<a
+							href="${pageContext.request.contextPath}/course/edit/${course.id}"
+							class="btn btn-primary">Edit</a>
+						<a
+							href="${pageContext.request.contextPath}/course/delete/${course.id}"
+							class="btn btn-primary">Delete</a>
+					</sec:authorize> <sec:authorize access="hasRole('ROLE_STUDENT')">
+						<a
+							href="{pageContext.request.contextPath}/course/enrollToCourse/${course.id}"
+							class="btn btn-primary">Enroll to Course</a>
+					</sec:authorize></td>
 			</tr>
 		</tbody>
 	</table>
@@ -57,7 +56,15 @@
 					<td><c:out value="${lecture.classroomId}" /></td>
 					<td><c:out value="${lecture.topic}" /></td>
 					<td><my:a href="/lecture/view/${lecture.id}"
-							class="btn btn-primary">view</my:a></td>
+							class="btn btn-primary">view</my:a> <sec:authorize
+							access="hasRole('ROLE_LECTURER')">
+							<a
+								href="${pageContext.request.contextPath}/lecture/edit/${lecture.id}"
+								class="btn btn-primary">Edit</a>
+							<a
+								href="${pageContext.request.contextPath}/lecture/delete/${lecture.id}"
+								class="btn btn-primary">Delete</a>
+						</sec:authorize></td>
 				</tr>
 			</c:forEach>
 		</tbody>

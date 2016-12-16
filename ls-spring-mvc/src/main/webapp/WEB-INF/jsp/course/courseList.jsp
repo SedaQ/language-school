@@ -39,7 +39,7 @@
 		</tbody>
 	</table>
         <sec:authorize access="hasRole('ROLE_LECTURER')">
-            <my:a href="/course/new/" class="btn btn-primary">new</my:a>
+            <my:a href="/course/new/" class="btn btn-primary">New Course</my:a>
         </sec:authorize>
 
 </body>
