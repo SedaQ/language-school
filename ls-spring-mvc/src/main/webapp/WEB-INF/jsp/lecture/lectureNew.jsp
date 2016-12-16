@@ -35,12 +35,13 @@
 	src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
 <script
 	src="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/src/js/bootstrap-datetimepicker.js"></script>
+
 <script type="text/javascript">
-      $('#datetimepicker').datetimepicker({
-        format: 'dd/MM/yyyy hh:mm:ss',
-        language: 'pt-BR'
-      });
-  </script>
+	$('#datetimepicker1').datetimepicker({
+		format : 'dd/MM/yyyy hh:mm:ss',
+		language : 'pt-BR'
+	});
+</script>
 </head>
 <body>
 	<%@ include file="../common/header.jsp"%>
@@ -51,10 +52,10 @@
 			cssClass="form-horizontal">
 			<div>
 				<label>Date Time</label>
-				<div id="datetimepicker" class="input-append date">
-					<input type="text" name="dayTime" class="form-control"/> <span
-						class="input-group-addon" > <span
-						class="glyphicon glyphicon-calendar" ></span>
+				<div id="datetimepicker1" class='input-group date'>
+					<input type="text" name="dayTime" class="form-control" /> <span
+						class="input-group-addon"> <span
+						class="glyphicon glyphicon-calendar"></span>
 					</span>
 				</div>
 			</div>
