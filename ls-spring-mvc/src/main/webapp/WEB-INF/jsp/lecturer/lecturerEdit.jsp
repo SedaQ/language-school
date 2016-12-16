@@ -18,7 +18,6 @@
 		<form:form class="table table-striped" method="post"
 			action="${pageContext.request.contextPath}/lecturer/update/${lecturer.id}"
 			modelAttribute="lecturer">
-
 			<div>
 				<label path="nickname">Nickname</label>
 				<form:input path="nickname" />
@@ -30,6 +29,11 @@
 			<div>
 				<label path="surname">Surname</label>
 				<form:input path="surname" />
+			</div>
+			<div>
+				<form:input type="hidden" path="userRole" />
+				<form:input type="hidden" path="passwordHash" />
+				<form:input type="hidden" path="email" />
 			</div>
 			<button class="btn btn-primary" type="submit">Update
 				lecturer</button>
