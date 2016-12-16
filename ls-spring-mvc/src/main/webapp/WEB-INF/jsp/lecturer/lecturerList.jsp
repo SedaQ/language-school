@@ -42,7 +42,7 @@
 
 	</table>
     <sec:authorize access="hasRole('ROLE_ADMIN')">
-        <my:a href="/lecturer/new/" class="btn btn-primary">New lecture</my:a>
+        <my:a href="/lecturer/new/" class="btn btn-primary">New lecturer</my:a>
     </sec:authorize>
 
 	<%@ include file="../common/footer.jsp"%>
