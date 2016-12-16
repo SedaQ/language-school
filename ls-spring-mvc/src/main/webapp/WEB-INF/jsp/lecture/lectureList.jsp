@@ -38,7 +38,7 @@
 		</tbody>
 	</table>
 	<sec:authorize access="hasRole('ROLE_LECTURER')">
-		<my:a href="/lecture/new/" class="btn btn-primary">new</my:a>
+		<my:a href="/lecture/new/" class="btn btn-primary">New lecture</my:a>
 	</sec:authorize>
 	<%@ include file="../common/footer.jsp"%>
 </body>

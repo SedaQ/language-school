@@ -50,34 +50,6 @@
 				<th>proficiency level</th>
 			</tr>
 		</thead>
-                <tbody>
-                    <c:forEach items="${lecturer.listOfLanguages}" var="language">
-			<tr>
-				<td>${language.id}</td>
-				<td><c:out value="${language.language}" /></td>
-				<td><c:out value="${language.proficiencyLevel}" /></td>
-                                <td>
-                                <sec:authorize access="hasRole('ROLE_ADMIN')">
-                                <a
-                                        href="${pageContext.request.contextPath}/language/edit/${language.id}"
-                                        class="btn btn-primary">Edit</a>
-                                <a
-                                        href="${pageContext.request.contextPath}/language/delete/${language.id}"
-                                        class="btn btn-primary">Delete</a>
-				</sec:authorize>
-                                </td>
-			</tr>
-                    </c:forEach>
-		</tbody>
-        </table>
-        <sec:authorize access="hasRole('ROLE_ADMIN')">
-            <my:a href="/language/new/${lecturer.id}" class="btn btn-primary">new</my:a>
-        </sec:authorize>
-	
-		
-	<!-- 
-	Lecturers lectures:
-	<table class="table table-striped">
 		<tbody>
 			<c:forEach items="${lecturerLanguages}" var="language">
 				<tr>
@@ -96,6 +68,10 @@
 			</c:forEach>
 		</tbody>
 	</table>
+
+	<sec:authorize access="hasRole('ROLE_ADMIN')">
+		<my:a href="/language/new/${lecturer.id}" class="btn btn-primary">Add new lecturer</my:a>
+	</sec:authorize>
 
 	<%@ include file="../common/footer.jsp"%>
 </body>

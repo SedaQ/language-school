@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.fi.ls.dto.lecturer.LecturerCreateDTO;
 import com.fi.ls.dto.lecturer.LecturerDTO;
 import com.fi.ls.facade.LecturerFacade;
 
@@ -41,6 +40,7 @@ public class LecturerController {
 		model.addAttribute("lecturerLanguages",
 				lecturerFacade.findAllLecturerLanguages(lecturerFacade.getLecturerById(id).get()));
 		model.addAttribute("lecturer", lecturerFacade.getLecturerById(id).get());
+		model.addAttribute("lecturerLectures", lecturerFacade.getLecturerById(id).get().getListOfLectures());
 		return "lecturer/lecturerView";
 	}
 
