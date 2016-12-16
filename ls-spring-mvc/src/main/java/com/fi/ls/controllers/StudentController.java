@@ -2,7 +2,11 @@ package com.fi.ls.controllers;
 
 import com.fi.ls.dto.course.CourseDTO;
 import com.fi.ls.dto.lecture.LectureDTO;
+
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
@@ -36,14 +40,14 @@ public class StudentController {
 
 	@Inject
 	private StudentFacade studentFacade;
-        
-        @Inject
+
+	@Inject
 	private LectureFacade lectureFacade;
-                
-        @Inject
+
+	@Inject
 	private CourseFacade courseFacade;
-        
-        @Inject
+
+	@Inject
 	private LSUserFacade lsUserFacade;
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -54,7 +58,12 @@ public class StudentController {
 
 	@RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
 	public String view(@PathVariable long id, Model model) {
-		model.addAttribute("student", studentFacade.getStudentById(id).get());
+		StudentDTO student = studentFacade.getStudentById(id).get();
+		model.addAttribute("student", student);
+		// again should be Set on persistence level
+		Set<LectureDTO> studentLectures = new HashSet<>(student.getListOfLectures()).stream()
+				.sorted((d1, d2) -> d1.getDayTime().compareTo(d2.getDayTime())).collect(Collectors.toSet());
+		model.addAttribute("studentLectures", studentLectures);
 		return "student/studentView";
 	}
 
@@ -96,32 +105,31 @@ public class StudentController {
 		studentFacade.deleteStudent(studentFacade.getStudentById(id).get());
 		return "redirect:" + uriBuilder.path("/student/list").buildAndExpand().encode().toUriString();
 	}
-        
-        @RequestMapping(value = "/enrollToLecture/{id}", method = RequestMethod.GET)
+
+	@RequestMapping(value = "/enrollToLecture/{id}", method = RequestMethod.GET)
 	public String enrollToLecture(@PathVariable Long id, Model model, UriComponentsBuilder uriBuilder) {
 		logger.debug("enrollToLecture");
-                
-                Optional<LectureDTO> lectureDTO = lectureFacade.getLectureById(id);
-                String email = SecurityContextHolder.getContext().getAuthentication().getName();
-                Long studentId = lsUserFacade.getUserByEmail(email).get().getId();
-                Optional<StudentDTO> studentDTO = studentFacade.getStudentById(studentId);
-                
-                studentFacade.enrollLecture(lectureDTO.get(), studentDTO.get());
-                
+
+		Optional<LectureDTO> lectureDTO = lectureFacade.getLectureById(id);
+		String email = SecurityContextHolder.getContext().getAuthentication().getName();
+		Long studentId = lsUserFacade.getUserByEmail(email).get().getId();
+		Optional<StudentDTO> studentDTO = studentFacade.getStudentById(studentId);
+
+		studentFacade.enrollLecture(lectureDTO.get(), studentDTO.get());
 		return "redirect:" + uriBuilder.path("/lecture/list").buildAndExpand().encode().toUriString();
 	}
-        
-        @RequestMapping(value = "/enrollToCourse/{id}", method = RequestMethod.GET)
+
+	@RequestMapping(value = "/enrollToCourse/{id}", method = RequestMethod.GET)
 	public String enrollToCourse(@PathVariable Long id, Model model, UriComponentsBuilder uriBuilder) {
 		logger.debug("enrollToCourse");
-                
-                Optional<CourseDTO> courseDTO = courseFacade.getCourseById(id);
-                String email = SecurityContextHolder.getContext().getAuthentication().getName();
-                Long studentId = lsUserFacade.getUserByEmail(email).get().getId();
-                Optional<StudentDTO> studentDTO = studentFacade.getStudentById(studentId);
-                
-                studentFacade.enrollCourse(courseDTO.get(), studentDTO.get());
-                
+
+		Optional<CourseDTO> courseDTO = courseFacade.getCourseById(id);
+		String email = SecurityContextHolder.getContext().getAuthentication().getName();
+		Long studentId = lsUserFacade.getUserByEmail(email).get().getId();
+		Optional<StudentDTO> studentDTO = studentFacade.getStudentById(studentId);
+
+		studentFacade.enrollCourse(courseDTO.get(), studentDTO.get());
+
 		return "redirect:" + uriBuilder.path("/course/list").buildAndExpand().encode().toUriString();
 	}
 

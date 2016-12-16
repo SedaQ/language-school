@@ -4,6 +4,7 @@ import javax.inject.Inject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +14,7 @@ import org.springframework.ui.Model;
 import com.fi.ls.dto.course.CourseCreateDTO;
 import com.fi.ls.dto.course.CourseDTO;
 import com.fi.ls.dto.lecture.LectureDTO;
+import com.fi.ls.dto.student.StudentDTO;
 import com.fi.ls.enums.ProficiencyLevel;
 import com.fi.ls.facade.CourseFacade;
 
@@ -66,7 +68,7 @@ public class CourseController {
 		model.addAttribute("proficiencylevels", new ArrayList<>(Arrays.asList(ProficiencyLevel.values())));
 		return "course/courseNew";
 	}
-
+	
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public String createCourse(@Valid @ModelAttribute("courseCreate") CourseCreateDTO formBean,
 			BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes,

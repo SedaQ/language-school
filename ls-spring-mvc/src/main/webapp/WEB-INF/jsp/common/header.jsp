@@ -37,7 +37,7 @@
 			</form>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="${pageContext.request.contextPath}/logout"><span
-						class="glyphicon glyphicon-log-in"></span> Log out</a></li>
+						class="glyphicon glyphicon-log-in"></span> ${user.getPrincipal.getName()}Log out</a></li>
 			</ul>
 		</div>
 	</nav>

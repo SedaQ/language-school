@@ -19,6 +19,7 @@
 				<th>dayTime</th>
 				<th>classroomId</th>
 				<th>topic</th>
+				<th>action</th>
 			</tr>
 		</thead>
 
@@ -28,24 +29,23 @@
 				<td><c:out value="${lecture.dayTime}" /></td>
 				<td><c:out value="${lecture.classroomId}" /></td>
 				<td><c:out value="${lecture.topic}" /></td>
+				<td><sec:authorize access="hasRole('ROLE_LECTURER')">
+						<a
+							href="${pageContext.request.contextPath}/lecture/edit/${lecture.id}"
+							class="btn btn-primary">Edit</a>
+						<a
+							href="${pageContext.request.contextPath}/lecture/delete/${lecture.id}"
+							class="btn btn-primary" onclick="return confirm('Are you sure you want to delete this lecture?')">Delete</a>
+					</sec:authorize></td>
 			</tr>
 		</tbody>
 	</table>
-	<sec:authorize access="hasRole('ROLE_LECTURER')">
+
+	<sec:authorize access="hasRole('ROLE_STUDENT')">
 		<a
-			href="${pageContext.request.contextPath}/lecture/edit/${lecture.id}"
-			class="btn btn-primary">Edit</a>
+			href="${pageContext.request.contextPath}/student/enrollToLecture/${lecture.id}"
+			class="btn btn-primary">Enroll to Lecture</a>
 	</sec:authorize>
-	<sec:authorize access="hasRole('ROLE_LECTURER')">
-		<a
-			href="${pageContext.request.contextPath}/lecture/delete/${lecture.id}"
-			class="btn btn-primary">Delete</a>
-	</sec:authorize>
-        <sec:authorize access="hasRole('ROLE_STUDENT')">
-            <a
-                    href="${pageContext.request.contextPath}/student/enrollToLecture/${lecture.id}"
-                    class="btn btn-primary">Enroll to Lecture</a>
-        </sec:authorize>
 
 	<%@ include file="../common/footer.jsp"%>
 </body>

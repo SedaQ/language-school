@@ -16,6 +16,7 @@
 	<table class="table">
 		<thead>
 			<tr>
+				<th>id</th>
 				<th>email</th>
 				<th>first name</th>
 				<th>surname</th>
@@ -25,7 +26,7 @@
 
 		<tbody>
 			<tr>
-				<td>${student.id}</td>
+				<td>${student.id}"</td>
 				<td><c:out value="${student.email}" /></td>
 				<td><c:out value="${student.firstName}" /></td>
 				<td><c:out value="${student.surname}" /></td>
@@ -36,10 +37,37 @@
 							class="btn btn-primary">Edit</a>
 						<a
 							href="${pageContext.request.contextPath}/student/delete/${student.id}"
-							class="btn btn-primary">Delete</a>
+							class="btn btn-primary" onclick="return confirm('Are you sure you want to delete this student?')">Delete</a>
 					</sec:authorize></td>
 			</tr>
 		</tbody>
+	</table>
+
+	Student lectures:
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>id</th>
+				<th>dayTime</th>
+				<th>classroomId</th>
+				<th>topic</th>
+				<th>action</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			<c:forEach items="${studentLectures}" var="lecture">
+				<tr>
+				<td><c:out value="${lecture.id}" /></td>
+				<td><c:out value="${lecture.dayTime}" /></td>
+				<td><c:out value="${lecture.classroomId}" /></td>
+				<td><c:out value="${lecture.topic}" /></td>
+					<td><my:a href="/lecture/view/${lecture.id}"
+							class="btn btn-primary">view</my:a></td>
+				</tr>
+			</c:forEach>
+		</tbody>
+
 	</table>
 
 	<%@ include file="../common/footer.jsp"%>

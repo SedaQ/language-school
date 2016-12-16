@@ -43,52 +43,31 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
 
 	@Override
 	public void loadData() {
-		LSUser user1 = new LSUser();
-		user1.setEmail("test@email.cz");
-		user1.setPasswordHash("test1");
-		user1.setUserRole(UserRoles.ROLE_ADMIN.name());
-		userService.registerUser(user1, user1.getPasswordHash());
-
-		LSUser user2 = new LSUser();
-		user2.setEmail("testtest@email.cz");
-		user2.setPasswordHash("test2");
-		user2.setUserRole(UserRoles.ROLE_LECTURER.name());
-		userService.registerUser(user2, user2.getPasswordHash());
-
-		LSUser user3 = new LSUser();
-		user3.setEmail("testtesttest@email.cz");
-		user3.setPasswordHash("test3");
-		user3.setUserRole(UserRoles.ROLE_STUDENT.name());
-		userService.registerUser(user3, user3.getPasswordHash());
-
-                LSUser user4 = new LSUser();
+		LSUser user4 = new LSUser();
 		user4.setEmail("admin@email.cz");
 		user4.setPasswordHash("admin");
 		user4.setUserRole(UserRoles.ROLE_ADMIN.name());
 		userService.registerUser(user4, user4.getPasswordHash());
 
-		LSUser user5 = new LSUser();
+		Lecturer user5 = new Lecturer();
 		user5.setEmail("lecturer@email.cz");
 		user5.setPasswordHash("lecturer");
 		user5.setUserRole(UserRoles.ROLE_LECTURER.name());
+		user5.setNickname("Boss");
+		user5.setFirstName("Alibaba");
+		user5.setSurname("Buh");
 		userService.registerUser(user5, user5.getPasswordHash());
-
-		LSUser user6 = new LSUser();
-		user6.setEmail("student@email.cz");
-		user6.setPasswordHash("student");
-		user6.setUserRole(UserRoles.ROLE_STUDENT.name());
-		userService.registerUser(user6, user6.getPasswordHash());
-                
-		log.info("Loading sample data...");
 
 		Student s1 = new Student();
 		s1.setFirstName("Arthur");
 		s1.setSurname("Dent");
 		s1.setBirthNumber("123456789");
-		s1.setEmail("a.dent42@email.uk");
-		s1.setPasswordHash("Hash");
-                s1.setUserRole(UserRoles.ROLE_STUDENT.name());
-                userService.registerUser(s1, s1.getPasswordHash());
+		s1.setEmail("student@email.cz");
+		s1.setPasswordHash("student");
+		s1.setUserRole(UserRoles.ROLE_STUDENT.name());
+		userService.registerUser(s1, s1.getPasswordHash());
+
+		log.info("Loading sample data...");
 
 		Student s2 = new Student();
 		s2.setFirstName("Mister");
@@ -96,8 +75,8 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
 		s2.setBirthNumber("S15BEEPZORD78");
 		s2.setEmail("slarti@constructions.magrathea");
 		s2.setPasswordHash("Hash");
-                s2.setUserRole(UserRoles.ROLE_STUDENT.name());
-                userService.registerUser(s2, s2.getPasswordHash());
+		s2.setUserRole(UserRoles.ROLE_STUDENT.name());
+		userService.registerUser(s2, s2.getPasswordHash());
 
 		Course c1 = new Course();
 		c1.setLanguage("Errnglish");
@@ -113,6 +92,8 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
 		l11.setClassroomId("A96");
 		l11.setDayTime(LocalDateTime.of(1979, Month.OCTOBER, 12, 0, 0));
 		l11.setTopic("Guidenance");
+
+		System.out.println("FORMAT DATA............" + l11.getDayTime());
 
 		Lecture l12 = new Lecture();
 		l12.setClassroomId("A96");

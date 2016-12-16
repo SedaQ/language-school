@@ -36,11 +36,11 @@
 							class="btn btn-primary">Edit</a>
 						<a
 							href="${pageContext.request.contextPath}/course/delete/${course.id}"
-							class="btn btn-primary">Delete</a>
+							class="btn btn-primary" onclick="return confirm('Are you sure you want to delete this course?')">Delete</a>
 					</sec:authorize> <sec:authorize access="hasRole('ROLE_STUDENT')">
 						<a
 							href="{pageContext.request.contextPath}/course/enrollToCourse/${course.id}"
-							class="btn btn-primary">Enroll to Course</a>
+							class="btn btn-primary" >Enroll to Course</a>
 					</sec:authorize></td>
 			</tr>
 		</tbody>
@@ -71,13 +71,15 @@
 								class="btn btn-primary">Edit</a>
 							<a
 								href="${pageContext.request.contextPath}/lecture/delete/${lecture.id}"
-								class="btn btn-primary">Delete</a>
+								class="btn btn-primary" onclick="return confirm('Are you sure you want to delete lecturer language?')">Delete</a>
 						</sec:authorize></td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
-
+	<sec:authorize access="hasRole('ROLE_LECTURER')">
+		<my:a href="/lecture/new/" class="btn btn-primary">New lecture</my:a>
+	</sec:authorize>
 
 </body>
 <%@ include file="../common/footer.jsp"%>

@@ -34,13 +34,18 @@
 					<td><c:out value="${lecture.topic}" /></td>
 					<td><my:a href="/lecture/view/${lecture.id}"
 							class="btn btn-primary">view</my:a></td>
-                                        <td>
-                                        <sec:authorize access="hasRole('ROLE_STUDENT')">
-                                            <a
-                                                    href="${pageContext.request.contextPath}/student/enrollToLecture/${lecture.id}"
-                                                    class="btn btn-primary">Enroll to Lecture</a>
-					</sec:authorize>
-                                        </td>
+					<td><sec:authorize access="hasRole('ROLE_STUDENT')">
+							<c:choose>
+								<c:when test="${!studentEnrolledLectures.contains(lecture)}">
+									<a
+										href="${pageContext.request.contextPath}/student/enrollToLecture/${lecture.id}"
+										class="btn btn-primary">Enroll to Lecture</a>
+								</c:when>
+								<c:otherwise>
+									already enrolled
+								</c:otherwise>
+							</c:choose>
+						</sec:authorize></td>
 				</tr>
 			</c:forEach>
 		</tbody>
