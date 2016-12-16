@@ -12,7 +12,9 @@ import org.springframework.format.annotation.DateTimeFormat;
  *
  */
 public class LectureCreateDTO {
-
+        
+        private Long id;
+    
 	@NotNull
 	//@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
 	@DateTimeFormat(pattern = "dd.MM.yyyy HH:mm")
@@ -24,6 +26,18 @@ public class LectureCreateDTO {
 	@NotNull
 	private String topic;
 
+        public Long getId() {
+
+		return id;
+
+	}
+
+	public void setId(Long id) {
+
+		this.id = id;
+
+	}
+        
 	public LocalDateTime getDayTime() {
 
 		return dayTime;
