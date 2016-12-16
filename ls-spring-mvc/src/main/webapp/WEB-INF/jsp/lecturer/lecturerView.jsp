@@ -71,7 +71,7 @@
 		</tbody>
         </table>
         <sec:authorize access="hasRole('ROLE_ADMIN')">
-            <my:a href="/language/new/${lecturer.id}" class="btn btn-primary">new</my:a>
+            <my:a href="/language/new/${lecturer.id}" class="btn btn-primary">new language</my:a>
         </sec:authorize>
 	
 		
