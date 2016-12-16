@@ -71,7 +71,7 @@
 								class="btn btn-primary">Edit</a>
 							<a
 								href="${pageContext.request.contextPath}/lecture/delete/${lecture.id}"
-								class="btn btn-primary" onclick="return confirm('Are you sure you want to delete lecturer language?')">Delete</a>
+								class="btn btn-primary" onclick="return confirm('Are you sure you want to delete this lecture?')">Delete</a>
 						</sec:authorize></td>
 				</tr>
 			</c:forEach>
