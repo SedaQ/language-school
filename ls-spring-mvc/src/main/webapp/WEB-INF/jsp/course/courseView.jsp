@@ -38,10 +38,24 @@
 							href="${pageContext.request.contextPath}/course/delete/${course.id}"
 							class="btn btn-primary"
 							onclick="return confirm('Are you sure you want to delete this course?')">Delete</a>
-					</sec:authorize> <sec:authorize access="hasRole('ROLE_STUDENT')">
-						<a
-							href="{pageContext.request.contextPath}/course/enrollToCourse/${course.id}"
-							class="btn btn-primary">Enroll to Course</a>
+					</sec:authorize>
+                                        <sec:authorize access="hasRole('ROLE_STUDENT')">
+                                            <c:set var="enrollable" value="false" />
+                                            <c:forEach items="${lecturesInCourse}" var="lecture">
+                                                <c:if test="${!studentEnrolledLectures.contains(lecture)}">
+                                                    <c:set var="enrollable" value="true" />
+                                                </c:if>
+                                            </c:forEach>
+                                            <c:choose>
+                                                <c:when test="${enrollable == 'true'}">
+                                                    <a
+                                                            href="${pageContext.request.contextPath}/student/enrollToCourse/${course.id}"
+                                                            class="btn btn-primary">Enroll to Course</a>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    TODO: Unenroll
+                                                </c:otherwise>
+                                            </c:choose>
 					</sec:authorize></td>
 			</tr>
 		</tbody>
@@ -64,8 +78,8 @@
 					<td><c:out value="${lecture.dayTime}" /></td>
 					<td><c:out value="${lecture.classroomId}" /></td>
 					<td><c:out value="${lecture.topic}" /></td>
-					<td><my:a href="/lecture/view/${lecture.id}"
-							class="btn btn-primary">view</my:a> <sec:authorize
+					<td><my:a href="/lecture/view/${lecture.id}" class="btn btn-primary">view</my:a></td>
+                                        <td><sec:authorize
 							access="hasRole('ROLE_LECTURER')">
 							<a
 								href="${pageContext.request.contextPath}/lecture/edit/${lecture.id}"
@@ -74,7 +88,21 @@
 								href="${pageContext.request.contextPath}/lecture/delete/${lecture.id}"
 								class="btn btn-primary"
 								onclick="return confirm('Are you sure you want to delete this lecture?')">Delete</a>
-						</sec:authorize></td>
+						</sec:authorize>
+                                            	<sec:authorize access="hasRole('ROLE_STUDENT')">
+							<c:choose>
+								<c:when test="${!studentEnrolledLectures.contains(lecture)}">
+									<a
+										href="${pageContext.request.contextPath}/student/enrollToLecture/${lecture.id}"
+										class="btn btn-primary">Enroll to Lecture</a>
+								</c:when>
+								<c:otherwise>
+									<a
+										href="${pageContext.request.contextPath}/student/unenrollLecture/${lecture.id}"
+										class="btn btn-primary">Unenroll</a>
+								</c:otherwise>
+							</c:choose>
+					</sec:authorize></td>
 				</tr>
 			</c:forEach>
 		</tbody>

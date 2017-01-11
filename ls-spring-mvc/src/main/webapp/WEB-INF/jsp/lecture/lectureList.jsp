@@ -32,8 +32,7 @@
 					<td><c:out value="${lecture.dayTime}" /></td>
 					<td><c:out value="${lecture.classroomId}" /></td>
 					<td><c:out value="${lecture.topic}" /></td>
-					<td><my:a href="/lecture/view/${lecture.id}"
-							class="btn btn-primary">view</my:a></td>
+					<td><my:a href="/lecture/view/${lecture.id}" class="btn btn-primary">view</my:a></td>
 					<td><sec:authorize access="hasRole('ROLE_STUDENT')">
 							<c:choose>
 								<c:when test="${!studentEnrolledLectures.contains(lecture)}">

@@ -29,6 +29,7 @@ import com.fi.ls.facade.CourseFacade;
 import com.fi.ls.facade.LSUserFacade;
 import com.fi.ls.facade.LectureFacade;
 import com.fi.ls.facade.StudentFacade;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -107,7 +108,7 @@ public class StudentController {
 	}
 
 	@RequestMapping(value = "/enrollToLecture/{id}", method = RequestMethod.GET)
-	public String enrollToLecture(@PathVariable Long id, Model model, UriComponentsBuilder uriBuilder) {
+	public String enrollToLecture(@PathVariable Long id, Model model, HttpServletRequest request) {
 		logger.debug("enrollToLecture");
 
 		Optional<LectureDTO> lectureDTO = lectureFacade.getLectureById(id);
@@ -116,11 +117,11 @@ public class StudentController {
 		Optional<StudentDTO> studentDTO = studentFacade.getStudentById(studentId);
 
 		studentFacade.enrollLecture(lectureDTO.get(), studentDTO.get());
-		return "redirect:" + uriBuilder.path("/lecture/list").buildAndExpand().encode().toUriString();
+                return "redirect:" + request.getHeader("Referer");
 	}
 
 	@RequestMapping(value = "/unenrollLecture/{id}", method = RequestMethod.GET)
-	public String unenrollLecture(@PathVariable Long id, Model model, UriComponentsBuilder uriBuilder) {
+	public String unenrollLecture(@PathVariable Long id, Model model, HttpServletRequest request) {
 		logger.debug("unenrollLecture");
 
 		Optional<LectureDTO> lectureDTO = lectureFacade.getLectureById(id);
@@ -129,7 +130,7 @@ public class StudentController {
 		Optional<StudentDTO> studentDTO = studentFacade.getStudentById(studentId);
 
 		studentFacade.cancelLectureFromStudentsList(lectureDTO.get(), studentDTO.get());
-		return "redirect:" + uriBuilder.path("/lecture/list").buildAndExpand().encode().toUriString();
+		return "redirect:" + request.getHeader("Referer");
 	}
 
 	@RequestMapping(value = "/enrollToCourse/{id}", method = RequestMethod.GET)
@@ -145,6 +146,4 @@ public class StudentController {
 
 		return "redirect:" + uriBuilder.path("/course/list").buildAndExpand().encode().toUriString();
 	}
-
-
 }

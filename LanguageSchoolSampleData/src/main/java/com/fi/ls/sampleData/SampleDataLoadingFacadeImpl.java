@@ -160,10 +160,9 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
 		l13.addCourse(c1);
 		c1.addLectures(Arrays.asList(l11, l12, l13));
 
-		l21.addCourse(c2);
 		l22.addCourse(c2);
 		l23.addCourse(c2);
-		c2.addLectures(Arrays.asList(l21, l22, l23));
+		c2.addLectures(Arrays.asList(l22, l23));
 
 		l11.addLecturer(lect1);
 		l12.addLecturer(lect1);
@@ -171,23 +170,20 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
 		l23.addLecturer(lect1);
 		lect1.setListOfLectures(Arrays.asList(l11, l12, l13, l23));
 
-		l21.addLecturer(lect2);
 		l22.addLecturer(lect2);
-		lect2.setListOfLectures(Arrays.asList(l21, l22));
+		lect2.setListOfLectures(Arrays.asList(l22));
 
 		l11.addStudent(s1);
 		l12.addStudent(s1);
 		l13.addStudent(s1);
-		l21.addStudent(s1);
-		s1.addListOfLectures(Arrays.asList(l11, l12, l13, l21));
+		s1.addListOfLectures(Arrays.asList(l11, l12, l13));
 
 		l11.addStudent(s2);
 		l12.addStudent(s2);
 		l13.addStudent(s2);
-		l21.addStudent(s2);
 		l22.addStudent(s2);
 		l23.addStudent(s2);
-		s2.addListOfLectures(Arrays.asList(l11, l12, l13, l21, l22, l23));
+		s2.addListOfLectures(Arrays.asList(l11, l12, l13, l22, l23));
 
 		log.info("Persisting Students");
 		studentService.create(s1);
@@ -199,7 +195,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
 		lectureService.create(l11);
 		lectureService.create(l12);
 		lectureService.create(l13);
-		lectureService.create(l21);
+		//lectureService.create(l21);
 		lectureService.create(l22);
 		lectureService.create(l23);
 		log.info("Persisting Lecturers");
