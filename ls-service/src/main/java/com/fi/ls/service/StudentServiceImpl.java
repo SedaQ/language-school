@@ -8,6 +8,7 @@ import com.fi.ls.exceptions.ServiceLayerException;
 import com.fi.ls.security.UserPasswordEncryption;
 
 import java.util.List;
+import java.util.Set;
 import javax.inject.Inject;
 import javax.persistence.PersistenceException;
 import javax.validation.ConstraintViolationException;
@@ -88,7 +89,7 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
-	public List<Student> findAllStudents() {
+	public Set<Student> findAllStudents() {
 		try {
 			return this.studentDao.findAll();
 		} catch (PersistenceException | DataAccessException ex) {
@@ -97,7 +98,7 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
-	public List<Student> findByFirstName(String firstName) {
+	public Set<Student> findByFirstName(String firstName) {
 		if (firstName == null)
 			throw new IllegalArgumentException("First name is null.");
 		try {
@@ -108,7 +109,7 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
-	public List<Student> findBySurname(String surname) {
+	public Set<Student> findBySurname(String surname) {
 		if (surname == null)
 			throw new IllegalArgumentException("Surname is null.");
 		try {
@@ -143,7 +144,7 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
-	public void cancelListOfLecturesFromStudentsList(List<Lecture> l, Student s) {
+	public void cancelListOfLecturesFromStudentsList(Set<Lecture> l, Student s) {
 		if (l == null || s == null)
 			throw new IllegalArgumentException("Lecture or student is null.");
 		s.removeListOfLectures(l);

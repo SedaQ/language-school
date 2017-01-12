@@ -3,6 +3,7 @@ package com.fi.ls.dao;
 import com.fi.ls.entity.Course;
 import com.fi.ls.enums.ProficiencyLevel;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
@@ -170,7 +171,7 @@ public class CourseDaoTest extends AbstractTestNGSpringContextTests {
 		em.persist(c1);
 		em.persist(c2);
 
-		List<Course> allCourses = courseDao.findAll();
+		Set<Course> allCourses = courseDao.findAll();
 
 		Assert.assertEquals(allCourses.size(), 3);
 	}

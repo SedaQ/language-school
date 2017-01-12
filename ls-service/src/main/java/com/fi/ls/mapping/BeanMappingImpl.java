@@ -2,9 +2,11 @@ package com.fi.ls.mapping;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -28,6 +30,15 @@ public class BeanMappingImpl implements BeanMapping {
 	@Override
 	public <T> List<T> mapTo(Collection<?> objects, Class<T> mapToClass) {
 		List<T> mappedCollection = new ArrayList<>();
+		for (Object object : objects) {
+			mappedCollection.add(modelMapper.map(object, mapToClass));
+		}
+		return mappedCollection;
+	}
+        
+        @Override
+	public <T> Set<T> mapToSet(Collection<?> objects, Class<T> mapToClass) {
+		Set<T> mappedCollection = new HashSet<>();
 		for (Object object : objects) {
 			mappedCollection.add(modelMapper.map(object, mapToClass));
 		}

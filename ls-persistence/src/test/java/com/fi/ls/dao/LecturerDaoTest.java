@@ -20,6 +20,7 @@ import com.fi.ls.entity.Lecturer;
 import com.fi.ls.enums.ProficiencyLevel;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author Pavel Šeda (441048)
@@ -172,7 +173,7 @@ public class LecturerDaoTest extends AbstractTestNGSpringContextTests {
             em.persist(lan1);
             em.persist(lan2);
             
-            List<Language> langs = lecturerDao.findAllLecturerLanguages(lect1);
+            Set<Language> langs = lecturerDao.findAllLecturerLanguages(lect1);
             
             Assert.assertEquals(langs.size(), 2);
             

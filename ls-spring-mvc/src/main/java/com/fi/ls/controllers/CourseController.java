@@ -56,9 +56,15 @@ public class CourseController {
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String list(Model model) {
+            
                 List<CourseDTO> courses = courseFacade.getAllCourses();
 		model.addAttribute("courses", courses);
-                
+                if (Helpers.hasRole(UserRoles.ROLE_STUDENT.name())) {
+			String email = SecurityContextHolder.getContext().getAuthentication().getName();
+			Long studentId = userFacade.getUserByEmail(email).get().getId();
+			Optional<StudentDTO> studentDTO = studentFacade.getStudentById(studentId);
+			model.addAttribute("studentEnrolledLectures", studentDTO.get().getListOfLectures());
+		}
 		return "course/courseList";
 	}
 
@@ -67,11 +73,6 @@ public class CourseController {
 		logger.debug("view: ", id);
 
 		CourseDTO course = courseFacade.getCourseById(id).get();
-                
-		// should be set on persistence level..
-		Set<LectureDTO> lectInCourse = new HashSet<>(courseFacade.getCourseById(id).get().getListOfLectures());
-                model.addAttribute("lecturesInCourse", lectInCourse);
-		
                 model.addAttribute("course", course);
                 if (Helpers.hasRole(UserRoles.ROLE_STUDENT.name())) {
 			String email = SecurityContextHolder.getContext().getAuthentication().getName();

@@ -183,7 +183,7 @@ public class StudentFacadeImpl implements StudentFacade {
 		if (l == null || s == null)
 			throw new IllegalArgumentException("course or student is null");
 		try {
-			studentService.cancelListOfLecturesFromStudentsList(beanMapping.mapTo(l, Lecture.class),
+			studentService.cancelListOfLecturesFromStudentsList(beanMapping.mapToSet(l, Lecture.class),
 					beanMapping.mapTo(s, Student.class).get());
 		} catch (ServiceLayerException | NoSuchElementException ex) {
 			logger.warn("error in cancel list of lectures: " + ex);

@@ -21,7 +21,9 @@ import static org.testng.Assert.fail;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.PersistenceException;
 
@@ -243,7 +245,7 @@ public class CourseServiceTest {
 		lecture3.setClassroomId("B401");
 		lecture3.setTopic("Poland");
 
-		List<Lecture> lectures = new ArrayList<>();
+		Set<Lecture> lectures = new HashSet<>();
 		lectures.add(lecture1);
 		lectures.add(lecture2);
 		lectures.add(lecture3);
@@ -259,9 +261,11 @@ public class CourseServiceTest {
 
 	@Test(expectedExceptions = { IllegalArgumentException.class })
 	public void testAddLecturesNullCourse() {
-		List<Lecture> listOfLectures = new ArrayList<>();
+		Set<Lecture> listOfLectures = new HashSet<>();
 		Lecture lecture = new Lecture();
+                lecture.setTopic("lecture");
 		Lecture lecture2 = new Lecture();
+                lecture2.setTopic("lecture2");
 		listOfLectures.add(lecture);
 		listOfLectures.add(lecture2);
 		courseService.addLectures(null, listOfLectures);

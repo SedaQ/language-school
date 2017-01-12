@@ -12,6 +12,7 @@ import com.fi.ls.facade.LSUserFacade;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.Arrays;
+import java.util.HashSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -161,32 +162,32 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
 		//l11.addCourse(c1);
 		//l12.addCourse(c1);
 		//l13.addCourse(c1);
-		c1.addLectures(Arrays.asList(l11, l12, l13));
+		c1.addLectures(new HashSet<>(Arrays.asList(l11, l12, l13)));
 
 		//l22.addCourse(c2);
 		//l23.addCourse(c2);
-		c2.addLectures(Arrays.asList(l22, l23));
+		c2.addLectures(new HashSet<>(Arrays.asList(l22, l23)));
 
 		//l11.addLecturer(lect1);
 		//l12.addLecturer(lect1);
 		//l13.addLecturer(lect1);
 		//l23.addLecturer(lect1);
-		lect1.setListOfLectures(Arrays.asList(l11, l12, l13, l23));
+		lect1.setListOfLectures(new HashSet<>(Arrays.asList(l11, l12, l13, l23)));
 
 		//l22.addLecturer(lect2);
-		lect2.setListOfLectures(Arrays.asList(l22));
+		lect2.setListOfLectures(new HashSet<>(Arrays.asList(l22)));
 
 		//l11.addStudent(s1);
 		//l12.addStudent(s1);
 		//l13.addStudent(s1);
-		s1.addListOfLectures(Arrays.asList(l11, l12, l13));
+		s1.addListOfLectures(new HashSet<>(Arrays.asList(l11, l12, l13)));
 
 		//l11.addStudent(s2);
 		//l12.addStudent(s2);
 		//l13.addStudent(s2);
 		//l22.addStudent(s2);
 		//l23.addStudent(s2);
-		s2.addListOfLectures(Arrays.asList(l11, l12, l13, l22, l23));
+		s2.addListOfLectures(new HashSet<>(Arrays.asList(l11, l12, l13, l22, l23)));
 
                 userService.registerUser(admin, admin.getPasswordHash());
                 userService.registerUser(lect3, lect3.getPasswordHash());

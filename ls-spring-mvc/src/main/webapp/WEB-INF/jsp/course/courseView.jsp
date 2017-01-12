@@ -41,7 +41,7 @@
 					</sec:authorize>
                                         <sec:authorize access="hasRole('ROLE_STUDENT')">
                                             <c:set var="enrollable" value="false" />
-                                            <c:forEach items="${lecturesInCourse}" var="lecture">
+                                            <c:forEach items="${course.listOfLectures}" var="lecture">
                                                 <c:if test="${!studentEnrolledLectures.contains(lecture)}">
                                                     <c:set var="enrollable" value="true" />
                                                 </c:if>
@@ -74,7 +74,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${lecturesInCourse}" var="lecture">
+			<c:forEach items="${course.listOfLectures}" var="lecture">
 				<tr>
 					<td><c:out value="${lecture.id}" /></td>
 					<td><c:out value="${lecture.dayTime}" /></td>

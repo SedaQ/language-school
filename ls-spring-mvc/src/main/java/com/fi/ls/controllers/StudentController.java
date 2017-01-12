@@ -25,10 +25,12 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.fi.ls.dto.student.StudentCreateDTO;
 import com.fi.ls.dto.student.StudentDTO;
+import com.fi.ls.enums.UserRoles;
 import com.fi.ls.facade.CourseFacade;
 import com.fi.ls.facade.LSUserFacade;
 import com.fi.ls.facade.LectureFacade;
 import com.fi.ls.facade.StudentFacade;
+import com.fi.ls.helpers.Helpers;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -62,10 +64,14 @@ public class StudentController {
 		StudentDTO student = studentFacade.getStudentById(id).get();
 		model.addAttribute("student", student);
                 
-		// again should be Set on persistence level
-		Set<LectureDTO> studentLectures = new HashSet<>(student.getListOfLectures()).stream()
-				.sorted((d1, d2) -> d1.getDayTime().compareTo(d2.getDayTime())).collect(Collectors.toSet());
-		model.addAttribute("studentLectures", studentLectures);
+                if (Helpers.hasRole(UserRoles.ROLE_STUDENT.name())) {
+			String email = SecurityContextHolder.getContext().getAuthentication().getName();
+			Long studentId = lsUserFacade.getUserByEmail(email).get().getId();
+			model.addAttribute("loggedStudentId", studentId);
+		}
+                else {
+                    model.addAttribute("loggedStudentId", null);
+                }
                 
 		return "student/studentView";
 	}

@@ -6,6 +6,7 @@ import com.fi.ls.entity.Lecture;
 import com.fi.ls.entity.Lecturer;
 import com.fi.ls.entity.Student;
 import java.util.List;
+import java.util.Set;
 
 /**
  *
@@ -51,21 +52,21 @@ public interface StudentService {
      * returns all students from database
      * @return list of all students
      */
-    public List<Student> findAllStudents();
+    public Set<Student> findAllStudents();
     
     /**
      * returns all students with same first name
      * @param firstName of students
      * @return list of all students with specific first name
      */
-    public List<Student> findByFirstName(String firstName);
+    public Set<Student> findByFirstName(String firstName);
     
     /**
      * returns all students with same surname
      * @param surname of students
      * @return list of all students with specific surname
      */
-    public List<Student> findBySurname(String surname);
+    public Set<Student> findBySurname(String surname);
     
     /**
      * students enroll to specific course
@@ -93,7 +94,7 @@ public interface StudentService {
      * @param l - lectures which will be canceled 
      * @param s - student which will cancel some lecture
      */
-    public void cancelListOfLecturesFromStudentsList(List<Lecture> l, Student s);
+    public void cancelListOfLecturesFromStudentsList(Set<Lecture> l, Student s);
 
 	/**
 	 * Register the given user with the given unencrypted password.

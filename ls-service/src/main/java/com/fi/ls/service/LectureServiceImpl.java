@@ -5,6 +5,7 @@ import com.fi.ls.entity.Lecture;
 import com.fi.ls.exceptions.ServiceLayerException;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Set;
 import javax.inject.Inject;
 import javax.persistence.PersistenceException;
 import javax.validation.ConstraintViolationException;
@@ -111,7 +112,7 @@ public class LectureServiceImpl implements LectureService {
     }
 
     @Override
-    public List<Lecture> findAll() {
+    public Set<Lecture> findAll() {
         
         try {
             

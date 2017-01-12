@@ -12,6 +12,7 @@ import java.util.Optional;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 import java.util.Collections;
+import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -87,7 +88,7 @@ public class LectureFacadeImpl implements LectureFacade {
             
         try {
             
-            List<Lecture> lectures = lectureService.findAll();
+            Set<Lecture> lectures = lectureService.findAll();
             return beanMapping.mapTo(lectures, LectureDTO.class);
                 
         } catch (NoSuchElementException | ServiceLayerException e) {

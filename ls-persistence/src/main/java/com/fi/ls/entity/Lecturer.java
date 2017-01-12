@@ -2,7 +2,9 @@ package com.fi.ls.entity;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -41,12 +43,12 @@ public class Lecturer extends LSUser {
 	@OneToMany(fetch = FetchType.EAGER, targetEntity = Language.class, mappedBy = "lecturer")
 	@Column(name = "list_of_languages")
 	@Mapping("listOfLanguages")
-	private List<Language> listOfLanguages = new ArrayList<>();
+	private Set<Language> listOfLanguages = new HashSet<>();
 
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.EAGER)
 	@Column(name = "list_of_lectures")
 	@Mapping("listOfLectures")
-	private List<Lecture> listOfLectures = new ArrayList<>();
+	private Set<Lecture> listOfLectures = new HashSet<>();
 
 	public String getNickname() {
 		return nickname;
@@ -76,23 +78,23 @@ public class Lecturer extends LSUser {
 		this.listOfLectures.remove(lecture);
 	}
 
-	public void deleteLectures(List<Lecture> lectures) {
+	public void deleteLectures(Set<Lecture> lectures) {
 		lectures.forEach(lect -> listOfLectures.remove(lect));
 	}
 
-	public List<Language> getListOfLanguages() {
-		return Collections.unmodifiableList(listOfLanguages);
+	public Set<Language> getListOfLanguages() {
+		return Collections.unmodifiableSet(listOfLanguages);
 	}
         
-    public void setListOfLanguages(List<Language> listOfLanguages) {
+        public void setListOfLanguages(Set<Language> listOfLanguages) {
         this.listOfLanguages = listOfLanguages;
 	}
 
-	public List<Lecture> getListOfLectures() {
-		return Collections.unmodifiableList(listOfLectures);
+	public Set<Lecture> getListOfLectures() {
+		return Collections.unmodifiableSet(listOfLectures);
 	}
 
-        public void setListOfLectures(List<Lecture> listOfLectures) {
+        public void setListOfLectures(Set<Lecture> listOfLectures) {
             this.listOfLectures = listOfLectures;
         }
 

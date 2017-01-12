@@ -1,8 +1,10 @@
 package com.fi.ls.entity;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -32,10 +34,10 @@ public class Student extends LSUser {
     @Column(unique = true, name = "birth_number")
     private String birthNumber;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @Column(name = "list_of_lectures")
     @Mapping("listOfLectures")
-    private List<Lecture> listOfLectures = new ArrayList<>();
+    private Set<Lecture> listOfLectures = new HashSet<>();
 
     public Student() {
     }
@@ -48,7 +50,7 @@ public class Student extends LSUser {
     	this.surname = surname;
     }
 
-    public void setListOfLectures(List<Lecture> listOfLectures) {
+    public void setListOfLectures(Set<Lecture> listOfLectures) {
     	this.listOfLectures = listOfLectures;
     }
 
@@ -64,7 +66,7 @@ public class Student extends LSUser {
     	return surname;
     }
 
-    public List<Lecture> getListOfLectures() {
+    public Set<Lecture> getListOfLectures() {
     	return listOfLectures;
     }
 
@@ -76,7 +78,7 @@ public class Student extends LSUser {
     	if (!(this.listOfLectures.contains(lecture))) this.listOfLectures.add(lecture);
     }
 
-    public void addListOfLectures(List<Lecture> lectures) {
+    public void addListOfLectures(Set<Lecture> lectures) {
     	lectures.forEach(l -> addLecture(l));
     }
 
@@ -84,7 +86,7 @@ public class Student extends LSUser {
 	this.listOfLectures.remove(lecture);
     }
 
-    public void removeListOfLectures(List<Lecture> lectures) {
+    public void removeListOfLectures(Set<Lecture> lectures) {
 	lectures.forEach(l -> removeLecture(l));
     }
 

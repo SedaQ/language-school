@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
 import com.fi.ls.entity.Course;
+import java.util.HashSet;
 
 /**
  * @author Pavel Šeda (441048)
@@ -46,7 +47,7 @@ public class CourseDaoImpl implements CourseDao {
 	}
 
 	@Override
-	public List<Course> findAll() {
-		return em.createNamedQuery("Course.findAll", Course.class).getResultList();
+	public Set<Course> findAll() {
+		return new HashSet<>(em.createNamedQuery("Course.findAll", Course.class).getResultList());
 	}
 }
