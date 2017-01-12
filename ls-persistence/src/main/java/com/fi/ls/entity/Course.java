@@ -47,7 +47,7 @@ public class Course {
 	@Column(name = "proficiency_level")
 	private ProficiencyLevel proficiencyLevel;
 
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.LAZY)
 	@Column(name = "list_of_lectures")
 	@Mapping("listOfLectures")
 	private List<Lecture> listOfLectures = new ArrayList<>();

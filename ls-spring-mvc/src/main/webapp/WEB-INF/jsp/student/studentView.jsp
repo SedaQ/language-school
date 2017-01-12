@@ -62,8 +62,12 @@
 				<td><c:out value="${lecture.dayTime}" /></td>
 				<td><c:out value="${lecture.classroomId}" /></td>
 				<td><c:out value="${lecture.topic}" /></td>
-					<td><my:a href="/lecture/view/${lecture.id}"
-							class="btn btn-primary">view</my:a></td>
+                                <td><my:a href="/lecture/view/${lecture.id}" class="btn btn-primary">view</my:a></td>
+                                <td><sec:authorize access="hasRole('ROLE_STUDENT')">
+                                    <a
+                                            href="${pageContext.request.contextPath}/student/unenrollLecture/${lecture.id}"
+                                            class="btn btn-primary">Unenroll</a>
+                                </sec:authorize></td>
 				</tr>
 			</c:forEach>
 		</tbody>

@@ -43,7 +43,7 @@ public class Lecturer extends LSUser {
 	@Mapping("listOfLanguages")
 	private List<Language> listOfLanguages = new ArrayList<>();
 
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.LAZY)
 	@Column(name = "list_of_lectures")
 	@Mapping("listOfLectures")
 	private List<Lecture> listOfLectures = new ArrayList<>();

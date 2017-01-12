@@ -53,7 +53,9 @@
                                                             class="btn btn-primary">Enroll to Course</a>
                                                 </c:when>
                                                 <c:otherwise>
-                                                    TODO: Unenroll
+                                                    <a
+                                                            href="${pageContext.request.contextPath}/student/unenrollCourse/${course.id}"
+                                                            class="btn btn-primary">Unenroll</a>
                                                 </c:otherwise>
                                             </c:choose>
 					</sec:authorize></td>
