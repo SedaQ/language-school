@@ -3,6 +3,7 @@ package com.fi.ls.service;
 import com.fi.ls.entity.Language;
 import com.fi.ls.exceptions.ServiceLayerException;
 import java.util.List;
+import java.util.Set;
 
 /**
  *
@@ -27,7 +28,7 @@ public interface LanguageService {
      * @return List of all lecturers languages which are in language school 
      * @exception ServiceLayerException
      */
-    List<Language> findAll();
+    Set<Language> findAll();
     
     /**
      * finds specific lecturers language by id

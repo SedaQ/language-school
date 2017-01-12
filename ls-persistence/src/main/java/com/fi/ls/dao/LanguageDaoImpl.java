@@ -1,7 +1,9 @@
 package com.fi.ls.dao;
 
 import com.fi.ls.entity.Language;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
@@ -38,8 +40,8 @@ public class LanguageDaoImpl implements LanguageDao {
 	}
 
 	@Override
-	public List<Language> findAll() {
-		return em.createNamedQuery("Language.findAll", Language.class).getResultList();
+	public Set<Language> findAll() {
+		return new HashSet<>(em.createNamedQuery("Language.findAll", Language.class).getResultList());
 	}
 
 }

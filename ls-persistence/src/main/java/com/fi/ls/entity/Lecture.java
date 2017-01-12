@@ -2,8 +2,10 @@ package com.fi.ls.entity;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -45,17 +47,17 @@ public class Lecture {
 	@ManyToMany(fetch = FetchType.EAGER, targetEntity = Student.class, mappedBy = "listOfLectures")
 	@Column(name = "list_of_students")
 	@Mapping("listOfStudents")
-	private List<Student> listOfStudents = new ArrayList<>();
+	private Set<Student> listOfStudents = new HashSet<>();
 
 	@ManyToMany(fetch = FetchType.EAGER, targetEntity = Lecturer.class, mappedBy = "listOfLectures")
 	@Column(name = "list_of_lecturers")
 	@Mapping("listOfLecturers")
-	private List<Lecturer> listOfLecturers = new ArrayList<>();
+	private Set<Lecturer> listOfLecturers = new HashSet<>();
 
 	@ManyToMany(fetch = FetchType.EAGER, targetEntity = Course.class, mappedBy = "listOfLectures")
 	@Column(name = "list_of_courses")
 	@Mapping("listOfCourses")
-	private List<Course> listOfCourses = new ArrayList<>();
+	private Set<Course> listOfCourses = new HashSet<>();
 
 	public Lecture() {
 
@@ -107,37 +109,37 @@ public class Lecture {
 
 	}
 
-	public List<Student> getListOfStudents() {
+	public Set<Student> getListOfStudents() {
 
 		return this.listOfStudents;
 
 	}
 
-	public void setListOfStudents(List<Student> newListOfStudents) {
+	public void setListOfStudents(Set<Student> newListOfStudents) {
 
 		this.listOfStudents = newListOfStudents;
 
 	}
 
-	public List<Lecturer> getListOfLecturers() {
+	public Set<Lecturer> getListOfLecturers() {
 
 		return this.listOfLecturers;
 
 	}
 
-	public void setListOfLecturers(List<Lecturer> newListOfLecturers) {
+	public void setListOfLecturers(Set<Lecturer> newListOfLecturers) {
 
 		this.listOfLecturers = newListOfLecturers;
 
 	}
 
-	public List<Course> getListOfCourses() {
+	public Set<Course> getListOfCourses() {
 
 		return this.listOfCourses;
 
 	}
 
-	public void setListOfCourses(List<Course> newListOfCourses) {
+	public void setListOfCourses(Set<Course> newListOfCourses) {
 
 		this.listOfCourses = newListOfCourses;
 
@@ -181,6 +183,9 @@ public class Lecture {
 			return false;
 		}
 		final Lecture other = (Lecture) obj;
+                if (!Objects.equals(this.topic, other.getTopic())) {
+			return false;
+		}
 		if (!Objects.equals(this.dayTime, other.getDayTime())) {
 			return false;
 		}

@@ -36,16 +36,25 @@
 						<a
 							href="${pageContext.request.contextPath}/lecture/delete/${lecture.id}"
 							class="btn btn-primary" onclick="return confirm('Are you sure you want to delete this lecture?')">Delete</a>
-					</sec:authorize></td>
+					</sec:authorize>
+                                    	<sec:authorize access="hasRole('ROLE_STUDENT')">
+                                            <c:choose>
+                                                    <c:when test="${!studentEnrolledLectures.contains(lecture)}">
+                                                            <a
+                                                                    href="${pageContext.request.contextPath}/student/enrollToLecture/${lecture.id}"
+                                                                    class="btn btn-primary">Enroll to Lecture</a>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                            <a
+                                                                    href="${pageContext.request.contextPath}/student/unenrollLecture/${lecture.id}"
+                                                                    class="btn btn-primary">Unenroll</a>
+                                                    </c:otherwise>
+                                            </c:choose>
+                                        </sec:authorize>
+                                </td>
 			</tr>
 		</tbody>
 	</table>
-
-	<sec:authorize access="hasRole('ROLE_STUDENT')">
-		<a
-			href="${pageContext.request.contextPath}/student/enrollToLecture/${lecture.id}"
-			class="btn btn-primary">Enroll to Lecture</a>
-	</sec:authorize>
 
 	<%@ include file="../common/footer.jsp"%>
 </body>

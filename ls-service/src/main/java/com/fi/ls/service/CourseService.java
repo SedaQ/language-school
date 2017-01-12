@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.fi.ls.entity.Course;
 import com.fi.ls.entity.Lecture;
+import java.util.Set;
 
 /**
  * @author Pavel Šeda (441048)
@@ -60,7 +61,7 @@ public interface CourseService {
 	 * 
 	 * @return List of courses which are in language school
 	 */
-	public List<Course> findAll();
+	public Set<Course> findAll();
 	
 	/**
 	 * add lecture to course
@@ -74,6 +75,6 @@ public interface CourseService {
 	 * @param l list of lectures which will be added to course
 	 * @param c course to which lectures will be added
 	 */
-	public void addLectures(Course c, List<Lecture> l);	
+	public void addLectures(Course c, Set<Lecture> l);	
 	
 }

@@ -16,11 +16,16 @@ import com.fi.ls.dto.course.CourseDTO;
 import com.fi.ls.dto.lecture.LectureDTO;
 import com.fi.ls.dto.student.StudentDTO;
 import com.fi.ls.enums.ProficiencyLevel;
+import com.fi.ls.enums.UserRoles;
 import com.fi.ls.facade.CourseFacade;
+import com.fi.ls.facade.LSUserFacade;
+import com.fi.ls.facade.StudentFacade;
+import com.fi.ls.helpers.Helpers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -42,10 +47,24 @@ public class CourseController {
 
 	@Inject
 	private CourseFacade courseFacade;
+        
+        @Inject
+	private LSUserFacade userFacade;
+        
+        @Inject
+	private StudentFacade studentFacade;
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String list(Model model) {
-		model.addAttribute("courses", courseFacade.getAllCourses());
+            
+                List<CourseDTO> courses = courseFacade.getAllCourses();
+		model.addAttribute("courses", courses);
+                if (Helpers.hasRole(UserRoles.ROLE_STUDENT.name())) {
+			String email = SecurityContextHolder.getContext().getAuthentication().getName();
+			Long studentId = userFacade.getUserByEmail(email).get().getId();
+			Optional<StudentDTO> studentDTO = studentFacade.getStudentById(studentId);
+			model.addAttribute("studentEnrolledLectures", studentDTO.get().getListOfLectures());
+		}
 		return "course/courseList";
 	}
 
@@ -54,10 +73,13 @@ public class CourseController {
 		logger.debug("view: ", id);
 
 		CourseDTO course = courseFacade.getCourseById(id).get();
-		// should be set on persistence level..
-		Set<LectureDTO> lectInCourse = new HashSet<>(courseFacade.getCourseById(id).get().getListOfLectures());
-		model.addAttribute("course", course);
-		model.addAttribute("lecturesInCourse", lectInCourse);
+                model.addAttribute("course", course);
+                if (Helpers.hasRole(UserRoles.ROLE_STUDENT.name())) {
+			String email = SecurityContextHolder.getContext().getAuthentication().getName();
+			Long studentId = userFacade.getUserByEmail(email).get().getId();
+			Optional<StudentDTO> studentDTO = studentFacade.getStudentById(studentId);
+			model.addAttribute("studentEnrolledLectures", studentDTO.get().getListOfLectures());
+		}
 		return "course/courseView";
 	}
 

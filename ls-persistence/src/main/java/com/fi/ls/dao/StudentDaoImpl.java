@@ -1,7 +1,9 @@
 package com.fi.ls.dao;
 
 import com.fi.ls.entity.Student;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -44,20 +46,20 @@ public class StudentDaoImpl implements StudentDao {
     }
     
     @Override
-    public List<Student> findAll() {
-    	return em.createNamedQuery("Student.findAll", Student.class).getResultList();
+    public Set<Student> findAll() {
+    	return new HashSet<>(em.createNamedQuery("Student.findAll", Student.class).getResultList());
     }
     
     @Override
-    public List<Student> findByFirstName(String firstName) {
-    	return em.createQuery("SELECT s FROM Student s WHERE s.firstName=:firstName", Student.class)
-    			.setParameter("firstName", firstName).getResultList();
+    public Set<Student> findByFirstName(String firstName) {
+    	return new HashSet<>(em.createQuery("SELECT s FROM Student s WHERE s.firstName=:firstName", Student.class)
+    			.setParameter("firstName", firstName).getResultList());
     }
 
     @Override
-    public List<Student> findBySurname(String surname) {
-    	return em.createQuery("SELECT s FROM Student s WHERE s.surname=:surname", Student.class)
-			.setParameter("surname", surname).getResultList();
+    public Set<Student> findBySurname(String surname) {
+    	return new HashSet<>(em.createQuery("SELECT s FROM Student s WHERE s.surname=:surname", Student.class)
+			.setParameter("surname", surname).getResultList());
     }
 
 }

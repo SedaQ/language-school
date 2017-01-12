@@ -9,6 +9,7 @@ import com.fi.ls.exceptions.ServiceLayerException;
 import com.fi.ls.security.UserPasswordEncryption;
 
 import java.util.List;
+import java.util.Set;
 import javax.inject.Inject;
 import javax.persistence.PersistenceException;
 import javax.transaction.Transactional;
@@ -50,7 +51,7 @@ public class LecturerServiceImpl implements LecturerService {
 	}
 
 	@Override
-	public List<Lecturer> findAll() {
+	public Set<Lecturer> findAll() {
 		try {
 			return lecturerDao.findAll();
 		} catch (PersistenceException | DataAccessException ex) {
@@ -109,7 +110,7 @@ public class LecturerServiceImpl implements LecturerService {
 	}
 
 	@Override
-	public void deleteLectures(Lecturer lect, List<Lecture> l) {
+	public void deleteLectures(Lecturer lect, Set<Lecture> l) {
 		if (lect == null || l == null)
 			throw new IllegalArgumentException("Lecturer parameter is null or Lecture parameter is null");
 		try {
@@ -121,7 +122,7 @@ public class LecturerServiceImpl implements LecturerService {
 	}
 
 	@Override
-	public List<Language> findAllLecturerLanguages(Lecturer l) {
+	public Set<Language> findAllLecturerLanguages(Lecturer l) {
 		if (l == null)
 			throw new IllegalArgumentException("Lecturer parameter is null");
 		try {

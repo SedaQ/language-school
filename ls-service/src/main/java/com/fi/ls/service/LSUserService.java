@@ -4,6 +4,7 @@ import java.util.List;
 
 
 import com.fi.ls.entity.LSUser;
+import java.util.Set;
 
 /**
  * @author Pavel Šeda (441048)

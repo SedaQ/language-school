@@ -22,7 +22,9 @@ import java.time.LocalDateTime;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -221,13 +223,11 @@ public class BeanMappingTest extends AbstractTestNGSpringContextTests {
             l2.setDayTime(LocalDateTime.MAX);
             l2.addCourse(c);
             
-            c.setListOfLectures(Arrays.asList(l1, l2));
+            c.setListOfLectures(new HashSet<>(Arrays.asList(l1, l2)));
             
             Optional<CourseDTO> dto = beanMapping.mapTo(c, CourseDTO.class);
             assertTrue(dto.isPresent());
             assertEquals(dto.get().getId(), c.getId());
-            assertEquals(dto.get().getListOfLectures().get(0).getId(), c.getListOfLectures().get(0).getId());
-            
         }
         
         @Test
@@ -257,8 +257,6 @@ public class BeanMappingTest extends AbstractTestNGSpringContextTests {
             Optional<Course> entity = beanMapping.mapTo(c, Course.class);
             assertTrue(entity.isPresent());
             assertEquals(entity.get().getId(), c.getId());
-            assertEquals(entity.get().getListOfLectures().get(0).getId(), c.getListOfLectures().get(0).getId());
-            
         }
 
 }

@@ -2,7 +2,9 @@ package com.fi.ls.dao;
 
 import com.fi.ls.entity.Language;
 import com.fi.ls.entity.Lecturer;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
@@ -39,13 +41,13 @@ public class LecturerDaoImpl implements LecturerDao {
 	}
 
 	@Override
-	public List<Lecturer> findAll() {
-		return em.createNamedQuery("Lecturer.findAll", Lecturer.class).getResultList();
+	public Set<Lecturer> findAll() {
+		return new HashSet<>(em.createNamedQuery("Lecturer.findAll", Lecturer.class).getResultList());
 	}
 
         @Override
-        public List<Language> findAllLecturerLanguages(Lecturer l) {
-                return em.createNamedQuery("Lecturer.findAllLecturerLanguages", Language.class).setParameter("lID", l.getId()).getResultList();
+        public Set<Language> findAllLecturerLanguages(Lecturer l) {
+                return new HashSet<>(em.createNamedQuery("Lecturer.findAllLecturerLanguages", Language.class).setParameter("lID", l.getId()).getResultList());
         }
 
 }

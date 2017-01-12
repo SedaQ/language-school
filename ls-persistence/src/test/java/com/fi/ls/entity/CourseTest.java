@@ -9,6 +9,8 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.fi.ls.enums.ProficiencyLevel;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author Pavel Šeda (441048)
@@ -52,10 +54,16 @@ public class CourseTest {
 	
 	@Test
 	public void testAddListOfLectures() {
-		List<Lecture> lectures = new ArrayList<>();
-		lectures.add(new Lecture());
-		lectures.add(new Lecture());
-		lectures.add(new Lecture());
+		Set<Lecture> lectures = new HashSet<>();
+                Lecture l1 = new Lecture();
+                l1.setTopic("l1");
+                Lecture l2 = new Lecture();
+                l2.setTopic("l2");
+                Lecture l3 = new Lecture();
+                l3.setTopic("l3");
+		lectures.add(l1);
+		lectures.add(l2);
+		lectures.add(l3);
 		c1.addLectures(lectures);
 		Assert.assertEquals(c1.getListOfLectures().size(), 3);
 	}

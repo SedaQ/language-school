@@ -56,14 +56,20 @@
 		</thead>
 
 		<tbody>
-			<c:forEach items="${studentLectures}" var="lecture">
+			<c:forEach items="${student.listOfLectures}" var="lecture">
 				<tr>
 				<td><c:out value="${lecture.id}" /></td>
 				<td><c:out value="${lecture.dayTime}" /></td>
 				<td><c:out value="${lecture.classroomId}" /></td>
 				<td><c:out value="${lecture.topic}" /></td>
-					<td><my:a href="/lecture/view/${lecture.id}"
-							class="btn btn-primary">view</my:a></td>
+                                <td><my:a href="/lecture/view/${lecture.id}" class="btn btn-primary">view</my:a></td>
+                                <td><sec:authorize access="hasRole('ROLE_STUDENT')">
+                                        <c:if test="${loggedStudentId == student.id}">
+                                            <a
+                                                    href="${pageContext.request.contextPath}/student/unenrollLecture/${lecture.id}"
+                                                    class="btn btn-primary">Unenroll</a>
+                                        </c:if>
+                                </sec:authorize></td>
 				</tr>
 			</c:forEach>
 		</tbody>

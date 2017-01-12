@@ -7,6 +7,7 @@ import com.fi.ls.entity.Lecture;
 import com.fi.ls.entity.Lecturer;
 import com.fi.ls.exceptions.ServiceLayerException;
 import java.util.List;
+import java.util.Set;
 
 /**
  *
@@ -31,7 +32,7 @@ public interface LecturerService {
      * @return List of all lecturers which are in language school
      * @exception ServiceLayerException
      */
-    List<Lecturer> findAll();
+    Set<Lecturer> findAll();
     
     /**
      * finds specific lecturer by id
@@ -83,7 +84,7 @@ public interface LecturerService {
      * @exception ServiceLayerException
      * @exception IllegalArgumentException
      */
-    public void deleteLectures(Lecturer lect, List<Lecture> l);
+    public void deleteLectures(Lecturer lect, Set<Lecture> l);
     
     /**
      * finds all languages of given lecturer
@@ -93,7 +94,7 @@ public interface LecturerService {
      * @exception ServiceLayerException
      * @exception IllegalArgumentException
      */
-    public List<Language> findAllLecturerLanguages(Lecturer l);
+    public Set<Language> findAllLecturerLanguages(Lecturer l);
 
 	/**
 	 * Register the given user with the given unencrypted password.

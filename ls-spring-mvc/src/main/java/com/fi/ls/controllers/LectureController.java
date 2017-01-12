@@ -39,6 +39,7 @@ import com.fi.ls.facade.LSUserFacade;
 import com.fi.ls.facade.LectureFacade;
 import com.fi.ls.facade.LecturerFacade;
 import com.fi.ls.facade.StudentFacade;
+import com.fi.ls.helpers.Helpers;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -70,7 +71,7 @@ public class LectureController {
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String list(Model model) {
-		if (hasRole(UserRoles.ROLE_STUDENT.name())) {
+		if (Helpers.hasRole(UserRoles.ROLE_STUDENT.name())) {
 			String email = SecurityContextHolder.getContext().getAuthentication().getName();
 			Long studentId = userFacade.getUserByEmail(email).get().getId();
 			Optional<StudentDTO> studentDTO = studentFacade.getStudentById(studentId);
@@ -82,6 +83,12 @@ public class LectureController {
 
 	@RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
 	public String view(@PathVariable long id, Model model) {
+            	if (Helpers.hasRole(UserRoles.ROLE_STUDENT.name())) {
+			String email = SecurityContextHolder.getContext().getAuthentication().getName();
+			Long studentId = userFacade.getUserByEmail(email).get().getId();
+			Optional<StudentDTO> studentDTO = studentFacade.getStudentById(studentId);
+			model.addAttribute("studentEnrolledLectures", studentDTO.get().getListOfLectures());
+		}
 		model.addAttribute("lecture", lectureFacade.getLectureById(id).get());
 		return "lecture/lectureView";
 	}
@@ -177,23 +184,4 @@ public class LectureController {
 		lectureFacade.deleteLecture(id);
 		return "redirect:" + uriBuilder.path("/course/view/{id}").buildAndExpand(myID).encode().toUriString();
 	}
-
-	private boolean hasRole(String role) {
-		// get security context from thread local
-		SecurityContext context = SecurityContextHolder.getContext();
-		if (context == null)
-			return false;
-
-		Authentication authentication = context.getAuthentication();
-		if (authentication == null)
-			return false;
-
-		for (GrantedAuthority auth : authentication.getAuthorities()) {
-			if (role.equals(auth.getAuthority()))
-				return true;
-		}
-
-		return false;
-	}
-
 }
