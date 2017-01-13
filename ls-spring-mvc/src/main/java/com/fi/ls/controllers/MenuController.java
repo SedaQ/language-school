@@ -66,9 +66,11 @@ public class MenuController {
 					lecturerFacade.findAllLecturerLanguages(lecturerFacade.getLecturerById(userId).get()));
 			model.addAttribute("lecturerLectures", lecturerFacade.getLecturerById(userId).get().getListOfLectures());
 			return "lecturer/lecturerView";
-		} else {
+		} else if (Helpers.hasRole(UserRoles.ROLE_ADMIN.name())) {
 			model.addAttribute("admin", lsUserFacade.getUserByEmail(email).get());
 			return "admin/adminView";
+		} else {
+			return "";
 		}
 	}
 }
