@@ -88,6 +88,11 @@ public class StudentController {
 			BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes,
 			UriComponentsBuilder uriBuilder) {
 		logger.debug("create");
+                if (bindingResult.hasErrors()) {
+                    
+                    return "student/studentNew";
+                    
+                }
 		studentFacade.registerUser(formBean, formBean.getPasswordHash());
 		return "redirect:" + uriBuilder.path("/student/list").buildAndExpand().encode().toUriString();
 	}
@@ -97,6 +102,11 @@ public class StudentController {
 			BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes,
 			UriComponentsBuilder uriBuilder) {
 		logger.debug("update");
+                if (bindingResult.hasErrors()) {
+                    
+                    return "student/studentEdit";
+                    
+                }
 		Optional<StudentDTO> cdto = studentFacade.updateStudent(formBean);
 		return "redirect:" + uriBuilder.path("/student/list").buildAndExpand().encode().toUriString();
 	}

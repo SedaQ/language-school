@@ -122,6 +122,11 @@ public class LectureController {
 			BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes,
 			UriComponentsBuilder uriBuilder) {
 		logger.debug("update");
+                if (bindingResult.hasErrors()) {
+                    
+                    return "lecture/lectureEdit";
+                    
+                }
 		Optional<LectureDTO> cdto = lectureFacade.updateLecture(formBean);
 		return "redirect:" + uriBuilder.path("/lecture/view/{id}").buildAndExpand(id).encode().toUriString();
 	}

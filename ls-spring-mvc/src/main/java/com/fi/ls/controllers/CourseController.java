@@ -96,6 +96,12 @@ public class CourseController {
 			BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes,
 			UriComponentsBuilder uriBuilder) {
 		logger.debug("create");
+                if (bindingResult.hasErrors()) {
+                    
+                    model.addAttribute("proficiencylevels", new ArrayList<>(Arrays.asList(ProficiencyLevel.values())));
+                    return "course/courseNew";
+                    
+                }
 		// formBean.setProficiencyLevel(ProficiencyLevel.C1);
 		Optional<CourseDTO> cdto = courseFacade.create(formBean);
 		// return "course/courseList";
@@ -115,6 +121,12 @@ public class CourseController {
 			BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes,
 			UriComponentsBuilder uriBuilder) {
 		logger.debug("update");
+                if (bindingResult.hasErrors()) {
+                    
+                    model.addAttribute("proficiencylevels", new ArrayList<>(Arrays.asList(ProficiencyLevel.values())));
+                    return "course/courseEdit";
+                    
+                }
 		// Optional<CourseDTO> toUpdate = courseFacade.getCourseById(id);
 		logger.debug("ID: " + formBean.getId().toString() + " name: " + formBean.getName() + " language: "
 				+ formBean.getLanguage());
