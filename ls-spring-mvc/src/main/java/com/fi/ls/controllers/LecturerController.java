@@ -66,6 +66,11 @@ public class LecturerController {
 			BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes,
 			UriComponentsBuilder uriBuilder) {
 		logger.debug("create");
+                if (bindingResult.hasErrors()) {
+                    
+                    return "lecturer/lecturerNew";
+                    
+                }
 		lecturerFacade.registerUser(formBean, formBean.getPasswordHash());
 		return "redirect:" + uriBuilder.path("/lecturer/list").buildAndExpand().encode().toUriString();
 	}
@@ -75,6 +80,11 @@ public class LecturerController {
 			BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes,
 			UriComponentsBuilder uriBuilder) {
 		logger.debug("update");
+                if (bindingResult.hasErrors()) {
+                    
+                    return "lecturer/lecturerEdit";
+                    
+                }
 		Optional<LecturerDTO> cdto = lecturerFacade.updateLecturer(formBean);
 		return "redirect:" + uriBuilder.path("/lecturer/list").buildAndExpand().encode().toUriString();
 	}

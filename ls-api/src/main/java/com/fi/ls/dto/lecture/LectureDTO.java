@@ -8,6 +8,8 @@ import java.util.Objects;
 import com.fi.ls.dto.course.CourseDTO;
 import com.fi.ls.dto.lecturer.LecturerDTO;
 import com.fi.ls.dto.student.StudentDTO;
+import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  * 
@@ -16,11 +18,14 @@ import com.fi.ls.dto.student.StudentDTO;
 public class LectureDTO {
 
     private Long id;
-
+    
+    @NotNull
     private LocalDateTime dayTime;
-
+    
+    @NotEmpty
     private String classroomId;
 
+    @NotEmpty
     private String topic;
     
     private List<StudentDTO> listOfStudents = new ArrayList<>();

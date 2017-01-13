@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -20,10 +21,10 @@ public class LectureCreateDTO {
 	@DateTimeFormat(pattern = "dd.MM.yyyy HH:mm")
 	private LocalDateTime dayTime;
 
-	@NotNull
+	@NotEmpty
 	private String classroomId;
 
-	@NotNull
+	@NotEmpty
 	private String topic;
 
         public Long getId() {

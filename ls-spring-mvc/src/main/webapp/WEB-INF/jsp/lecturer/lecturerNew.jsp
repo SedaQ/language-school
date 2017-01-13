@@ -21,22 +21,27 @@
 			<div>
 				<label path="email">E-mail</label>
 				<form:input path="email" />
+                                <form:errors path="email" />
 			</div>
 			<div>
 				<label path="passwordHash">Password</label>
 				<form:input path="passwordHash" />
+                                <form:errors path="passwordHash" />
 			</div>
 			<div>
 				<label path="nickname">Nickname</label>
 				<form:input path="nickname" />
+                                <form:errors path="nickname" />
 			</div>
 			<div>
 				<label path="firstName">First name</label>
 				<form:input path="firstName" />
+                                <form:errors path="firstName" />
 			</div>
 			<div>
 				<label path="surname">Surname</label>
 				<form:input path="surname" />
+                                <form:errors path="surname" />
 			</div>
 			<button class="btn btn-primary" type="submit">Create
 				lecturer</button>

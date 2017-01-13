@@ -22,14 +22,17 @@
 			<div>
 				<label path="firstName">First name</label>
 				<form:input path="firstName" />
+                                <form:errors path="firstName" />
 			</div>
 			<div>
 				<label path="surname">Surname</label>
 				<form:input path="surname" />
+                                <form:errors path="surname" />
 			</div>
 			<div>
 				<label path="birthNumber">Birth number</label>
 				<form:input path="birthNumber" />
+                                <form:errors path="birthNumber" />
 			</div>
 			<div>
 				<form:input type="hidden" path="userRole" />

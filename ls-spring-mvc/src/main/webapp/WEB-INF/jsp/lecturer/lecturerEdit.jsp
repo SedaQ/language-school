@@ -21,14 +21,17 @@
 			<div>
 				<label path="nickname">Nickname</label>
 				<form:input path="nickname" />
+                                <form:errors path="nickname" />
 			</div>
 			<div>
 				<label path="firstName">First name</label>
 				<form:input path="firstName" />
+                                <form:errors path="firstName" />
 			</div>
 			<div>
 				<label path="surname">Surname</label>
 				<form:input path="surname" />
+                                <form:errors path="surname" />
 			</div>
 			<div>
 				<form:input type="hidden" path="userRole" />

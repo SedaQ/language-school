@@ -1,5 +1,7 @@
 package com.fi.ls.dto.user;
-
+import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 /**
  * @author Pavel Šeda (441048)
  *
@@ -7,7 +9,10 @@ package com.fi.ls.dto.user;
 public class LSUserDTO {
 
 	protected Long id;
+        @Email
+        @NotEmpty
 	private String email;
+        @NotEmpty
 	private String passwordHash;
 	private String userRole;
 

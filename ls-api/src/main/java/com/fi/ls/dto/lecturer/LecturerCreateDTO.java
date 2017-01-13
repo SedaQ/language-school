@@ -2,6 +2,7 @@ package com.fi.ls.dto.lecturer;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  * @author Pavel Šeda (441048)
@@ -9,15 +10,15 @@ import javax.validation.constraints.Size;
  */
 public class LecturerCreateDTO {
 
-	@NotNull
+	@NotEmpty
 	@Size(min = 5, max = 30)
 	private String nickname;
 
-	@NotNull
+	@NotEmpty
 	@Size(min = 2, max = 50)
 	private String firstName;
 
-	@NotNull
+	@NotEmpty
 	@Size(min = 2, max = 50)
 	private String surname;
 

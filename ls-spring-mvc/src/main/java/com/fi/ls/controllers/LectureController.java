@@ -101,10 +101,18 @@ public class LectureController {
 	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public String createLecture(@RequestParam(value = "dayTime") String dayTime,
+	public String createLecture(
+                        @Valid @ModelAttribute("lectureCreate") LectureCreateDTO formBean,
+			BindingResult bindingResult,
+                        @RequestParam(value = "dayTime") String dayTime,
 			@RequestParam(value = "classroomId") String classroomId, @RequestParam(value = "topic") String topic,
 			Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder) {
 		logger.debug("create");
+                if (bindingResult.hasErrors()) {
+                    
+                    return "lecture/lectureNew";
+                    
+                }
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
 
 		LocalDateTime localDateTime = LocalDateTime.parse(dayTime, formatter);

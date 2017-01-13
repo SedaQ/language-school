@@ -83,6 +83,8 @@ public class StudentController {
 		return "student/studentNew";
 	}
 
+        
+/*MNE
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public String createStudent(@Valid @ModelAttribute("studentCreate") StudentDTO formBean,
 			BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes,
@@ -96,7 +98,22 @@ public class StudentController {
 		studentFacade.registerUser(formBean, formBean.getPasswordHash());
 		return "redirect:" + uriBuilder.path("/student/list").buildAndExpand().encode().toUriString();
 	}
-
+*/
+        @RequestMapping(value = "/create", method = RequestMethod.POST)
+	public String createStudent(@Valid @ModelAttribute("studentCreate") StudentDTO formBean,
+			BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes,
+			UriComponentsBuilder uriBuilder) {
+                
+		logger.debug("create");
+                if (bindingResult.hasErrors()) {
+                    
+                    return "student/studentNew";
+                    
+                }
+		studentFacade.registerUser(formBean, formBean.getPasswordHash());
+		return "redirect:" + uriBuilder.path("/student/list").buildAndExpand().encode().toUriString();
+	}
+        
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
 	public String updateStudent(@PathVariable Long id, @Valid @ModelAttribute("student") StudentDTO formBean,
 			BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes,

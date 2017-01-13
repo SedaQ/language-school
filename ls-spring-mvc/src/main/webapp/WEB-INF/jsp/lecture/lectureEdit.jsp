@@ -22,14 +22,17 @@
 			<div>
 				<label path="dayTime">DateTime</label>
 				<form:input path="dayTime" />
+                                <form:errors path="dayTime" />
 			</div>
 			<div>
 				<label path="classroomId">Classroom id</label>
 				<form:input path="classroomId" />
+                                <form:errors path="classroomId" />
 			</div>
 			<div>
 				<label path="topic">Topic</label>
 				<form:input path="topic" />
+                                <form:errors path="topic" />
 			</div>
 			<button class="btn btn-primary" type="submit">Update lecture</button>
 		</form:form>

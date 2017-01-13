@@ -2,6 +2,7 @@ package com.fi.ls.dto.student;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  * @author Pavel Šeda (441048)
@@ -11,15 +12,15 @@ public class StudentCreateDTO {
 
 	private Long id;
 
-	@NotNull
+	@NotEmpty
 	@Size(min = 2, max = 50)
 	private String firstName;
 
-	@NotNull
+	@NotEmpty
 	@Size(min = 2, max = 50)
 	private String surname;
 
-	@NotNull
+	@NotEmpty
 	private String birthNumber;
 
 	public String getFirstName() {

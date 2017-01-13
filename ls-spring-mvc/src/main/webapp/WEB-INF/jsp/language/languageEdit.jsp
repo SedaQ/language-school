@@ -23,6 +23,7 @@
 			<div>
 				<label path="language">Language</label>
 				<form:input path="language" />
+                                <form:errors path="language" />
 			</div>
 			<div>
 				<form:label path="proficiencyLevel">Proficiency level</form:label>
@@ -31,6 +32,7 @@
 						<form:option value="${level}">${level}</form:option>
 					</c:forEach>
 				</form:select>
+                                <form:errors path="proficiencyLevel" />
 			</div>
 			<button class="btn btn-primary" type="submit">Update
 				language</button>

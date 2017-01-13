@@ -2,6 +2,7 @@ package com.fi.ls.dto.user;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  * @author Pavel Šeda (441048)
@@ -11,15 +12,15 @@ public class LSUserCreateDTO {
 
 	private Long id;
 
-	@NotNull
+	@NotEmpty
 	@Pattern(regexp = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")
 	private String email;
 
-	@NotNull
+	@NotEmpty
 	@Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$") // Minimum 8 characters at least 1 Alphabet and 1 Number
 	private String password;
 
-	@NotNull
+	@NotEmpty
 	private String userRole;
 
 	public String getEmail() {
