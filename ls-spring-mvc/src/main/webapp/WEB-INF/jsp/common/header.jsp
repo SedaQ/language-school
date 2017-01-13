@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -29,6 +31,7 @@
 				<li><a href="${pageContext.request.contextPath}/about">About</a></li>
 				<li><a href="${pageContext.request.contextPath}/contact">Contact</a></li>
 			</ul>
+			<!-- 
 			<form class="navbar-form navbar-left">
 				<div class="input-group">
 					<input type="text" class="form-control" placeholder="Search">
@@ -39,13 +42,15 @@
 					</div>
 				</div>
 			</form>
+			 -->
+
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="${pageContext.request.contextPath}/logout"><span
 						class="glyphicon glyphicon-log-in"> Logout</span></a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="">
-						<sec:authorize var="loggedIn" access="isAuthenticated()">
+				<li><a href="${pageContext.request.contextPath}/userDetail"> <sec:authorize
+							var="loggedIn" access="isAuthenticated()">
 							<c:choose>
 								<c:when test="${loggedIn}">
 									<%=request.getUserPrincipal().getName()%>

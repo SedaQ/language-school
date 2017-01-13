@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<title>LS Contact Us</title>
 <jsp:include page="common/head.jsp" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/assets/css/contactus.css">
