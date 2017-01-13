@@ -14,30 +14,39 @@
 <body>
 	<%@ include file="../common/header.jsp"%>
 
-	<div class="container center_div">
-		<form:form method="post"
-			action="${pageContext.request.contextPath}/course/create"
-			modelAttribute="courseCreate" cssClass="form-horizontal">
-			<div class="form-group">
-				<label path="name">Name</label> 
-                                <form:input path="name" />
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+			<h1 class="page-header">
+				Create new Course <small></small>
+			</h1>
+			<div class="container center_div">
+				<form:form method="post"
+					action="${pageContext.request.contextPath}/course/create"
+					modelAttribute="courseCreate" cssClass="form-horizontal">
+					<div class="form-group">
+						<label path="name">Name</label>
+						<form:input path="name" />
+					</div>
+					<div class="form-group row">
+						<label path="language">Language</label>
+						<form:input path="language" />
+					</div>
+					<div class="form-group row">
+						<label path="proficiencyLevel">Proficiency level</label>
+						<form:select path="proficiencyLevel">
+							<c:forEach items="${proficiencylevels}" var="proflvl">
+								<form:option value="${proflvl}">${proflvl}</form:option>
+							</c:forEach>
+						</form:select>
+					</div>
+					<div>
+						<button class="btn btn-primary" type="submit">Create
+							course</button>
+					</div>
+				</form:form>
 			</div>
-			<div class="form-group row">
-				<label path="language">Language</label> 
-                                <form:input path="language" />
-			</div>
-			<div class="form-group row">
-				<label path="proficiencyLevel">Proficiency level</label> 
-                                <form:select path="proficiencyLevel">
-					<c:forEach items="${proficiencylevels}" var="proflvl">
-						<form:option value="${proflvl}">${proflvl}</form:option>
-					</c:forEach>
-				</form:select>
-			</div>
-			<button class="btn btn-primary" type="submit">Create course</button>
-		</form:form>
+		</div>
 	</div>
-	
 </body>
 <%@ include file="../common/footer.jsp"%>
 </html>

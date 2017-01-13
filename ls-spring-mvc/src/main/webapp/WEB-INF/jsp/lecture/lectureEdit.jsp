@@ -14,27 +14,35 @@
 <body>
 	<%@ include file="../common/header.jsp"%>
 
-	<div class="container center_div">
-		<form:form class="table table-striped" method="post"
-			action="${pageContext.request.contextPath}/lecture/update/${lecture.id}"
-			modelAttribute="lecture">
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+			<h1 class="page-header">
+				Edit Lecture <small></small>
+			</h1>
+			<div class="container center_div">
+				<form:form class="table table-striped" method="post"
+					action="${pageContext.request.contextPath}/lecture/update/${lecture.id}"
+					modelAttribute="lecture">
 
-			<div>
-				<label path="dayTime">DateTime</label>
-				<form:input path="dayTime" />
+					<label path="dayTime">DateTime</label>
+					<div>
+						<form:input path="dayTime" />
+					</div>
+					<label path="classroomId">Classroom id</label>
+					<div>
+						<form:input path="classroomId" />
+					</div>
+					<label path="topic">Topic</label>
+					<div>
+						<form:input path="topic" />
+					</div>
+					<br />
+					<button class="btn btn-primary" type="submit">Update
+						lecture</button>
+				</form:form>
 			</div>
-			<div>
-				<label path="classroomId">Classroom id</label>
-				<form:input path="classroomId" />
-			</div>
-			<div>
-				<label path="topic">Topic</label>
-				<form:input path="topic" />
-			</div>
-			<button class="btn btn-primary" type="submit">Update lecture</button>
-		</form:form>
+		</div>
 	</div>
-
 	<%@ include file="../common/footer.jsp"%>
 </body>
 </html>

@@ -13,38 +13,43 @@
 </head>
 <body>
 	<%@ include file="../common/header.jsp"%>
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+			<h1 class="page-header">
+				List of all students <small></small>
+			</h1>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>id</th>
+						<th>email</th>
+						<th>first name</th>
+						<th>surname</th>
+						<th>birth number</th>
+						<th>action</th>
+					</tr>
+				</thead>
 
-	<table class="table table-striped">
-		<thead>
-			<tr>
-				<th>id</th>
-				<th>email</th>
-				<th>first name</th>
-				<th>surname</th>
-				<th>birth number</th>
-				<th>action</th>
-			</tr>
-		</thead>
+				<tbody>
+					<c:forEach items="${students}" var="student">
+						<tr>
+							<td><c:out value="${student.id}" /></td>
+							<td><c:out value="${student.email}" /></td>
+							<td><c:out value="${student.firstName}" /></td>
+							<td><c:out value="${student.surname}" /></td>
+							<td><c:out value="${student.birthNumber}" /></td>
+							<td><my:a href="/student/view/${student.id}"
+									class="btn btn-primary">view</my:a></td>
+						</tr>
+					</c:forEach>
+				</tbody>
 
-		<tbody>
-			<c:forEach items="${students}" var="student">
-				<tr>
-					<td><c:out value="${student.id}" /></td>
-					<td><c:out value="${student.email}" /></td>
-					<td><c:out value="${student.firstName}" /></td>
-					<td><c:out value="${student.surname}" /></td>
-					<td><c:out value="${student.birthNumber}" /></td>
-					<td><my:a href="/student/view/${student.id}"
-							class="btn btn-primary">view</my:a></td>
-				</tr>
-			</c:forEach>
-		</tbody>
-
-	</table>
-	<sec:authorize access="hasRole('ROLE_ADMIN')">
-		<my:a href="/student/new/" class="btn btn-primary">New student</my:a>
-	</sec:authorize>
-
+			</table>
+			<sec:authorize access="hasRole('ROLE_ADMIN')">
+				<my:a href="/student/new/" class="btn btn-primary">New student</my:a>
+			</sec:authorize>
+		</div>
+	</div>
 	<%@ include file="../common/footer.jsp"%>
 </body>
 </html>

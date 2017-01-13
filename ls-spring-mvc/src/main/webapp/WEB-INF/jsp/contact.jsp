@@ -10,11 +10,9 @@
 	href="${pageContext.request.contextPath}/assets/css/bottom.css">
 </head>
 <body>
-
 	<!-- header -->
-	<jsp:include page="common/header.jsp" />
+	<%@ include file="common/header.jsp"%>
 	<!--/header-->
-
 	<section id="contact-info">
 		<div class="container">
 			<div class="row">
@@ -133,7 +131,7 @@
 	</section>
 	<!--/#contact-page-->
 
-<p></p>
+	<p></p>
 	<!-- bottom -->
 	<jsp:include page="common/bottom.jsp" />
 	<!--/bottom-->
