@@ -46,7 +46,7 @@
 
 			</table>
 			<sec:authorize access="hasRole('ROLE_ADMIN')">
-				<my:a href="/lecturer/new/" class="btn btn-primary">New lecturer</my:a>
+				<my:a href="/lecture/new/" class="btn btn-primary">New lecture</my:a>
 			</sec:authorize>
 
 		</div>

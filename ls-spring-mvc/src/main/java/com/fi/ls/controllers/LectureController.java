@@ -83,7 +83,7 @@ public class LectureController {
 
 	@RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
 	public String view(@PathVariable long id, Model model) {
-            	if (Helpers.hasRole(UserRoles.ROLE_STUDENT.name())) {
+		if (Helpers.hasRole(UserRoles.ROLE_STUDENT.name())) {
 			String email = SecurityContextHolder.getContext().getAuthentication().getName();
 			Long studentId = userFacade.getUserByEmail(email).get().getId();
 			Optional<StudentDTO> studentDTO = studentFacade.getStudentById(studentId);
@@ -97,6 +97,14 @@ public class LectureController {
 	public String newLecture(Model model) {
 		logger.debug("new");
 		model.addAttribute("lectureCreate", new LectureCreateDTO());
+		return "lecture/lectureNew";
+	}
+
+	@RequestMapping(value = "/newLectureInCourse", method = RequestMethod.GET)
+	public String newLectureToCourse(@PathVariable long id, Model model) {
+		logger.debug("newLectureToCourse");
+		model.addAttribute("lectureCreate", new LectureCreateDTO());
+		model.addAttribute("LectureInCourse", id);
 		return "lecture/lectureNew";
 	}
 
@@ -122,11 +130,11 @@ public class LectureController {
 			BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes,
 			UriComponentsBuilder uriBuilder) {
 		logger.debug("update");
-                if (bindingResult.hasErrors()) {
-                    
-                    return "lecture/lectureEdit";
-                    
-                }
+		if (bindingResult.hasErrors()) {
+
+			return "lecture/lectureEdit";
+
+		}
 		Optional<LectureDTO> cdto = lectureFacade.updateLecture(formBean);
 		return "redirect:" + uriBuilder.path("/lecture/view/{id}").buildAndExpand(id).encode().toUriString();
 	}
