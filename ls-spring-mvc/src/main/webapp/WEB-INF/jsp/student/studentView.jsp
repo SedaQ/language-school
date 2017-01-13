@@ -37,15 +37,17 @@
 						<td><c:out value="${student.firstName}" /></td>
 						<td><c:out value="${student.surname}" /></td>
 						<td><c:out value="${student.birthNumber}" /></td>
-						<td><sec:authorize access="hasRole('ROLE_ADMIN')">
+						<td><sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_STUDENT')">
 								<a
 									href="${pageContext.request.contextPath}/student/edit/${student.id}"
 									class="btn btn-primary">Edit</a>
+							</sec:authorize></td>
+							<sec:authorize access="hasRole('ROLE_ADMIN')">
 								<a
 									href="${pageContext.request.contextPath}/student/delete/${student.id}"
 									class="btn btn-primary"
 									onclick="return confirm('Are you sure you want to delete this student?')">Delete</a>
-							</sec:authorize></td>
+							</sec:authorize></td>							
 					</tr>
 				</tbody>
 			</table>

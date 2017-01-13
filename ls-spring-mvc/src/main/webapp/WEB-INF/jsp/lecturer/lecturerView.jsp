@@ -37,14 +37,19 @@
 						<td><c:out value="${lecturer.nickname}" /></td>
 						<td><c:out value="${lecturer.firstName}" /></td>
 						<td><c:out value="${lecturer.surname}" /></td>
-						<td><sec:authorize access="hasRole('ROLE_ADMIN')">
+						<td><sec:authorize
+								access="hasAnyRole('ROLE_ADMIN', 'ROLE_LECTURER')">
 								<a
 									href="${pageContext.request.contextPath}/lecturer/edit/${lecturer.id}"
 									class="btn btn-primary">Edit</a>
-								<a
-									href="${pageContext.request.contextPath}/lecturer/delete/${lecturer.id}"
-									class="btn btn-primary">Delete</a>
 							</sec:authorize></td>
+						<sec:authorize access="hasRole('ROLE_ADMIN')">
+							<a
+								href="${pageContext.request.contextPath}/lecturer/delete/${lecturer.id}"
+								class="btn btn-primary">Delete</a>
+						</sec:authorize>
+						</td>
+
 					</tr>
 				</tbody>
 			</table>
