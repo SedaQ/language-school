@@ -2,6 +2,7 @@ package com.fi.ls.dao;
 
 import com.fi.ls.entity.Language;
 import java.util.List;
+import java.util.Set;
 
 /**
  *
@@ -39,6 +40,6 @@ public interface LanguageDao {
 	 * Returns all Languages
 	 * @return List of Languages
 	 */
-	public List<Language> findAll();
+	public Set<Language> findAll();
     
 }

@@ -13,6 +13,7 @@ import com.fi.ls.dao.LSUserRepository;
 import com.fi.ls.entity.LSUser;
 import com.fi.ls.enums.UserRoles;
 import com.fi.ls.exceptions.ServiceLayerException;
+import java.util.Set;
 import javax.persistence.PersistenceException;
 import javax.validation.ConstraintViolationException;
 import org.springframework.dao.DataAccessException;

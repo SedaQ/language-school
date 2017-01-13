@@ -154,8 +154,9 @@ public class StudentDaoTest extends AbstractTestNGSpringContextTests {
 
 		em.persist(student1);
 		Assert.assertNotNull(studentDao.findByFirstName(student1.getFirstName()));
-		Assert.assertEquals(studentDao.findByFirstName(student1.getFirstName()).get(0).getFirstName(),
-				student1.getFirstName());
+                for (Student s : studentDao.findByFirstName(student1.getFirstName())) {
+                    Assert.assertEquals(s.getFirstName(), student1.getFirstName());
+                }
 
 	}
 
@@ -164,8 +165,9 @@ public class StudentDaoTest extends AbstractTestNGSpringContextTests {
 
 		em.persist(student1);
 		Assert.assertNotNull(studentDao.findBySurname(student1.getSurname()));
-		Assert.assertEquals(studentDao.findBySurname(student1.getSurname()).get(0).getSurname(), student1.getSurname());
-
+                for (Student s : studentDao.findBySurname(student1.getSurname())) {
+                    Assert.assertEquals(s.getSurname(), student1.getSurname());
+                }
 	}
 
 	@Test

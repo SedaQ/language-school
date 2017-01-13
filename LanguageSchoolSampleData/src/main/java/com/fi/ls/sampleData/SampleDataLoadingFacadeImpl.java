@@ -12,6 +12,7 @@ import com.fi.ls.facade.LSUserFacade;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.Arrays;
+import java.util.HashSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,52 +44,29 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
 
 	@Override
 	public void loadData() {
-		LSUser user1 = new LSUser();
-		user1.setEmail("test@email.cz");
-		user1.setPasswordHash("test1");
-		user1.setUserRole(UserRoles.ROLE_ADMIN.name());
-		userService.registerUser(user1, user1.getPasswordHash());
+            
+		log.info("Loading sample data...");
+            
+		LSUser admin = new LSUser();
+		admin.setEmail("admin@email.cz");
+		admin.setPasswordHash("admin");
+		admin.setUserRole(UserRoles.ROLE_ADMIN.name());
 
-		LSUser user2 = new LSUser();
-		user2.setEmail("testtest@email.cz");
-		user2.setPasswordHash("test2");
-		user2.setUserRole(UserRoles.ROLE_LECTURER.name());
-		userService.registerUser(user2, user2.getPasswordHash());
-
-		LSUser user3 = new LSUser();
-		user3.setEmail("testtesttest@email.cz");
-		user3.setPasswordHash("test3");
-		user3.setUserRole(UserRoles.ROLE_STUDENT.name());
-		userService.registerUser(user3, user3.getPasswordHash());
-
-                LSUser user4 = new LSUser();
-		user4.setEmail("admin@email.cz");
-		user4.setPasswordHash("admin");
-		user4.setUserRole(UserRoles.ROLE_ADMIN.name());
-		userService.registerUser(user4, user4.getPasswordHash());
-
-		LSUser user5 = new LSUser();
+		Lecturer user5 = new Lecturer();
 		user5.setEmail("lecturer@email.cz");
 		user5.setPasswordHash("lecturer");
 		user5.setUserRole(UserRoles.ROLE_LECTURER.name());
-		userService.registerUser(user5, user5.getPasswordHash());
-
-		LSUser user6 = new LSUser();
-		user6.setEmail("student@email.cz");
-		user6.setPasswordHash("student");
-		user6.setUserRole(UserRoles.ROLE_STUDENT.name());
-		userService.registerUser(user6, user6.getPasswordHash());
-                
-		log.info("Loading sample data...");
+		user5.setNickname("Boss");
+		user5.setFirstName("Alibaba");
+		user5.setSurname("Buh");
 
 		Student s1 = new Student();
 		s1.setFirstName("Arthur");
 		s1.setSurname("Dent");
 		s1.setBirthNumber("123456789");
-		s1.setEmail("a.dent42@email.uk");
-		s1.setPasswordHash("Hash");
-                s1.setUserRole(UserRoles.ROLE_STUDENT.name());
-                userService.registerUser(s1, s1.getPasswordHash());
+		s1.setEmail("student@email.cz");
+		s1.setPasswordHash("student");
+		s1.setUserRole(UserRoles.ROLE_STUDENT.name());
 
 		Student s2 = new Student();
 		s2.setFirstName("Mister");
@@ -96,8 +74,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
 		s2.setBirthNumber("S15BEEPZORD78");
 		s2.setEmail("slarti@constructions.magrathea");
 		s2.setPasswordHash("Hash");
-                s2.setUserRole(UserRoles.ROLE_STUDENT.name());
-                userService.registerUser(s2, s2.getPasswordHash());
+		s2.setUserRole(UserRoles.ROLE_STUDENT.name());
 
 		Course c1 = new Course();
 		c1.setLanguage("Errnglish");
@@ -152,6 +129,14 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
 		lect2.setNickname("Olórin");
 		lect2.setEmail("gandalf@mainar.tol");
 		lect2.setPasswordHash("Hash");
+                
+                Lecturer lect3 = new Lecturer();
+		lect3.setEmail("lecturer@email.cz");
+		lect3.setPasswordHash("lecturer");
+		lect3.setUserRole(UserRoles.ROLE_LECTURER.name());
+		lect3.setNickname("Boss");
+		lect3.setFirstName("Alibaba");
+		lect3.setSurname("Buh");
 
 		Language lan11 = new Language();
 		lan11.setLanguage("Errnglish");
@@ -174,61 +159,60 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
 		lect2.addLanguage(lan22);
 		lan22.setLecturer(lect2);
 
-		l11.addCourse(c1);
-		l12.addCourse(c1);
-		l13.addCourse(c1);
-		c1.addLectures(Arrays.asList(l11, l12, l13));
+		//l11.addCourse(c1);
+		//l12.addCourse(c1);
+		//l13.addCourse(c1);
+		c1.addLectures(new HashSet<>(Arrays.asList(l11, l12, l13)));
 
-		l21.addCourse(c2);
-		l22.addCourse(c2);
-		l23.addCourse(c2);
-		c2.addLectures(Arrays.asList(l21, l22, l23));
+		//l22.addCourse(c2);
+		//l23.addCourse(c2);
+		c2.addLectures(new HashSet<>(Arrays.asList(l22, l23)));
 
-		l11.addLecturer(lect1);
-		l12.addLecturer(lect1);
-		l13.addLecturer(lect1);
-		l23.addLecturer(lect1);
-		lect1.setListOfLectures(Arrays.asList(l11, l12, l13, l23));
+		//l11.addLecturer(lect1);
+		//l12.addLecturer(lect1);
+		//l13.addLecturer(lect1);
+		//l23.addLecturer(lect1);
+		lect1.setListOfLectures(new HashSet<>(Arrays.asList(l11, l12, l13, l23)));
 
-		l21.addLecturer(lect2);
-		l22.addLecturer(lect2);
-		lect2.setListOfLectures(Arrays.asList(l21, l22));
+		//l22.addLecturer(lect2);
+		lect2.setListOfLectures(new HashSet<>(Arrays.asList(l22)));
 
-		l11.addStudent(s1);
-		l12.addStudent(s1);
-		l13.addStudent(s1);
-		l21.addStudent(s1);
-		s1.addListOfLectures(Arrays.asList(l11, l12, l13, l21));
+		//l11.addStudent(s1);
+		//l12.addStudent(s1);
+		//l13.addStudent(s1);
+		s1.addListOfLectures(new HashSet<>(Arrays.asList(l11, l12, l13)));
 
-		l11.addStudent(s2);
-		l12.addStudent(s2);
-		l13.addStudent(s2);
-		l21.addStudent(s2);
-		l22.addStudent(s2);
-		l23.addStudent(s2);
-		s2.addListOfLectures(Arrays.asList(l11, l12, l13, l21, l22, l23));
+		//l11.addStudent(s2);
+		//l12.addStudent(s2);
+		//l13.addStudent(s2);
+		//l22.addStudent(s2);
+		//l23.addStudent(s2);
+		s2.addListOfLectures(new HashSet<>(Arrays.asList(l11, l12, l13, l22, l23)));
 
+                userService.registerUser(admin, admin.getPasswordHash());
+                userService.registerUser(lect3, lect3.getPasswordHash());
+                userService.registerUser(s1, s1.getPasswordHash());
+                userService.registerUser(s2, s2.getPasswordHash());
+                
 		log.info("Persisting Students");
-		studentService.create(s1);
-		studentService.create(s2);
-		log.info("Persisting Courses");
-		courseService.create(c1);
-		courseService.create(c2);
-		log.info("Persisting Lectures");
+                
+                log.info("Persisting Lectures");
 		lectureService.create(l11);
 		lectureService.create(l12);
 		lectureService.create(l13);
 		lectureService.create(l21);
 		lectureService.create(l22);
 		lectureService.create(l23);
-		log.info("Persisting Lecturers");
+		log.info("Persisting Courses");
+		courseService.create(c1);
+		courseService.create(c2);
+                log.info("Persisting Lecturers");
 		lecturerService.create(lect1);
 		lecturerService.create(lect2);
 		log.info("Persisting Languages");
 		languageService.create(lan11);
 		languageService.create(lan21);
 		languageService.create(lan22);
-
 		log.info("Sample data loaded...");
 	}
 

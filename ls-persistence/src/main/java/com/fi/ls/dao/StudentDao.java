@@ -2,6 +2,7 @@ package com.fi.ls.dao;
 
 import com.fi.ls.entity.Student;
 import java.util.List;
+import java.util.Set;
 
 /**
  *
@@ -46,20 +47,20 @@ public interface StudentDao {
      * returns all Students
      * @return List of all Students
      */
-    public List<Student> findAll();
+    public Set<Student> findAll();
     
     /**
      * returns all students with same first name
      * @param firstName of students
      * @return list of all students with specific first name
      */
-    public List<Student> findByFirstName(String firstName);
+    public Set<Student> findByFirstName(String firstName);
     
     /**
      * returns all students with same surname
      * @param surname of students
      * @return list of all students with specific surname
      */
-    public List<Student> findBySurname(String surname);   
+    public Set<Student> findBySurname(String surname);   
 
 }

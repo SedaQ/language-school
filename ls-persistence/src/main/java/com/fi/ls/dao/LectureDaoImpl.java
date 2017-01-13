@@ -1,7 +1,9 @@
 package com.fi.ls.dao;
 
 import com.fi.ls.entity.Lecture;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
@@ -45,9 +47,9 @@ public class LectureDaoImpl implements LectureDao {
 	}
 
 	@Override
-	public List<Lecture> findAll() {
+	public Set<Lecture> findAll() {
             
-		return em.createNamedQuery("Lecture.findAll", Lecture.class).getResultList();
+		return new HashSet<>(em.createNamedQuery("Lecture.findAll", Lecture.class).getResultList());
                 
 	}
         

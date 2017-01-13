@@ -14,6 +14,7 @@ import com.fi.ls.service.StudentService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import javax.transaction.Transactional;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -145,6 +146,6 @@ public class StudentFacadeTest extends AbstractTestNGSpringContextTests {
         List<LectureDTO> l = new ArrayList<>();
         l.add(lecture);
         studentFacade.cancelListOfLecturesFromStudentsList(l, student);
-        verify(studentService, times(1)).cancelListOfLecturesFromStudentsList(any(List.class), any(Student.class));
+        verify(studentService, times(1)).cancelListOfLecturesFromStudentsList(any(Set.class), any(Student.class));
     }
 }

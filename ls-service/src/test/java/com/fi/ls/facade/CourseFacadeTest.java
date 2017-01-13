@@ -29,6 +29,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.testng.annotations.BeforeMethod;
 
@@ -223,12 +224,12 @@ public class CourseFacadeTest extends AbstractTestNGSpringContextTests {
 	@Test
 	public void testAddLectures() {
 		courseFacade.addLectures(courseDTO1, Arrays.asList(lectureDTO1));
-		verify(courseService, times(1)).addLectures(any(Course.class), any(List.class));
+		verify(courseService, times(1)).addLectures(any(Course.class), any(Set.class));
 	}
 
 	@Test
 	public void testAddLecturesThrows() {
-		doThrow(new ServiceLayerException("")).when(courseService).addLectures(any(Course.class), any(List.class));
+		doThrow(new ServiceLayerException("")).when(courseService).addLectures(any(Course.class), any(Set.class));
 		Boolean output = courseFacade.addLectures(courseDTO1, Arrays.asList(lectureDTO1));
 		assertFalse(output);
 	}

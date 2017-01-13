@@ -39,5 +39,6 @@ Smartphone Compatible Web template, free Webdesigns for Nokia, Samsung, LG, Sony
 
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/assets/bootstrap/css/footer-distributed.css">
+	
 <!--/fonts-->
 <!--//end-animate-->

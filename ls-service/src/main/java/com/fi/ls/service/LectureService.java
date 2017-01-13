@@ -2,6 +2,7 @@ package com.fi.ls.service;
 
 import com.fi.ls.entity.Lecture;
 import java.util.List;
+import java.util.Set;
 
 /**
  *
@@ -40,6 +41,6 @@ public interface LectureService {
      * returns all Lectures
      * @return List of Lectures
      */
-    public List<Lecture> findAll();
+    public Set<Lecture> findAll();
     
 }

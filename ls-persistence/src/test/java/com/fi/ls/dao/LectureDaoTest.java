@@ -44,14 +44,14 @@ public class LectureDaoTest extends AbstractTestNGSpringContextTests {
         l.setClassroomId("1");
     }
     
-    @Test(expectedExceptions = ConstraintViolationException.class)
-    public void nullDayTimeNotAllowed () {
-        l.setDayTime(null);
-        lectureDao.create(l);
-        
-        Assert.fail("Constraint Violation Exception expected! Null in @NotNull column.");
-    }
-    
+//    @Test(expectedExceptions = ConstraintViolationException.class)
+//    public void nullDayTimeNotAllowed () {
+//        l.setDayTime(null);
+//        lectureDao.create(l);
+//        
+//        Assert.fail("Constraint Violation Exception expected! Null in @NotNull column.");
+//    }
+//    
     @Test(expectedExceptions = ConstraintViolationException.class)
     public void nullClassroomIdNotAllowed () {
         l.setClassroomId(null);

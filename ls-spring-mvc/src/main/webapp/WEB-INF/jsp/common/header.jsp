@@ -1,3 +1,7 @@
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <!--header-->
@@ -37,7 +41,18 @@
 			</form>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="${pageContext.request.contextPath}/logout"><span
-						class="glyphicon glyphicon-log-in"></span> Log out</a></li>
+						class="glyphicon glyphicon-log-in"> Logout</span></a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="">
+						<sec:authorize var="loggedIn" access="isAuthenticated()">
+							<c:choose>
+								<c:when test="${loggedIn}">
+									<%=request.getUserPrincipal().getName()%>
+								</c:when>
+							</c:choose>
+						</sec:authorize>
+				</a></li>
 			</ul>
 		</div>
 	</nav>

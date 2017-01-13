@@ -33,28 +33,28 @@ or
 ```
 
 ### Testing
-For testing purposes there were created 3 different users in memory via ls-spring-data module. Each role has some differences in web view.
-For example only admin could delete course, only student could enroll to course etc.
+For testing purposes there were created 3 different users in memory via LanguageSchoolSampleData module. Each role has some differences in web view.
+For example only lecturer manages courses and lectures, admin manages students and lecturers, student enrolls to course, lectures etc.
 
 #### as admin:
 
 ```
-username: test@email.cz
-password: test1
+username: admin@email.cz
+password: admin
 ```
 
 #### as lecturer
 
 ```
-username: testtest@email.cz
-password: test2
+username: lecturer@email.cz
+password: lecturer
 ```
 
 #### as student
 
 ```
-username: testtesttest@email.cz
-password: test3
+username: student@email.cz
+password: student
 ```
 
 

@@ -13,7 +13,7 @@
 </head>
 <body>
 	<%@ include file="../common/header.jsp"%>
-	
+
 	<div class="container center_div">
 		<form:form class="table table-striped" method="post"
 			action="${pageContext.request.contextPath}/student/update/${student.id}"
@@ -30,6 +30,11 @@
 			<div>
 				<label path="birthNumber">Birth number</label>
 				<form:input path="birthNumber" />
+			</div>
+			<div>
+				<form:input type="hidden" path="userRole" />
+				<form:input type="hidden" path="passwordHash" />
+				<form:input type="hidden" path="email" />
 			</div>
 			<button class="btn btn-primary" type="submit">Update student</button>
 		</form:form>

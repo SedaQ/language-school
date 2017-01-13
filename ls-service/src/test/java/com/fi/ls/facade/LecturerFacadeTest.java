@@ -15,6 +15,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import javax.transaction.Transactional;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -230,12 +231,12 @@ public class LecturerFacadeTest extends AbstractTestNGSpringContextTests {
         
         lecturerFacade.deleteLectures(lecturer, Arrays.asList(lecture));
         
-        verify(lecturerService, times(1)).deleteLectures(any(Lecturer.class), any(List.class));
+        verify(lecturerService, times(1)).deleteLectures(any(Lecturer.class), any(Set.class));
     }
     
     @Test
     public void testDeleteLecturesThrows() {
-        doThrow(new ServiceLayerException("")).when(lecturerService).deleteLectures(any(Lecturer.class), any(List.class));
+        doThrow(new ServiceLayerException("")).when(lecturerService).deleteLectures(any(Lecturer.class), any(Set.class));
         
         Boolean output = lecturerFacade.deleteLectures(lecturer, Arrays.asList(lecture));
         

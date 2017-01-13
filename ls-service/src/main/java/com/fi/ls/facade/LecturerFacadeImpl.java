@@ -18,6 +18,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.Set;
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
@@ -113,7 +114,7 @@ public class LecturerFacadeImpl implements LecturerFacade {
 	@Transactional(readOnly = true)
 	public List<LecturerDTO> getAllLecturers() {
 		try {
-			List<Lecturer> entities = lecturerService.findAll();
+			Set<Lecturer> entities = lecturerService.findAll();
 			return beanMapping.mapTo(entities, LecturerDTO.class);
 		} catch (ServiceLayerException | NoSuchElementException ex) {
 			logger.warn("getAllLecturers method invokes exception: " + ex);
@@ -148,7 +149,7 @@ public class LecturerFacadeImpl implements LecturerFacade {
 
 		try {
 			lecturerService.deleteLectures(beanMapping.mapTo(lect, Lecturer.class).get(),
-					beanMapping.mapTo(l, Lecture.class));
+					beanMapping.mapToSet(l, Lecture.class));
 			return true;
 		} catch (ServiceLayerException | NoSuchElementException ex) {
 			logger.warn("deleteLectures method invokes exception: " + ex);
@@ -165,7 +166,7 @@ public class LecturerFacadeImpl implements LecturerFacade {
 
 		try {
 			Optional<Lecturer> entity = beanMapping.mapTo(l, Lecturer.class);
-			List<Language> entities = lecturerService.findAllLecturerLanguages(entity.get());
+			Set<Language> entities = lecturerService.findAllLecturerLanguages(entity.get());
 			return beanMapping.mapTo(entities, LanguageDTO.class);
 		} catch (ServiceLayerException | NoSuchElementException ex) {
 			logger.warn("findAllLecturerLanguages method invokes exception: " + ex);

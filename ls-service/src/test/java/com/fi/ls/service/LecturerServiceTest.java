@@ -10,6 +10,7 @@ import com.fi.ls.exceptions.ServiceLayerException;
 import com.fi.ls.security.UserPasswordEncryption;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import javax.persistence.PersistenceException;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -252,7 +253,7 @@ public class LecturerServiceTest {
     @Test(expectedExceptions = {IllegalArgumentException.class})
     public void testDeleteLecturesLecturerNull() {
         
-        lecturerService.deleteLectures(null, Arrays.asList(lec));
+        lecturerService.deleteLectures(null, new HashSet<>(Arrays.asList(lec)));
         
         fail("Expected IllegalArgumentException");
     }
@@ -268,7 +269,7 @@ public class LecturerServiceTest {
     @Test
     public void testDeleteLectures() {
 
-        lecturerService.deleteLectures(l, Arrays.asList(lec));
+        lecturerService.deleteLectures(l, new HashSet<>(Arrays.asList(lec)));
 
         verify(lecturerDao, times(1)).update(l);
     }
@@ -277,7 +278,7 @@ public class LecturerServiceTest {
     public void testDeleteLecturesThrows() {
         doThrow(new PersistenceException("")).when(lecturerDao).update(any(Lecturer.class));
         
-        lecturerService.deleteLectures(l, Arrays.asList(lec));
+        lecturerService.deleteLectures(l, new HashSet<>(Arrays.asList(lec)));
         
         fail("Expected ServiceException");
     }

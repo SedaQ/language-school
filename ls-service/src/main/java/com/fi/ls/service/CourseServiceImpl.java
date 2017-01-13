@@ -13,6 +13,7 @@ import com.fi.ls.dao.CourseDao;
 import com.fi.ls.entity.Course;
 import com.fi.ls.entity.Lecture;
 import com.fi.ls.exceptions.ServiceLayerException;
+import java.util.Set;
 
 /**
  * @author Pavel Šeda (441048)
@@ -85,7 +86,7 @@ public class CourseServiceImpl implements CourseService {
 	}
 
 	@Override
-	public List<Course> findAll() {
+	public Set<Course> findAll() {
 		try {
 			return courseDao.findAll();
 		} catch (PersistenceException | DataAccessException ex) {
@@ -102,7 +103,7 @@ public class CourseServiceImpl implements CourseService {
 	}
 
 	@Override
-	public void addLectures(Course c, List<Lecture> l) {
+	public void addLectures(Course c, Set<Lecture> l) {
 		if (c == null || l == null)
 			throw new IllegalArgumentException("Course or Lecture parameter is null");
 		c.addLectures(l);

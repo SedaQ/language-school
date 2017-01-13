@@ -3,6 +3,7 @@ package com.fi.ls.dao;
 import java.util.List;
 
 import com.fi.ls.entity.Course;
+import java.util.Set;
 
 /**
  * @author Pavel Šeda (441048)
@@ -47,6 +48,6 @@ public interface CourseDao {
 	 * Returns all courses in language school
 	 * @return List of courses which are in language school
 	 */
-	public List<Course> findAll();
+	public Set<Course> findAll();
 	
 }

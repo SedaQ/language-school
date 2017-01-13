@@ -137,7 +137,7 @@ public class CourseFacadeImpl implements CourseFacade {
 			throw new IllegalArgumentException(
 					"CourseDTO c parameter or List<LectureDTO> l is null in addLectures method");
 		try {
-			courseService.addLectures(beanMapping.mapTo(c, Course.class).get(), beanMapping.mapTo(l, Lecture.class));
+			courseService.addLectures(beanMapping.mapTo(c, Course.class).get(), beanMapping.mapToSet(l, Lecture.class));
 			return true;
 		} catch (ServiceLayerException | NoSuchElementException ex) {
 			logger.warn("addLectures method invokes exception: " + ex);

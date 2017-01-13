@@ -4,6 +4,7 @@ import javax.inject.Inject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,12 +14,18 @@ import org.springframework.ui.Model;
 import com.fi.ls.dto.course.CourseCreateDTO;
 import com.fi.ls.dto.course.CourseDTO;
 import com.fi.ls.dto.lecture.LectureDTO;
+import com.fi.ls.dto.student.StudentDTO;
 import com.fi.ls.enums.ProficiencyLevel;
+import com.fi.ls.enums.UserRoles;
 import com.fi.ls.facade.CourseFacade;
+import com.fi.ls.facade.LSUserFacade;
+import com.fi.ls.facade.StudentFacade;
+import com.fi.ls.helpers.Helpers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -40,10 +47,24 @@ public class CourseController {
 
 	@Inject
 	private CourseFacade courseFacade;
+        
+        @Inject
+	private LSUserFacade userFacade;
+        
+        @Inject
+	private StudentFacade studentFacade;
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String list(Model model) {
-		model.addAttribute("courses", courseFacade.getAllCourses());
+            
+                List<CourseDTO> courses = courseFacade.getAllCourses();
+		model.addAttribute("courses", courses);
+                if (Helpers.hasRole(UserRoles.ROLE_STUDENT.name())) {
+			String email = SecurityContextHolder.getContext().getAuthentication().getName();
+			Long studentId = userFacade.getUserByEmail(email).get().getId();
+			Optional<StudentDTO> studentDTO = studentFacade.getStudentById(studentId);
+			model.addAttribute("studentEnrolledLectures", studentDTO.get().getListOfLectures());
+		}
 		return "course/courseList";
 	}
 
@@ -52,10 +73,13 @@ public class CourseController {
 		logger.debug("view: ", id);
 
 		CourseDTO course = courseFacade.getCourseById(id).get();
-		// should be set on persistence level..
-		Set<LectureDTO> lectInCourse = new HashSet<>(courseFacade.getCourseById(id).get().getListOfLectures());
-		model.addAttribute("course", course);
-		model.addAttribute("lecturesInCourse", lectInCourse);
+                model.addAttribute("course", course);
+                if (Helpers.hasRole(UserRoles.ROLE_STUDENT.name())) {
+			String email = SecurityContextHolder.getContext().getAuthentication().getName();
+			Long studentId = userFacade.getUserByEmail(email).get().getId();
+			Optional<StudentDTO> studentDTO = studentFacade.getStudentById(studentId);
+			model.addAttribute("studentEnrolledLectures", studentDTO.get().getListOfLectures());
+		}
 		return "course/courseView";
 	}
 
@@ -66,12 +90,18 @@ public class CourseController {
 		model.addAttribute("proficiencylevels", new ArrayList<>(Arrays.asList(ProficiencyLevel.values())));
 		return "course/courseNew";
 	}
-
+	
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public String createCourse(@Valid @ModelAttribute("courseCreate") CourseCreateDTO formBean,
 			BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes,
 			UriComponentsBuilder uriBuilder) {
 		logger.debug("create");
+                if (bindingResult.hasErrors()) {
+                    
+                    model.addAttribute("proficiencylevels", new ArrayList<>(Arrays.asList(ProficiencyLevel.values())));
+                    return "course/courseNew";
+                    
+                }
 		// formBean.setProficiencyLevel(ProficiencyLevel.C1);
 		Optional<CourseDTO> cdto = courseFacade.create(formBean);
 		// return "course/courseList";
@@ -91,6 +121,12 @@ public class CourseController {
 			BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes,
 			UriComponentsBuilder uriBuilder) {
 		logger.debug("update");
+                if (bindingResult.hasErrors()) {
+                    
+                    model.addAttribute("proficiencylevels", new ArrayList<>(Arrays.asList(ProficiencyLevel.values())));
+                    return "course/courseEdit";
+                    
+                }
 		// Optional<CourseDTO> toUpdate = courseFacade.getCourseById(id);
 		logger.debug("ID: " + formBean.getId().toString() + " name: " + formBean.getName() + " language: "
 				+ formBean.getLanguage());

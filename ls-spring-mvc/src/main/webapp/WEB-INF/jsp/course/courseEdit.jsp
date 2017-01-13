@@ -18,10 +18,6 @@
 		<form:form class="table table-striped" method="post"
 			action="${pageContext.request.contextPath}/course/update/${course.id}"
 			modelAttribute="course">
-                        <div>
-				<label path="id">ID</label>
-				<form:input path="id" />
-			</div>
 			<div>
 				<label path="name">Name</label>
 				<form:input path="name" />

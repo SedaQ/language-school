@@ -42,6 +42,8 @@
 			</tr>
 		</tbody>
 	</table>
+	
+	Lecturer languages:
 	<table class="table">
 		<thead>
 			<tr>
@@ -62,7 +64,7 @@
 								class="btn btn-primary">Edit</a>
 							<a
 								href="${pageContext.request.contextPath}/language/delete/${language.id}"
-								class="btn btn-primary">Delete</a>
+								onclick="return confirm('Are you sure you want to delete lecturer language?')" class="btn btn-primary">Delete</a>
 						</sec:authorize></td>
 				</tr>
 			</c:forEach>

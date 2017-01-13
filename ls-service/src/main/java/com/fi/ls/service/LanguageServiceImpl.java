@@ -4,6 +4,7 @@ import com.fi.ls.dao.LanguageDao;
 import com.fi.ls.entity.Language;
 import com.fi.ls.exceptions.ServiceLayerException;
 import java.util.List;
+import java.util.Set;
 import javax.inject.Inject;
 import javax.persistence.PersistenceException;
 import javax.validation.ConstraintViolationException;
@@ -41,7 +42,7 @@ public class LanguageServiceImpl implements LanguageService {
     }
 
     @Override
-    public List<Language> findAll() {
+    public Set<Language> findAll() {
         try {
             return languageDao.findAll();
         }

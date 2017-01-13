@@ -20,6 +20,8 @@ import org.dozer.Mapping;
 import com.fi.ls.enums.ProficiencyLevel;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author Pavel Šeda (441048)
@@ -50,7 +52,7 @@ public class Course {
 	@ManyToMany(fetch = FetchType.EAGER)
 	@Column(name = "list_of_lectures")
 	@Mapping("listOfLectures")
-	private List<Lecture> listOfLectures = new ArrayList<>();
+	private Set<Lecture> listOfLectures = new HashSet<>();
 
 	public Course() {
 	}
@@ -59,7 +61,7 @@ public class Course {
 		this.listOfLectures.add(lecture);
 	}
 
-	public void addLectures(List<Lecture> lectures) {
+	public void addLectures(Set<Lecture> lectures) {
 		lectures.forEach(l -> listOfLectures.add(l));
 	}
 
@@ -75,7 +77,7 @@ public class Course {
 		this.proficiencyLevel = proficiencyLevel;
 	}
 
-	public void setListOfLectures(List<Lecture> listOfLectures) {
+	public void setListOfLectures(Set<Lecture> listOfLectures) {
 		this.listOfLectures = listOfLectures;
 	}
 
@@ -99,8 +101,8 @@ public class Course {
 		return proficiencyLevel;
 	}
 
-	public List<Lecture> getListOfLectures() {
-		return Collections.unmodifiableList(listOfLectures);
+	public Set<Lecture> getListOfLectures() {
+		return Collections.unmodifiableSet(listOfLectures);
 	}
 
 	@Override

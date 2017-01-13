@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.Set;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 
@@ -100,7 +101,7 @@ public class LanguageFacadeImpl implements LanguageFacade {
 	@Override
 	public List<LanguageDTO> getAllLanguages() {
 		try {
-			List<Language> entities = languageService.findAll();
+			Set<Language> entities = languageService.findAll();
 			return beanMapping.mapTo(entities, LanguageDTO.class);
 		} catch (ServiceLayerException | NoSuchElementException ex) {
 			logger.warn("getAllLanguages method invokes exception: " + ex);
