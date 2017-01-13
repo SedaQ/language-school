@@ -3,10 +3,7 @@ package com.fi.ls.controllers;
 import com.fi.ls.dto.course.CourseDTO;
 import com.fi.ls.dto.lecture.LectureDTO;
 
-import java.util.HashSet;
 import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
@@ -23,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.fi.ls.dto.student.StudentCreateDTO;
 import com.fi.ls.dto.student.StudentDTO;
 import com.fi.ls.enums.UserRoles;
 import com.fi.ls.facade.CourseFacade;
@@ -32,7 +28,6 @@ import com.fi.ls.facade.LectureFacade;
 import com.fi.ls.facade.StudentFacade;
 import com.fi.ls.helpers.Helpers;
 import javax.servlet.http.HttpServletRequest;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 @Controller
@@ -63,16 +58,15 @@ public class StudentController {
 	public String view(@PathVariable long id, Model model) {
 		StudentDTO student = studentFacade.getStudentById(id).get();
 		model.addAttribute("student", student);
-                
-                if (Helpers.hasRole(UserRoles.ROLE_STUDENT.name())) {
+
+		if (Helpers.hasRole(UserRoles.ROLE_STUDENT.name())) {
 			String email = SecurityContextHolder.getContext().getAuthentication().getName();
 			Long studentId = lsUserFacade.getUserByEmail(email).get().getId();
 			model.addAttribute("loggedStudentId", studentId);
+		} else {
+			model.addAttribute("loggedStudentId", null);
 		}
-                else {
-                    model.addAttribute("loggedStudentId", null);
-                }
-                
+
 		return "student/studentView";
 	}
 
@@ -90,11 +84,11 @@ public class StudentController {
 			BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes,
 			UriComponentsBuilder uriBuilder) {
 		logger.debug("create");
-                if (bindingResult.hasErrors()) {
-                    
-                    return "student/studentNew";
-                    
-                }
+		if (bindingResult.hasErrors()) {
+
+			return "student/studentNew";
+
+		}
 		studentFacade.registerUser(formBean, formBean.getPasswordHash());
 		return "redirect:" + uriBuilder.path("/student/list").buildAndExpand().encode().toUriString();
 	}
@@ -119,11 +113,11 @@ public class StudentController {
 			BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes,
 			UriComponentsBuilder uriBuilder) {
 		logger.debug("update");
-                if (bindingResult.hasErrors()) {
-                    
-                    return "student/studentEdit";
-                    
-                }
+		if (bindingResult.hasErrors()) {
+
+			return "student/studentEdit";
+
+		}
 		Optional<StudentDTO> cdto = studentFacade.updateStudent(formBean);
 		return "redirect:" + uriBuilder.path("/student/list").buildAndExpand().encode().toUriString();
 	}
@@ -152,7 +146,7 @@ public class StudentController {
 		Optional<StudentDTO> studentDTO = studentFacade.getStudentById(studentId);
 
 		studentFacade.enrollLecture(lectureDTO.get(), studentDTO.get());
-                return "redirect:" + request.getHeader("Referer");
+		return "redirect:" + request.getHeader("Referer");
 	}
 
 	@RequestMapping(value = "/unenrollLecture/{id}", method = RequestMethod.GET)
@@ -181,8 +175,8 @@ public class StudentController {
 
 		return "redirect:" + request.getHeader("Referer");
 	}
-        
-        @RequestMapping(value = "/unenrollCourse/{id}", method = RequestMethod.GET)
+
+	@RequestMapping(value = "/unenrollCourse/{id}", method = RequestMethod.GET)
 	public String unenrollCourse(@PathVariable Long id, Model model, HttpServletRequest request) {
 		logger.debug("unenrollCourse");
 

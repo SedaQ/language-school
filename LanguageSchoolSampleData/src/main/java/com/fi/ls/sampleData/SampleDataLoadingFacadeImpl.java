@@ -44,9 +44,9 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
 
 	@Override
 	public void loadData() {
-            
+
 		log.info("Loading sample data...");
-            
+
 		LSUser admin = new LSUser();
 		admin.setEmail("admin@email.cz");
 		admin.setPasswordHash("admin");
@@ -129,8 +129,8 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
 		lect2.setNickname("Olórin");
 		lect2.setEmail("gandalf@mainar.tol");
 		lect2.setPasswordHash("Hash");
-                
-                Lecturer lect3 = new Lecturer();
+
+		Lecturer lect3 = new Lecturer();
 		lect3.setEmail("lecturer@email.cz");
 		lect3.setPasswordHash("lecturer");
 		lect3.setUserRole(UserRoles.ROLE_LECTURER.name());
@@ -150,6 +150,13 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
 		lan22.setLanguage("dASGREf23'daz/]]@3");
 		lan22.setProficiencyLevel(ProficiencyLevel.C2);
 
+		Language lanPavel = new Language();
+		lanPavel.setLanguage("Englishhhh");
+		lanPavel.setProficiencyLevel(ProficiencyLevel.B2);
+
+		user5.addLanguage(lanPavel);
+		lanPavel.setLecturer(user5);
+
 		lect1.addLanguage(lan11);
 		lan11.setLecturer(lect1);
 
@@ -159,44 +166,44 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
 		lect2.addLanguage(lan22);
 		lan22.setLecturer(lect2);
 
-		//l11.addCourse(c1);
-		//l12.addCourse(c1);
-		//l13.addCourse(c1);
+		// l11.addCourse(c1);
+		// l12.addCourse(c1);
+		// l13.addCourse(c1);
 		c1.addLectures(new HashSet<>(Arrays.asList(l11, l12, l13)));
 
-		//l22.addCourse(c2);
-		//l23.addCourse(c2);
+		// l22.addCourse(c2);
+		// l23.addCourse(c2);
 		c2.addLectures(new HashSet<>(Arrays.asList(l22, l23)));
 
-		//l11.addLecturer(lect1);
-		//l12.addLecturer(lect1);
-		//l13.addLecturer(lect1);
-		//l23.addLecturer(lect1);
+		// l11.addLecturer(lect1);
+		// l12.addLecturer(lect1);
+		// l13.addLecturer(lect1);
+		// l23.addLecturer(lect1);
 		lect1.setListOfLectures(new HashSet<>(Arrays.asList(l11, l12, l13, l23)));
 
-		//l22.addLecturer(lect2);
+		// l22.addLecturer(lect2);
 		lect2.setListOfLectures(new HashSet<>(Arrays.asList(l22)));
 
-		//l11.addStudent(s1);
-		//l12.addStudent(s1);
-		//l13.addStudent(s1);
+		// l11.addStudent(s1);
+		// l12.addStudent(s1);
+		// l13.addStudent(s1);
 		s1.addListOfLectures(new HashSet<>(Arrays.asList(l11, l12, l13)));
 
-		//l11.addStudent(s2);
-		//l12.addStudent(s2);
-		//l13.addStudent(s2);
-		//l22.addStudent(s2);
-		//l23.addStudent(s2);
+		// l11.addStudent(s2);
+		// l12.addStudent(s2);
+		// l13.addStudent(s2);
+		// l22.addStudent(s2);
+		// l23.addStudent(s2);
 		s2.addListOfLectures(new HashSet<>(Arrays.asList(l11, l12, l13, l22, l23)));
 
-                userService.registerUser(admin, admin.getPasswordHash());
-                userService.registerUser(lect3, lect3.getPasswordHash());
-                userService.registerUser(s1, s1.getPasswordHash());
-                userService.registerUser(s2, s2.getPasswordHash());
-                
+		userService.registerUser(admin, admin.getPasswordHash());
+		userService.registerUser(lect3, lect3.getPasswordHash());
+		userService.registerUser(s1, s1.getPasswordHash());
+		userService.registerUser(s2, s2.getPasswordHash());
+
 		log.info("Persisting Students");
-                
-                log.info("Persisting Lectures");
+
+		log.info("Persisting Lectures");
 		lectureService.create(l11);
 		lectureService.create(l12);
 		lectureService.create(l13);
@@ -206,7 +213,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
 		log.info("Persisting Courses");
 		courseService.create(c1);
 		courseService.create(c2);
-                log.info("Persisting Lecturers");
+		log.info("Persisting Lecturers");
 		lecturerService.create(lect1);
 		lecturerService.create(lect2);
 		log.info("Persisting Languages");

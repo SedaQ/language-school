@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html">
+<!DOCTYPE html>
 <html>
 <head>
 <title>Language school about</title>
@@ -18,7 +18,7 @@
 				<h1 class="page-header">
 					About Us <small></small>
 				</h1>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+				<p>Lorem ipsum dolor sit amget, consectetur adipisicing elit.
 					Sint, explicabo dolores ipsam aliquam inventore corrupti eveniet
 					quisquam quod totam laudantium repudiandae obcaecati ea consectetur
 					debitis velit facere nisi expedita vel?</p>
@@ -34,7 +34,7 @@
 				<img class="img-circle img-responsive img-center"
 					src="http://placehold.it/200x200" alt="">
 				<h3>
-					Pavel Seda <small>English teacher</small>
+					Pavel Šeda <small>English teacher</small>
 				</h3>
 				<p>xyz</p>
 			</div>
@@ -42,7 +42,7 @@
 				<img class="img-circle img-responsive img-center"
 					src="http://placehold.it/200x200" alt="">
 				<h3>
-					Matus Guoth <small>Spanish teacher</small>
+					Matúš Guoth <small>Spanish teacher</small>
 				</h3>
 				<p>xyz</p>
 			</div>
@@ -50,7 +50,7 @@
 				<img class="img-circle img-responsive img-center"
 					src="http://placehold.it/200x200" alt="">
 				<h3>
-					Lukas Daubner <small>Turkish teacher</small>
+					Lukáš Daubner <small>Turkish teacher</small>
 				</h3>
 				<p>xyz</p>
 			</div>

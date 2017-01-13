@@ -51,6 +51,7 @@ public class LecturerController {
 				lecturerFacade.findAllLecturerLanguages(lecturerFacade.getLecturerById(id).get()));
 		model.addAttribute("lecturer", lecturerFacade.getLecturerById(id).get());
 		model.addAttribute("lecturerLectures", lecturerFacade.getLecturerById(id).get().getListOfLectures());
+		//model.addAttribute("lecturer", lecturerFacade.get)
 		return "lecturer/lecturerView";
 	}
 
