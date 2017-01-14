@@ -97,14 +97,15 @@ public class LectureController {
 	public String newLecture(Model model) {
 		logger.debug("new");
 		model.addAttribute("lectureCreate", new LectureCreateDTO());
+                model.addAttribute("courseId", null);
 		return "lecture/lectureNew";
 	}
 
-	@RequestMapping(value = "/newLectureInCourse", method = RequestMethod.GET)
-	public String newLectureToCourse(@PathVariable long id, Model model) {
+	@RequestMapping(value = "/newLectureInCourse/{id}", method = RequestMethod.GET)
+	public String newLectureToCourse(@PathVariable Long id, Model model) {
 		logger.debug("newLectureToCourse");
 		model.addAttribute("lectureCreate", new LectureCreateDTO());
-		model.addAttribute("LectureInCourse", id);
+		model.addAttribute("courseId", id);
 		return "lecture/lectureNew";
 	}
 
@@ -114,13 +115,16 @@ public class LectureController {
 			BindingResult bindingResult,
                         @RequestParam(value = "dayTime") String dayTime,
 			@RequestParam(value = "classroomId") String classroomId, @RequestParam(value = "topic") String topic,
+                        @RequestParam(value = "courseId") Long courseId,
 			Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder) {
 		logger.debug("create");
+                /*
                 if (bindingResult.hasErrors()) {
                     
                     return "lecture/lectureNew";
                     
                 }
+                */
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
 
 		LocalDateTime localDateTime = LocalDateTime.parse(dayTime, formatter);
@@ -128,8 +132,11 @@ public class LectureController {
 		lecture.setDayTime(localDateTime);
 		lecture.setClassroomId(classroomId);
 		lecture.setTopic(topic);
-
 		Optional<LectureDTO> cdto = lectureFacade.createLecture(lecture);
+                if (courseId != null) {
+                    courseFacade.addLecture(courseFacade.getCourseById(courseId).get(), cdto.get());
+                    return "redirect:" + uriBuilder.path("/course/view/{id}").buildAndExpand(courseId).encode().toUriString();
+                }
 		return "redirect:" + uriBuilder.path("/lecture/list").buildAndExpand().encode().toUriString();
 	}
 

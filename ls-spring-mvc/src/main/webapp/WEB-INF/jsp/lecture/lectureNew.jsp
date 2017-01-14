@@ -74,6 +74,9 @@
 					<div>
 						<input type="text" name="topic" />
 					</div>
+                                        <div>
+						<input type="hidden" name="courseId" value="${courseId}" />
+					</div>
 					<br />
 					<button class="btn btn-primary" type="submit">Create
 						lecture</button>
