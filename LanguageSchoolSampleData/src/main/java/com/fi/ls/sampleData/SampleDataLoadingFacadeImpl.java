@@ -51,14 +51,6 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
 		admin.setEmail("admin@email.cz");
 		admin.setPasswordHash("admin");
 		admin.setUserRole(UserRoles.ROLE_ADMIN.name());
-
-		Lecturer user5 = new Lecturer();
-		user5.setEmail("lecturer@email.cz");
-		user5.setPasswordHash("lecturer");
-		user5.setUserRole(UserRoles.ROLE_LECTURER.name());
-		user5.setNickname("Boss");
-		user5.setFirstName("Alibaba");
-		user5.setSurname("Buh");
 		
 		Student s1 = new Student();
 		s1.setFirstName("Arthur");
@@ -154,8 +146,8 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
 		lanPavel.setLanguage("Englishhhh");
 		lanPavel.setProficiencyLevel(ProficiencyLevel.B2);
 
-		user5.addLanguage(lanPavel);
-		lanPavel.setLecturer(user5);
+		lect3.addLanguage(lanPavel);
+		lanPavel.setLecturer(lect3);
 
 		lect1.addLanguage(lan11);
 		lan11.setLecturer(lect1);
@@ -220,6 +212,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
 		languageService.create(lan11);
 		languageService.create(lan21);
 		languageService.create(lan22);
+                languageService.create(lanPavel);
 		log.info("Sample data loaded...");
 	}
 
