@@ -48,10 +48,10 @@ public class CourseController {
 	@Inject
 	private CourseFacade courseFacade;
         
-        @Inject
+    @Inject
 	private LSUserFacade userFacade;
         
-        @Inject
+    @Inject
 	private StudentFacade studentFacade;
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)

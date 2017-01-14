@@ -161,5 +161,13 @@ public class LecturerServiceImpl implements LecturerService {
 			throw new ServiceLayerException("Problem with authenticating Lecturer, see inner exception.", ex);
 		}
 	}
+        
+        @Override
+	public void addLecture(Lecturer lr, Lecture l) {
+		if (lr == null || l == null)
+			throw new IllegalArgumentException("Course or Lecture parameter is null");
+		lr.addLecture(l);
+		lecturerDao.update(lr);
+	}
 
 }
