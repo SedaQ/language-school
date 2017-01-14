@@ -12,7 +12,7 @@ import org.hibernate.validator.constraints.NotEmpty;
  */
 public class CourseCreateDTO {
 
-	@NotEmpty
+	@NotEmpty(message="Please enter name")
 	@Size(min = 2, max = 30)
 	private String name;
 

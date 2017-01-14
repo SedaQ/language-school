@@ -54,6 +54,7 @@ public class LanguageController {
 		logger.debug("create");
                 if (bindingResult.hasErrors()) {
                     
+                    model.addAttribute("proficiencylevels", new ArrayList<>(Arrays.asList(ProficiencyLevel.values())));
                     return "language/languageNew";
                     
                 }
@@ -76,6 +77,7 @@ public class LanguageController {
 		logger.debug("update");
                 if (bindingResult.hasErrors()) {
                     
+                    model.addAttribute("proficiencylevels", new ArrayList<>(Arrays.asList(ProficiencyLevel.values())));
                     return "language/languageEdit";
                     
                 }
