@@ -98,6 +98,16 @@ public class LectureController {
 		logger.debug("new");
 		model.addAttribute("lectureCreate", new LectureCreateDTO());
                 model.addAttribute("courseId", null);
+                model.addAttribute("lecturerId", null);
+		return "lecture/lectureNew";
+	}
+        
+        @RequestMapping(value = "/new/lecturer={lecturerId}", method = RequestMethod.GET)
+	public String newLectureWithLecturer(@PathVariable long lecturerId, Model model) {
+		logger.debug("new/lecturer={lecturerId}", lecturerId);
+		model.addAttribute("lectureCreate", new LectureCreateDTO());
+                model.addAttribute("courseId", null);
+                model.addAttribute("lecturerId", lecturerId);
 		return "lecture/lectureNew";
 	}
 
@@ -106,6 +116,7 @@ public class LectureController {
 		logger.debug("newLectureToCourse");
 		model.addAttribute("lectureCreate", new LectureCreateDTO());
 		model.addAttribute("courseId", id);
+                model.addAttribute("lecturerId", null);
 		return "lecture/lectureNew";
 	}
 
@@ -116,6 +127,7 @@ public class LectureController {
                         @RequestParam(value = "dayTime") String dayTime,
 			@RequestParam(value = "classroomId") String classroomId, @RequestParam(value = "topic") String topic,
                         @RequestParam(value = "courseId") Long courseId,
+                        @RequestParam(value = "lecturerId") Long lecturerId,
 			Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder) {
 		logger.debug("create");
                 /*
@@ -133,9 +145,13 @@ public class LectureController {
 		lecture.setClassroomId(classroomId);
 		lecture.setTopic(topic);
 		Optional<LectureDTO> cdto = lectureFacade.createLecture(lecture);
-                if (courseId != null) {
+                if (courseId != null && lecturerId == null) {
                     courseFacade.addLecture(courseFacade.getCourseById(courseId).get(), cdto.get());
                     return "redirect:" + uriBuilder.path("/course/view/{id}").buildAndExpand(courseId).encode().toUriString();
+                }
+                if (courseId == null && lecturerId != null) {
+                    lecturerFacade.addLecture(lecturerFacade.getLecturerById(lecturerId).get(), cdto.get());
+                    return "redirect:" + uriBuilder.path("/lecturer/view/{id}").buildAndExpand(lecturerId).encode().toUriString();
                 }
 		return "redirect:" + uriBuilder.path("/lecture/list").buildAndExpand().encode().toUriString();
 	}
