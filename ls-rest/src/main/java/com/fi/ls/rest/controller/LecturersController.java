@@ -1,10 +1,10 @@
 package com.fi.ls.rest.controller;
 
-import com.fi.ls.dto.course.CourseCreateDTO;
-import com.fi.ls.dto.course.CourseDTO;
 import com.fi.ls.dto.language.LanguageDTO;
 import com.fi.ls.dto.lecture.LectureDTO;
-import com.fi.ls.dto.lecturer.LecturerCreateDTO;
+import com.fi.ls.dto.lecturer.*;
+import com.fi.ls.enums.UserRoles;
+import com.fi.ls.facade.LSUserFacade;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,17 +15,12 @@ import javax.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.fi.ls.dto.lecturer.LecturerDTO;
 import com.fi.ls.facade.LecturerFacade;
 import com.fi.ls.rest.ApiEndpoints;
 import com.fi.ls.rest.assembler.LanguageResourceAssembler;
 import com.fi.ls.rest.assembler.LectureResourceAssembler;
 import com.fi.ls.rest.assembler.LecturerResourceAssembler;
-import static com.fi.ls.rest.controller.CoursesController.logger;
-import com.fi.ls.rest.exception.InvalidParameterException;
-import com.fi.ls.rest.exception.ResourceAlreadyExistingException;
-import com.fi.ls.rest.exception.ResourceNotFoundException;
-import com.fi.ls.rest.exception.ResourceNotModifiedException;
+import com.fi.ls.rest.exception.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
@@ -50,6 +45,9 @@ public class LecturersController {
 
 	@Inject
 	private LecturerFacade lecturerFacade;
+        
+        @Inject
+	private LSUserFacade userFacade;
         
         @Inject
         private LecturerResourceAssembler lecturerResourceAssembler;
@@ -218,21 +216,54 @@ public class LecturersController {
         
         /**
          * create lecturer
-         * curl -X POST -i -H "Content-Type: application/json" --data '{"nickname":"ju","firstName":"hele","surname":"nedele"}' http://localhost:8080/pa165/rest/lecturers/create
+         * curl -X POST -i -H "Content-Type: application/json" --data '{"nickname":"ju","firstName":"hele","surname":"nedele","email":"juhele@nedele.muf"}' http://localhost:8080/pa165/rest/lecturers/create
          * NOTE: You might need to escape " and ' characters
          * 
          * @param lecturer
          * @return 
          */
         @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-        public final LecturerDTO createLecturer(@RequestBody LecturerCreateDTO lecturer) {
+        public final LecturerDTO createLecturer(@RequestBody LecturerDTO lecturer) {
 
             logger.debug("rest createLecturer()");
+            
+            lecturer.setUserRole(UserRoles.ROLE_LECTURER.name());
+            Boolean created = lecturerFacade.registerUser(lecturer, "default");
+            
+            if(created) {
+                Long lecturerId = userFacade.getUserByEmail(lecturer.getEmail()).get().getId();
+                return lecturerFacade.getLecturerById(lecturerId).get();
+            }
+            else
+                throw new InvalidParameterException();
+        }
+        
+        /**
+         * update lecturer
+         * curl -X PUT -i -H "Content-Type: application/json" --data '{"id":2,"nickname":"Updated","firstName":"test","surname":"testS"}' http://localhost:8080/pa165/rest/lecturers/update
+         * NOTE: You might need to escape " and ' characters
+         * 
+         * @param lecturer
+         * @return 
+         */
+        @RequestMapping(value = "/update", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+        public final LecturerDTO updateLecturer(@RequestBody LecturerDTO lecturer) {
 
-            Optional<LecturerDTO> created = lecturerFacade.createLecturer(lecturer);
-
-            if(created.isPresent())
-                return created.get();
+            logger.debug("rest updateLecturer()");
+            
+            Optional<LecturerDTO> target = lecturerFacade.getLecturerById(lecturer.getId());
+            if(!target.isPresent())
+                throw new ResourceNotFoundException();
+            
+            lecturer.setListOfLectures(target.get().getListOfLectures());
+            lecturer.setListOfLanguages(target.get().getListOfLanguages());
+            lecturer.setEmail(target.get().getEmail());
+            lecturer.setPasswordHash(target.get().getPasswordHash());
+            lecturer.setUserRole(target.get().getUserRole());
+            Optional<LecturerDTO> updated = lecturerFacade.updateLecturer(lecturer);
+            
+            if(updated.isPresent())
+                return updated.get();
             else
                 throw new InvalidParameterException();
         }

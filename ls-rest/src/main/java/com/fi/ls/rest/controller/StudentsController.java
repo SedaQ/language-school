@@ -12,10 +12,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.fi.ls.dto.student.StudentDTO;
+import com.fi.ls.enums.UserRoles;
+import com.fi.ls.facade.LSUserFacade;
 import com.fi.ls.facade.StudentFacade;
 import com.fi.ls.rest.ApiEndpoints;
 import com.fi.ls.rest.assembler.LectureResourceAssembler;
 import com.fi.ls.rest.assembler.StudentResourceAssembler;
+import com.fi.ls.rest.exception.InvalidParameterException;
 import com.fi.ls.rest.exception.ResourceNotFoundException;
 import com.fi.ls.rest.exception.ResourceNotModifiedException;
 import java.util.ArrayList;
@@ -27,6 +30,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.context.request.WebRequest;
 
 /**
@@ -41,6 +45,9 @@ public class StudentsController {
 
 	@Inject
 	private StudentFacade studentFacade;
+        
+        @Inject
+	private LSUserFacade userFacade;
         
         @Inject
         private StudentResourceAssembler studentResourceAssembler;
@@ -166,5 +173,58 @@ public class StudentsController {
 
             if(!deleted)
                 throw new ResourceNotFoundException();
+        }
+        
+        /**
+         * create student
+         * curl -X POST -i -H "Content-Type: application/json" --data '{"birthNumber":"15","firstName":"Created","surname":"nedele","email":"juhele@nedele.muf"}' http://localhost:8080/pa165/rest/students/create
+         * NOTE: You might need to escape " and ' characters
+         * 
+         * @param student
+         * @return 
+         */
+        @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+        public final StudentDTO createLecturer(@RequestBody StudentDTO student) {
+
+            logger.debug("rest createStudent()");
+            
+            student.setUserRole(UserRoles.ROLE_LECTURER.name());
+            Boolean created = studentFacade.registerUser(student, "default");
+            
+            if(created) {
+                Long studentId = userFacade.getUserByEmail(student.getEmail()).get().getId();
+                return studentFacade.getStudentById(studentId).get();
+            }
+            else
+                throw new InvalidParameterException();
+        }
+        
+        /**
+         * update student
+         * curl -X PUT -i -H "Content-Type: application/json" --data '{"id":4,"birthNumber":"123466","firstName":"Updated","surname":"testS"}' http://localhost:8080/pa165/rest/students/update
+         * NOTE: You might need to escape " and ' characters
+         * 
+         * @param student
+         * @return 
+         */
+        @RequestMapping(value = "/update", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+        public final StudentDTO updateLecturer(@RequestBody StudentDTO student) {
+
+            logger.debug("rest updateStudent()");
+            
+            Optional<StudentDTO> target = studentFacade.getStudentById(student.getId());
+            if(!target.isPresent())
+                throw new ResourceNotFoundException();
+            
+            student.setListOfLectures(target.get().getListOfLectures());
+            student.setEmail(target.get().getEmail());
+            student.setPasswordHash(target.get().getPasswordHash());
+            student.setUserRole(target.get().getUserRole());
+            Optional<StudentDTO> updated = studentFacade.updateStudent(student);
+            
+            if(updated.isPresent())
+                return updated.get();
+            else
+                throw new InvalidParameterException();
         }
 }
