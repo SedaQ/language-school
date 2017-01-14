@@ -1,6 +1,7 @@
 package com.fi.ls.rest.controller;
 
 import com.fi.ls.dto.course.CourseDTO;
+import com.fi.ls.dto.lecture.LectureCreateDTO;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,6 +21,7 @@ import com.fi.ls.rest.assembler.CourseResourceAssembler;
 import com.fi.ls.rest.assembler.LectureResourceAssembler;
 import com.fi.ls.rest.assembler.LecturerResourceAssembler;
 import com.fi.ls.rest.assembler.StudentResourceAssembler;
+import com.fi.ls.rest.exception.InvalidParameterException;
 import com.fi.ls.rest.exception.ResourceNotFoundException;
 import com.fi.ls.rest.exception.ResourceNotModifiedException;
 import java.util.ArrayList;
@@ -32,6 +34,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.context.request.WebRequest;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import org.springframework.web.bind.annotation.RequestBody;
 
 /**
  * @author Lukáš Daubner (410034)
@@ -79,6 +82,7 @@ public class LecturesController {
 
             Resources<Resource<LectureDTO>> lecturesResources = new Resources<>(lectureResourceCollection);
             lecturesResources.add(linkTo(this.getClass()).withSelfRel());
+            lecturesResources.add(linkTo(LecturesController.class).slash("create").withRel("POST"));
 
             final StringBuffer eTag = new StringBuffer("\"");
             eTag.append(Integer.toString(lecturesResources.hashCode()));
@@ -247,5 +251,50 @@ public class LecturesController {
 
             if(!deleted)
                 throw new ResourceNotFoundException();
+        }
+        
+        /**
+         * create lecture
+         * 
+         * @param lecture
+         * @return 
+         */
+        @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+        public final LectureDTO createCourse(@RequestBody LectureCreateDTO lecture) {
+
+            logger.debug("rest createLecture()");
+
+            Optional<LectureDTO> created = lectureFacade.createLecture(lecture);
+
+            if(created.isPresent())
+                return created.get();
+            else
+                throw new InvalidParameterException();
+        }
+        
+        /**
+         * update lecture
+         * 
+         * @param lecture
+         * @return 
+         */
+        @RequestMapping(value = "/update", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+        public final LectureDTO updateCourse(@RequestBody LectureDTO lecture) {
+
+            logger.debug("rest updateLecture()");
+            
+            Optional<LectureDTO> target = lectureFacade.getLectureById(lecture.getId());
+            if(!target.isPresent())
+                throw new ResourceNotFoundException();
+            
+            lecture.setListOfCourses(target.get().getListOfCourses());
+            lecture.setListOfLecturers(target.get().getListOfLecturers());
+            lecture.setListOfStudents(target.get().getListOfStudents());
+            Optional<LectureDTO> updated = lectureFacade.updateLecture(lecture);
+            
+            if(updated.isPresent())
+                return updated.get();
+            else
+                throw new InvalidParameterException();
         }
 }

@@ -26,7 +26,6 @@ public class LanguageResourceAssembler implements ResourceAssembler<LanguageDTO,
             languageResource.add(linkTo(LanguagesController.class).slash(languageDTO.getId()).withSelfRel());
             languageResource.add(linkTo(LecturersController.class).slash(languageDTO.getLecturer().getId()).withRel("lecturer"));
             languageResource.add(linkTo(LanguagesController.class).slash(languageDTO.getId()).withRel("DELETE"));
-            languageResource.add(linkTo(LanguagesController.class).slash("create").withRel("POST"));
             languageResource.add(linkTo(LanguagesController.class).slash("update").withRel("PUT"));
 
         } catch (Exception ex) {

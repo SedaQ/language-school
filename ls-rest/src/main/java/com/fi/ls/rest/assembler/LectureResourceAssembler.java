@@ -27,7 +27,6 @@ public class LectureResourceAssembler implements ResourceAssembler<LectureDTO, R
             lectureResource.add(linkTo(LecturesController.class).slash(lectureDTO.getId()).slash("courses").withRel("courses"));
             lectureResource.add(linkTo(LecturesController.class).slash(lectureDTO.getId()).slash("students").withRel("students"));
             lectureResource.add(linkTo(LecturesController.class).slash(lectureDTO.getId()).withRel("DELETE"));
-            lectureResource.add(linkTo(LecturesController.class).slash("create").withRel("POST"));
             lectureResource.add(linkTo(LecturesController.class).slash("update").withRel("PUT"));
 
         } catch (Exception ex) {
