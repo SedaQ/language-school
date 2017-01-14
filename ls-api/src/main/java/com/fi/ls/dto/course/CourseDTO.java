@@ -5,6 +5,8 @@ import java.util.List;
 
 import com.fi.ls.dto.lecture.LectureDTO;
 import com.fi.ls.enums.ProficiencyLevel;
+import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  * @author Pavel Šeda (441048)
@@ -13,8 +15,11 @@ import com.fi.ls.enums.ProficiencyLevel;
 public class CourseDTO {
 
 	private Long id;
+        @NotEmpty
 	private String name;
+        @NotEmpty
 	private String language;
+        @NotNull
 	private ProficiencyLevel proficiencyLevel;
 	private List<LectureDTO> listOfLectures = new ArrayList<>();
 

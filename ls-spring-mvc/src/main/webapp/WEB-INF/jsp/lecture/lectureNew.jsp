@@ -37,46 +37,52 @@
 	src="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/src/js/bootstrap-datetimepicker.js"></script>
 
 <script type="text/javascript">
-    $(function () {
-        $('#datetimepicker2').datetimepicker({
-            locale: 'ru'
-        });
-    });
+	$(function() {
+		$('#datetimepicker2').datetimepicker({
+			locale : 'ru'
+		});
+	});
 </script>
 
 </head>
 <body>
 	<%@ include file="../common/header.jsp"%>
 
-	<div class="container center_div">
-		<form method="post"
-			action="${pageContext.request.contextPath}/lecture/create"
-			cssClass="form-horizontal">
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+			<h1 class="page-header">
+				Create new Lecture <small></small>
+			</h1>
 			<div>
-				<label>Date Time</label>
-				<div  class='input-group date' id="datetimepicker2">
-					<input type="text" name="dayTime" class="form-control" /> <span
-						class="input-group-addon"> <span
-						class="glyphicon glyphicon-calendar"></span>
-					</span>
-				</div>
+				<form method="post"
+					action="${pageContext.request.contextPath}/lecture/create"
+					cssClass="form-horizontal">
+					<div>
+						<label>Date Time</label>
+						<div class='input-group date' id="datetimepicker2">
+							<input type="text" name="dayTime" class="form-control" /> <span
+								class="input-group-addon"> <span
+								class="glyphicon glyphicon-calendar"></span>
+							</span>
+						</div>
+					</div>
+					<label>Classroom Id</label>
+					<div>
+						<input type="text" name="classroomId" />
+					</div>
+					<label>Topic</label>
+					<div>
+						<input type="text" name="topic" />
+					</div>
+					<br />
+					<button class="btn btn-primary" type="submit">Create
+						lecture</button>
+					<input type="hidden" name="${_csrf.parameterName}"
+						value="${_csrf.token}" />
+				</form>
 			</div>
-			<label>Classroom Id</label>
-			<div>
-				<input type="text" name="classroomId" />
-			</div>
-			<label>Topic</label>
-			<div>
-				<input type="text" name="topic" />
-			</div>
-			<br />
-			<button class="btn btn-primary" type="submit">Create lecture</button>
-			<input type="hidden" name="${_csrf.parameterName}"
-				value="${_csrf.token}" />
-		</form>
+		</div>
 	</div>
-
 	<%@ include file="../common/footer.jsp"%>
-
 </body>
 </html>

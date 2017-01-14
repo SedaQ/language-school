@@ -5,15 +5,20 @@ import java.util.List;
 
 import com.fi.ls.dto.lecture.LectureDTO;
 import com.fi.ls.dto.user.LSUserDTO;
+import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  *
  * @author Matúš
  */
 public class StudentDTO extends LSUserDTO {
-
+    
+    @NotEmpty
     private String firstName;
+    @NotEmpty
     private String surname;
+    @NotEmpty
     private String birthNumber;
     private List<LectureDTO> listOfLectures = new ArrayList<>();
 

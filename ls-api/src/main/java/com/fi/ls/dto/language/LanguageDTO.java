@@ -2,6 +2,7 @@ package com.fi.ls.dto.language;
 
 import com.fi.ls.dto.lecturer.LecturerDTO;
 import com.fi.ls.enums.ProficiencyLevel;
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  *
@@ -10,6 +11,7 @@ import com.fi.ls.enums.ProficiencyLevel;
 public class LanguageDTO {
     
     private Long id;
+    @NotEmpty
     private String language;
     private LecturerDTO lecturer;
     private ProficiencyLevel proficiencyLevel;

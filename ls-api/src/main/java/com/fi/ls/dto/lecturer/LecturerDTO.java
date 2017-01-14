@@ -7,14 +7,18 @@ import java.util.List;
 import com.fi.ls.dto.language.LanguageDTO;
 import com.fi.ls.dto.lecture.LectureDTO;
 import com.fi.ls.dto.user.LSUserDTO;
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  *
  * @author Lukas Daubner (410034)
  */
 public class LecturerDTO extends LSUserDTO {
+    @NotEmpty
     private String nickname;
+    @NotEmpty
     private String firstName;
+    @NotEmpty
     private String surname;
     private List<LanguageDTO> listOfLanguages = new ArrayList<>();
     private List<LectureDTO> listOfLectures = new ArrayList<>();

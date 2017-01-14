@@ -83,7 +83,7 @@ public class LectureController {
 
 	@RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
 	public String view(@PathVariable long id, Model model) {
-            	if (Helpers.hasRole(UserRoles.ROLE_STUDENT.name())) {
+		if (Helpers.hasRole(UserRoles.ROLE_STUDENT.name())) {
 			String email = SecurityContextHolder.getContext().getAuthentication().getName();
 			Long studentId = userFacade.getUserByEmail(email).get().getId();
 			Optional<StudentDTO> studentDTO = studentFacade.getStudentById(studentId);
@@ -100,11 +100,27 @@ public class LectureController {
 		return "lecture/lectureNew";
 	}
 
+	@RequestMapping(value = "/newLectureInCourse", method = RequestMethod.GET)
+	public String newLectureToCourse(@PathVariable long id, Model model) {
+		logger.debug("newLectureToCourse");
+		model.addAttribute("lectureCreate", new LectureCreateDTO());
+		model.addAttribute("LectureInCourse", id);
+		return "lecture/lectureNew";
+	}
+
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public String createLecture(@RequestParam(value = "dayTime") String dayTime,
+	public String createLecture(
+                        @Valid @ModelAttribute("lectureCreate") LectureCreateDTO formBean,
+			BindingResult bindingResult,
+                        @RequestParam(value = "dayTime") String dayTime,
 			@RequestParam(value = "classroomId") String classroomId, @RequestParam(value = "topic") String topic,
 			Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder) {
 		logger.debug("create");
+                if (bindingResult.hasErrors()) {
+                    
+                    return "lecture/lectureNew";
+                    
+                }
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
 
 		LocalDateTime localDateTime = LocalDateTime.parse(dayTime, formatter);
@@ -122,11 +138,11 @@ public class LectureController {
 			BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes,
 			UriComponentsBuilder uriBuilder) {
 		logger.debug("update");
-                if (bindingResult.hasErrors()) {
-                    
-                    return "lecture/lectureEdit";
-                    
-                }
+		if (bindingResult.hasErrors()) {
+
+			return "lecture/lectureEdit";
+
+		}
 		Optional<LectureDTO> cdto = lectureFacade.updateLecture(formBean);
 		return "redirect:" + uriBuilder.path("/lecture/view/{id}").buildAndExpand(id).encode().toUriString();
 	}

@@ -52,6 +52,11 @@ public class LanguageController {
 			BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes,
 			UriComponentsBuilder uriBuilder) {
 		logger.debug("create");
+                if (bindingResult.hasErrors()) {
+                    
+                    return "language/languageNew";
+                    
+                }
 		Optional<LanguageDTO> dto = languageFacade.createLanguage(language);
 		return "redirect:" + uriBuilder.pathSegment("lecturer","view", dto.get().getLecturer().getId().toString()).buildAndExpand().encode().toUriString();
         }
@@ -69,6 +74,11 @@ public class LanguageController {
 			BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes,
 			UriComponentsBuilder uriBuilder) {
 		logger.debug("update");
+                if (bindingResult.hasErrors()) {
+                    
+                    return "language/languageEdit";
+                    
+                }
 		Optional<LanguageDTO> dto = languageFacade.updateLanguage(language);
 		return "redirect:" + uriBuilder.pathSegment("lecturer","view", dto.get().getLecturer().getId().toString()).buildAndExpand().encode().toUriString();
 	}

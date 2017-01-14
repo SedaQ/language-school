@@ -4,6 +4,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.fi.ls.enums.ProficiencyLevel;
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  * @author Pavel Šeda (441048)
@@ -11,11 +12,11 @@ import com.fi.ls.enums.ProficiencyLevel;
  */
 public class CourseCreateDTO {
 
-	@NotNull
+	@NotEmpty
 	@Size(min = 2, max = 30)
 	private String name;
 
-	@NotNull
+	@NotEmpty
 	private String language;
 
 	@NotNull

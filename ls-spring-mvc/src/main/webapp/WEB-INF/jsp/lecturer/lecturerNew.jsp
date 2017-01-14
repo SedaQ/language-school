@@ -13,36 +13,47 @@
 </head>
 <body>
 	<%@ include file="../common/header.jsp"%>
-
-	<div class="container center_div">
-		<form:form method="post"
-			action="${pageContext.request.contextPath}/lecturer/create"
-			modelAttribute="lecturerCreate" cssClass="form-horizontal">
-			<div>
-				<label path="email">E-mail</label>
-				<form:input path="email" />
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+			<h1 class="page-header">
+				Create new Lecturer <small></small>
+			</h1>
+			<div class="container center_div">
+				<form:form method="post"
+					action="${pageContext.request.contextPath}/lecturer/create"
+					modelAttribute="lecturerCreate" cssClass="form-horizontal">
+					<label path="email">E-mail</label>
+					<div>
+						<form:input path="email" />
+                                                <form:errors path="email" />
+					</div>
+					<label path="passwordHash">Password</label>
+					<div>
+						<form:input type="password" path="passwordHash" />
+                                                <form:errors path="passwordHash" />
+					</div>
+					<label path="nickname">Nickname</label>s
+					<div>
+						<form:input path="nickname" />
+                                                <form:errors path="nickname" />
+					</div>
+					<label path="firstName">First name</label>
+					<div>
+						<form:input path="firstName" />
+                                                <form:errors path="firstName" />
+					</div>
+					<label path="surname">Surname</label>
+					<div>
+						<form:input path="surname" />
+                                                <form:errors path="surname" />
+					</div>
+					<br />
+					<button class="btn btn-primary" type="submit">Create
+						lecturer</button>
+				</form:form>
 			</div>
-			<div>
-				<label path="passwordHash">Password</label>
-				<form:input path="passwordHash" />
-			</div>
-			<div>
-				<label path="nickname">Nickname</label>
-				<form:input path="nickname" />
-			</div>
-			<div>
-				<label path="firstName">First name</label>
-				<form:input path="firstName" />
-			</div>
-			<div>
-				<label path="surname">Surname</label>
-				<form:input path="surname" />
-			</div>
-			<button class="btn btn-primary" type="submit">Create
-				lecturer</button>
-		</form:form>
+		</div>
 	</div>
-
 	<%@ include file="../common/footer.jsp"%>
 </body>
 </html>
