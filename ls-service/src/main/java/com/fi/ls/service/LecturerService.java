@@ -110,11 +110,4 @@ public interface LecturerService {
 	 * matches the records.
 	 */
 	public boolean authenticate(Lecturer u, String password);
-        
-        /**
-	 * add lecture to lecturer
-	 * @param l lecture which will be added to lecturer
-	 * @param lr lecturer to which lecture will be added
-	 */
-	public void addLecture(Lecturer lr, Lecture l);
 }

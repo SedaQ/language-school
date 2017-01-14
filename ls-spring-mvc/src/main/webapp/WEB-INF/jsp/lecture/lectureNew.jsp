@@ -39,7 +39,7 @@
 <script type="text/javascript">
 	$(function() {
 		$('#datetimepicker2').datetimepicker({
-			locale : 'eng'
+			locale : 'ru'
 		});
 	});
 </script>
@@ -73,9 +73,6 @@
 					<label>Topic</label>
 					<div>
 						<input type="text" name="topic" />
-					</div>
-                                        <div>
-						<input type="hidden" name="courseId" value="${courseId}" />
 					</div>
 					<br />
 					<button class="btn btn-primary" type="submit">Create

@@ -37,15 +37,18 @@
 						<td><c:out value="${lecturer.nickname}" /></td>
 						<td><c:out value="${lecturer.firstName}" /></td>
 						<td><c:out value="${lecturer.surname}" /></td>
-						<td><sec:authorize access="hasRole('ROLE_ADMIN')">
+						<td><sec:authorize
+								access="hasAnyRole('ROLE_ADMIN', 'ROLE_LECTURER')">
 								<a
 									href="${pageContext.request.contextPath}/lecturer/edit/${lecturer.id}"
 									class="btn btn-primary">Edit</a>
-
-								<a
-									href="${pageContext.request.contextPath}/lecturer/delete/${lecturer.id}"
-									class="btn btn-primary">Delete</a>
 							</sec:authorize></td>
+						<sec:authorize access="hasRole('ROLE_ADMIN')">
+							<a
+								href="${pageContext.request.contextPath}/lecturer/delete/${lecturer.id}"
+								class="btn btn-primary">Delete</a>
+						</sec:authorize>
+						</td>
 
 					</tr>
 				</tbody>
@@ -97,7 +100,7 @@
 				</thead>
 
 				<tbody>
-					<c:forEach items="${lecturerLectures}" var="lecture">
+					<c:forEach items="${lectures}" var="lecture">
 						<tr>
 							<td><c:out value="${lecture.id}" /></td>
 							<td><c:out value="${lecture.dayTime}" /></td>
@@ -105,6 +108,7 @@
 							<td><c:out value="${lecture.topic}" /></td>
 							<td><my:a href="/lecture/view/${lecture.id}"
 									class="btn btn-primary">view</my:a></td>
+							<!-- 
 							<td><sec:authorize access="hasRole('ROLE_STUDENT')">
 									<c:choose>
 										<c:when test="${!studentEnrolledLectures.contains(lecture)}">
@@ -119,13 +123,14 @@
 										</c:otherwise>
 									</c:choose>
 								</sec:authorize></td>
+								 -->
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
 
 			<sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_LECTURER')">
-				<my:a href="/lecture/newLecturers/${lecturer.id}" class="btn btn-primary">Add new lecture</my:a>
+				<my:a href="/lecture/new" class="btn btn-primary">Add new lecture</my:a>
 			</sec:authorize>
 		</div>
 	</div>

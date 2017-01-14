@@ -102,11 +102,6 @@ public class Lecturer extends LSUser {
 		listOfLanguages.add(lan);
 		lan.setLecturer(this);
 	}
-        
-        public void addLecture(Lecture l){
-            listOfLectures.add(l);
-            l.addLecturer(this);
-        }
 
 	@Override
 	public boolean equals(Object obj) {

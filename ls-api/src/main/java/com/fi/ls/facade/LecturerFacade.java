@@ -102,12 +102,4 @@ public interface LecturerFacade {
 	 * @return true, if successful
 	 */
 	public Boolean authenticate(LecturerDTO u);
-        
-        /**
-	 * add lecture to lecturer
-	 * @param l lecture which will be added to lecturer
-	 * @param lr lecturer to which lecture will be added
-         * @return true, if successfully added
-	 */
-	public Boolean addLecture(LecturerDTO lr, LectureDTO l);
 }

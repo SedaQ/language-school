@@ -201,19 +201,5 @@ public class LecturerFacadeImpl implements LecturerFacade {
 			return false;
 		}
 	}
-        
-        @Override
-        public Boolean addLecture(LecturerDTO lr, LectureDTO l){
-            if (lr == null || l == null)
-			throw new IllegalArgumentException("LecturerDTO lr parameter or LectureDTO l is null in addLecture method");
-		try {
-			lecturerService.addLecture(beanMapping.mapTo(lr, Lecturer.class).get(),
-					beanMapping.mapTo(l, Lecture.class).get());
-			return true;
-		} catch (ServiceLayerException | NoSuchElementException ex) {
-			logger.warn("addLecture method invokes exception: " + ex);
-			return false;
-		}
-        }
 	
 }
