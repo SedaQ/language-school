@@ -179,8 +179,9 @@ public class LectureController {
 
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
 	public String deleteLecture(@PathVariable Long id, Model model, UriComponentsBuilder uriBuilder) {
-		Long myID = lectureFacade.getLectureById(id).get().getListOfCourses().get(0).getId();
-
+            
+                logger.debug("delete");
+                
 		for (CourseDTO courseDTO : lectureFacade.getLectureById(id).get().getListOfCourses()) {
 
 			List<LectureDTO> lectureList;
@@ -188,7 +189,6 @@ public class LectureController {
 			for (LectureDTO l : courseDTO.getListOfLectures()) {
 				lectureList.add(l);
 			}
-			// lectureList = courseDTO.getListOfLectures();
 			lectureList.remove(lectureFacade.getLectureById(id).get());
 			courseDTO.setListOfLectures(lectureList);
 			courseFacade.updateCourse(courseDTO);
@@ -202,7 +202,6 @@ public class LectureController {
 			for (LectureDTO l : lecturerDTO.getListOfLectures()) {
 				lectureList.add(l);
 			}
-			// lectureList = lecturerDTO.getListOfLectures();
 			lectureList.remove(lectureFacade.getLectureById(id).get());
 			lecturerDTO.setListOfLectures(lectureList);
 			lecturerFacade.updateLecturer(lecturerDTO);
@@ -216,16 +215,13 @@ public class LectureController {
 			for (LectureDTO l : studentDTO.getListOfLectures()) {
 				lectureList.add(l);
 			}
-			// lectureList = studentDTO.getListOfLectures();
 			lectureList.remove(lectureFacade.getLectureById(id).get());
 			studentDTO.setListOfLectures(lectureList);
 			studentFacade.updateStudent(studentDTO);
 
 		}
 
-		logger.debug("delete");
-
 		lectureFacade.deleteLecture(id);
-		return "redirect:" + uriBuilder.path("/course/view/{id}").buildAndExpand(myID).encode().toUriString();
+		return "redirect:" + uriBuilder.path("/lecture/list").toUriString();
 	}
 }
