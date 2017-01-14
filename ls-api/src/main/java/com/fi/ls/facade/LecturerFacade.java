@@ -77,13 +77,21 @@ public interface LecturerFacade {
 	 */
 	public Boolean deleteLectures(LecturerDTO lect, List<LectureDTO> l);
         
-    /**
-     * finds all languages of given lecturer
-     * 
-     * @param l specific lecturer 
-     * @return languages of given lecturer
-     */
-    public List<LanguageDTO> findAllLecturerLanguages(LecturerDTO l);
+        /**
+         * finds all languages of given lecturer
+         * 
+         * @param l specific lecturer 
+         * @return languages of given lecturer
+         */
+        public List<LanguageDTO> findAllLecturerLanguages(LecturerDTO l);
+
+        /**
+	 * add lecture to lecturer
+	 * @param lect lecture to add
+         * @param l lecturer to which lecture will be added
+         * @return true, if successfully added
+         */
+        public Boolean addLecture(LecturerDTO l, LectureDTO lect);
     
 	/**
 	 * Register the given user with the given unencrypted password.
