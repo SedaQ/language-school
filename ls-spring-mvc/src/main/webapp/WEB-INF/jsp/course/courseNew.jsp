@@ -26,12 +26,12 @@
 					<div class="form-group">
 						<label path="name">Name</label>
 						<form:input path="name" />
-                                                <form:errors path="name" />
+                        <form:errors path="name" />
 					</div>
 					<div class="form-group row">
 						<label path="language">Language</label>
 						<form:input path="language" />
-                                                <form:errors path="language" />
+                        <form:errors path="language" />
 					</div>
 					<div class="form-group row">
 						<label path="proficiencyLevel">Proficiency level</label>
@@ -40,7 +40,7 @@
 								<form:option value="${proflvl}">${proflvl}</form:option>
 							</c:forEach>
 						</form:select>
-                                                <form:errors path="proficiencyLevel" />
+                        <form:errors path="proficiencyLevel" />
 					</div>
 					<div>
 						<button class="btn btn-primary" type="submit">Create

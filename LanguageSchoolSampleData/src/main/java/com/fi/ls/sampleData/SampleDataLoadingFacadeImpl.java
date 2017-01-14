@@ -59,7 +59,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
 		user5.setNickname("Boss");
 		user5.setFirstName("Alibaba");
 		user5.setSurname("Buh");
-
+		
 		Student s1 = new Student();
 		s1.setFirstName("Arthur");
 		s1.setSurname("Dent");
