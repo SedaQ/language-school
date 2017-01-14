@@ -173,6 +173,20 @@ public class LecturerFacadeImpl implements LecturerFacade {
 			return Collections.emptyList();
 		}
 	}
+        
+        @Override
+        public Boolean addLecture(LecturerDTO l, LectureDTO lect) {
+                    if (lect == null || l == null)
+                            throw new IllegalArgumentException("LectureDTO elct parameter or LecturerDTO l is null in addLecture method");
+                    try {
+                            lecturerService.addLecture(beanMapping.mapTo(l, Lecturer.class).get(),
+                                    beanMapping.mapTo(lect, Lecture.class).get());
+                            return true;
+                    } catch (ServiceLayerException | NoSuchElementException ex) {
+                            logger.warn("addLecture method invokes exception: " + ex);
+                            return false;
+                    }
+        }
 
 	@Override
 	public Boolean registerUser(LecturerDTO u, String unencryptedPassword) {
@@ -201,5 +215,4 @@ public class LecturerFacadeImpl implements LecturerFacade {
 			return false;
 		}
 	}
-	
 }

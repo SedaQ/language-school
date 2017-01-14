@@ -95,6 +95,13 @@ public interface LecturerService {
      * @exception IllegalArgumentException
      */
     public Set<Language> findAllLecturerLanguages(Lecturer l);
+        
+        /**
+	 * add lecture to lecturer
+         * @param l lecturer to which lecture will be added
+         * @param lect lecture to add
+         */
+        public void addLecture(Lecturer l, Lecture lect);
 
 	/**
 	 * Register the given user with the given unencrypted password.

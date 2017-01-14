@@ -125,7 +125,7 @@
 			</table>
 
 			<sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_LECTURER')">
-				<my:a href="/lecture/new" class="btn btn-primary">Add new lecture</my:a>
+				<my:a href="lecture/new/lecturer=${lecturer.id}" class="btn btn-primary">Add new lecture</my:a>
 			</sec:authorize>
 		</div>
 	</div>
