@@ -69,6 +69,7 @@ public class StudentsController {
 
             Resources<Resource<StudentDTO>> studentsResources = new Resources<>(studentResourceCollection);
             studentsResources.add(linkTo(this.getClass()).withSelfRel());
+            studentsResources.add(linkTo(StudentsController.class).slash("create").withRel("POST"));
 
             final StringBuffer eTag = new StringBuffer("\"");
             eTag.append(Integer.toString(studentsResources.hashCode()));

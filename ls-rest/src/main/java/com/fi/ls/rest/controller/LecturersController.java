@@ -81,6 +81,7 @@ public class LecturersController {
 
             Resources<Resource<LecturerDTO>> lecturersResources = new Resources<>(languageResourceCollection);
             lecturersResources.add(linkTo(this.getClass()).withSelfRel());
+            lecturersResources.add(linkTo(LecturersController.class).slash("create").withRel("POST"));
 
             final StringBuffer eTag = new StringBuffer("\"");
             eTag.append(Integer.toString(lecturersResources.hashCode()));

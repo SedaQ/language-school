@@ -10,12 +10,13 @@ import javax.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.fi.ls.dto.language.LanguageDTO;
+import com.fi.ls.dto.language.*;
+import com.fi.ls.dto.lecturer.LecturerDTO;
 import com.fi.ls.facade.LanguageFacade;
+import com.fi.ls.facade.LecturerFacade;
 import com.fi.ls.rest.ApiEndpoints;
 import com.fi.ls.rest.assembler.LanguageResourceAssembler;
-import com.fi.ls.rest.exception.ResourceNotFoundException;
-import com.fi.ls.rest.exception.ResourceNotModifiedException;
+import com.fi.ls.rest.exception.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
@@ -25,6 +26,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.context.request.WebRequest;
 
 /**
@@ -39,6 +41,9 @@ public class LanguagesController {
 
 	@Inject
 	private LanguageFacade languageFacade;
+        
+        @Inject
+	private LecturerFacade lecturerFacade;
         
         @Inject
         private LanguageResourceAssembler languageResourceAssembler;
@@ -64,6 +69,7 @@ public class LanguagesController {
 
             Resources<Resource<LanguageDTO>> languagesResources = new Resources<>(languageResourceCollection);
             languagesResources.add(linkTo(this.getClass()).withSelfRel());
+            languagesResources.add(linkTo(LanguagesController.class).slash("create").withRel("POST"));
 
             final StringBuffer eTag = new StringBuffer("\"");
             eTag.append(Integer.toString(languagesResources.hashCode()));
@@ -124,5 +130,61 @@ public class LanguagesController {
 
             if(!deleted)
                 throw new ResourceNotFoundException();
+        }
+        
+        /**
+         * create language
+         * curl -X POST -i -H "Content-Type: application/json" --data '{"language":"Created","lecturerId":"2","proficiencyLevel":"B1"}' http://localhost:8080/pa165/rest/languages/create
+         * NOTE: You might need to escape " and ' characters
+         * 
+         * @param language
+         * @return 
+         */
+        @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+        public final LanguageDTO createLanguage(@RequestBody LanguageCreateDTO language) {
+
+            logger.debug("rest createLanguage()");
+            
+            Optional<LecturerDTO> lecturer = lecturerFacade.getLecturerById(language.getLecturerId());
+            if(!lecturer.isPresent())
+                throw new InvalidParameterException();
+            
+            LanguageDTO filledLanguage = new LanguageDTO();
+            filledLanguage.setLanguage(language.getLanguage());
+            filledLanguage.setProficiencyLevel(language.getProficiencyLevel());
+            filledLanguage.setLecturer(lecturer.get());
+            
+            Optional<LanguageDTO> created = languageFacade.createLanguage(filledLanguage);
+
+            if(created.isPresent())
+                return created.get();
+            else
+                throw new InvalidParameterException();
+        }
+        
+        /**
+         * update language
+         * curl -X PUT -i -H "Content-Type: application/json" --data '{"id":2,"language":"Updated","proficiencyLevel":"B1"}' http://localhost:8080/pa165/rest/languages/update
+         * NOTE: You might need to escape " and ' characters
+         * 
+         * @param language
+         * @return 
+         */
+        @RequestMapping(value = "/update", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+        public final LanguageDTO updateCourse(@RequestBody LanguageDTO language) {
+
+            logger.debug("rest updateLanguage()");
+            
+            Optional<LanguageDTO> target = languageFacade.getLanguageById(language.getId());
+            if(!target.isPresent())
+                throw new ResourceNotFoundException();
+            
+            language.setLecturer(target.get().getLecturer());
+            Optional<LanguageDTO> updated = languageFacade.updateLanguage(language);
+            
+            if(updated.isPresent())
+                return updated.get();
+            else
+                throw new InvalidParameterException();
         }
 }
