@@ -4,16 +4,12 @@
 <html>
 <head>
 <title>LS Contact Us</title>
-<jsp:include page="common/head.jsp" />
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/assets/css/contactus.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/assets/css/bottom.css">
+<%@ include file="common/head.jsp"%>
 </head>
+        <%@ include file="common/header.jsp"%>
 <body>
-	<!-- header -->
-	<%@ include file="common/header.jsp"%>
-	<!--/header-->
+        <link rel="stylesheet"	href="${pageContext.request.contextPath}/assets/css/contactus.css">
+        <link rel="stylesheet"	href="${pageContext.request.contextPath}/assets/css/bottom.css">
 	<section id="contact-info">
 		<div class="container">
 			<div class="row">
@@ -137,15 +133,14 @@
 	<jsp:include page="common/bottom.jsp" />
 	<!--/bottom-->
 
-
 	<script src="${pageContext.request.contextPath}/assets/js/jquery.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/assets/bootstrap/js/bootstrap.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/assets/js/jquery.prettyPhoto.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/assets/js/jquery.isotope.min.js"></script>
+<!--
+	<script	src="${pageContext.request.contextPath}/assets/bootstrap/js/bootstrap.min.js"></script>
+-->
+        <script	src="${pageContext.request.contextPath}/assets/js/jquery.prettyPhoto.js"></script>
+	<script	src="${pageContext.request.contextPath}/assets/js/jquery.isotope.min.js"></script>
 	<script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
 	<script src="${pageContext.request.contextPath}/assets/js/wow.min.js"></script>
+
 </body>
 </html>
