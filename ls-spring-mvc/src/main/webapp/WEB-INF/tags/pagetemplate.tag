@@ -89,13 +89,13 @@
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="${pageContext.request.contextPath}/userDetail">
-							<sec:authorize var="loggedIn" access="isAuthenticated()">
-								<c:choose>
-									<c:when test="${loggedIn}">
-										<%=request.getUserPrincipal().getName()%>
-									</c:when>
-								</c:choose>
-							</sec:authorize>
+						<sec:authorize var="loggedIn" access="isAuthenticated()">
+							<c:choose>
+								<c:when test="${loggedIn}">
+									<%=request.getUserPrincipal().getName()%>
+								</c:when>
+							</c:choose>
+						</sec:authorize>
 					</a></li>
 				</ul>
 			</div>

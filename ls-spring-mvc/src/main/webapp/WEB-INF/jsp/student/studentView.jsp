@@ -5,8 +5,16 @@
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 
-<my:pagetemplate title="Language school Student">
-	<jsp:attribute name="body">
+<!DOCTYPE html>
+<html>
+<head>
+<title>Language School Student</title>
+<%@ include file="../common/head.jsp"%>
+</head>
+<body>
+	<%@ include file="../common/header.jsp"%>
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
 			<h1 class="page-header">
 				Student details <small></small>
 			</h1>
@@ -31,12 +39,12 @@
 						<td><c:out value="${student.birthNumber}" /></td>
 						<td><sec:authorize access="hasRole('ROLE_ADMIN')">
 								<a
-								href="${pageContext.request.contextPath}/student/edit/${student.id}"
-								class="btn btn-primary">Edit</a>
+									href="${pageContext.request.contextPath}/student/edit/${student.id}"
+									class="btn btn-primary">Edit</a>
 								<a
-								href="${pageContext.request.contextPath}/student/delete/${student.id}"
-								class="btn btn-primary"
-								onclick="return confirm('Are you sure you want to delete this student?')">Delete</a>
+									href="${pageContext.request.contextPath}/student/delete/${student.id}"
+									class="btn btn-primary"
+									onclick="return confirm('Are you sure you want to delete this student?')">Delete</a>
 							</sec:authorize></td>
 					</tr>
 				</tbody>
@@ -62,17 +70,21 @@
 							<td><c:out value="${lecture.classroomId}" /></td>
 							<td><c:out value="${lecture.topic}" /></td>
 							<td><my:a href="/lecture/view/${lecture.id}"
-								class="btn btn-primary">view</my:a></td>
+									class="btn btn-primary">view</my:a></td>
 							<td><sec:authorize access="hasRole('ROLE_STUDENT')">
 									<c:if test="${loggedStudentId == student.id}">
 										<a
-										href="${pageContext.request.contextPath}/student/unenrollLecture/${lecture.id}"
-										class="btn btn-primary">Unenroll</a>
+											href="${pageContext.request.contextPath}/student/unenrollLecture/${lecture.id}"
+											class="btn btn-primary">Unenroll</a>
 									</c:if>
 								</sec:authorize></td>
 						</tr>
 					</c:forEach>
 				</tbody>
+
 			</table>
-	</jsp:attribute>
-</my:pagetemplate>
+		</div>
+	</div>
+	<%@ include file="../common/footer.jsp"%>
+</body>
+</html>
