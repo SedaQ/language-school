@@ -4,18 +4,10 @@
 <%@ taglib tagdir="/WEB-INF/tags" prefix="my"%>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="my"%>
 
-<!DOCTYPE html>
-<html>
-<head>
-<title>Language School courses</title>
-<%@ include file="../common/head.jsp"%>
-</head>
-<body>
-	<%@ include file="../common/header.jsp"%>
-
-	<div class="row">
-		<div class="col-md-8 col-md-offset-2">
+<my:pagetemplate title="Language school Course">
+	<jsp:attribute name="body">
 			<h1 class="page-header">
 				List of all courses <small></small>
 			</h1>
@@ -38,7 +30,7 @@
 							<td><c:out value="${course.language}" /></td>
 							<td><c:out value="${course.proficiencyLevel}" /></td>
 							<td><my:a href="/course/view/${course.id}"
-									class="btn btn-primary">view</my:a></td>
+								class="btn btn-primary">view</my:a></td>
 							<td><sec:authorize access="hasRole('ROLE_STUDENT')">
 									<c:set var="enrollable" value="false" />
 									<c:forEach items="${course.listOfLectures}" var="lecture">
@@ -49,13 +41,13 @@
 									<c:choose>
 										<c:when test="${enrollable == 'true'}">
 											<a
-												href="${pageContext.request.contextPath}/student/enrollToCourse/${course.id}"
-												class="btn btn-primary">Enroll to Course</a>
+											href="${pageContext.request.contextPath}/student/enrollToCourse/${course.id}"
+											class="btn btn-primary">Enroll to Course</a>
 										</c:when>
 										<c:otherwise>
 											<a
-												href="${pageContext.request.contextPath}/student/unenrollCourse/${course.id}"
-												class="btn btn-primary">Unenroll</a>
+											href="${pageContext.request.contextPath}/student/unenrollCourse/${course.id}"
+											class="btn btn-primary">Unenroll</a>
 										</c:otherwise>
 									</c:choose>
 								</sec:authorize></td>
@@ -66,8 +58,5 @@
 			<sec:authorize access="hasRole('ROLE_LECTURER')">
 				<my:a href="/course/new/" class="btn btn-primary">New Course</my:a>
 			</sec:authorize>
-		</div>
-	</div>
-</body>
-<%@ include file="../common/footer.jsp"%>
-</html>
+	</jsp:attribute>
+</my:pagetemplate>

@@ -4,25 +4,17 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="my"%>
 
-<!DOCTYPE html>
-<html>
-<head>
-<title>Language School Course</title>
-<%@ include file="../common/head.jsp"%>
-</head>
-<body>
-	<%@ include file="../common/header.jsp"%>
-
-	<div class="row">
-		<div class="col-md-8 col-md-offset-2">
+<my:pagetemplate title="Language school Course">
+	<jsp:attribute name="body">
 			<h1 class="page-header">
 				Create new Course <small></small>
 			</h1>
 			<div class="container center_div">
 				<form:form method="post"
-					action="${pageContext.request.contextPath}/course/create"
-					modelAttribute="courseCreate" cssClass="form-horizontal">
+				action="${pageContext.request.contextPath}/course/create"
+				modelAttribute="courseCreate" cssClass="form-horizontal">
 					<div class="form-group">
 						<label path="name">Name</label>
 						<form:input path="name" />
@@ -48,8 +40,5 @@
 					</div>
 				</form:form>
 			</div>
-		</div>
-	</div>
-</body>
-<%@ include file="../common/footer.jsp"%>
-</html>
+	</jsp:attribute>
+</my:pagetemplate>

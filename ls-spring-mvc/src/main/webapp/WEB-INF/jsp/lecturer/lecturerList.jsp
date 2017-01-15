@@ -5,16 +5,8 @@
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 
-<!DOCTYPE html>
-<html>
-<head>
-<title>Language School Lecturers</title>
-<%@ include file="../common/head.jsp"%>
-</head>
-<body>
-	<%@ include file="../common/header.jsp"%>
-	<div class="row">
-		<div class="col-md-8 col-md-offset-2">
+<my:pagetemplate title="Language school Lecturer">
+	<jsp:attribute name="body">
 			<h1 class="page-header">
 				List of all lecturers <small></small>
 			</h1>
@@ -39,7 +31,7 @@
 							<td><c:out value="${lecturer.firstName}" /></td>
 							<td><c:out value="${lecturer.surname}" /></td>
 							<td><my:a href="/lecturer/view/${lecturer.id}"
-									class="btn btn-primary">view</my:a></td>
+								class="btn btn-primary">view</my:a></td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -48,9 +40,5 @@
 			<sec:authorize access="hasRole('ROLE_ADMIN')">
 				<my:a href="/lecturer/new/" class="btn btn-primary">New lecturer</my:a>
 			</sec:authorize>
-
-		</div>
-	</div>
-	<%@ include file="../common/footer.jsp"%>
-</body>
-</html>
+	</jsp:attribute>
+</my:pagetemplate>

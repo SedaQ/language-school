@@ -5,17 +5,8 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="my"%>
 
-<!DOCTYPE html>
-<html>
-<head>
-<title>Language School lecture</title>
-<%@ include file="../common/head.jsp"%>
-</head>
-<body>
-	<%@ include file="../common/header.jsp"%>
-
-	<div class="row">
-		<div class="col-md-8 col-md-offset-2">
+<my:pagetemplate title="Language school Lecturer">
+	<jsp:attribute name="body">
 			<h1 class="page-header">
 				Lecturer details <small></small>
 			</h1>
@@ -127,8 +118,5 @@
 			<sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_LECTURER')">
 				<my:a href="${pageContext.request.contextPath}/../lecture/new/lecturer=${lecturer.id}" class="btn btn-primary">Add new lecture</my:a>
 			</sec:authorize>
-		</div>
-	</div>
-	<%@ include file="../common/footer.jsp"%>
-</body>
-</html>
+	</jsp:attribute>
+</my:pagetemplate>

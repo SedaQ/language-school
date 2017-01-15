@@ -4,17 +4,10 @@
 <%@ taglib tagdir="/WEB-INF/tags" prefix="my"%>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="my"%>
 
-<!DOCTYPE html>
-<html>
-<head>
-<title>Language school Student</title>
-<%@ include file="../common/head.jsp"%>
-</head>
-<body>
-	<%@ include file="../common/header.jsp"%>
-	<div class="row">
-		<div class="col-md-8 col-md-offset-2">
+<my:pagetemplate title="Language school Admin">
+	<jsp:attribute name="body">
 			<h1 class="page-header">
 				Admin details <small></small>
 			</h1>
@@ -33,8 +26,5 @@
 					</tr>
 				</tbody>
 			</table>
-		</div>
-	</div>
-	<%@ include file="../common/footer.jsp"%>
-</body>
-</html>
+	</jsp:attribute>
+</my:pagetemplate>
