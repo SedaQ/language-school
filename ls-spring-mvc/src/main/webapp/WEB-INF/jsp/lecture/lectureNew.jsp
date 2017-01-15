@@ -53,7 +53,7 @@
 			<h1 class="page-header">
 				Create new Lecture <small></small>
 			</h1>
-			<div>
+			<div class="col-md-3">
 				<form:form method="post"
 					action="${pageContext.request.contextPath}/lecture/create"
 					cssClass="form-horizontal">
