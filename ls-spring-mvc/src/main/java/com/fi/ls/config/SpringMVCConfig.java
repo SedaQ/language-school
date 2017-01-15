@@ -109,5 +109,4 @@ public class SpringMVCConfig extends WebMvcConfigurerAdapter {
 		logger.debug("registering JSR-303 validator");
 		return new LocalValidatorFactoryBean();
 	}
-
 }

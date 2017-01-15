@@ -54,7 +54,7 @@
 				Create new Lecture <small></small>
 			</h1>
 			<div class="col-md-3">
-				<form:form method="post"
+                            <form:form method="post" enctype="multipart/form-data;charset=UTF-8"
 					action="${pageContext.request.contextPath}/lecture/create"
 					cssClass="form-horizontal"
                                         modelAttribute="lectureCreate">

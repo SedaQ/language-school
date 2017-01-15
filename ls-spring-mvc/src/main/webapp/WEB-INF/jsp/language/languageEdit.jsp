@@ -10,7 +10,7 @@
 				Edit Language <small></small>
 			</h1>
 			<div>
-				<form:form class="table table-striped" method="post"
+				<form:form class="table table-striped" method="post" enctype="multipart/form-data;charset=UTF-8"
 				action="${pageContext.request.contextPath}/language/update/${language.id}"
 				modelAttribute="language">
 					<form:hidden path="id" />

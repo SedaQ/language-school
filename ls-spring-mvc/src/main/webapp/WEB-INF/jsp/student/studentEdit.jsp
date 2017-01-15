@@ -10,7 +10,7 @@
 				Edit Student <small></small>
 			</h1>
 			<div class="container center_div">
-				<form:form class="table table-striped" method="post"
+				<form:form class="table table-striped" method="post" enctype="multipart/form-data;charset=UTF-8"
 				action="${pageContext.request.contextPath}/student/update/${student.id}"
 				modelAttribute="student">
 					<label path="firstName">First name</label>

@@ -10,7 +10,7 @@
 				Create new Lecturer <small></small>
 			</h1>
 			<div class="container center_div">
-				<form:form method="post"
+				<form:form method="post" enctype="multipart/form-data;charset=UTF-8"
 					action="${pageContext.request.contextPath}/lecturer/create"
 					modelAttribute="lecturerCreate" cssClass="form-horizontal">
 					<label path="email">E-mail</label>
