@@ -39,7 +39,7 @@
 <script type="text/javascript">
 	$(function() {
 		$('#datetimepicker2').datetimepicker({
-			locale : 'en'
+			locale : 'ru'
 		});
 	});
 </script>
@@ -73,6 +73,14 @@
 					<label>Topic</label>
 					<div>
 						<input type="text" name="topic" />
+					</div>
+                                        <label path="proficiencyLevel">Belongs to course</label>
+					<div>
+						<select name="courseName">
+							<c:forEach items="${courses}" var="crs">
+								<option value="${crs}" ${crs == selectedCourse ? 'selected' : ''}>${crs}</option>
+							</c:forEach>
+						</select>
 					</div>
                                         <div>
 						<input type="hidden" name="courseId" value="${courseId}" />

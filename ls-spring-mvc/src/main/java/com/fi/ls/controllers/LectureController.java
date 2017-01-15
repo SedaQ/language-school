@@ -96,6 +96,15 @@ public class LectureController {
 	@RequestMapping(value = "/new", method = RequestMethod.GET)
 	public String newLecture(Model model) {
 		logger.debug("new");
+                List<String> courses = new ArrayList<String>();
+                courses.add("No course");
+                for (CourseDTO courseDTO : courseFacade.getAllCourses()) {
+
+                    courses.add(courseDTO.getName());
+                    
+		}
+                model.addAttribute("selectedCourse", "No course");
+                model.addAttribute("courses", courses);
 		model.addAttribute("lectureCreate", new LectureCreateDTO());
                 model.addAttribute("courseId", null);
                 model.addAttribute("lecturerId", null);
@@ -105,6 +114,15 @@ public class LectureController {
         @RequestMapping(value = "/new/lecturer={lecturerId}", method = RequestMethod.GET)
 	public String newLectureWithLecturer(@PathVariable long lecturerId, Model model) {
 		logger.debug("new/lecturer={lecturerId}", lecturerId);
+                List<String> courses = new ArrayList<String>();
+                courses.add("No course");
+                for (CourseDTO courseDTO : courseFacade.getAllCourses()) {
+
+                    courses.add(courseDTO.getName());
+                    
+		}
+                model.addAttribute("selectedCourse", "No course");
+                model.addAttribute("courses", courses);                
 		model.addAttribute("lectureCreate", new LectureCreateDTO());
                 model.addAttribute("courseId", null);
                 model.addAttribute("lecturerId", lecturerId);
@@ -114,6 +132,15 @@ public class LectureController {
 	@RequestMapping(value = "/newLectureInCourse/{id}", method = RequestMethod.GET)
 	public String newLectureToCourse(@PathVariable Long id, Model model) {
 		logger.debug("newLectureToCourse");
+                List<String> courses = new ArrayList<String>();
+                courses.add("No course");
+                for (CourseDTO courseDTO : courseFacade.getAllCourses()) {
+
+                    courses.add(courseDTO.getName());
+                    
+		}
+                model.addAttribute("selectedCourse", courseFacade.getCourseById(id).get().getName());
+                model.addAttribute("courses", courses);  
 		model.addAttribute("lectureCreate", new LectureCreateDTO());
 		model.addAttribute("courseId", id);
                 model.addAttribute("lecturerId", null);
@@ -128,6 +155,7 @@ public class LectureController {
 			@RequestParam(value = "classroomId") String classroomId, @RequestParam(value = "topic") String topic,
                         @RequestParam(value = "courseId") Long courseId,
                         @RequestParam(value = "lecturerId") Long lecturerId,
+                        @RequestParam(value = "courseName") String courseName,
 			Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder) {
 		logger.debug("create");
                 /*
@@ -145,8 +173,12 @@ public class LectureController {
 		lecture.setClassroomId(classroomId);
 		lecture.setTopic(topic);
 		Optional<LectureDTO> cdto = lectureFacade.createLecture(lecture);
+                if (courseName != null & !"No course".equals(courseName)) {
+                    
+                    courseFacade.addLecture(courseFacade.getCourseByName(courseName).get(), cdto.get());
+                    
+                }
                 if (courseId != null && lecturerId == null) {
-                    courseFacade.addLecture(courseFacade.getCourseById(courseId).get(), cdto.get());
                     return "redirect:" + uriBuilder.path("/course/view/{id}").buildAndExpand(courseId).encode().toUriString();
                 }
                 if (courseId == null && lecturerId != null) {
@@ -154,6 +186,7 @@ public class LectureController {
                     return "redirect:" + uriBuilder.path("/lecturer/view/{id}").buildAndExpand(lecturerId).encode().toUriString();
                 }
 		return "redirect:" + uriBuilder.path("/lecture/list").buildAndExpand().encode().toUriString();
+                
 	}
 
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
