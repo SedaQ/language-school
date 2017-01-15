@@ -29,8 +29,10 @@
         <![endif]-->
 <script type="text/javascript"
 	src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+	<!-- 
 <script type="text/javascript"
 	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+	 -->
 <script
 	src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
 <script
@@ -74,8 +76,19 @@
 					<div>
 						<input type="text" name="topic" />
 					</div>
+                                        <label path="proficiencyLevel">Belongs to course</label>
+					<div>
+						<select name="courseName">
+							<c:forEach items="${courses}" var="crs">
+								<option value="${crs}" ${crs == selectedCourse ? 'selected' : ''}>${crs}</option>
+							</c:forEach>
+						</select>
+					</div>
                                         <div>
 						<input type="hidden" name="courseId" value="${courseId}" />
+					</div>
+                                        <div>
+						<input type="hidden" name="lecturerId" value="${lecturerId}" />
 					</div>
 					<br />
 					<button class="btn btn-primary" type="submit">Create

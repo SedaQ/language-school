@@ -109,7 +109,7 @@ public class CourseFacadeImpl implements CourseFacade {
 		if (name == null || name.isEmpty())
 			throw new IllegalArgumentException("String parameter is null or empty in deleteCourse method");
 		try {
-			Optional<Course> course = Optional.ofNullable(courseService.findByName(""));
+			Optional<Course> course = Optional.ofNullable(courseService.findByName(name));
 			return course.isPresent() ? beanMapping.mapTo(course.get(), CourseDTO.class) : Optional.empty();
 		} catch (ServiceLayerException | NoSuchElementException ex) {
 			logger.warn("getCourseByName method invokes exception: " + ex);

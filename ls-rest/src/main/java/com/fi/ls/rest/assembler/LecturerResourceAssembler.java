@@ -26,7 +26,6 @@ public class LecturerResourceAssembler implements ResourceAssembler<LecturerDTO,
             lecturerResource.add(linkTo(LecturersController.class).slash(lecturerDTO.getId()).slash("languages").withRel("languages"));
             lecturerResource.add(linkTo(LecturersController.class).slash(lecturerDTO.getId()).slash("lectures").withRel("lectures"));
             lecturerResource.add(linkTo(LecturersController.class).slash(lecturerDTO.getId()).withRel("DELETE"));
-            lecturerResource.add(linkTo(LecturersController.class).slash("create").withRel("POST"));
             lecturerResource.add(linkTo(LecturersController.class).slash("update").withRel("PUT"));
 
         } catch (Exception ex) {

@@ -77,6 +77,7 @@ public class CoursesController {
 
             Resources<Resource<CourseDTO>> coursesResources = new Resources<>(courseResourceCollection);
             coursesResources.add(linkTo(this.getClass()).withSelfRel());
+            coursesResources.add(linkTo(CoursesController.class).slash("create").withRel("POST"));
 
             final StringBuffer eTag = new StringBuffer("\"");
             eTag.append(Integer.toString(coursesResources.hashCode()));
@@ -205,20 +206,20 @@ public class CoursesController {
          * curl -X PUT -i -H "Content-Type: application/json" --data '{"id":2,"name":"Updated","language":"Updated","proficiencyLevel":"B1"}' http://localhost:8080/pa165/rest/courses/update
          * NOTE: You might need to escape " and ' characters
          * 
-         * @param newCourse
+         * @param course
          * @return 
          */
         @RequestMapping(value = "/update", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-        public final CourseDTO updateCourse(@RequestBody CourseDTO newCourse) {
+        public final CourseDTO updateCourse(@RequestBody CourseDTO course) {
 
             logger.debug("rest updateCourse()");
             
-            Optional<CourseDTO> target = courseFacade.getCourseById(newCourse.getId());
+            Optional<CourseDTO> target = courseFacade.getCourseById(course.getId());
             if(!target.isPresent())
                 throw new ResourceNotFoundException();
             
-            newCourse.setListOfLectures(target.get().getListOfLectures());
-            Optional<CourseDTO> updated = courseFacade.updateCourse(newCourse);
+            course.setListOfLectures(target.get().getListOfLectures());
+            Optional<CourseDTO> updated = courseFacade.updateCourse(course);
             
             if(updated.isPresent())
                 return updated.get();

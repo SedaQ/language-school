@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Language School lecture</title>
+<title>Language School Lecturer</title>
 <%@ include file="../common/head.jsp"%>
 </head>
 <body>
@@ -125,7 +125,7 @@
 			</table>
 
 			<sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_LECTURER')">
-				<my:a href="/lecture/new" class="btn btn-primary">Add new lecture</my:a>
+				<my:a href="${pageContext.request.contextPath}/../lecture/new/lecturer=${lecturer.id}" class="btn btn-primary">Add new lecture</my:a>
 			</sec:authorize>
 		</div>
 	</div>

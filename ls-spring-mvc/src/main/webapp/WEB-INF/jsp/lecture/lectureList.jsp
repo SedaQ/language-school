@@ -4,18 +4,10 @@
 <%@ taglib tagdir="/WEB-INF/tags" prefix="my"%>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="my"%>
 
-<!DOCTYPE html>
-<html>
-<head>
-<title>Language School Lectures</title>
-<%@ include file="../common/head.jsp"%>
-</head>
-<body>
-	<%@ include file="../common/header.jsp"%>
-
-	<div class="row">
-		<div class="col-md-8 col-md-offset-2">
+<my:pagetemplate title="Language school Lecture">
+	<jsp:attribute name="body">
 			<h1 class="page-header">
 				List of all lectures <small></small>
 			</h1>
@@ -60,10 +52,5 @@
 			<sec:authorize access="hasRole('ROLE_LECTURER')">
 				<my:a href="/lecture/new/" class="btn btn-primary">New lecture</my:a>
 			</sec:authorize>
-
-		</div>
-	</div>
-
-	<%@ include file="../common/footer.jsp"%>
-</body>
-</html>
+	</jsp:attribute>
+</my:pagetemplate>

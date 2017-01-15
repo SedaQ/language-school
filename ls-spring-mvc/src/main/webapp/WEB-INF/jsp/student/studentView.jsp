@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Language school Student</title>
+<title>Language School Student</title>
 <%@ include file="../common/head.jsp"%>
 </head>
 <body>

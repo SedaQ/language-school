@@ -25,7 +25,6 @@ public class CourseResourceAssembler implements ResourceAssembler<CourseDTO, Res
             courseResource.add(linkTo(CoursesController.class).slash(courseDTO.getId()).withSelfRel());
             courseResource.add(linkTo(CoursesController.class).slash(courseDTO.getId()).slash("lectures").withRel("lectures"));
             courseResource.add(linkTo(CoursesController.class).slash(courseDTO.getId()).withRel("DELETE"));
-            courseResource.add(linkTo(CoursesController.class).slash("create").withRel("POST"));
             courseResource.add(linkTo(CoursesController.class).slash("update").withRel("PUT"));
 
         } catch (Exception ex) {
