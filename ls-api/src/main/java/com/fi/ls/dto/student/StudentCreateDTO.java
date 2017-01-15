@@ -12,15 +12,15 @@ public class StudentCreateDTO {
 
 	private Long id;
 
-	@NotEmpty
-	@Size(min = 2, max = 50)
+	@NotEmpty(message="Please enter first name")
+	@Size(min = 2, max = 50, message="First Name must be between {min} and {max}")
 	private String firstName;
 
-	@NotEmpty
-	@Size(min = 2, max = 50)
+	@NotEmpty(message="Please enter surname")
+	@Size(min = 2, max = 50, message="Surname must be between {min} and {max}")
 	private String surname;
 
-	@NotEmpty
+	@NotEmpty(message="Please enter birth number")
 	private String birthNumber;
 
 	public String getFirstName() {

@@ -13,14 +13,14 @@ public class LSUserCreateDTO {
 	private Long id;
 
 	@NotEmpty
-	@Pattern(regexp = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")
+	@Pattern(regexp = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$", message = "Email must exists!")
 	private String email;
 
 	@NotEmpty
-	@Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$") // Minimum 8 characters at least 1 Alphabet and 1 Number
+	@Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$",  message = "Minimum 8 characters at least 1 Alphabet and 1 Number") // Minimum 8 characters at least 1 Alphabet and 1 Number
 	private String password;
 
-	@NotEmpty
+	@NotEmpty(message = "User role couldn't be empty")
 	private String userRole;
 
 	public String getEmail() {

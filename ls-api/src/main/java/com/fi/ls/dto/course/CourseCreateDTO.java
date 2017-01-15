@@ -13,13 +13,13 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class CourseCreateDTO {
 
 	@NotEmpty(message="Please enter name")
-	@Size(min = 2, max = 30, message="Length must be between 2 and 30 characters ")
+	@Size(min = 2, max = 30, message="Length must be between {min} and {max} ")
 	private String name;
 
-	@NotEmpty
+	@NotEmpty(message="Please enter language")
 	private String language;
 
-	@NotNull
+	@NotNull(message="Please enter proficiencyLevel")
 	private ProficiencyLevel proficiencyLevel;
 
 	public String getName() {

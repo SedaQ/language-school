@@ -1,5 +1,4 @@
-<%@ tag pageEncoding="utf-8" dynamic-attributes="dynattrs"
-	trimDirectiveWhitespaces="true"%>
+<%@ tag pageEncoding="utf-8" dynamic-attributes="dynattrs" trimDirectiveWhitespaces="true" %>
 <%@ attribute name="title" required="false"%>
 <%@ attribute name="subtitle" required="false"%>
 <%@ attribute name="head" fragment="true"%>

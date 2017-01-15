@@ -11,15 +11,15 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class LecturerCreateDTO {
 
 	@NotEmpty
-	@Size(min = 5, max = 30)
+	@Size(min = 5, max = 30, message="Nickname must be between {min} and {max}")
 	private String nickname;
 
 	@NotEmpty
-	@Size(min = 2, max = 50)
+	@Size(min = 2, max = 50, message="First name must be between {min} and {max}")
 	private String firstName;
 
 	@NotEmpty
-	@Size(min = 2, max = 50)
+	@Size(min = 2, max = 50, message="Surname must be between {min} and {max}")
 	private String surname;
 
 	public String getNickname() {

@@ -18,14 +18,15 @@ public class StartInitializer extends AbstractAnnotationConfigDispatcherServletI
 	}
 
 	@Override
+	protected Class<?>[] getServletConfigClasses() {
+		return null;
+	}
+
+	@Override
 	protected Filter[] getServletFilters() {
 		CharacterEncodingFilter encodingFilter = new CharacterEncodingFilter();
 		encodingFilter.setEncoding("utf-8");
 		return new Filter[] { encodingFilter };
 	}
 
-	@Override
-	protected Class<?>[] getServletConfigClasses() {
-		return null;
-	}
 }
