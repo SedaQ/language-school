@@ -61,7 +61,7 @@
 					<div>
 						<label>Date Time</label>
 						<div class='input-group date' id="datetimepicker2">
-							<input type="text" name="dayTime" class="form-control" /> <span
+							<input type="text" name="dayTime" class="form-control" value="${dateTime}"/> <span
 								class="input-group-addon"> <span
 								class="glyphicon glyphicon-calendar"></span>
 							</span>

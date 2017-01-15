@@ -157,6 +157,7 @@ public class LectureController {
 			Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder) {
 		logger.debug("create");
 		if (bindingResult.hasErrors()) {
+                        model.addAttribute("dateTime", lectureCreateBean.getDayTime().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")));
 			List<String> courses = new ArrayList<String>();
 			courses.add("No course");
 			for (CourseDTO courseDTO : courseFacade.getAllCourses()) {
@@ -190,7 +191,8 @@ public class LectureController {
 			UriComponentsBuilder uriBuilder) {
 		logger.debug("update");
 		if (bindingResult.hasErrors()) {
-
+                        
+                        model.addAttribute("dateTime", formBean.getDayTime().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")));
 			return "lecture/lectureEdit";
 
 		}
