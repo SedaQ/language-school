@@ -10,7 +10,7 @@
 				Create new Student <small></small>
 			</h1>
 			<div>
-				<form:form method="post"
+				<form:form method="post" enctype="multipart/form-data;charset=UTF-8"
 				action="${pageContext.request.contextPath}/student/create"
 				modelAttribute="studentCreate" cssClass="form-horizontal">
 					<label path="email">E-mail</label>

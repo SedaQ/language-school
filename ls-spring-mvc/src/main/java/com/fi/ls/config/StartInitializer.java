@@ -14,7 +14,7 @@ public class StartInitializer extends AbstractAnnotationConfigDispatcherServletI
 		encodingFilter.setEncoding("UTF-8");
 		return new Filter[] { encodingFilter };
 	}
-	
+
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
 		return new Class<?>[] { SpringMVCConfig.class };

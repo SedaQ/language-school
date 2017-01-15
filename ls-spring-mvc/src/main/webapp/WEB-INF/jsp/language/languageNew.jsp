@@ -10,7 +10,7 @@
 				New Language <small></small>
 			</h1>
 			<div class="container center_div">
-				<form:form method="post"
+				<form:form method="post" enctype="multipart/form-data;charset=UTF-8"
 				action="${pageContext.request.contextPath}/language/create"
 				modelAttribute="language" cssClass="form-horizontal">
 					<form:hidden path="lecturer.id" />

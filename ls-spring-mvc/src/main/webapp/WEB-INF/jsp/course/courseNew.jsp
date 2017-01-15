@@ -1,4 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="sec"
@@ -11,7 +10,7 @@
 				Create new Course <small></small>
 			</h1>
 			<div class="container center_div">
-				<form:form method="post"
+				<form:form method="post" enctype="multipart/form-data;charset=UTF-8"
 				action="${pageContext.request.contextPath}/course/create"
 				modelAttribute="courseCreate" cssClass="form-horizontal">
 					<div class="form-group">
