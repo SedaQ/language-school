@@ -158,11 +158,11 @@ public class LectureController {
 			for (CourseDTO courseDTO : courseFacade.getAllCourses()) {
 				courses.add(courseDTO.getName());
 			}
-			model.addAttribute("selectedCourse", "No course");
+			model.addAttribute("selectedCourse", courseName);
 			model.addAttribute("courses", courses);
-			model.addAttribute("lectureCreate", new LectureCreateDTO());
-			model.addAttribute("courseId", null);
-			model.addAttribute("lecturerId", null);
+			//model.addAttribute("lectureCreate", new LectureCreateDTO());
+			//model.addAttribute("courseId", null);
+			//model.addAttribute("lecturerId", null);
 			return "lecture/lectureNew";
 		}
 		Optional<LectureDTO> cdto = lectureFacade.createLecture(lectureCreateBean);

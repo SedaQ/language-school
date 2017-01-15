@@ -20,7 +20,7 @@ public class LectureDTO {
 
     private Long id;
     
-    @NotNull(message= "Time couldn't be empty")
+    @NotNull(message= "Time can't be empty")
     @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
     private LocalDateTime dayTime;
     

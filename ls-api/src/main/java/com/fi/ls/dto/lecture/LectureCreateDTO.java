@@ -16,14 +16,14 @@ public class LectureCreateDTO {
         
     private Long id;
     
-	@NotNull(message= "Time couldn't be empty")
+	@NotNull(message= "Time can't be empty")
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	private LocalDateTime dayTime;
 
-	@NotEmpty(message= "ClassroomId couldn't be empty")
+	@NotEmpty(message= "ClassroomId can't be empty")
 	private String classroomId;
 
-	@NotEmpty(message= "Topic couldn't be empty")
+	@NotEmpty(message= "Topic can't be empty")
 	private String topic;
 
     public Long getId() {

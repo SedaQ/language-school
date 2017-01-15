@@ -56,7 +56,8 @@
 			<div class="col-md-3">
 				<form:form method="post"
 					action="${pageContext.request.contextPath}/lecture/create"
-					cssClass="form-horizontal">
+					cssClass="form-horizontal"
+                                        modelAttribute="lectureCreate">
 					<div>
 						<label>Date Time</label>
 						<div class='input-group date' id="datetimepicker2">
@@ -67,17 +68,17 @@
 						</div>
 						<form:errors path="dayTime" />
 					</div>
-					<label>Classroom Id</label>
+					<label path="classroomId">Classroom Id</label>
 					<div>
-						<input type="text" name="classroomId" />
+						<form:input path="classroomId" />
 						<form:errors path="classroomId" />
 					</div>
-					<label>Topic</label>
+					<label path="topic">Topic</label>
 					<div>
-						<input type="text" name="topic" />
+						<form:input path="topic"/>
 						<form:errors path="topic" />
 					</div>
-                        <label path="proficiencyLevel">Belongs to course</label>
+                                        <label>Belongs to course</label>
 					<div>
 						<select name="courseName">
 							<c:forEach items="${courses}" var="crs">
