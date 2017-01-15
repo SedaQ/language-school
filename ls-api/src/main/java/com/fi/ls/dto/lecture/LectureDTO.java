@@ -10,6 +10,7 @@ import com.fi.ls.dto.lecturer.LecturerDTO;
 import com.fi.ls.dto.student.StudentDTO;
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * 
@@ -19,7 +20,8 @@ public class LectureDTO {
 
     private Long id;
     
-    @NotNull
+    @NotNull(message= "Time couldn't be empty")
+    @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
     private LocalDateTime dayTime;
     
     @NotEmpty

@@ -196,7 +196,9 @@ public class LectureController {
 
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
 	public String editLecture(@PathVariable Long id, Model model) {
-		model.addAttribute("lecture", lectureFacade.getLectureById(id).get());
+                LectureDTO lecture = lectureFacade.getLectureById(id).get();
+		model.addAttribute("lecture", lecture);
+                model.addAttribute("dateTime", lecture.getDayTime().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")));
 		logger.debug("edit");
 		return "lecture/lectureEdit";
 	}
