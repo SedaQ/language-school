@@ -20,7 +20,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.fi.ls.dto.lecturer.LecturerDTO;
+import com.fi.ls.dto.student.StudentDTO;
+import com.fi.ls.enums.UserRoles;
+import com.fi.ls.facade.LSUserFacade;
 import com.fi.ls.facade.LecturerFacade;
+import com.fi.ls.facade.StudentFacade;
+import com.fi.ls.helpers.Helpers;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 @Controller
 @RequestMapping("/lecturer")
@@ -30,6 +36,12 @@ public class LecturerController {
 
 	@Inject
 	private LecturerFacade lecturerFacade;
+        
+        @Inject
+	private LSUserFacade userFacade;
+        
+        @Inject
+	private StudentFacade studentFacade;
 
 	@InitBinder
 	public void customizeBinding(WebDataBinder binder) {
@@ -47,10 +59,13 @@ public class LecturerController {
 
 	@RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
 	public String view(@PathVariable long id, Model model) {
-		model.addAttribute("lecturerLanguages",
-				lecturerFacade.findAllLecturerLanguages(lecturerFacade.getLecturerById(id).get()));
 		model.addAttribute("lecturer", lecturerFacade.getLecturerById(id).get());
-		model.addAttribute("lecturerLectures", lecturerFacade.getLecturerById(id).get().getListOfLectures());
+                if (Helpers.hasRole(UserRoles.ROLE_STUDENT.name())) {
+			String email = SecurityContextHolder.getContext().getAuthentication().getName();
+			Long studentId = userFacade.getUserByEmail(email).get().getId();
+			Optional<StudentDTO> studentDTO = studentFacade.getStudentById(studentId);
+			model.addAttribute("studentEnrolledLectures", studentDTO.get().getListOfLectures());
+		}
 		return "lecturer/lecturerView";
 	}
 

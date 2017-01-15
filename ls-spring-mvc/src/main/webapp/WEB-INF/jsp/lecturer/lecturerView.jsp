@@ -59,7 +59,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${lecturerLanguages}" var="language">
+					<c:forEach items="${lecturer.listOfLanguages}" var="language">
 						<tr>
 							<td>${language.id}</td>
 							<td><c:out value="${language.language}" /></td>
@@ -95,7 +95,7 @@
 				</thead>
 
 				<tbody>
-					<c:forEach items="${lecturerLectures}" var="lecture">
+					<c:forEach items="${lecturer.listOfLectures}" var="lecture">
 						<tr>
 							<td><c:out value="${lecture.id}" /></td>
 							<td><c:out value="${lecture.dayTime}" /></td>
