@@ -17,7 +17,7 @@ public class LectureCreateDTO {
     private Long id;
     
 	@NotNull(message= "Time couldn't be empty")
-	@DateTimeFormat(pattern = "dd.MM.yyyy HH:mm")
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	private LocalDateTime dayTime;
 
 	@NotEmpty(message= "ClassroomId couldn't be empty")
