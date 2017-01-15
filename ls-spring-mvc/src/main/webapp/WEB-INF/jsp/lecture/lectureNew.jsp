@@ -41,7 +41,7 @@
 <script type="text/javascript">
 	$(function() {
 		$('#datetimepicker2').datetimepicker({
-			locale : 'ru'
+			locale : 'cs'
 		});
 	});
 </script>

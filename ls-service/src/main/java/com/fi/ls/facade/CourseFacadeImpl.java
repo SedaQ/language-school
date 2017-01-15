@@ -107,7 +107,7 @@ public class CourseFacadeImpl implements CourseFacade {
 	@Override
 	public Optional<CourseDTO> getCourseByName(String name) {
 		if (name == null || name.isEmpty())
-			throw new IllegalArgumentException("String parameter is null or empty in deleteCourse method");
+			throw new IllegalArgumentException("String parameter is null or empty in getCourseByName method");
 		try {
 			Optional<Course> course = Optional.ofNullable(courseService.findByName(name));
 			return course.isPresent() ? beanMapping.mapTo(course.get(), CourseDTO.class) : Optional.empty();
