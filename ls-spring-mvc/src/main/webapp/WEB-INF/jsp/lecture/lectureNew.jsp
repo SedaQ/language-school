@@ -39,7 +39,7 @@
 <script type="text/javascript">
 	$(function() {
 		$('#datetimepicker2').datetimepicker({
-			locale : 'ru'
+			locale : 'en-gb'
 		});
 	});
 </script>
