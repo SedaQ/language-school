@@ -56,7 +56,7 @@
 				Create new Lecture <small></small>
 			</h1>
 			<div>
-				<form method="post"
+				<form:form method="post"
 					action="${pageContext.request.contextPath}/lecture/create"
 					cssClass="form-horizontal">
 					<div>
@@ -67,16 +67,19 @@
 								class="glyphicon glyphicon-calendar"></span>
 							</span>
 						</div>
+						<form:errors path="dayTime" />
 					</div>
 					<label>Classroom Id</label>
 					<div>
 						<input type="text" name="classroomId" />
+						<form:errors path="classroomId" />
 					</div>
 					<label>Topic</label>
 					<div>
 						<input type="text" name="topic" />
+						<form:errors path="topic" />
 					</div>
-                                        <label path="proficiencyLevel">Belongs to course</label>
+                        <label path="proficiencyLevel">Belongs to course</label>
 					<div>
 						<select name="courseName">
 							<c:forEach items="${courses}" var="crs">
@@ -84,18 +87,16 @@
 							</c:forEach>
 						</select>
 					</div>
-                                        <div>
+                   <div>
 						<input type="hidden" name="courseId" value="${courseId}" />
 					</div>
-                                        <div>
+                    <div>
 						<input type="hidden" name="lecturerId" value="${lecturerId}" />
 					</div>
 					<br />
 					<button class="btn btn-primary" type="submit">Create
 						lecture</button>
-					<input type="hidden" name="${_csrf.parameterName}"
-						value="${_csrf.token}" />
-				</form>
+				</form:form>
 			</div>
 		</div>
 	</div>

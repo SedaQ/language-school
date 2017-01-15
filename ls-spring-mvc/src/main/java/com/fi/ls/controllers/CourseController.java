@@ -24,6 +24,7 @@ import com.fi.ls.helpers.Helpers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -56,10 +57,10 @@ public class CourseController {
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String list(Model model) {
-            
-                List<CourseDTO> courses = courseFacade.getAllCourses();
+        List<CourseDTO> courses = courseFacade.getAllCourses();
+        Collections.sort(courses, (o1, o2) -> o1.getId().compareTo(o2.getId()));
 		model.addAttribute("courses", courses);
-                if (Helpers.hasRole(UserRoles.ROLE_STUDENT.name())) {
+        if (Helpers.hasRole(UserRoles.ROLE_STUDENT.name())) {
 			String email = SecurityContextHolder.getContext().getAuthentication().getName();
 			Long studentId = userFacade.getUserByEmail(email).get().getId();
 			Optional<StudentDTO> studentDTO = studentFacade.getStudentById(studentId);
@@ -73,13 +74,16 @@ public class CourseController {
 		logger.debug("view: ", id);
 
 		CourseDTO course = courseFacade.getCourseById(id).get();
-                model.addAttribute("course", course);
-                if (Helpers.hasRole(UserRoles.ROLE_STUDENT.name())) {
+        model.addAttribute("course", course);
+        if (Helpers.hasRole(UserRoles.ROLE_STUDENT.name())) {
 			String email = SecurityContextHolder.getContext().getAuthentication().getName();
 			Long studentId = userFacade.getUserByEmail(email).get().getId();
 			Optional<StudentDTO> studentDTO = studentFacade.getStudentById(studentId);
 			model.addAttribute("studentEnrolledLectures", studentDTO.get().getListOfLectures());
 		}
+		List<LectureDTO> lecturesInCourse = course.getListOfLectures();
+		Collections.sort(lecturesInCourse, (o1, o2) -> o1.getDayTime().compareTo(o2.getDayTime()));
+		model.addAttribute("courseLectures", lecturesInCourse);
 		return "course/courseView";
 	}
 
@@ -93,15 +97,15 @@ public class CourseController {
 	
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public String createCourse(@Valid @ModelAttribute("courseCreate") CourseCreateDTO formBean,
-			BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes,
-			UriComponentsBuilder uriBuilder) {
+		BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes,
+		UriComponentsBuilder uriBuilder) {
 		logger.debug("create");
-                if (bindingResult.hasErrors()) {
-                    
-                    model.addAttribute("proficiencylevels", new ArrayList<>(Arrays.asList(ProficiencyLevel.values())));
-                    return "course/courseNew";
-                    
-                }
+        if (bindingResult.hasErrors()) {
+            
+            model.addAttribute("proficiencylevels", new ArrayList<>(Arrays.asList(ProficiencyLevel.values())));
+            return "course/courseNew";
+            
+        }
 		// formBean.setProficiencyLevel(ProficiencyLevel.C1);
 		Optional<CourseDTO> cdto = courseFacade.create(formBean);
 		// return "course/courseList";

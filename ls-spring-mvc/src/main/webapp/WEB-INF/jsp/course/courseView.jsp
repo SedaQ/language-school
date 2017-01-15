@@ -71,7 +71,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${course.listOfLectures}" var="lecture">
+					<c:forEach items="${courseLectures}" var="lecture">
 						<tr>
 							<td><c:out value="${lecture.id}" /></td>
 							<td><c:out value="${lecture.dayTime}" /></td>
