@@ -14,22 +14,21 @@ import org.springframework.format.annotation.DateTimeFormat;
  */
 public class LectureCreateDTO {
         
-        private Long id;
+    private Long id;
     
-	@NotNull
-	//@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+	@NotNull(message= "Time couldn't be empty")
 	@DateTimeFormat(pattern = "dd.MM.yyyy HH:mm")
 	private LocalDateTime dayTime;
 
-	@NotEmpty
+	@NotEmpty(message= "ClassroomId couldn't be empty")
 	private String classroomId;
 
-	@NotEmpty
+	@NotEmpty(message= "Topic couldn't be empty")
 	private String topic;
 
-        public Long getId() {
+    public Long getId() {
 
-		return id;
+	return id;
 
 	}
 

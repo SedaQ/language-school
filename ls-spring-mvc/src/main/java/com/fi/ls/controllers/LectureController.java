@@ -45,6 +45,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -77,7 +78,9 @@ public class LectureController {
 			Optional<StudentDTO> studentDTO = studentFacade.getStudentById(studentId);
 			model.addAttribute("studentEnrolledLectures", studentDTO.get().getListOfLectures());
 		}
-		model.addAttribute("lectures", lectureFacade.getAllLectures());
+		List<LectureDTO> lectures = lectureFacade.getAllLectures();
+		Collections.sort(lectures, (o1, o2) -> o1.getDayTime().compareTo(o2.getDayTime()));
+		model.addAttribute("lectures", lectures);
 		return "lecture/lectureList";
 	}
 
@@ -96,97 +99,85 @@ public class LectureController {
 	@RequestMapping(value = "/new", method = RequestMethod.GET)
 	public String newLecture(Model model) {
 		logger.debug("new");
-                List<String> courses = new ArrayList<String>();
-                courses.add("No course");
-                for (CourseDTO courseDTO : courseFacade.getAllCourses()) {
-
-                    courses.add(courseDTO.getName());
-                    
+		List<String> courses = new ArrayList<String>();
+		courses.add("No course");
+		for (CourseDTO courseDTO : courseFacade.getAllCourses()) {
+			courses.add(courseDTO.getName());
 		}
-                model.addAttribute("selectedCourse", "No course");
-                model.addAttribute("courses", courses);
+		model.addAttribute("selectedCourse", "No course");
+		model.addAttribute("courses", courses);
 		model.addAttribute("lectureCreate", new LectureCreateDTO());
-                model.addAttribute("courseId", null);
-                model.addAttribute("lecturerId", null);
+		model.addAttribute("courseId", null);
+		model.addAttribute("lecturerId", null);
 		return "lecture/lectureNew";
 	}
-        
-        @RequestMapping(value = "/new/lecturer={lecturerId}", method = RequestMethod.GET)
+
+	@RequestMapping(value = "/new/lecturer={lecturerId}", method = RequestMethod.GET)
 	public String newLectureWithLecturer(@PathVariable long lecturerId, Model model) {
 		logger.debug("new/lecturer={lecturerId}", lecturerId);
-                List<String> courses = new ArrayList<String>();
-                courses.add("No course");
-                for (CourseDTO courseDTO : courseFacade.getAllCourses()) {
-
-                    courses.add(courseDTO.getName());
-                    
+		List<String> courses = new ArrayList<String>();
+		courses.add("No course");
+		for (CourseDTO courseDTO : courseFacade.getAllCourses()) {
+			courses.add(courseDTO.getName());
 		}
-                model.addAttribute("selectedCourse", "No course");
-                model.addAttribute("courses", courses);                
+		model.addAttribute("selectedCourse", "No course");
+		model.addAttribute("courses", courses);
 		model.addAttribute("lectureCreate", new LectureCreateDTO());
-                model.addAttribute("courseId", null);
-                model.addAttribute("lecturerId", lecturerId);
+		model.addAttribute("courseId", null);
+		model.addAttribute("lecturerId", lecturerId);
 		return "lecture/lectureNew";
 	}
 
 	@RequestMapping(value = "/newLectureInCourse/{id}", method = RequestMethod.GET)
 	public String newLectureToCourse(@PathVariable Long id, Model model) {
 		logger.debug("newLectureToCourse");
-                List<String> courses = new ArrayList<String>();
-                courses.add("No course");
-                for (CourseDTO courseDTO : courseFacade.getAllCourses()) {
+		List<String> courses = new ArrayList<String>();
+		courses.add("No course");
+		for (CourseDTO courseDTO : courseFacade.getAllCourses()) {
 
-                    courses.add(courseDTO.getName());
-                    
+			courses.add(courseDTO.getName());
+
 		}
-                model.addAttribute("selectedCourse", courseFacade.getCourseById(id).get().getName());
-                model.addAttribute("courses", courses);  
+		model.addAttribute("selectedCourse", courseFacade.getCourseById(id).get().getName());
+		model.addAttribute("courses", courses);
 		model.addAttribute("lectureCreate", new LectureCreateDTO());
 		model.addAttribute("courseId", id);
-                model.addAttribute("lecturerId", null);
+		model.addAttribute("lecturerId", null);
 		return "lecture/lectureNew";
 	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public String createLecture(
-                        @Valid @ModelAttribute("lectureCreate") LectureCreateDTO formBean,
-			BindingResult bindingResult,
-                        @RequestParam(value = "dayTime") String dayTime,
-			@RequestParam(value = "classroomId") String classroomId, @RequestParam(value = "topic") String topic,
-                        @RequestParam(value = "courseId") Long courseId,
-                        @RequestParam(value = "lecturerId") Long lecturerId,
-                        @RequestParam(value = "courseName") String courseName,
+	public String createLecture(@Valid @ModelAttribute("lectureCreate") LectureCreateDTO lectureCreateBean,
+			BindingResult bindingResult, @RequestParam(value = "courseId") Long courseId,
+			@RequestParam(value = "lecturerId") Long lecturerId, @RequestParam(value = "courseName") String courseName,
 			Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder) {
 		logger.debug("create");
-                /*
-                if (bindingResult.hasErrors()) {
-                    
-                    return "lecture/lectureNew";
-                    
-                }
-                */
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
-
-		LocalDateTime localDateTime = LocalDateTime.parse(dayTime, formatter);
-		LectureCreateDTO lecture = new LectureCreateDTO();
-		lecture.setDayTime(localDateTime);
-		lecture.setClassroomId(classroomId);
-		lecture.setTopic(topic);
-		Optional<LectureDTO> cdto = lectureFacade.createLecture(lecture);
-                if (courseName != null & !"No course".equals(courseName)) {
-                    
-                    courseFacade.addLecture(courseFacade.getCourseByName(courseName).get(), cdto.get());
-                    
-                }
-                if (courseId != null && lecturerId == null) {
-                    return "redirect:" + uriBuilder.path("/course/view/{id}").buildAndExpand(courseId).encode().toUriString();
-                }
-                if (courseId == null && lecturerId != null) {
-                    lecturerFacade.addLecture(lecturerFacade.getLecturerById(lecturerId).get(), cdto.get());
-                    return "redirect:" + uriBuilder.path("/lecturer/view/{id}").buildAndExpand(lecturerId).encode().toUriString();
-                }
+		if (bindingResult.hasErrors()) {
+			List<String> courses = new ArrayList<String>();
+			courses.add("No course");
+			for (CourseDTO courseDTO : courseFacade.getAllCourses()) {
+				courses.add(courseDTO.getName());
+			}
+			model.addAttribute("selectedCourse", "No course");
+			model.addAttribute("courses", courses);
+			model.addAttribute("lectureCreate", new LectureCreateDTO());
+			model.addAttribute("courseId", null);
+			model.addAttribute("lecturerId", null);
+			return "lecture/lectureNew";
+		}
+		Optional<LectureDTO> cdto = lectureFacade.createLecture(lectureCreateBean);
+		if (courseName != null & !"No course".equals(courseName)) {
+			courseFacade.addLecture(courseFacade.getCourseByName(courseName).get(), cdto.get());
+		}
+		if (courseId != null && lecturerId == null) {
+			return "redirect:" + uriBuilder.path("/course/view/{id}").buildAndExpand(courseId).encode().toUriString();
+		}
+		if (courseId == null && lecturerId != null) {
+			lecturerFacade.addLecture(lecturerFacade.getLecturerById(lecturerId).get(), cdto.get());
+			return "redirect:"
+					+ uriBuilder.path("/lecturer/view/{id}").buildAndExpand(lecturerId).encode().toUriString();
+		}
 		return "redirect:" + uriBuilder.path("/lecture/list").buildAndExpand().encode().toUriString();
-                
 	}
 
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
@@ -212,9 +203,9 @@ public class LectureController {
 
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
 	public String deleteLecture(@PathVariable Long id, Model model, UriComponentsBuilder uriBuilder) {
-            
-                logger.debug("delete");
-                
+
+		logger.debug("delete");
+
 		for (CourseDTO courseDTO : lectureFacade.getLectureById(id).get().getListOfCourses()) {
 
 			List<LectureDTO> lectureList;
