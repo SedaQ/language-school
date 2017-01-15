@@ -82,7 +82,8 @@ public class SpringMVCConfig extends WebMvcConfigurerAdapter {
 	public ViewResolver viewResolver() {
 		logger.debug("registering JSP in /WEB-INF/jsp/ as views");
 		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-		viewResolver.setContentType("text/html;charset=UTF-8");
+		//viewResolver.setCharacterEncoding("UTF-8");
+		viewResolver.setContentType("text/html; charset=UTF-8");
 		viewResolver.setPrefix("/WEB-INF/jsp/");
 		viewResolver.setSuffix(".jsp");
 		return viewResolver;

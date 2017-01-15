@@ -5,11 +5,13 @@
 <head>
 <title>LS Contact Us</title>
 <%@ include file="common/head.jsp"%>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/assets/css/contactus.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/assets/css/bottom.css">
 </head>
-        <%@ include file="common/header.jsp"%>
+<%@ include file="common/header.jsp"%>
 <body>
-        <link rel="stylesheet"	href="${pageContext.request.contextPath}/assets/css/contactus.css">
-        <link rel="stylesheet"	href="${pageContext.request.contextPath}/assets/css/bottom.css">
 	<section id="contact-info">
 		<div class="container">
 			<div class="row">
@@ -134,11 +136,13 @@
 	<!--/bottom-->
 
 	<script src="${pageContext.request.contextPath}/assets/js/jquery.js"></script>
-<!--
+	<!--
 	<script	src="${pageContext.request.contextPath}/assets/bootstrap/js/bootstrap.min.js"></script>
 -->
-        <script	src="${pageContext.request.contextPath}/assets/js/jquery.prettyPhoto.js"></script>
-	<script	src="${pageContext.request.contextPath}/assets/js/jquery.isotope.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/assets/js/jquery.prettyPhoto.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/assets/js/jquery.isotope.min.js"></script>
 	<script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
 	<script src="${pageContext.request.contextPath}/assets/js/wow.min.js"></script>
 

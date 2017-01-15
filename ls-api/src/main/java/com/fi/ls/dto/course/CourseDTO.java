@@ -15,11 +15,11 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class CourseDTO {
 
 	private Long id;
-        @NotEmpty
+	@NotEmpty
 	private String name;
-        @NotEmpty
+	@NotEmpty
 	private String language;
-        @NotNull
+	@NotNull
 	private ProficiencyLevel proficiencyLevel;
 	private List<LectureDTO> listOfLectures = new ArrayList<>();
 

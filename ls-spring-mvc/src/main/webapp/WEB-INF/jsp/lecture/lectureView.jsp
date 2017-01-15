@@ -6,7 +6,7 @@
 <my:pagetemplate title="Language school Lecture">
 	<jsp:attribute name="body">
 			<h1 class="page-header">
-				Lecture details <small></small>
+				Lecture details 
 			</h1>
 			<table class="table table-striped">
 				<thead>
@@ -49,6 +49,93 @@
 							</sec:authorize></td>
 					</tr>
 				</tbody>
+			</table>
+			<h3 class="page-header">
+				This Lecture is in following Courses 
+			</h3>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>id</th>
+						<th>name</th>
+						<th>language</th>
+						<th>proficiency level</th>
+						<th>action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${lectureInCourse}" var="course">
+						<tr>
+							<td><c:out value="${course.id}" /></td>
+							<td><c:out value="${course.name}" /></td>
+							<td><c:out value="${course.language}" /></td>
+							<td><c:out value="${course.proficiencyLevel}" /></td>
+							<td><my:a href="/course/view/${course.id}"
+								class="btn btn-primary">view</my:a></td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+			
+			<h3 class="page-header">
+				This Lecture is teached by following Lecturers 
+			</h3>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>id</th>
+						<th>email</th>
+						<th>nickname</th>
+						<th>first Name</th>
+						<th>surname</th>
+						<th>action</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<c:forEach items="${courseLecturers}" var="lecturer">
+						<tr>
+							<td><c:out value="${lecturer.id}" /></td>
+							<td><c:out value="${lecturer.email}" /></td>
+							<td><c:out value="${lecturer.nickname}" /></td>
+							<td><c:out value="${lecturer.firstName}" /></td>
+							<td><c:out value="${lecturer.surname}" /></td>
+							<td><my:a href="/lecturer/view/${lecturer.id}"
+								class="btn btn-primary">view</my:a></td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+			
+			<h3 class="page-header">
+				Student enrolled to this lecture 
+			</h3>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>id</th>
+						<th>email</th>
+						<th>first name</th>
+						<th>surname</th>
+						<th>birth number</th>
+						<th>action</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<c:forEach items="${courseStudents}" var="student">
+						<tr>
+							<td><c:out value="${student.id}" /></td>
+							<td><c:out value="${student.email}" /></td>
+							<td><c:out value="${student.firstName}" /></td>
+							<td><c:out value="${student.surname}" /></td>
+							<td><c:out value="${student.birthNumber}" /></td>
+							<td><my:a href="/student/view/${student.id}"
+								class="btn btn-primary">view</my:a></td>
+						</tr>
+					</c:forEach>
+				</tbody>
+
 			</table>
 	</jsp:attribute>
 </my:pagetemplate>

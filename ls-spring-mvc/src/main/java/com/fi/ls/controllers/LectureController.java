@@ -92,7 +92,11 @@ public class LectureController {
 			Optional<StudentDTO> studentDTO = studentFacade.getStudentById(studentId);
 			model.addAttribute("studentEnrolledLectures", studentDTO.get().getListOfLectures());
 		}
-		model.addAttribute("lecture", lectureFacade.getLectureById(id).get());
+		LectureDTO lecture = lectureFacade.getLectureById(id).get();
+		model.addAttribute("lecture", lecture);
+		model.addAttribute("lectureInCourse", lecture.getListOfCourses());
+		model.addAttribute("courseLecturers", lecture.getListOfLecturers());
+		model.addAttribute("courseStudents", lecture.getListOfStudents());
 		return "lecture/lectureView";
 	}
 
