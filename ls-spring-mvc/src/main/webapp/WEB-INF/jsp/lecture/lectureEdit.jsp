@@ -53,7 +53,7 @@
 			<h1 class="page-header">
 				Edit Lecture <small></small>
 			</h1>
-			<div>
+			<div class="col-md-3">
 				<form:form class="table table-striped" method="post"
 					action="${pageContext.request.contextPath}/lecture/update/${lecture.id}"
 					modelAttribute="lecture">
